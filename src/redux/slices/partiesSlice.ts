@@ -30,7 +30,7 @@ export const partiesSlice = createSlice({
       state.selectedPartyLogoUrl = `${action.payload}?${new Date()}`;
       if (state.list) {
         state.list
-          .filter((p) => p.id === state.selected?.id)
+          .filter((p) => p.partyId === state.selected?.partyId)
           .forEach((p) => (p.urlLogo = state.selectedPartyLogoUrl));
       }
     },

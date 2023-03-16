@@ -14,11 +14,6 @@ import WelcomeDashboard from './components/welcomeDashboard/WelcomeDashboard';
 import PartyCard from './components/partyCard/PartyCard';
 import { PartyLogoUploader } from './components/partyCard/components/partyLogoUploader/PartyLogoUploader';
 import ActiveProductCard from './components/activeProductsSection/components/ActiveProductCard';
-/*
-type Props = {
-  party: PartyPnpg;
-  products?: Array<Product>;
-}; */
 
 type UrlParams = {
   partyId: string;
@@ -34,7 +29,7 @@ const DashboardOverview = () => {
   const [selectedParty, setSelectedParty] = useState<PartyPnpg>();
 
   useEffect(() => {
-    const chosenParty = parties?.find((p) => p.externalId === partyId);
+    const chosenParty = parties?.find((p) => p.partyId === partyId);
     setSelectedParty(chosenParty);
   }, [partyId]);
 
@@ -59,16 +54,16 @@ const DashboardOverview = () => {
 
   return (
     <Box p={3} sx={{ width: '100%' }}>
-      <WelcomeDashboard businessName={selectedParty?.name} />
+      <WelcomeDashboard businessName={selectedParty?.description} />
       <Grid container direction="row" justifyContent={'center'} alignItems="center" mb={2}>
         <Grid item xs={6} display="flex" alignItems="center">
           <Typography variant="h6" sx={{ fontWeight: '700' }}>
-            {selectedParty?.name}
+            {selectedParty?.description}
           </Typography>
         </Grid>
         {selectedParty && (
           <Grid item xs={6}>
-            <PartyLogoUploader partyId={selectedParty.id} />
+            <PartyLogoUploader partyId={selectedParty.partyId} />
           </Grid>
         )}
       </Grid>
@@ -87,7 +82,7 @@ const DashboardOverview = () => {
             cardTitle={t('overview.notificationAreaProduct.card.title')}
             urlLogo={PnIcon}
             btnAction={() =>
-              selectedParty ? handleClick('prod-pnpg', selectedParty.id) : undefined
+              selectedParty ? handleClick('prod-pnpg', selectedParty.partyId) : undefined
             }
           />
         </Grid>

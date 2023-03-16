@@ -8,7 +8,7 @@ import { ProductRole } from '../../model/ProductRole';
 export const mockedPartyProduct: Product = {
   logo: 'https://selcdcheckoutsa.z6.web.core.windows.net/resources/products/prod-pn/logo.svg',
   id: 'prod-pn-pg',
-  title: 'Piattaforma Notifiche',
+  title: 'Piattaforma Notifiche Persone Giuridiche',
   description: 'Piattaforma Notifiche Persone Giuridiche',
   authorized: false,
   productOnBoardingStatus: ProductOnBoardingStatusEnum.ACTIVE,
@@ -26,7 +26,7 @@ export const mockedPartyProducts: Array<Product> = [
   {
     logo: 'https://selcdcheckoutsa.z6.web.core.windows.net/resources/products/prod-pn/logo.svg',
     id: 'prod-pn-pg',
-    title: 'Piattaforma Notifiche',
+    title: 'Piattaforma Notifiche Persone Giuridiche',
     description: 'Piattaforma Notifiche Persone Giuridiche',
     authorized: false,
     productOnBoardingStatus: ProductOnBoardingStatusEnum.ACTIVE,

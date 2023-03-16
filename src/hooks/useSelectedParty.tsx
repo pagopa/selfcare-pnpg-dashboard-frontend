@@ -50,7 +50,7 @@ export const useSelectedParty = (): {
     });
     */
   const fetchSelectedParty = (partyId: string) => {
-    const chosenParty = parties?.find((p) => p.id === partyId);
+    const chosenParty = parties?.find((p) => p.partyId === partyId);
     setParty(chosenParty);
   };
 

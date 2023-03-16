@@ -16,10 +16,7 @@ import { ENV } from '../../utils/env';
 import RemoteRoutingUsers from '../../microcomponents/users/RemoteRoutingUsers';
 import RemoteRoutingProductUsers from '../../microcomponents/users/RemoteRoutingProductUsers';
 import RemoteRoutingGroups from '../../microcomponents/groups/RemoteRoutingGroups';
-import {
-  ProductOnBoardingStatusEnum,
-  StatusEnum,
-} from '../../api/generated/b4f-dashboard-pnpg/SubProductResource';
+import { mockedPartyProducts as products } from '../../services/__mocks__/productService';
 import DashboardSideMenu from './components/dashboardSideMenu/DashboardSideMenu';
 
 export type DashboardPageProps = {
@@ -85,32 +82,7 @@ const Dashboard = () => {
   const history = useHistory();
   const party = useAppSelector(partiesSelectors.selectPartySelected);
   // const products = useAppSelector(partiesSelectors.selectPartySelectedProducts);
-  const products: Array<Product> = [
-    {
-      logo: 'https://selcdcheckoutsa.z6.web.core.windows.net/resources/products/prod-io/logo.svg',
-      title: 'App IO',
-      description: 'App IO description',
-      id: 'prod-io',
-      authorized: true,
-      productOnBoardingStatus: ProductOnBoardingStatusEnum.ACTIVE,
-      userRole: 'ADMIN',
-      status: StatusEnum.ACTIVE,
-      activationDateTime: new Date('2021-01-31T23:00:00.000Z'),
-      urlPublic: 'https://io.italia.it/ ',
-      urlBO: 'https://io.selfcare.pagopa.it/path/acs?token=<IdentityToken>',
-      imageUrl:
-        'https://selcdcheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg',
-      subProducts: [
-        {
-          id: 'prod-io-premium',
-          title: 'Premium',
-          status: StatusEnum.ACTIVE,
-          productOnBoardingStatus: ProductOnBoardingStatusEnum.ACTIVE,
-        },
-      ],
-      logoBgColor: 'primary.main',
-    },
-  ];
+
   const store = useStore();
   const theme = useTheme();
   const { i18n } = useTranslation();

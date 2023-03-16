@@ -5,10 +5,10 @@ export const mockedPnpgParties: Array<PartyPnpg> = [
     externalId: '1',
     fiscalCode: '1',
     geographicTaxonomies: [{ code: '', desc: '' }],
-    id: '1',
+    partyId: '1',
     institutionType: 'GSP',
-    mailAddress: undefined,
-    name: 'Test businessName 01',
+    digitalAddress: undefined,
+    description: 'Test businessName 01',
     recipientCode: 'MDSSFDF',
     status: 'TestStatus1',
     address: 'LegalAddressTest1',
@@ -23,10 +23,10 @@ export const mockedPnpgParties: Array<PartyPnpg> = [
     externalId: '11111111111',
     fiscalCode: '11111111111',
     geographicTaxonomies: [{ code: '', desc: '' }],
-    id: '11111111111',
+    partyId: '11111111111',
     institutionType: 'GSP',
-    mailAddress: undefined,
-    name: 'Test businessName 02',
+    digitalAddress: undefined,
+    description: 'Test businessName 02',
     recipientCode: 'MDSSFDF',
     status: 'TestStatus2',
     address: 'LegalAddressTest2',
@@ -41,10 +41,10 @@ export const mockedPnpgParties: Array<PartyPnpg> = [
     externalId: '44444444444',
     fiscalCode: '44444444444',
     geographicTaxonomies: [{ code: '', desc: '' }],
-    id: '44444444444',
+    partyId: '44444444444',
     institutionType: 'GSP',
-    mailAddress: undefined,
-    name: 'Test businessName 03',
+    digitalAddress: undefined,
+    description: 'Test businessName 03',
     recipientCode: 'MDSSFDF',
     status: 'TestStatus1',
     address: 'LegalAddressTest2',
@@ -64,11 +64,11 @@ export const verifyFetchPartiesMockExecution = (parties: Array<PartyPnpg>) => {
 export const fetchParties = () => new Promise((resolve) => resolve(mockedPnpgParties));
 
 export const verifyFetchPartyDetailsMockExecution = (party: PartyPnpg) => {
-  expect(party).toStrictEqual(mockedPnpgParties.filter((p) => p.id === party.id)[0]);
+  expect(party).toStrictEqual(mockedPnpgParties.filter((p) => p.partyId === party.partyId)[0]);
 };
 
 export const fetchPartyDetails = (
   partyId: string,
   _parties?: Array<PartyPnpg>
 ): Promise<PartyPnpg | null> =>
-  new Promise((resolve) => resolve(mockedPnpgParties.find((p) => p.id === partyId) ?? null));
+  new Promise((resolve) => resolve(mockedPnpgParties.find((p) => p.partyId === partyId) ?? null));

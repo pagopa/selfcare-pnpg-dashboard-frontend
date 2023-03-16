@@ -22,7 +22,7 @@ export default function PartyDetail({ party }: Props) {
         </Grid>
         <Grid item xs={8}>
           <Typography sx={{ ...infoStyles, maxWidth: '100% !important' }} className="ShowDots">
-            {'-'}
+            {party?.institutionType}
           </Typography>
         </Grid>
         <Grid item xs={4}>
@@ -38,7 +38,7 @@ export default function PartyDetail({ party }: Props) {
         </Grid>
         <Grid item xs={8}>
           <Typography sx={{ ...infoStyles, maxWidth: '100% !important' }} className="ShowDots">
-            {party?.name}
+            {party?.description}
           </Typography>
         </Grid>
       </Grid>

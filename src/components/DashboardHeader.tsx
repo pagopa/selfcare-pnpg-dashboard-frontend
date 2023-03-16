@@ -50,7 +50,7 @@ const DashboardHeader = ({ onExit, loggedUser, parties }: Props) => {
         onExit={onExit}
         withSecondHeader={!!party}
         addSelfcareProduct={false}
-        selectedPartyId={selectedParty?.externalId}
+        selectedPartyId={selectedParty?.partyId}
         productsList={[
           {
             id: 'prod-pn-pg',
@@ -67,8 +67,8 @@ const DashboardHeader = ({ onExit, loggedUser, parties }: Props) => {
         ]}
         partyList={parties.map((p) => ({
           logoUrl: p.urlLogo ?? '',
-          id: p.externalId ?? '',
-          name: p.name ?? '',
+          id: p.partyId ?? '',
+          name: p.description ?? '',
           productRole: p.fiscalCode ?? '',
         }))}
         loggedUser={

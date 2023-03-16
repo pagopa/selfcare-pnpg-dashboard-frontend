@@ -27,16 +27,16 @@ export type PnpgInstitutionLegalAddressResource = {
 
 export type PartyPnpg = {
   externalId: string;
-  id: string;
+  partyId: string;
   fiscalCode: string;
-  name: string;
+  description: string;
   status: string;
   urlLogo?: string;
   address?: string;
   category?: string;
   geographicTaxonomies?: Array<GeographicTaxonomyResource>;
   institutionType?: string;
-  mailAddress?: string;
+  digitalAddress?: string;
   origin?: string;
   originId?: string;
   recipientCode?: string;
@@ -55,15 +55,15 @@ export const institutionPnPGResource2PartyPnpg = (
     address: institutionResourcePnpg.address,
     externalId: institutionResourcePnpg.externalId,
     fiscalCode: institutionResourcePnpg.fiscalCode,
-    id: institutionResourcePnpg.id,
-    name: institutionResourcePnpg.name,
+    partyId: institutionResourcePnpg.id,
+    description: institutionResourcePnpg.name,
     status: institutionResourcePnpg.status,
     urlLogo,
     category: institutionResourcePnpg.category,
     geographicTaxonomies:
       institutionResourcePnpg.geographicTaxonomies as Array<GeographicTaxonomyResource>,
     institutionType: institutionResourcePnpg.institutionType,
-    mailAddress: institutionResourcePnpg.mailAddress,
+    digitalAddress: institutionResourcePnpg.mailAddress,
     origin: institutionResourcePnpg.origin,
     originId: institutionResourcePnpg.originId,
     recipientCode: institutionResourcePnpg.recipientCode,

@@ -25,13 +25,13 @@ export default function DashboardSideMenu({ party }: Props) {
   const groupsRoute = ENV.ROUTES.GROUPS;
 
   const overviewPath = resolvePathVariables(overviewRoute, {
-    partyId: party.id,
+    partyId: party.partyId,
   });
   const usersPath = resolvePathVariables(usersRoute, {
-    partyId: party.id,
+    partyId: party.partyId,
   });
   const groupsPath = resolvePathVariables(groupsRoute, {
-    partyId: party.id,
+    partyId: party.partyId,
   });
 
   const isOVerviewSelected = window.location.pathname === overviewPath;
@@ -44,19 +44,21 @@ export default function DashboardSideMenu({ party }: Props) {
         <List sx={{ width: '100%' }}>
           <DashboardSidenavItem
             title={t('overview.sideMenu.institutionManagement.overview.title')}
-            handleClick={() => onExit(() => history.push(party.id ? overviewPath : overviewRoute))}
+            handleClick={() =>
+              onExit(() => history.push(party.partyId ? overviewPath : overviewRoute))
+            }
             isSelected={isOVerviewSelected}
             icon={DashboardCustomize}
           />
           <DashboardSidenavItem
             title={t('overview.sideMenu.institutionManagement.referents.title')}
-            handleClick={() => onExit(() => history.push(party.id ? usersPath : usersRoute))}
+            handleClick={() => onExit(() => history.push(party.partyId ? usersPath : usersRoute))}
             isSelected={isRoleSelected}
             icon={PeopleAlt}
           />
           <DashboardSidenavItem
             title={t('overview.sideMenu.institutionManagement.groups.title')}
-            handleClick={() => onExit(() => history.push(party.id ? groupsPath : groupsRoute))}
+            handleClick={() => onExit(() => history.push(party.partyId ? groupsPath : groupsRoute))}
             isSelected={isGroupSelected}
             icon={SupervisedUserCircle}
           />

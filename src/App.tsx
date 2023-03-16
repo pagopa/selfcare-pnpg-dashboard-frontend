@@ -28,7 +28,7 @@ const App = () => (
       <Route path="*">
         <Redirect
           to={resolvePathVariables(routes.PARTY_DASHBOARD.path, {
-            partyId: '1',
+            partyId: '5b321318-3df7-48c1-87c8-2865e6707c3d',
           })}
         />
       </Route>

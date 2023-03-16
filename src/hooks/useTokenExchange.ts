@@ -42,7 +42,7 @@ export const useTokenExchange = () => {
             trackEvent(
               'DASHBOARD_OPEN_PRODUCT',
               {
-                party_id: selectedParty.id,
+                party_id: selectedParty.partyId,
                 product_id: product.id,
                 product_role: product.userRole,
                 target: selectedEnvironment,
@@ -66,7 +66,7 @@ export const useTokenExchange = () => {
             trackEvent(
               'DASHBOARD_OPEN_PRODUCT',
               {
-                party_id: selectedParty.id,
+                party_id: selectedParty.partyId,
                 product_id: product.id,
                 product_role: product.userRole,
                 target: 'prod',
