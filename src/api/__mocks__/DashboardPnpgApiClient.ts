@@ -18,7 +18,7 @@ export const loggedUser: User = {
 export const mockedAgencies: Array<BusinessPnpg> = [
   {
     businessName: 'Ragione Sociale success',
-    businessTaxId: '00000000000',
+    businessTaxId: '1',
   },
   {
     businessName: 'Ragione Sociale alreadyOnboarded',
@@ -58,7 +58,7 @@ export const mockedPnPGInstitutionsResource: Array<PartyPnpg> = [
     category: 'categoryTest1',
     origin: 'originTest1',
     originId: 'originIdTest1',
-    userRole: undefined,
+    userRole: 'ADMIN',
     zipCode: undefined,
     urlLogo: 'http://checkout.selfcare/institutions/00000000000/logo.png',
   },
@@ -102,7 +102,7 @@ export const mockedPnPGInstitutionsResource: Array<PartyPnpg> = [
 
 export const mockedRetrievedInstitutionLegalAddress: Array<PnpgInstitutionLegalAddressResource> = [
   {
-    externalInstitutionId: '00000000000',
+    externalInstitutionId: '1',
     address: 'Legal Address API retrieve, 0',
     zipCode: '03040',
   },

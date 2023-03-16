@@ -2,10 +2,10 @@ import { PartyPnpg } from '../../model/PartyPnpg';
 
 export const mockedPnpgParties: Array<PartyPnpg> = [
   {
-    externalId: '00000000000',
-    fiscalCode: '00000000000',
+    externalId: '1',
+    fiscalCode: '1',
     geographicTaxonomies: [{ code: '', desc: '' }],
-    id: '00000000000',
+    id: '1',
     institutionType: 'GSP',
     mailAddress: undefined,
     name: 'Test businessName 01',
@@ -15,7 +15,7 @@ export const mockedPnpgParties: Array<PartyPnpg> = [
     category: 'categoryTest1',
     origin: 'originTest1',
     originId: 'originIdTest1',
-    userRole: undefined,
+    userRole: 'ADMIN',
     zipCode: undefined,
     urlLogo: 'http://checkout.selfcare/institutions/00000000000/logo.png',
   },

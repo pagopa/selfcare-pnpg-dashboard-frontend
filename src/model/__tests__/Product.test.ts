@@ -1,5 +1,8 @@
-import { ProductsResource, StatusEnum } from '../../api/generated/b4f-dashboard/ProductsResource';
-import { ProductOnBoardingStatusEnum } from '../../api/generated/b4f-dashboard/SubProductResource';
+import {
+  ProductsResource,
+  StatusEnum,
+} from '../../api/generated/b4f-dashboard-pnpg/ProductsResource';
+import { ProductOnBoardingStatusEnum } from '../../api/generated/b4f-dashboard-pnpg/SubProductResource';
 import { productResource2Product } from '../Product';
 
 test('Test institutionInfo2Party', () => {

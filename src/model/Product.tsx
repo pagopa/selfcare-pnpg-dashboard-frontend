@@ -1,8 +1,8 @@
-import { ProductsResource } from '../api/generated/b4f-dashboard/ProductsResource';
+import { ProductsResource } from '../api/generated/b4f-dashboard-pnpg/ProductsResource';
 import {
   ProductOnBoardingStatusEnum,
   StatusEnum,
-} from '../api/generated/b4f-dashboard/SubProductResource';
+} from '../api/generated/b4f-dashboard-pnpg/SubProductResource';
 
 import { UserRole } from './PartyPnpg';
 
