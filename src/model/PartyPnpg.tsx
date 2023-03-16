@@ -1,5 +1,5 @@
 import { InstitutionPnPGResource } from '../api/generated/b4f-dashboard-pnpg/InstitutionPnPGResource';
-import { GeographicTaxonomyResource } from '../api/generated/b4f-dashboard/GeographicTaxonomyResource';
+import { GeographicTaxonomyResource } from '../api/generated/b4f-dashboard-pnpg/GeographicTaxonomyResource';
 import { ENV } from '../utils/env';
 
 export type UserRole = 'ADMIN' | 'LIMITED';

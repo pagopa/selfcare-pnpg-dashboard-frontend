@@ -1,7 +1,7 @@
 import {
   ProductOnBoardingStatusEnum,
   StatusEnum,
-} from '../../api/generated/b4f-dashboard/SubProductResource';
+} from '../../api/generated/b4f-dashboard-pnpg/SubProductResource';
 import { Product } from '../../model/Product';
 import { ProductRole } from '../../model/ProductRole';
 
@@ -21,6 +21,25 @@ export const mockedPartyProduct: Product = {
   subProducts: [],
   logoBgColor: 'pagoPA.main',
 };
+
+export const mockedPartyProducts: Array<Product> = [
+  {
+    logo: 'https://selcdcheckoutsa.z6.web.core.windows.net/resources/products/prod-pn/logo.svg',
+    id: 'prod-pn-pg',
+    title: 'Piattaforma Notifiche',
+    description: 'Piattaforma Notifiche Persone Giuridiche',
+    authorized: false,
+    productOnBoardingStatus: ProductOnBoardingStatusEnum.ACTIVE,
+    status: StatusEnum.ACTIVE,
+    urlBO: 'http://notifiche/bo?token=<IdentityToken>',
+    activationDateTime: new Date(2021, 1, 2),
+    urlPublic: 'http://notifiche/public',
+    imageUrl:
+      'https://selcdcheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg',
+    subProducts: [],
+    logoBgColor: 'pagoPA.main',
+  },
+];
 
 export const mockedProductRoles: Array<ProductRole> = [
   {
