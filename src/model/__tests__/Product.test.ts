@@ -11,8 +11,8 @@ test('Test institutionInfo2Party', () => {
   const productResource: ProductsResource = {
     logo: 'https://selcdcheckoutsa.z6.web.core.windows.net/resources/products/prod-pn/logo.svg',
     id: 'prod-pn-pg',
-    title: 'Piattaforma Notifiche',
-    description: 'Piattaforma Notifiche Persone Giuridiche',
+    title: 'Piattaforma Notifiche Persone Giuridiche',
+    description: 'Descrizione Piattaforma Notifiche Persone Giuridiche',
     authorized: false,
     productOnBoardingStatus: ProductOnBoardingStatusEnum.ACTIVE,
     status: StatusEnum.ACTIVE,
@@ -27,8 +27,8 @@ test('Test institutionInfo2Party', () => {
   expect(product).toStrictEqual({
     logo: 'https://selcdcheckoutsa.z6.web.core.windows.net/resources/products/prod-pn/logo.svg',
     id: 'prod-pn-pg',
-    title: 'Piattaforma Notifiche',
-    description: 'Piattaforma Notifiche Persone Giuridiche',
+    title: 'Piattaforma Notifiche Persone Giuridiche',
+    description: 'Descrizione Piattaforma Notifiche Persone Giuridiche',
     authorized: false,
     productOnBoardingStatus: ProductOnBoardingStatusEnum.ACTIVE,
     status: StatusEnum.ACTIVE,
