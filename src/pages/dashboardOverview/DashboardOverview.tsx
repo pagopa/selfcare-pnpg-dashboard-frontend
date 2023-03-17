@@ -2,7 +2,6 @@ import { Grid, Box, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import TitleBox from '@pagopa/selfcare-common-frontend/components/TitleBox';
-import { storageTokenOps } from '@pagopa/selfcare-common-frontend/utils/storage';
 import { useErrorDispatcher } from '@pagopa/selfcare-common-frontend';
 import { useTranslation } from 'react-i18next';
 import { PartyPnpg } from '../../model/PartyPnpg';
@@ -29,14 +28,11 @@ const DashboardOverview = () => {
   const [selectedParty, setSelectedParty] = useState<PartyPnpg>();
 
   useEffect(() => {
-    const chosenParty = parties?.find((p) => p.partyId === partyId);
+    const chosenParty = parties?.find((p) => p.externalId === partyId || p.partyId === partyId);
     setSelectedParty(chosenParty);
   }, [partyId]);
 
   const handleClick = async (productId: string, institutionId: string) => {
-    storageTokenOps.write(
-      'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Imp3dF84Njo3NDoxZTozNTphZTphNjpkODo0YjpkYzplOTpmYzo4ZTphMDozNTo2ODpiNSJ9.eyJlbWFpbCI6ImZ1cmlvdml0YWxlQG1hcnRpbm8uaXQiLCJmYW1pbHlfbmFtZSI6IlNhcnRvcmkiLCJmaXNjYWxfbnVtYmVyIjoiU1JUTkxNMDlUMDZHNjM1UyIsIm5hbWUiOiJBbnNlbG1vIiwiZnJvbV9hYSI6ZmFsc2UsInVpZCI6IjUwOTZlNGM2LTI1YTEtNDVkNS05YmRmLTJmYjk3NGE3YzFjOCIsImxldmVsIjoiTDIiLCJpYXQiOjE2NzU0MTcxMTYsImV4cCI6MTY3NTQ0OTUxNiwiYXVkIjoiYXBpLmRldi5zZWxmY2FyZS5wYWdvcGEuaXQiLCJpc3MiOiJTUElEIiwianRpIjoiMDFHUkJBOFFKMDdKN0U3RDIySFo3NFo0TTYifQ.fZJ4b7Au6oRjxd9WqivcWeVz8KO2IKx6rDTZNNyEcXQ6zKuJDz27CWBwJ635_3WlhbYynPVXlvp4FrDQEGch1eeEfmkSCyKVFd38BlUBRYeuPYL-g79jzu_fdVOj6TzVF9y1cumC_3Z3wagxcryjEtzpD-0qPVZrGyrBAyGiM6qc6PxzY49kMYefz8l17n59GDUf72xHAWQPRXqKomgJTeTd_-dV_5h_R7PfrocJgg6InywYl87dr_c7G7Neg4-zIHa74rijh7nuTVNgdUzitJlZLlLoOHZG93yFtQeGzXdPbX6CvsP2lqCCTsXs5JSgwNofZ3NilDTFwIxd1lLaBA'
-    );
     setLoading(true);
     retrieveProductBackoffice(productId, institutionId)
       .then((backOfficeUrl) => window.location.assign(backOfficeUrl))
@@ -82,7 +78,7 @@ const DashboardOverview = () => {
             cardTitle={t('overview.notificationAreaProduct.card.title')}
             urlLogo={PnIcon}
             btnAction={() =>
-              selectedParty ? handleClick('prod-pnpg', selectedParty.partyId) : undefined
+              selectedParty ? handleClick('prod-pn-pg', selectedParty.partyId) : undefined
             }
           />
         </Grid>

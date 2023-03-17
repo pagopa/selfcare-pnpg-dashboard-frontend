@@ -1,8 +1,10 @@
+import { resolvePathVariables } from '@pagopa/selfcare-common-frontend/utils/routes-utils';
 import { PartyPnpg } from '../model/PartyPnpg';
 // import { Product } from '../model/Product';
 // import { ProductsRolesMap } from '../model/ProductRole';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { partiesActions, partiesSelectors } from '../redux/slices/partiesSlice';
+import { ENV } from '../utils/env';
 // import { fetchProducts } from '../services/productService';
 
 export const useSelectedParty = (): {
@@ -50,8 +52,14 @@ export const useSelectedParty = (): {
     });
     */
   const fetchSelectedParty = (partyId: string) => {
-    const chosenParty = parties?.find((p) => p.partyId === partyId);
+    const chosenParty = parties?.find((p) => p.externalId === partyId || p.partyId === partyId);
     setParty(chosenParty);
+
+    const result = resolvePathVariables(ENV.ROUTES.OVERVIEW, {
+      partyId: chosenParty?.partyId ?? '',
+    });
+
+    history.pushState(null, 'null', result);
   };
 
   return { fetchSelectedParty };
