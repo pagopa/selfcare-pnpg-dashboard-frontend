@@ -6,14 +6,14 @@ import { useTranslation, Trans } from 'react-i18next';
 import { useTokenExchange } from '../../../../../hooks/useTokenExchange';
 import { PartyPnpg } from '../../../../../model/PartyPnpg';
 import { Product } from '../../../../../model/Product';
-import ActiveProductCard from './ActiveProductCard';
+import ActiveProductCard from './DigitalNotificationCard';
 
 type Props = {
   party: PartyPnpg;
   product: Product;
 };
 
-export default function ActiveProductCardContainer({ party, product }: Props) {
+export default function DigitalNotificationCardContainer({ party, product }: Props) {
   const { t } = useTranslation();
   const { invokeProductBo } = useTokenExchange();
 
@@ -32,8 +32,6 @@ export default function ActiveProductCardContainer({ party, product }: Props) {
               ? setOpenEnvironmentModal(true)
               : invokeProductBo(product, party)
           }
-          // party={party}
-          // product={product}
         />
         {lastServiceActivationDate && (
           <Typography variant="h5" sx={{ fontSize: '16px' }} mx={1}>

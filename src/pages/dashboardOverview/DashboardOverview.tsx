@@ -1,4 +1,4 @@
-import { Grid, Box, Typography } from '@mui/material';
+import { Grid, Box } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import TitleBox from '@pagopa/selfcare-common-frontend/components/TitleBox';
@@ -12,7 +12,7 @@ import PnIcon from '../../assets/pn.svg';
 import WelcomeDashboard from './components/welcomeDashboard/WelcomeDashboard';
 import PartyCard from './components/partyCard/PartyCard';
 import { PartyLogoUploader } from './components/partyCard/components/partyLogoUploader/PartyLogoUploader';
-import ActiveProductCard from './components/activeProductsSection/components/ActiveProductCard';
+import DigitalNotificationCard from './components/activeProductsSection/components/DigitalNotificationCard';
 
 type UrlParams = {
   partyId: string;
@@ -52,19 +52,14 @@ const DashboardOverview = () => {
     <Box p={3} sx={{ width: '100%' }}>
       <WelcomeDashboard businessName={selectedParty?.description} />
       <Grid container direction="row" justifyContent={'center'} alignItems="center" mb={2}>
-        <Grid item xs={6} display="flex" alignItems="center">
-          <Typography variant="h6" sx={{ fontWeight: '700' }}>
-            {selectedParty?.description}
-          </Typography>
-        </Grid>
         {selectedParty && (
           <Grid item xs={6}>
             <PartyLogoUploader partyId={selectedParty.partyId} />
           </Grid>
         )}
-      </Grid>
-      <Grid item xs={12}>
-        <PartyCard party={selectedParty} />
+        <Grid item xs={6}>
+          <PartyCard party={selectedParty} />
+        </Grid>
       </Grid>
       <Grid item container ml={1} mt={5}>
         <TitleBox
@@ -74,7 +69,7 @@ const DashboardOverview = () => {
           titleFontSize="28px"
         />
         <Grid container mb={44}>
-          <ActiveProductCard
+          <DigitalNotificationCard
             cardTitle={t('overview.notificationAreaProduct.card.title')}
             urlLogo={PnIcon}
             btnAction={() =>
