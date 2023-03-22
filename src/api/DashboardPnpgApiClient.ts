@@ -6,6 +6,8 @@ import { ENV } from '../utils/env';
 import { store } from '../redux/store';
 import { createClient, WithDefaultsT } from './generated/b4f-dashboard-pnpg/client';
 import { InstitutionPnPGResourceArray } from './generated/b4f-dashboard-pnpg/InstitutionPnPGResourceArray';
+import { ProductsResource } from './generated/b4f-dashboard-pnpg/ProductsResource';
+import { ProductRoleMappingsResource } from './generated/b4f-dashboard-pnpg/ProductRoleMappingsResource';
 
 const withBearerAndInstitutionId: WithDefaultsT<'bearerAuth'> =
   (wrappedOperation) => (params: any) => {
@@ -57,6 +59,18 @@ export const DashboardPnpgApi = {
 
   saveInstitutionLogo: async (institutionId: string, logo: File): Promise<boolean> => {
     const result = await apiClient.saveInstitutionLogoUsingPUT({ institutionId, logo });
+    return extractResponse(result, 200, onRedirectToLogin);
+  },
+
+  getProducts: async (institutionId: string): Promise<Array<ProductsResource>> => {
+    const result = await apiClient.getInstitutionProductsUsingGET({ institutionId });
+    return extractResponse(result, 200, onRedirectToLogin);
+  },
+
+  getProductRoles: async (productId: string): Promise<Array<ProductRoleMappingsResource>> => {
+    const result = await apiClient.getProductRolesUsingGET({
+      productId,
+    });
     return extractResponse(result, 200, onRedirectToLogin);
   },
 };

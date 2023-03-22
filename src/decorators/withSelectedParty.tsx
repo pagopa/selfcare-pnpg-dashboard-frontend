@@ -1,5 +1,7 @@
+import { useErrorDispatcher } from '@pagopa/selfcare-common-frontend';
 import { useEffect } from 'react';
 import { useParams } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { useSelectedParty } from '../hooks/useSelectedParty';
 
 type DashboardUrlParams = {
@@ -14,9 +16,20 @@ export default function withSelectedParty(
   const ComponentWithSelectedParty = (props: any) => {
     const { fetchSelectedParty } = useSelectedParty();
     const { partyId } = useParams<DashboardUrlParams>();
+    const { t } = useTranslation();
+    const addError = useErrorDispatcher();
 
     const doFetch = (): void => {
-      fetchSelectedParty(partyId);
+      fetchSelectedParty(partyId).catch((reason) => {
+        addError({
+          id: 'FETCH_SELECTED_PARTY_ERROR',
+          blocking: false,
+          error: reason,
+          displayableDescription: t('unmanageableBusiness'),
+          techDescription: `An error occurred while retrieving selected party with ${partyId}`,
+          toNotify: true,
+        });
+      });
     };
 
     useEffect(() => {

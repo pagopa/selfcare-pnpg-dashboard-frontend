@@ -1,30 +1,41 @@
-// import { DashboardPnpgApi } from '../api/DashboardPnpgApiClient';
-import { Product } from '../model/Product';
+import { DashboardPnpgApi } from '../api/DashboardPnpgApiClient';
+import { Product, productResource2Product } from '../model/Product';
 import { ProductRole } from '../model/ProductRole';
 import {
   mockedPartyProducts,
   fetchProductRoles as fetchProductRolesMocked,
 } from './__mocks__/productService';
 
-export const fetchProducts = (_partyId: string): Promise<Array<Product>> => {
+export const fetchProducts = (partyId: string): Promise<Array<Product>> => {
   /* istanbul ignore if */
-  // eslint-disable-next-line sonarjs/no-all-duplicated-branches
-  if (process.env.REACT_APP_API_MOCK_PRODUCTS === 'true') {
+  if (process.env.REACT_APP_MOCK_API === 'true') {
     return new Promise((resolve) => resolve(mockedPartyProducts));
   } else {
-    return new Promise((resolve) => resolve(mockedPartyProducts));
-    /* DashboardPnpgApi.getProducts(partyId).then((productResources) =>
-      productResources ? productResources.map(productResource2Product) : [] 
-   ); */
+    return DashboardPnpgApi.getProducts(partyId).then((productResources) =>
+      productResources ? productResources.map(productResource2Product) : []
+    );
   }
 };
 
 export const fetchProductRoles = (product: Product): Promise<Array<ProductRole>> => {
   /* istanbul ignore if */
-  // eslint-disable-next-line sonarjs/no-all-duplicated-branches
-  if (process.env.REACT_APP_API_MOCK_PRODUCTS === 'true') {
+  if (process.env.REACT_APP_MOCK_API === 'true') {
     return fetchProductRolesMocked(product);
   } else {
-    return fetchProductRolesMocked(product);
+    return DashboardPnpgApi.getProductRoles(product.id).then((roles) =>
+      roles
+        .map((pr) =>
+          pr.productRoles.map((r) => ({
+            productId: product.id,
+            partyRole: pr.partyRole,
+            selcRole: pr.selcRole,
+            multiroleAllowed: pr.multiroleAllowed,
+            productRole: r.code,
+            title: r.label,
+            description: r.description,
+          }))
+        )
+        .flatMap((x) => x)
+    );
   }
 };

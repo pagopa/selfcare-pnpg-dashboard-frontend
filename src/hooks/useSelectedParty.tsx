@@ -1,32 +1,39 @@
-import { resolvePathVariables } from '@pagopa/selfcare-common-frontend/utils/routes-utils';
+import useLoading from '@pagopa/selfcare-common-frontend/hooks/useLoading';
 import { PartyPnpg } from '../model/PartyPnpg';
-// import { Product } from '../model/Product';
-// import { ProductsRolesMap } from '../model/ProductRole';
+import { Product } from '../model/Product';
+import { ProductsRolesMap } from '../model/ProductRole';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { partiesActions, partiesSelectors } from '../redux/slices/partiesSlice';
-import { ENV } from '../utils/env';
-// import { fetchProducts } from '../services/productService';
+import { fetchPartyDetails } from '../services/partyService';
+import { fetchProducts } from '../services/productService';
+import { LOADING_TASK_SEARCH_PARTY, LOADING_TASK_SEARCH_PRODUCTS } from '../utils/constants';
 
 export const useSelectedParty = (): {
-  fetchSelectedParty: (partyId: string) => void;
+  fetchSelectedParty: (partyId: string) => Promise<[PartyPnpg | null, Array<Product> | null]>;
 } => {
   const dispatch = useAppDispatch();
-  // const selectedParty = useAppSelector(partiesSelectors.selectPartySelected);
-  // const selectedPartyProducts = useAppSelector(partiesSelectors.selectPartySelectedProducts);
+  const selectedParty = useAppSelector(partiesSelectors.selectPartySelected);
+  const selectedPartyProducts = useAppSelector(partiesSelectors.selectPartySelectedProducts);
   const parties = useAppSelector(partiesSelectors.selectPartiesList);
   const setParty = (party?: PartyPnpg) => dispatch(partiesActions.setPartySelected(party));
-  // const setPartyProducts = (products?: Array<Product>) =>
-  // dispatch(partiesActions.setPartySelectedProducts(products));
-  // const setLoadingDetails = useLoading(LOADING_TASK_SEARCH_PARTY);
-  // const setLoadingProducts = useLoading(LOADING_TASK_SEARCH_PRODUCTS);
-  // const productsRolesMap = useAppSelector(partiesSelectors.selectPartySelectedProductsRolesMap);
+  const setPartyProducts = (products?: Array<Product>) =>
+    dispatch(partiesActions.setPartySelectedProducts(products));
+  const setLoadingDetails = useLoading(LOADING_TASK_SEARCH_PARTY);
+  const setLoadingProducts = useLoading(LOADING_TASK_SEARCH_PRODUCTS);
+  const productsRolesMap = useAppSelector(partiesSelectors.selectPartySelectedProductsRolesMap);
 
-  /*
-  const fetchParty = (partyId: string) => {
-    const chosenParty = parties?.find((p) => p.id === partyId);
-    setParty(chosenParty);
-  };
-
+  const fetchParty = (partyId: string): Promise<PartyPnpg | null> =>
+    fetchPartyDetails(partyId, parties).then((party) => {
+      if (party) {
+        if (party.status !== 'ACTIVE') {
+          throw new Error(`INVALID_PARTY_STATE_${party.status}`);
+        }
+        setParty(party);
+        return party;
+      } else {
+        throw new Error(`Cannot find partyId ${partyId}`);
+      }
+    });
   const fetchProductLists = (partyId: string) =>
     fetchProducts(partyId).then((products) => {
       if (products) {
@@ -50,16 +57,31 @@ export const useSelectedParty = (): {
         throw new Error(`Cannot find products of partyId ${partyId}`);
       }
     });
-    */
+
   const fetchSelectedParty = (partyId: string) => {
-    const chosenParty = parties?.find((p) => p.externalId === partyId || p.partyId === partyId);
-    setParty(chosenParty);
+    if (!selectedParty || selectedParty.partyId !== partyId) {
+      setLoadingDetails(true);
+      setLoadingProducts(true);
 
-    const result = resolvePathVariables(ENV.ROUTES.OVERVIEW, {
-      partyId: chosenParty?.partyId ?? '',
-    });
+      const partyDetailPromise: Promise<PartyPnpg | null> = fetchParty(partyId).finally(() =>
+        setLoadingDetails(false)
+      );
 
-    history.pushState(null, 'null', result);
+      const partyProductsPromise: Promise<Array<Product> | null> = fetchProductLists(
+        partyId
+      ).finally(() => setLoadingProducts(false));
+
+      return Promise.all([partyDetailPromise, partyProductsPromise]).catch((e) => {
+        setParty(undefined);
+        setPartyProducts(undefined);
+        throw e;
+      });
+    } else {
+      return Promise.all([
+        new Promise<PartyPnpg>((resolve) => resolve(selectedParty)),
+        new Promise<Array<Product>>((resolve) => resolve(selectedPartyProducts ?? [])),
+      ]);
+    }
   };
 
   return { fetchSelectedParty };
