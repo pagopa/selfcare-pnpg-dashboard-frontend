@@ -16,7 +16,7 @@ export default function withSelectedParty(
     const { partyId } = useParams<DashboardUrlParams>();
 
     const doFetch = (): void => {
-      fetchSelectedParty(partyId);
+      fetchSelectedParty(partyId).catch((reason) => reason);
     };
 
     useEffect(() => {
