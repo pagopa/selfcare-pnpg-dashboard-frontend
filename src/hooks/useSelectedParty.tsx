@@ -1,4 +1,5 @@
 import useLoading from '@pagopa/selfcare-common-frontend/hooks/useLoading';
+import { resolvePathVariables } from '@pagopa/selfcare-common-frontend/utils/routes-utils';
 import { PartyPnpg } from '../model/PartyPnpg';
 import { Product } from '../model/Product';
 import { ProductsRolesMap } from '../model/ProductRole';
@@ -7,6 +8,7 @@ import { partiesActions, partiesSelectors } from '../redux/slices/partiesSlice';
 import { fetchPartyDetails } from '../services/partyService';
 import { fetchProducts } from '../services/productService';
 import { LOADING_TASK_SEARCH_PARTY, LOADING_TASK_SEARCH_PRODUCTS } from '../utils/constants';
+import { ENV } from '../utils/env';
 
 export const useSelectedParty = (): {
   fetchSelectedParty: (partyId: string) => Promise<[PartyPnpg | null, Array<Product> | null]>;
@@ -28,6 +30,10 @@ export const useSelectedParty = (): {
         if (party.status !== 'ACTIVE') {
           throw new Error(`INVALID_PARTY_STATE_${party.status}`);
         }
+        const resolvedUrlWithPartyId = resolvePathVariables(ENV.ROUTES.OVERVIEW, {
+          partyId: party?.partyId ?? '',
+        });
+        history.pushState(null, 'null', resolvedUrlWithPartyId);
         setParty(party);
         return party;
       } else {
