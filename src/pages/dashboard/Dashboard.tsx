@@ -1,9 +1,8 @@
 import { Grid, Box, useTheme } from '@mui/material';
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import { Route, Switch, useHistory } from 'react-router';
 import { useStore } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { storageTokenOps } from '@pagopa/selfcare-common-frontend/utils/storage';
 import withSelectedParty from '../../decorators/withSelectedParty';
 import withProductRolesMap from '../../decorators/withProductsRolesMap';
 import withSelectedProduct from '../../decorators/withSelectedPartyProduct';
@@ -16,7 +15,6 @@ import { DASHBOARD_ROUTES, RouteConfig, RoutesObject } from '../../routes';
 import { ENV } from '../../utils/env';
 import RemoteRoutingUsers from '../../microcomponents/users/RemoteRoutingUsers';
 import RemoteRoutingGroups from '../../microcomponents/groups/RemoteRoutingGroups';
-import { mockedPartyProducts as products } from '../../services/__mocks__/productService';
 import DashboardSideMenu from './components/dashboardSideMenu/DashboardSideMenu';
 
 export type DashboardPageProps = {
@@ -81,18 +79,10 @@ export const buildRoutes = (
 const Dashboard = () => {
   const history = useHistory();
   const party = useAppSelector(partiesSelectors.selectPartySelected);
-  // const products = useAppSelector(partiesSelectors.selectPartySelectedProducts);
-
+  const products = useAppSelector(partiesSelectors.selectPartySelectedProducts);
   const store = useStore();
   const theme = useTheme();
   const { i18n } = useTranslation();
-
-  // TODO This will be removed when the login service of PN is available
-  useEffect(() => {
-    storageTokenOps.write(
-      'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Imp3dF9kZjplNjoxOTplYToxZTpjZTplNjo3Yjo3MDo0MjoyYzphMjpjZDo4Yjo1MjowYiJ9.eyJlbWFpbCI6ImQuZGVsbGF2YWxsZUB0ZXN0Lml0IiwiZmFtaWx5X25hbWUiOiJEZWxsYSBWYWxsZSIsImZpc2NhbF9udW1iZXIiOiJETExER0k1M1QzMEkzMjRFIiwibmFtZSI6IkRpZWdvIiwiZnJvbV9hYSI6ZmFsc2UsInVpZCI6IjM5MzQ1MDcyLWU0YmYtNDYwOS04MmVhLTg4ZDE5NDUyNTM2YiIsImxldmVsIjoiTDIiLCJpYXQiOjE2NDAyNTU2ODMsImFwaSI6InBucGciLCJhdWQiOiJhcGkuZGV2LnNlbGZjYXJlLnBhZ29wYS5pdCIsImlzcyI6IlNQSUQiLCJqdGkiOiIwMUZRS0RQWjE1R1Q0U1RDUUFFNUVYQlZWTSJ9.XeaRUpqmHzevWAt9bojuvFogOUPpVkjQWEqAdKFYJo0icY5gA3BkRqYpQHuCudqrCQDmhi0zRh8o5sx-5OcavBDFEOZnF7dvdf3EWdnAuJvbDpifoNPvO1dUZUhN3u6MvtZwwJnuRi_a85jpquDM8qQH5F-r_s75P1IMeewXnNnAQKdets-xb6TreRcyM4q7fEYdBf21DJ6WmLC7x3i6yxWuJUY1DnEIHUbX7CwuW2GFZ6Zth1OuNNN2L9Nm3YLAy90lo-xQh4lGYMESgJmP98pNmBovPm193NiFSWmnQkuigmBAip87bnzqCx4MO5_RwDnVDxTdTim8faBxCI9SEA'
-    );
-  }, []);
 
   const activeProducts: Array<Product> =
     useMemo(() => products?.filter((p) => p.productOnBoardingStatus === 'ACTIVE'), [products]) ??
