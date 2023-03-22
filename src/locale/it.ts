@@ -5,6 +5,7 @@ export default {
       message: 'Stai per essere rediretto alla pagina di login...',
     },
   },
+  unmanageableBusiness: "L'impresa selezinata non è gestibile",
   overview: {
     title: 'Panoramica',
     subTitle: 'Visualizza il riepilogo dei dati e leggi le notifiche di {{ businessName }}.',
