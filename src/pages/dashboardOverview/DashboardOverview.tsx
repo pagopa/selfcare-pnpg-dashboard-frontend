@@ -35,7 +35,9 @@ const DashboardOverview = () => {
   const handleClick = async (productId: string, institutionId: string) => {
     setLoading(true);
     retrieveProductBackoffice(productId, institutionId)
-      .then((backOfficeUrl) => window.location.assign(backOfficeUrl))
+      .then((backOfficeUrl) => {
+        window.location.assign(backOfficeUrl);
+      })
       .catch((reason) => {
         addError({
           id: 'RETRIEVE_PRODUCT_BACK_OFFICE_ERROR',
@@ -72,9 +74,7 @@ const DashboardOverview = () => {
           <DigitalNotificationCard
             cardTitle={t('overview.notificationAreaProduct.card.title')}
             urlLogo={PnIcon}
-            btnAction={() =>
-              selectedParty ? handleClick('prod-pn-pg', selectedParty.partyId) : undefined
-            }
+            btnAction={() => handleClick('prod-pn-pg', partyId)}
           />
         </Grid>
       </Grid>

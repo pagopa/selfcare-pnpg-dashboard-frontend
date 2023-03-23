@@ -51,7 +51,7 @@ test('Test rendering dashboard parties loaded', () => {
 
 test('Test routing ', async () => {
   const { history, store } = renderApp();
-  await waitFor(() => expect(history.location.pathname).toBe('/'));
+  await waitFor(() => expect(history.location.pathname).toBe('/dashboard'));
 
   history.push('/dashboard/1');
   await waitFor(() => expect(history.location.pathname).toBe('/dashboard/1'));

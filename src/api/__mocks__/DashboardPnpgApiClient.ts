@@ -1,9 +1,4 @@
-import {
-  BusinessPnpg,
-  InstitutionsPnpg,
-  PartyPnpg,
-  PnpgInstitutionLegalAddressResource,
-} from '../../model/PartyPnpg';
+import { BusinessPnpg, InstitutionsPnpg, PartyPnpg } from '../../model/PartyPnpg';
 
 export const mockedAgencies: Array<BusinessPnpg> = [
   {
@@ -36,49 +31,59 @@ export const mockedInstitutionPnPG: InstitutionsPnpg = {
 export const mockedPnPGInstitutionsResource: Array<PartyPnpg> = [
   {
     userRole: 'ADMIN',
-    description: "TOD'S S.P.A",
+    description: 'mockedBusiness1',
     urlLogo: 'image',
     status: 'ACTIVE',
-    partyId: '5b321318-3df7-48c1-87c8-2865e6707c3d',
+    partyId: '5b321318-3df7-48c1-67c8-1111e6707c3d',
     digitalAddress: '',
-    fiscalCode: '01113570442',
+    fiscalCode: '01113570210',
     category: '',
-    externalId: '01113570442',
+    externalId: '01113570210',
     originId: 'originId1',
     origin: 'IPA',
     institutionType: 'Azienda privata',
   },
   {
     userRole: 'ADMIN',
-    description: 'DIEGO DELLA VALLE & C. S.R.L.',
+    description: 'mockedBusiness2',
     urlLogo: 'image',
     status: 'ACTIVE',
-    partyId: '6b11b97c-a659-4f0d-a8cc-316e11b1025f',
+    partyId: '5b123318-7ff7-48c1-67c8-1111e6707c3d',
     digitalAddress: '',
-    fiscalCode: '01501320442',
+    fiscalCode: '03343570210',
     category: '',
-    externalId: '01501320442',
+    externalId: '03343570210',
     originId: 'originId1',
     origin: 'IPA',
     institutionType: 'Azienda privata',
   },
-];
-
-export const mockedRetrievedInstitutionLegalAddress: Array<PnpgInstitutionLegalAddressResource> = [
   {
-    externalInstitutionId: '1',
-    address: 'Legal Address API retrieve, 0',
-    zipCode: '03040',
+    userRole: 'ADMIN',
+    description: 'mockedBusiness3',
+    urlLogo: 'image',
+    status: 'ACTIVE',
+    partyId: '5b971318-3df7-11c1-67c8-1111e6707c3d',
+    digitalAddress: '',
+    fiscalCode: '05923570210',
+    category: '',
+    externalId: '05923570210',
+    originId: 'originId1',
+    origin: 'IPA',
+    institutionType: 'Azienda privata',
   },
   {
-    externalInstitutionId: '11111111111',
-    address: 'Legal Address API retrieve, 1',
-    zipCode: '03040',
-  },
-  {
-    externalInstitutionId: '33333333333',
-    address: 'Legal Address API retrieve, 3',
-    zipCode: '03040',
+    userRole: 'ADMIN',
+    description: 'mockedBusiness4',
+    urlLogo: 'image',
+    status: 'ACTIVE',
+    partyId: '5b971318-3df7-11c1-67c8-1111e6707dgt',
+    digitalAddress: '',
+    fiscalCode: '05923570510',
+    category: '',
+    externalId: '05923570510',
+    originId: 'originId1',
+    origin: 'IPA',
+    institutionType: 'Azienda privata',
   },
 ];
 

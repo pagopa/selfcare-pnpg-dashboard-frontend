@@ -8,7 +8,6 @@ import { TFunction, useTranslation } from 'react-i18next';
 import { DashboardPnpgApi } from '../../../../../../api/DashboardPnpgApiClient';
 import { useAppDispatch, useAppSelector } from '../../../../../../redux/hooks';
 import { partiesActions, partiesSelectors } from '../../../../../../redux/slices/partiesSlice';
-// import { PartyLogo } from './components/PartyLogo';
 import { PartyDescription } from './components/PartyDescription';
 import PartyLogo from './components/PartyLogo';
 
@@ -17,9 +16,9 @@ type Props = {
 };
 
 const getLabelLinkText = (t: TFunction<'translation', undefined>) =>
-  document.querySelector('#partyLogo')?.children[0].tagName === 'svg'
-    ? t('overview.partyLogo.upload')
-    : t('overview.partyLogo.modify');
+  document.querySelector('#businessLogo')?.children[0].tagName === 'svg'
+    ? t('overview.businessLogo.upload')
+    : t('overview.businessLogo.modify');
 
 export function PartyLogoUploader({ partyId }: Props) {
   const { t } = useTranslation();
@@ -48,8 +47,8 @@ export function PartyLogoUploader({ partyId }: Props) {
       blocking: false,
       error: new Error(),
       techDescription: `Wrong File Extension : ${files[0]}`,
-      displayableTitle: t('overview.partyLogo.uploadError.title'),
-      displayableDescription: t('overview.partyLogo.uploadError.description'),
+      displayableTitle: t('overview.businessLogo.uploadError.title'),
+      displayableDescription: t('overview.businessLogo.uploadError.description'),
       toNotify: false,
       onRetry: open,
     });
@@ -67,7 +66,7 @@ export function PartyLogoUploader({ partyId }: Props) {
         .then(() => {
           setUrlLogo(urlLogo);
           setLoading(false);
-          setLabelLink(t('overview.partyLogo.modify'));
+          setLabelLink(t('overview.businessLogo.modify'));
           trackEvent('DASHBOARD_PARTY_CHANGE_LOGO_SUCCESS', {
             party_id: partyId,
             request_id: requestId,
@@ -84,12 +83,12 @@ export function PartyLogoUploader({ partyId }: Props) {
             blocking: false,
             error: reason,
             techDescription: 'An error occurred while uploading new logo',
-            displayableTitle: t('overview.partyLogo.modifyError.title'),
-            displayableDescription: t('overview.partyLogo.modifyError.description'),
+            displayableTitle: t('overview.businessLogo.modifyError.title'),
+            displayableDescription: t('overview.businessLogo.modifyError.description'),
             toNotify: false,
             onRetry: open,
           });
-          setLabelLink(t('overview.partyLogo.upload'));
+          setLabelLink(t('overview.businessLogo.upload'));
         });
     },
     onDropRejected: onFileRejected,
