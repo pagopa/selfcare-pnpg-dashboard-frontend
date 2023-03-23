@@ -5,7 +5,20 @@ export default {
       message: 'Stai per essere rediretto alla pagina di login...',
     },
   },
-  unmanageableBusiness: "L'impresa selezinata non è gestibile",
+  unmanageableBusiness: "L'impresa selezionata non è gestibile",
+  businessSelection: {
+    title: 'Seleziona la tua impresa',
+    subTitle:
+      'Se operi per più imprese, potrai modificare la tua scelta dopo aver<1 />effettuato l’accesso.',
+    search: 'Cerca impresa',
+    signIn: 'Accedi',
+    noBusinessFound: {
+      title: 'Accesso non consentito',
+      description:
+        'L’Area Riservata è dedicata agli enti che utilizzano i prodotti <1 /> di PagoPA.  Se lavori per un ente, chiedi a un <3 /> Amministratore di aggiungerti nella sezione Utenti.',
+      backHome: 'Chiudi',
+    },
+  },
   overview: {
     title: 'Panoramica',
     subTitle: 'Visualizza il riepilogo dei dati e leggi le notifiche di {{ businessName }}.',
@@ -29,7 +42,7 @@ export default {
         title: 'Vai alle notifiche',
       },
     },
-    partyLogo: {
+    businessLogo: {
       upload: "Carica il logo dell'impresa",
       modify: "Modifica il logo dell'impresa",
       uploadError: {

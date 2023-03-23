@@ -17,7 +17,7 @@ export default function PartyLogo({ loading, urlLogo }: Props) {
       alignItems="center"
     >
       {!loading ? (
-        <PartyAvatar customSrc={urlLogo} id="partyLogo" customAlt={'logo'} />
+        <PartyAvatar customSrc={urlLogo} id="businessLogo" customAlt={'logo'} />
       ) : (
         <Box
           sx={{

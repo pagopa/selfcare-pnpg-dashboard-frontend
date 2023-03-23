@@ -31,7 +31,7 @@ export function PartyDescription({ labelLink, open, loading }: Props) {
         </ButtonNaked>
         <Tooltip
           title={
-            <Trans i18nKey={t('overview.partyLogo.size')}>
+            <Trans i18nKey={t('overview.businessLogo.size')}>
               Dimensione massima 300 x <br /> 300px - Formato .png
             </Trans>
           }
@@ -49,7 +49,7 @@ export function PartyDescription({ labelLink, open, loading }: Props) {
           mt={1}
           sx={{ fontSize: '12px', fontWeight: 'fontWeightRegular', color: 'text.secondary' }}
         >
-          <Trans i18nKey="overview.partyLogo.info">
+          <Trans i18nKey="overview.businessLogo.info">
             Inserisci solo il logo del tuo ente.
             <br />
             Sarai responsabile dell’inserimento di immagini diverse da quella indicata.

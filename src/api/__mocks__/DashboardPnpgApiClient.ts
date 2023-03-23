@@ -48,20 +48,6 @@ export const mockedPnPGInstitutionsResource: Array<PartyPnpg> = [
     origin: 'IPA',
     institutionType: 'Azienda privata',
   },
-  {
-    userRole: 'ADMIN',
-    description: 'DIEGO DELLA VALLE & C. S.R.L.',
-    urlLogo: 'image',
-    status: 'ACTIVE',
-    partyId: '6b11b97c-a659-4f0d-a8cc-316e11b1025f',
-    digitalAddress: '',
-    fiscalCode: '01501320442',
-    category: '',
-    externalId: '01501320442',
-    originId: 'originId1',
-    origin: 'IPA',
-    institutionType: 'Azienda privata',
-  },
 ];
 
 export const mockedRetrievedInstitutionLegalAddress: Array<PnpgInstitutionLegalAddressResource> = [

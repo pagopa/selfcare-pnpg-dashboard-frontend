@@ -1,5 +1,6 @@
 import Dashboard from './pages/dashboard/Dashboard';
 import DashboardOverview from './pages/dashboardOverview/DashboardOverview';
+import PartySelectionContainer from './pages/partySelectionContainer/PartySelectionContainer';
 import { ENV } from './utils/env';
 
 export const BASE_ROUTE = ENV.PUBLIC_URL;
@@ -17,6 +18,11 @@ export type RouteConfig = {
 };
 
 const ROUTES = {
+  PARTY_SELECTION: {
+    path: `${BASE_ROUTE}`,
+    exact: true,
+    component: PartySelectionContainer,
+  },
   PARTY_DASHBOARD: {
     path: `${BASE_ROUTE}/:partyId`,
     exact: false,
