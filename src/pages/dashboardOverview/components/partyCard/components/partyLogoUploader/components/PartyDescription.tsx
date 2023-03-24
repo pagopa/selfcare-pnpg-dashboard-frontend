@@ -50,7 +50,7 @@ export function PartyDescription({ labelLink, open, loading }: Props) {
           sx={{ fontSize: '12px', fontWeight: 'fontWeightRegular', color: 'text.secondary' }}
         >
           <Trans i18nKey="overview.businessLogo.info">
-            Inserisci solo il logo del tuo ente.
+            Inserisci solo il logo della tua impresa
             <br />
             Sarai responsabile dell’inserimento di immagini diverse da quella indicata.
           </Trans>

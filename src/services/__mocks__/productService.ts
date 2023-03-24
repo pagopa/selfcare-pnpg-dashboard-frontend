@@ -10,7 +10,7 @@ export const mockedPartyProduct: Product = {
   id: 'prod-pn-pg',
   title: 'Piattaforma Notifiche Persone Giuridiche',
   description: 'Piattaforma Notifiche Persone Giuridiche',
-  authorized: false,
+  authorized: true,
   productOnBoardingStatus: ProductOnBoardingStatusEnum.ACTIVE,
   status: StatusEnum.ACTIVE,
   urlBO: 'http://notifiche/bo?token=<IdentityToken>',
@@ -20,6 +20,7 @@ export const mockedPartyProduct: Product = {
     'https://selcdcheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg',
   subProducts: [],
   logoBgColor: 'pagoPA.main',
+  userRole: 'ADMIN',
 };
 
 export const mockedPartyProducts: Array<Product> = [
@@ -28,7 +29,7 @@ export const mockedPartyProducts: Array<Product> = [
     id: 'prod-pn-pg',
     title: 'Piattaforma Notifiche Persone Giuridiche',
     description: 'Piattaforma Notifiche Persone Giuridiche',
-    authorized: false,
+    authorized: true,
     productOnBoardingStatus: ProductOnBoardingStatusEnum.ACTIVE,
     status: StatusEnum.ACTIVE,
     urlBO: 'http://notifiche/bo?token=<IdentityToken>',
@@ -38,6 +39,7 @@ export const mockedPartyProducts: Array<Product> = [
       'https://selcdcheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg',
     subProducts: [],
     logoBgColor: 'pagoPA.main',
+    userRole: 'ADMIN',
   },
 ];
 
