@@ -42,9 +42,7 @@ export default function NoParty() {
             <Box>
               <Typography variant="body1">
                 <Trans i18nKey="businessSelection.noBusinessFound.description">
-                  L’Area Riservata è dedicata agli enti che utilizzano i prodotti <br /> di PagoPA.
-                  Se lavori per un ente, chiedi a un <br /> Amministratore di aggiungerti nella
-                  sezione Utenti.
+                  Dal tuo SPID non risulti essere Legale Rappresentante di <br /> alcuna impresa.
                 </Trans>
               </Typography>
             </Box>
@@ -58,9 +56,9 @@ export default function NoParty() {
               height: '46px',
               fontSize: 'fontSize',
             }}
-            onClick={() => window.location.assign(ENV.URL_FE.LANDING)}
+            onClick={() => window.location.assign(ENV.URL_FE.ONBOARDING)}
           >
-            {t('businessSelection.noBusinessFound.backHome')}
+            {t('businessSelection.noBusinessFound.registerBusiness')}
           </Button>
         </Grid>
       </Grid>

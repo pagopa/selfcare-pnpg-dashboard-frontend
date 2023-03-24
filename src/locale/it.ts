@@ -13,10 +13,9 @@ export default {
     search: 'Cerca impresa',
     signIn: 'Accedi',
     noBusinessFound: {
-      title: 'Accesso non consentito',
-      description:
-        'L’Area Riservata è dedicata agli enti che utilizzano i prodotti <1 /> di PagoPA.  Se lavori per un ente, chiedi a un <3 /> Amministratore di aggiungerti nella sezione Utenti.',
-      backHome: 'Chiudi',
+      title: 'Nessuna impresa trovata',
+      description: 'Dal tuo SPID non risulti essere Legale Rappresentante di <1 /> alcuna impresa.',
+      registerBusiness: 'Registra impresa',
     },
   },
   overview: {

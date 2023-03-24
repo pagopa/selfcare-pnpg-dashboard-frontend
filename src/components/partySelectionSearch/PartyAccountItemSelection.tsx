@@ -9,7 +9,6 @@ type Props = {
 };
 
 export default function PartyAccountItemSelection({ selectedParty, clearField }: Props) {
-  // const { t } = useTranslation();
   return (
     <Box display="flex" p={2}>
       <Box width="100%">

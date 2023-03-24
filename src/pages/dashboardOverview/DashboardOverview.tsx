@@ -23,6 +23,7 @@ const DashboardOverview = () => {
   const { partyId } = useParams<UrlParams>();
   const addError = useErrorDispatcher();
   const parties = useAppSelector(partiesSelectors.selectPartiesList);
+  const products = useAppSelector(partiesSelectors.selectPartySelectedProducts);
 
   const [_loading, setLoading] = useState<boolean>(false);
   const [selectedParty, setSelectedParty] = useState<PartyPnpg>();
@@ -50,6 +51,8 @@ const DashboardOverview = () => {
       .finally(() => setLoading(false));
   };
 
+  const prodPnpg = products?.find((p) => p.id === 'prod-pn-pg');
+
   return (
     <Box p={3} sx={{ width: '100%' }}>
       <WelcomeDashboard businessName={selectedParty?.description} />
@@ -74,7 +77,7 @@ const DashboardOverview = () => {
           <DigitalNotificationCard
             cardTitle={t('overview.notificationAreaProduct.card.title')}
             urlLogo={PnIcon}
-            btnAction={() => handleClick('prod-pn-pg', partyId)}
+            btnAction={() => handleClick(prodPnpg ? prodPnpg.id : '', partyId)}
           />
         </Grid>
       </Grid>
