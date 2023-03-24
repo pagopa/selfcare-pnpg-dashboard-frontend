@@ -18,6 +18,10 @@ export default {
       registerBusiness: 'Registra impresa',
     },
   },
+  productsList: {
+    yourBusiness: 'La tua impresa',
+    digitalNotifications: 'Notifiche digitali',
+  },
   overview: {
     title: 'Panoramica',
     subTitle: 'Visualizza il riepilogo dei dati e leggi le notifiche di {{ businessName }}.',

@@ -6,12 +6,13 @@ import { resolvePathVariables } from '@pagopa/selfcare-common-frontend/utils/rou
 import { useMemo, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useTranslation, Trans } from 'react-i18next';
+import { ProductSwitchItem } from '@pagopa/mui-italia';
 import withParties, { WithPartiesProps } from '../decorators/withParties';
 import { useTokenExchange } from '../hooks/useTokenExchange';
 import { Product } from '../model/Product';
 import { useAppSelector } from '../redux/hooks';
 import { partiesSelectors } from '../redux/slices/partiesSlice';
-import ROUTES from '../routes';
+import ROUTES, { DASHBOARD_ROUTES } from '../routes';
 import { PartyPnpg } from '../model/PartyPnpg';
 import { ENV } from './../utils/env';
 
@@ -51,20 +52,23 @@ const DashboardHeader = ({ onExit, loggedUser, parties }: Props) => {
         withSecondHeader={!!party}
         addSelfcareProduct={false}
         selectedPartyId={selectedParty?.partyId}
-        productsList={[
-          {
-            id: 'prod-pn-pg',
-            title: 'La tua impresa',
-            linkType: 'external',
-            productUrl: '',
-          },
-          {
-            id: 'prod-pn',
-            title: 'Notifiche digitali',
-            linkType: 'external',
-            productUrl: '',
-          },
-        ]}
+        productsList={
+          products
+            ?.map((p) => ({
+              id: '',
+              title: p.id === 'prod-pn-pg' ? t('productsList.digitalNotifications') : p.title,
+              linkType: 'external',
+              productUrl: p.urlPublic,
+            }))
+            .concat({
+              id: 'prod-pn-pg',
+              title: t('productsList.yourBusiness'),
+              linkType: 'external',
+              productUrl: resolvePathVariables(DASHBOARD_ROUTES.OVERVIEW.path, {
+                partyId: selectedParty?.partyId ?? '',
+              }),
+            }) as Array<ProductSwitchItem>
+        }
         partyList={parties.map((p) => ({
           logoUrl: p.urlLogo ?? '',
           id: p.partyId ?? '',
