@@ -15,7 +15,7 @@ export default {
     noBusinessFound: {
       title: 'Nessuna impresa trovata',
       description: 'Dal tuo SPID non risulti essere Legale Rappresentante di <1 /> alcuna impresa.',
-      close: 'Chiudi',
+      registerBusiness: 'Registra impresa',
     },
   },
   overview: {

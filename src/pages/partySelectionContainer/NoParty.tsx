@@ -56,9 +56,9 @@ export default function NoParty() {
               height: '46px',
               fontSize: 'fontSize',
             }}
-            onClick={() => window.location.assign(ENV.URL_FE.LANDING)}
+            onClick={() => window.location.assign(ENV.URL_FE.ONBOARDING)}
           >
-            {t('businessSelection.noBusinessFound.close')}
+            {t('businessSelection.noBusinessFound.registerBusiness')}
           </Button>
         </Grid>
       </Grid>
