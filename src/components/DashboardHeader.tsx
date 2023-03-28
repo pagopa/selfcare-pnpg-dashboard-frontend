@@ -55,13 +55,13 @@ const DashboardHeader = ({ onExit, loggedUser, parties }: Props) => {
         productsList={
           products
             ?.map((p) => ({
-              id: '',
-              title: p.id === 'prod-pn-pg' ? t('productsList.digitalNotifications') : p.title,
+              id: p.id,
+              title: t('productsList.digitalNotifications'),
               linkType: 'external',
               productUrl: p.urlPublic,
             }))
             .concat({
-              id: 'prod-pn-pg',
+              id: 'dashboard-pn-pg',
               title: t('productsList.yourBusiness'),
               linkType: 'external',
               productUrl: resolvePathVariables(DASHBOARD_ROUTES.OVERVIEW.path, {
@@ -104,7 +104,7 @@ const DashboardHeader = ({ onExit, loggedUser, parties }: Props) => {
             }
           });
         }}
-        selectedProductId={'prod-pn-pg'}
+        selectedProductId={'dashboard-pn-pg'}
         onSelectedParty={(selectedParty: PartySwitchItem) => {
           trackEvent('DASHBOARD_PARTY_SELECTION', {
             party_id: selectedParty.id,
