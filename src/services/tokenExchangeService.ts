@@ -7,4 +7,4 @@ export const retrieveBackOfficeUrl = (
   product: Product,
   environment?: string
 ): Promise<string> =>
-  DashboardPnpgApi.retrieveProductBackoffice(selectedParty.partyId, product.id, environment);
+  DashboardPnpgApi.retrieveProductBackoffice(product.id, selectedParty.partyId, environment);
