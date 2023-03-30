@@ -1074,8 +1074,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "format": "uri",
-              "type": "string"
+              "$ref": "#/definitions/STRINGWrapper"
             }
           },
           "400": {
