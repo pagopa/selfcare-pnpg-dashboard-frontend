@@ -9,7 +9,8 @@ export default {
   businessSelection: {
     title: 'Seleziona la tua impresa',
     subTitle:
-      'Se operi per più imprese, potrai modificare la tua scelta dopo aver<1 />effettuato l’accesso.',
+      'Se leggi le notifiche di più aziende, potrai modificare la tua scelta dopo avere effettuato l’accesso.',
+    onboardAnotherBusiness: 'Sei un Legale Rappresentante? <1>Registra un’altra azienda</1>',
     search: 'Cerca impresa',
     signIn: 'Accedi',
     noBusinessFound: {

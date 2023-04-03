@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Grid, Button, Paper, useTheme, Typography, Stack } from '@mui/material';
+import { Grid, Button, Paper, useTheme, Typography, Stack, Box, Link } from '@mui/material';
 import { useHistory } from 'react-router';
 import { resolvePathVariables } from '@pagopa/selfcare-common-frontend/utils/routes-utils';
 import { trackEvent } from '@pagopa/selfcare-common-frontend/services/analyticsService';
@@ -9,6 +9,7 @@ import { useAppDispatch } from '../../../redux/hooks';
 import { partiesActions } from '../../../redux/slices/partiesSlice';
 import { PartyPnpg } from '../../../model/PartyPnpg';
 import PartySelectionSearch from '../../../components/partySelectionSearch/PartySelectionSearch';
+import { ENV } from '../../../utils/env';
 
 type Props = {
   parties: Array<PartyPnpg>;
@@ -49,10 +50,7 @@ export default function PartySelection({ parties }: Props) {
         </Grid>
         <Grid item xs={18} display="flex" justifyContent="center">
           <Typography variant="body1" align="center">
-            <Trans i18nKey="businessSelection.subTitle">
-              Se operi per più imprese, potrai modificare la tua scelta dopo aver <br /> effettuato
-              l’accesso.
-            </Trans>
+            {t('businessSelection.subTitle')}
           </Typography>
         </Grid>
       </Grid>
@@ -99,6 +97,37 @@ export default function PartySelection({ parties }: Props) {
             {t('businessSelection.signIn')}
           </Button>
         </Stack>
+      </Grid>
+      <Grid item xs={6} mt={4}>
+        <Box
+          sx={{
+            fontSize: '18px',
+            lineHeight: '24px',
+            textAlign: 'center',
+          }}
+        >
+          <Typography
+            sx={{
+              textAlign: 'center',
+            }}
+            variant="caption"
+            color={theme.palette.text.primary}
+          >
+            <Trans i18nKey="businessSelection.onboardAnotherBusiness">
+              {'Sei un Legale Rappresentante? '}
+              <Link
+                onClick={() => window.location.assign(ENV.URL_FE.ONBOARDING)}
+                sx={{
+                  textDecoration: 'underline',
+                  cursor: 'pointer',
+                  color: theme.palette.primary.main,
+                }}
+              >
+                {"Registra un'altra impresa"}
+              </Link>
+            </Trans>
+          </Typography>
+        </Box>
       </Grid>
     </Grid>
   );
