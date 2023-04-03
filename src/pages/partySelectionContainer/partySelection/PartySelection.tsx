@@ -116,7 +116,7 @@ export default function PartySelection({ parties }: Props) {
             <Trans i18nKey="businessSelection.onboardAnotherBusiness">
               {'Sei un Legale Rappresentante? '}
               <Link
-                onClick={() => ENV.URL_FE.ONBOARDING}
+                onClick={() => window.location.assign(ENV.URL_FE.ONBOARDING)}
                 sx={{
                   textDecoration: 'underline',
                   cursor: 'pointer',
