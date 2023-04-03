@@ -98,7 +98,7 @@ export default function PartySelection({ parties }: Props) {
           </Button>
         </Stack>
       </Grid>
-      <Grid item xs={6} mt={6}>
+      <Grid item xs={6} mt={4}>
         <Box
           sx={{
             fontSize: '18px',
