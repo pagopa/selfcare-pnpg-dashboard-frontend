@@ -41,20 +41,22 @@ test('Test rendering', () => {
 
 test('Test rendering dashboard parties loaded', () => {
   const history = createMemoryHistory();
-  history.push('/dashboard/6');
+  history.push('/dashboard/5b321318-3df7-48c1-67c8-1111e6707c3d');
 
   const { store } = renderApp(undefined, history);
 
   verifyLoginMockExecution(store.getState());
-  expect(store.getState().parties.list).toBe(mockedPnpgParties); // the new UI is always fetching parties list
+  expect(store.getState().parties.list).toBe(mockedPnpgParties);
 });
 
 test('Test routing ', async () => {
   const { history, store } = renderApp();
-  await waitFor(() => expect(history.location.pathname).toBe('/dashboard'));
+  await waitFor(() => expect(history.location.pathname).toBe('/'));
 
-  history.push('/dashboard/1');
-  await waitFor(() => expect(history.location.pathname).toBe('/dashboard/1'));
+  history.push('/dashboard/5b321318-3df7-48c1-67c8-1111e6707c3d');
+  await waitFor(() =>
+    expect(history.location.pathname).toBe('/dashboard/5b321318-3df7-48c1-67c8-1111e6707c3d')
+  );
 
   verifySelectedPartyMockExecution(store.getState());
 });

@@ -39,7 +39,7 @@ const onRedirectToLogin = () =>
   );
 
 export const DashboardPnpgApi = {
-  getPnPGInstitutions: async (): Promise<InstitutionPnPGResourceArray> => {
+  fetchParties: async (): Promise<InstitutionPnPGResourceArray> => {
     const result = await apiClient.getPnPGInstitutionsUsingGET({});
     return extractResponse(result, 200, onRedirectToLogin);
   },
