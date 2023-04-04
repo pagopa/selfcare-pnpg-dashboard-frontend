@@ -33,7 +33,7 @@ export const useSelectedParty = (): {
         const resolvedUrlWithPartyId = resolvePathVariables(ENV.ROUTES.OVERVIEW, {
           partyId: party?.partyId ?? '',
         });
-        history.pushState(null, 'null', resolvedUrlWithPartyId);
+        window.location.assign(resolvedUrlWithPartyId);
         setParty(party);
         return party;
       } else {
