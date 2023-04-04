@@ -2,12 +2,14 @@ import { DashboardPnpgApi } from '../api/DashboardPnpgApiClient';
 import { mockedPnPGInstitutionsResource } from '../api/__mocks__/DashboardPnpgApiClient';
 import { institutionPnPGResource2PartyPnpg, PartyPnpg } from '../model/PartyPnpg';
 
-export const getPnPGInstitutions = (): Promise<Array<PartyPnpg>> => {
+export const fetchParties = (): Promise<Array<PartyPnpg>> => {
   /* istanbul ignore if */
   if (process.env.REACT_APP_MOCK_API === 'true') {
-    return new Promise((resolve) => resolve(mockedPnPGInstitutionsResource));
+    return new Promise((resolve) =>
+      resolve(mockedPnPGInstitutionsResource.map(institutionPnPGResource2PartyPnpg))
+    );
   } else {
-    return DashboardPnpgApi.getPnPGInstitutions().then((institutions) =>
+    return DashboardPnpgApi.fetchParties().then((institutions) =>
       institutions ? institutions.map(institutionPnPGResource2PartyPnpg) : []
     );
   }
@@ -19,13 +21,11 @@ export const fetchPartyDetails = (
 ): Promise<PartyPnpg | null> => {
   /* istanbul ignore if */
   if (process.env.REACT_APP_API_MOCK_PARTIES === 'true') {
-    return new Promise((resolve) =>
-      resolve(
-        mockedPnPGInstitutionsResource.find(
-          (p) => p.partyId === partyId || p.externalId === partyId
-        ) ?? null
-      )
-    );
+    const selectedPartyDetail =
+      mockedPnPGInstitutionsResource
+        .map(institutionPnPGResource2PartyPnpg)
+        .find((p) => p.partyId === partyId || p.externalId === partyId) ?? null;
+    return new Promise((resolve) => resolve(selectedPartyDetail));
   }
   return retrieveParty(partyId, parties);
 };

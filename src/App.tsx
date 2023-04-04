@@ -6,7 +6,6 @@ import {
 } from '@pagopa/selfcare-common-frontend';
 import { Route, Switch } from 'react-router';
 import withLogin from '@pagopa/selfcare-common-frontend/decorators/withLogin';
-import { Redirect } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import routes, { RoutesObject } from './routes';
 
@@ -24,9 +23,6 @@ const App = () => (
       <LoadingOverlay />
       <UserNotifyHandle />
       <UnloadEventHandler />
-      <Route path="*">
-        <Redirect to={routes.PARTY_SELECTION.path} />
-      </Route>
       {buildRoutes(routes)}
     </Layout>
   </ErrorBoundary>

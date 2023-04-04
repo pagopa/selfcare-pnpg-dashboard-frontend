@@ -1,3 +1,5 @@
+import { resolvePathVariables } from '@pagopa/selfcare-common-frontend/utils/routes-utils';
+import { Redirect, useParams } from 'react-router-dom';
 import Dashboard from './pages/dashboard/Dashboard';
 import DashboardOverview from './pages/dashboardOverview/DashboardOverview';
 import PartySelectionContainer from './pages/partySelectionContainer/PartySelectionContainer';
@@ -16,6 +18,18 @@ export type RouteConfig = {
   withSelectedProduct?: boolean;
   withSelectedProductRoles?: boolean;
 };
+
+const buildRedirectToBasePath = (basePath: string): RoutesObject => ({
+  SUBPATH_DEFAULT: {
+    path: `${basePath}/*`,
+    component: (): React.FunctionComponentElement<any> => {
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      const pathVariables: { [key: string]: string } = useParams();
+      const effectiveBasePath = resolvePathVariables(basePath, pathVariables);
+      return <Redirect to={`${effectiveBasePath || basePath}`} />;
+    },
+  },
+});
 
 const ROUTES = {
   PARTY_SELECTION: {
@@ -36,6 +50,7 @@ export const DASHBOARD_ROUTES = {
     exact: false,
     component: DashboardOverview,
   },
+  ...buildRedirectToBasePath(`${BASE_ROUTE}/:partyId`),
 };
 
 export default ROUTES as { [key in keyof typeof ROUTES]: RouteConfig };

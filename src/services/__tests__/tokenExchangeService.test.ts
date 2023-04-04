@@ -1,6 +1,6 @@
-import { mockedPnpgParties } from '../__mocks__/partyService';
+import { fetchParties } from '../__mocks__/partyService';
 import { retrieveBackOfficeUrl } from '../tokenExchangeService';
-import { mockedPartyProduct } from '../__mocks__/productService';
+import { mockedPartyProducts } from '../__mocks__/productService';
 
 jest.mock('../tokenExchangeService');
 
@@ -9,7 +9,7 @@ beforeEach(() => {
 });
 
 test('Test retrieveTokenExchange', async () => {
-  const url = await retrieveBackOfficeUrl(mockedPnpgParties[0], mockedPartyProduct);
+  const url = await retrieveBackOfficeUrl(fetchParties[0], mockedPartyProducts[0]);
 
   expect(url).toBe('https://hostname/path?id=DUMMYTOKEN');
 
