@@ -24,10 +24,10 @@ const App = () => (
       <LoadingOverlay />
       <UserNotifyHandle />
       <UnloadEventHandler />
+      {buildRoutes(routes)}
       <Route path="*">
         <Redirect to={routes.PARTY_SELECTION.path} />
       </Route>
-      {buildRoutes(routes)}
     </Layout>
   </ErrorBoundary>
 );
