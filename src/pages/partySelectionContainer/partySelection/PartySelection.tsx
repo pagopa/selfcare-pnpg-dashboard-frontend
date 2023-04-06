@@ -32,7 +32,7 @@ export default function PartySelection({ parties }: Props) {
     const selectedPartyFromOnboarding = parties.find((p) => p.partyId === partyId);
     if (partyId && selectedPartyFromOnboarding) {
       setSelectedParty(selectedPartyFromOnboarding);
-      history.push(resolvePathVariables(DASHBOARD_ROUTES.OVERVIEW.path, { partyId }));
+      window.location.assign(resolvePathVariables(DASHBOARD_ROUTES.OVERVIEW.path, { partyId }));
     } else {
       dispatch(partiesActions.setPartySelected(undefined));
       dispatch(partiesActions.setPartySelectedProducts(undefined));
