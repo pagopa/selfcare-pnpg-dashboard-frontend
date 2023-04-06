@@ -4,7 +4,7 @@ import { useHistory } from 'react-router';
 import { resolvePathVariables } from '@pagopa/selfcare-common-frontend/utils/routes-utils';
 import { trackEvent } from '@pagopa/selfcare-common-frontend/services/analyticsService';
 import { useTranslation, Trans } from 'react-i18next';
-import ROUTES, { DASHBOARD_ROUTES } from '../../../routes';
+import ROUTES from '../../../routes';
 import { useAppDispatch } from '../../../redux/hooks';
 import { partiesActions } from '../../../redux/slices/partiesSlice';
 import { PartyPnpg } from '../../../model/PartyPnpg';
@@ -32,7 +32,6 @@ export default function PartySelection({ parties }: Props) {
     const selectedPartyFromOnboarding = parties.find((p) => p.partyId === partyId);
     if (partyId && selectedPartyFromOnboarding) {
       setSelectedParty(selectedPartyFromOnboarding);
-      history.push(resolvePathVariables(DASHBOARD_ROUTES.OVERVIEW.path, { partyId }));
     } else {
       dispatch(partiesActions.setPartySelected(undefined));
       dispatch(partiesActions.setPartySelectedProducts(undefined));
