@@ -20,7 +20,7 @@ export default function withSelectedParty(
     };
 
     useEffect(() => {
-      doFetch();
+      setTimeout(() => doFetch(), 2000);
     }, [partyId]);
     return <WrappedComponent {...props} />;
   };
