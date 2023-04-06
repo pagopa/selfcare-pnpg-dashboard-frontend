@@ -24,7 +24,7 @@ export default function DigitalNotificationCard({ cardTitle, urlLogo, btnAction 
             <ProductAvatar
               logoUrl={urlLogo}
               size={'default'}
-              logoBgColor={'#0066CC'}
+              logoBgColor={'#0B3EE3'}
               logoAltText={``}
             />
           </Box>

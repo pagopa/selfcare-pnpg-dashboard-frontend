@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { PartyPnpg } from '../../model/PartyPnpg';
 import { partiesSelectors } from '../../redux/slices/partiesSlice';
 import { useAppSelector } from '../../redux/hooks';
-import PnIcon from '../../assets/pn.svg';
+import SendIcon from '../../assets/send.svg';
 import { useTokenExchange } from '../../hooks/useTokenExchange';
 import WelcomeDashboard from './components/welcomeDashboard/WelcomeDashboard';
 import PartyCard from './components/partyCard/PartyCard';
@@ -56,7 +56,7 @@ const DashboardOverview = () => {
         <Grid container mb={44}>
           <DigitalNotificationCard
             cardTitle={t('overview.notificationAreaProduct.card.title')}
-            urlLogo={PnIcon}
+            urlLogo={SendIcon}
             btnAction={() =>
               prodPnpg && selectedParty ? invokeProductBo(prodPnpg, selectedParty) : undefined
             }
