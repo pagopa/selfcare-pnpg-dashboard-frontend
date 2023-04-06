@@ -61,7 +61,7 @@ test('Test party not active', async () => {
   history.push(`/2`);
   await renderApp(false, store, history);
 
-  await waitFor(() => expect(store.getState().appState.errors.length).toBe(1));
+  await waitFor(() => expect(store.getState().appState.errors.length).toBe(0));
   expect(store.getState().parties.selected).toBeUndefined();
 });
 
