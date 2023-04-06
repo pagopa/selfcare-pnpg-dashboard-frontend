@@ -27,8 +27,15 @@ export default function PartySelection({ parties }: Props) {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(partiesActions.setPartySelected(undefined));
-    dispatch(partiesActions.setPartySelectedProducts(undefined));
+    // eslint-disable-next-line functional/immutable-data
+    const partyId = window.location.pathname.split('/').pop();
+    const selectedPartyFromOnboarding = parties.find((p) => p.partyId === partyId);
+    if (partyId && selectedPartyFromOnboarding) {
+      setSelectedParty(selectedPartyFromOnboarding);
+    } else {
+      dispatch(partiesActions.setPartySelected(undefined));
+      dispatch(partiesActions.setPartySelectedProducts(undefined));
+    }
   }, []);
 
   useEffect(() => {
