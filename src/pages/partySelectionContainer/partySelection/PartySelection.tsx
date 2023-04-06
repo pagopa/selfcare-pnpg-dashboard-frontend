@@ -4,8 +4,7 @@ import { useHistory } from 'react-router';
 import { resolvePathVariables } from '@pagopa/selfcare-common-frontend/utils/routes-utils';
 import { trackEvent } from '@pagopa/selfcare-common-frontend/services/analyticsService';
 import { useTranslation, Trans } from 'react-i18next';
-import { useParams } from 'react-router-dom';
-import ROUTES from '../../../routes';
+import ROUTES, { DASHBOARD_ROUTES } from '../../../routes';
 import { useAppDispatch } from '../../../redux/hooks';
 import { partiesActions } from '../../../redux/slices/partiesSlice';
 import { PartyPnpg } from '../../../model/PartyPnpg';
@@ -16,13 +15,8 @@ type Props = {
   parties: Array<PartyPnpg>;
 };
 
-type DashboardUrlParams = {
-  partyId: string;
-};
-
 export default function PartySelection({ parties }: Props) {
   const { t } = useTranslation();
-  const { partyId } = useParams<DashboardUrlParams>();
   const bodyTitle = t('businessSelection.title');
   const theme = useTheme();
   const [selectedParty, setSelectedParty] = React.useState<PartyPnpg | null>(
@@ -33,9 +27,12 @@ export default function PartySelection({ parties }: Props) {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    // eslint-disable-next-line functional/immutable-data
+    const partyId = window.location.pathname.split('/').pop();
     const selectedPartyFromOnboarding = parties.find((p) => p.partyId === partyId);
     if (partyId && selectedPartyFromOnboarding) {
       setSelectedParty(selectedPartyFromOnboarding);
+      history.push(resolvePathVariables(DASHBOARD_ROUTES.OVERVIEW.path, { partyId }));
     } else {
       dispatch(partiesActions.setPartySelected(undefined));
       dispatch(partiesActions.setPartySelectedProducts(undefined));
