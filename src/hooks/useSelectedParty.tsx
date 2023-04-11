@@ -43,7 +43,9 @@ export const useSelectedParty = (): {
       }
     });
   const fetchProductLists = (partyId: string) =>
-    fetchProducts(partyId).then((products) => {
+    fetchProducts(
+      parties?.find((p) => p.partyId === partyId || p.externalId === partyId)?.partyId ?? partyId
+    ).then((products) => {
       if (products) {
         setPartyProducts(products);
         dispatch(
