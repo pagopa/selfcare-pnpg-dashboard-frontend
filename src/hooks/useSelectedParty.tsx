@@ -30,10 +30,12 @@ export const useSelectedParty = (): {
         if (party.status !== 'ACTIVE') {
           throw new Error(`INVALID_PARTY_STATE_${party.status}`);
         }
-        const resolvedUrlWithPartyId = resolvePathVariables(ENV.ROUTES.OVERVIEW, {
-          partyId: party?.partyId ?? '',
-        });
-        history.pushState(null, 'null', resolvedUrlWithPartyId);
+        if (partyId === party.externalId) {
+          const resolvedUrlWithPartyId = resolvePathVariables(ENV.ROUTES.OVERVIEW, {
+            partyId: party?.partyId ?? '',
+          });
+          history.pushState(null, 'null', resolvedUrlWithPartyId);
+        }
         setParty(party);
         return party;
       } else {
@@ -65,7 +67,11 @@ export const useSelectedParty = (): {
     });
 
   const fetchSelectedParty = (partyId: string) => {
-    if (!selectedParty || selectedParty.partyId !== partyId) {
+    if (
+      !selectedParty ||
+      selectedParty.partyId !== partyId ||
+      selectedParty.externalId !== partyId
+    ) {
       setLoadingDetails(true);
       setLoadingProducts(true);
 
