@@ -121,7 +121,7 @@ export default function PartySelection({ parties }: Props) {
             color={theme.palette.text.primary}
           >
             <Trans i18nKey="businessSelection.onboardAnotherBusiness">
-              {'Sei un Legale Rappresentante? '}
+              {'Sei un Legale Rappresentante e non trovi la tua impresa? '}
               <Link
                 onClick={() => window.location.assign(ENV.URL_FE.ONBOARDING)}
                 sx={{
@@ -130,7 +130,7 @@ export default function PartySelection({ parties }: Props) {
                   color: theme.palette.primary.main,
                 }}
               >
-                {"Registra un'altra impresa"}
+                {'Registrane una nuova'}
               </Link>
             </Trans>
           </Typography>
