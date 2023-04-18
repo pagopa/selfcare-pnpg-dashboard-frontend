@@ -58,7 +58,7 @@ export const verifyFetchPartiesMockExecution = (parties: Array<PartyPnpg>) => {
 export const fetchParties = () => new Promise((resolve) => resolve(mockedPnpgParties));
 
 export const verifyFetchPartyDetailsMockExecution = (party: PartyPnpg) => {
-  expect(party).toStrictEqual(mockedPnpgParties.filter((p) => p.partyId === party.partyId)[0]);
+  expect(party).toStrictEqual(mockedPnpgParties.find((p) => p.partyId === party.partyId));
 };
 
 export const fetchPartyDetails = (
