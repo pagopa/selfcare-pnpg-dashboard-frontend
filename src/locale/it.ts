@@ -15,8 +15,8 @@ export default {
     search: 'Cerca impresa',
     signIn: 'Accedi',
     noBusinessFound: {
-      title: 'Nessuna impresa trovata',
-      description: 'Dal tuo SPID non risulti essere Legale Rappresentante di <1 /> alcuna impresa.',
+      title: 'L’impresa non è ancora <1/>registrata ',
+      description: 'La registrazione può essere effettuata solo da un Legale <1/>Rappresentante.',
       registerBusiness: 'Registra impresa',
     },
   },
