@@ -17,7 +17,7 @@ type Props = {
 };
 
 const verifyPartyFilter = (party: PartyPnpg, filter: string) =>
-  party.description.toUpperCase().indexOf(filter.toUpperCase()) >= 0;
+  party.description && party.description.toUpperCase().indexOf(filter.toUpperCase()) >= 0;
 const CustomBox = styled(Box)({
   '&::-webkit-scrollbar': {
     width: 4,

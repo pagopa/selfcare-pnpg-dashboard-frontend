@@ -5,7 +5,7 @@ import i18n from '@pagopa/selfcare-common-frontend/locale/locale-utils';
 import { ENV } from '../utils/env';
 import { store } from '../redux/store';
 import { createClient, WithDefaultsT } from './generated/b4f-dashboard-pnpg/client';
-import { InstitutionPnPGResourceArray } from './generated/b4f-dashboard-pnpg/InstitutionPnPGResourceArray';
+import { PnPGInstitutionResourceArray } from './generated/b4f-dashboard-pnpg/PnPGInstitutionResourceArray';
 import { ProductsResource } from './generated/b4f-dashboard-pnpg/ProductsResource';
 import { ProductRoleMappingsResource } from './generated/b4f-dashboard-pnpg/ProductRoleMappingsResource';
 
@@ -39,7 +39,7 @@ const onRedirectToLogin = () =>
   );
 
 export const DashboardPnpgApi = {
-  fetchParties: async (): Promise<InstitutionPnPGResourceArray> => {
+  fetchParties: async (): Promise<PnPGInstitutionResourceArray> => {
     const result = await apiClient.getPnPGInstitutionsUsingGET({});
     return extractResponse(result, 200, onRedirectToLogin);
   },
