@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Grid, Button, Typography, Box } from '@mui/material';
+import { Grid, Button, Typography } from '@mui/material';
 import { trackEvent } from '@pagopa/selfcare-common-frontend/services/analyticsService';
 import { useTranslation, Trans } from 'react-i18next';
 import { ReactComponent as NoBusiness } from '../../assets/no-business.svg';
@@ -37,14 +37,12 @@ export default function NoParty() {
       </Grid>
       <Grid item container justifyContent="center">
         <Grid item xs={4}>
-          <Box>
-            <Typography variant="body1">
-              <Trans i18nKey="businessSelection.noBusinessFound.description">
-                La registrazione può essere effettuata solo da un Legale <br />
-                Rappresentante.
-              </Trans>
-            </Typography>
-          </Box>
+          <Typography variant="body1">
+            <Trans i18nKey="businessSelection.noBusinessFound.description">
+              La registrazione può essere effettuata solo da un Legale <br />
+              Rappresentante.
+            </Trans>
+          </Typography>
         </Grid>
       </Grid>
 
