@@ -1,4 +1,4 @@
-import { InstitutionPnPGResource } from '../../api/generated/b4f-dashboard-pnpg/InstitutionPnPGResource';
+import { PnPGInstitutionResource } from '../../api/generated/b4f-dashboard-pnpg/PnPGInstitutionResource';
 import { InstitutionTypeEnum } from '../../api/generated/b4f-dashboard-pnpg/InstitutionResource';
 import { institutionPnPGResource2PartyPnpg, PartyPnpg } from '../PartyPnpg';
 
@@ -43,7 +43,7 @@ test('Test Party', () => {
 });
 
 test('Test institutionResource2Party', () => {
-  const institutionResource: InstitutionPnPGResource = {
+  const institutionResource: PnPGInstitutionResource = {
     externalId: '44444444444',
     fiscalCode: '44444444444',
     geographicTaxonomies: [{ code: '', desc: '' }],

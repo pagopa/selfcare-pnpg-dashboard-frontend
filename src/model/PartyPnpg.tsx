@@ -1,4 +1,4 @@
-import { InstitutionPnPGResource } from '../api/generated/b4f-dashboard-pnpg/InstitutionPnPGResource';
+import { PnPGInstitutionResource } from '../api/generated/b4f-dashboard-pnpg/PnPGInstitutionResource';
 import { GeographicTaxonomyResource } from '../api/generated/b4f-dashboard-pnpg/GeographicTaxonomyResource';
 import { ENV } from '../utils/env';
 
@@ -29,8 +29,8 @@ export type PartyPnpg = {
   externalId: string;
   partyId: string;
   fiscalCode: string;
-  description: string;
   status: string;
+  description?: string;
   urlLogo?: string;
   address?: string;
   category?: string;
@@ -48,7 +48,7 @@ const buildUrlLogo = (partyId: string) =>
   `${ENV.URL_INSTITUTION_LOGO.PREFIX}${partyId}${ENV.URL_INSTITUTION_LOGO.SUFFIX}`;
 
 export const institutionPnPGResource2PartyPnpg = (
-  institutionResourcePnpg: InstitutionPnPGResource
+  institutionResourcePnpg: PnPGInstitutionResource
 ): PartyPnpg => {
   const urlLogo = institutionResourcePnpg.id && buildUrlLogo(institutionResourcePnpg.id);
   return {
