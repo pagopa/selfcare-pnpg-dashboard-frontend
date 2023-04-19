@@ -1216,7 +1216,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/InstitutionPnPGResource"
+                    "$ref": "#/components/schemas/PnPGInstitutionResource"
                   }
                 }
               }
@@ -3113,76 +3113,6 @@
           }
         }
       },
-      "InstitutionPnPGResource": {
-        "title": "InstitutionPnPGResource",
-        "required": ["externalId", "fiscalCode", "id", "name", "status"],
-        "type": "object",
-        "properties": {
-          "address": {
-            "type": "string",
-            "description": "Institution's physical address"
-          },
-          "category": {
-            "type": "string",
-            "description": "Institution's category"
-          },
-          "externalId": {
-            "type": "string",
-            "description": "Institution's unique external identifier"
-          },
-          "fiscalCode": {
-            "type": "string",
-            "description": "Fiscal code corresponding to the institution"
-          },
-          "geographicTaxonomies": {
-            "type": "array",
-            "description": "Institution's geographic taxonomy",
-            "items": {
-              "$ref": "#/components/schemas/GeographicTaxonomyResource"
-            }
-          },
-          "id": {
-            "type": "string",
-            "description": "Institution's unique internal identifier"
-          },
-          "institutionType": {
-            "type": "string",
-            "description": "Institution's type"
-          },
-          "mailAddress": {
-            "type": "string",
-            "description": "Institution's email address"
-          },
-          "name": {
-            "type": "string",
-            "description": "Institution's name"
-          },
-          "origin": {
-            "type": "string",
-            "description": "Institution's data origin"
-          },
-          "originId": {
-            "type": "string",
-            "description": "Institution's identifier related to origin"
-          },
-          "recipientCode": {
-            "type": "string",
-            "description": "Billing recipient code"
-          },
-          "status": {
-            "type": "string",
-            "description": "Institution's status"
-          },
-          "userRole": {
-            "type": "string",
-            "description": "Logged user's role"
-          },
-          "zipCode": {
-            "type": "string",
-            "description": "Institution's zipCode"
-          }
-        }
-      },
       "InstitutionResource": {
         "title": "InstitutionResource",
         "required": [
@@ -3282,7 +3212,7 @@
       },
       "InstitutionUserDetailsResource": {
         "title": "InstitutionUserDetailsResource",
-        "required": ["email", "fiscalCode", "id", "name", "products", "role", "status", "surname"],
+        "required": ["fiscalCode", "id", "name", "products", "role", "status", "surname"],
         "type": "object",
         "properties": {
           "email": {
@@ -3328,7 +3258,7 @@
       },
       "InstitutionUserResource": {
         "title": "InstitutionUserResource",
-        "required": ["email", "id", "name", "products", "role", "status", "surname"],
+        "required": ["id", "name", "products", "role", "status", "surname"],
         "type": "object",
         "properties": {
           "email": {
@@ -3477,6 +3407,76 @@
           }
         }
       },
+      "PnPGInstitutionResource": {
+        "title": "PnPGInstitutionResource",
+        "required": ["externalId", "fiscalCode", "id", "status"],
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "description": "Institution's physical address"
+          },
+          "category": {
+            "type": "string",
+            "description": "Institution's category"
+          },
+          "externalId": {
+            "type": "string",
+            "description": "Institution's unique external identifier"
+          },
+          "fiscalCode": {
+            "type": "string",
+            "description": "Fiscal code corresponding to the institution"
+          },
+          "geographicTaxonomies": {
+            "type": "array",
+            "description": "Institution's geographic taxonomy",
+            "items": {
+              "$ref": "#/components/schemas/GeographicTaxonomyResource"
+            }
+          },
+          "id": {
+            "type": "string",
+            "description": "Institution's unique internal identifier"
+          },
+          "institutionType": {
+            "type": "string",
+            "description": "Institution's type"
+          },
+          "mailAddress": {
+            "type": "string",
+            "description": "Institution's email address"
+          },
+          "name": {
+            "type": "string",
+            "description": "Institution's name"
+          },
+          "origin": {
+            "type": "string",
+            "description": "Institution's data origin"
+          },
+          "originId": {
+            "type": "string",
+            "description": "Institution's identifier related to origin"
+          },
+          "recipientCode": {
+            "type": "string",
+            "description": "Billing recipient code"
+          },
+          "status": {
+            "type": "string",
+            "description": "Institution's status"
+          },
+          "userRole": {
+            "type": "string",
+            "description": "Logged user's role"
+          },
+          "zipCode": {
+            "type": "string",
+            "description": "Institution's zipCode"
+          }
+        }
+      },
       "Problem": {
         "title": "Problem",
         "required": ["status", "title"],
@@ -3610,7 +3610,7 @@
       },
       "ProductUserResource": {
         "title": "ProductUserResource",
-        "required": ["email", "id", "name", "product", "role", "status", "surname"],
+        "required": ["id", "name", "product", "role", "status", "surname"],
         "type": "object",
         "properties": {
           "email": {
