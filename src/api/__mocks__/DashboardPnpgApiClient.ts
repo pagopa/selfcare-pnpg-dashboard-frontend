@@ -4,7 +4,7 @@ import {
   InstitutionsPnpg,
   PartyPnpg,
 } from '../../model/PartyPnpg';
-import { InstitutionPnPGResource } from '../generated/b4f-dashboard-pnpg/InstitutionPnPGResource';
+import { PnPGInstitutionResource } from '../generated/b4f-dashboard-pnpg/PnPGInstitutionResource';
 import {
   ProductOnBoardingStatusEnum,
   ProductsResource,
@@ -39,7 +39,7 @@ export const mockedInstitutionPnPG: InstitutionsPnpg = {
   requestDateTime: 'x',
 };
 
-export const mockedPnPGInstitutionsResource: Array<InstitutionPnPGResource> = [
+export const mockedPnPGInstitutionsResource: Array<PnPGInstitutionResource> = [
   {
     userRole: 'ADMIN',
     name: 'mockedBusiness1',

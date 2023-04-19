@@ -10,12 +10,13 @@ export default {
     title: 'Seleziona la tua impresa',
     subTitle:
       'Se leggi le notifiche di più aziende, potrai modificare la tua scelta dopo avere effettuato l’accesso.',
-    onboardAnotherBusiness: 'Sei un Legale Rappresentante? <1>Registra un’altra azienda</1>',
+    onboardAnotherBusiness:
+      'Sei un Legale Rappresentante e non trovi la tua impresa? <1>Registrane una nuova</1>',
     search: 'Cerca impresa',
     signIn: 'Accedi',
     noBusinessFound: {
-      title: 'Nessuna impresa trovata',
-      description: 'Dal tuo SPID non risulti essere Legale Rappresentante di <1 /> alcuna impresa.',
+      title: 'L’impresa non è ancora <1/>registrata ',
+      description: 'La registrazione può essere effettuata solo da un Legale <1/>Rappresentante.',
       registerBusiness: 'Registra impresa',
     },
   },

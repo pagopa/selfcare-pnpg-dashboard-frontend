@@ -22,40 +22,22 @@ test('Test fetchProductRoles', async () => {
 
   expect(productRoles).toStrictEqual([
     {
-      productId: mockedPartyProducts[0].id,
+      productId: 'prod-pn-pg',
       partyRole: 'MANAGER',
       selcRole: 'ADMIN',
       multiroleAllowed: false,
-      productRole: 'referente-legale',
-      title: 'Referente Legale',
-      description: 'Descrizione referente-legale',
-    },
-    {
-      productId: mockedPartyProducts[0].id,
-      partyRole: 'DELEGATE',
-      selcRole: 'ADMIN',
-      multiroleAllowed: false,
-      productRole: 'referente-amministrativo',
+      productRole: 'pg-admin',
       title: 'Amministratore',
-      description: 'Descrizione referente-amministrativo',
+      description: 'Stipula il contratto e identifica gli amministratori',
     },
     {
-      productId: mockedPartyProducts[0].id,
+      productId: 'prod-pn-pg',
       partyRole: 'OPERATOR',
       selcRole: 'LIMITED',
       multiroleAllowed: false,
-      productRole: 'Amministratore',
-      title: 'Amministratore',
-      description: 'Ha tutti i permessi e gestisce gli utenti',
-    },
-    {
-      productId: mockedPartyProducts[0].id,
-      partyRole: 'OPERATOR',
-      selcRole: 'LIMITED',
-      multiroleAllowed: false,
-      productRole: 'Gestore Notifiche',
+      productRole: 'pg-operator',
       title: 'Gestore Notifiche',
-      description: "Gestisce l’integrazione tecnologica e/o l'operatività dei servizi",
+      description: "Gestisce l'integrazione tecnologica e/o l'operatività dei servizi",
     },
   ]);
 

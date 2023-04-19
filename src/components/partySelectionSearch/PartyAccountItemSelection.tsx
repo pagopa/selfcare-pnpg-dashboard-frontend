@@ -13,7 +13,7 @@ export default function PartyAccountItemSelection({ selectedParty, clearField }:
     <Box display="flex" p={2}>
       <Box width="100%">
         <PartyAccountItem
-          partyName={selectedParty ? selectedParty.description : ''}
+          partyName={selectedParty?.description ?? ''}
           image={selectedParty?.urlLogo}
           maxCharactersNumberMultiLine={20}
           noWrap={false}
