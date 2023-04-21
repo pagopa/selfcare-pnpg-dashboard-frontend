@@ -33,6 +33,14 @@ export default function PartyDetail({ party }: Props) {
             {party?.fiscalCode}
           </Typography>
         </Grid>
+        <Grid item xs={6}>
+          <Typography variant="body2">{t('overview.partyDetail.mailAddress')}</Typography>
+        </Grid>
+        <Grid item xs={6}>
+          <Typography sx={{ ...infoStyles, maxWidth: '100% !important' }} className="ShowDots">
+            {party?.mailAddress}
+          </Typography>
+        </Grid>
       </Grid>
     </Grid>
   );

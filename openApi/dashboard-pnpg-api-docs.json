@@ -3409,7 +3409,7 @@
       },
       "PnPGInstitutionResource": {
         "title": "PnPGInstitutionResource",
-        "required": ["externalId", "fiscalCode", "id", "status"],
+        "required": ["certified", "externalId", "fiscalCode", "id", "status"],
         "type": "object",
         "properties": {
           "address": {
@@ -3419,6 +3419,11 @@
           "category": {
             "type": "string",
             "description": "Institution's category"
+          },
+          "certified": {
+            "type": "boolean",
+            "description": "${swagger.onboarding.pnPGInstitutions.model.certified}",
+            "example": false
           },
           "externalId": {
             "type": "string",

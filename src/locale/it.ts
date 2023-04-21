@@ -65,6 +65,7 @@ export default {
     partyDetail: {
       businessName: 'Ragione sociale',
       fiscalCode: 'Codice Fiscale',
+      mailAddress: 'Email',
     },
   },
 };
