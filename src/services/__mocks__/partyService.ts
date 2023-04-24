@@ -1,0 +1,68 @@
+import { PartyPnpg } from '../../model/PartyPnpg';
+
+export const mockedPnpgParties: Array<PartyPnpg> = [
+  {
+    userRole: 'ADMIN',
+    description: 'mockedBusiness1',
+    status: 'ACTIVE',
+    partyId: '5b321318-3df7-48c1-67c8-1111e6707c3d',
+    fiscalCode: '01113570210',
+    category: '',
+    externalId: '01113570210',
+    originId: 'originId1',
+    origin: 'IPA',
+    institutionType: 'Azienda privata',
+  },
+  {
+    userRole: 'ADMIN',
+    description: 'mockedBusiness2',
+    status: 'ACTIVE',
+    partyId: '5b123318-7ff7-48c1-67c8-1111e6707c3d',
+    fiscalCode: '03343570210',
+    category: '',
+    externalId: '03343570210',
+    originId: 'originId1',
+    origin: 'IPA',
+    institutionType: 'Azienda privata',
+  },
+  {
+    userRole: 'ADMIN',
+    description: 'mockedBusiness3',
+    status: 'ACTIVE',
+    partyId: '5b971318-3df7-11c1-67c8-1111e6707c3d',
+    fiscalCode: '05923570210',
+    category: '',
+    externalId: '05923570210',
+    originId: 'originId1',
+    origin: 'IPA',
+    institutionType: 'Azienda privata',
+  },
+  {
+    userRole: 'ADMIN',
+    description: 'mockedBusiness4',
+    status: 'ACTIVE',
+    partyId: '5b971318-3df7-11c1-67c8-1111e6707dgt',
+    fiscalCode: '05923570510',
+    category: '',
+    externalId: '05923570510',
+    originId: 'originId1',
+    origin: 'IPA',
+    institutionType: 'Azienda privata',
+  },
+];
+
+export const verifyFetchPartiesMockExecution = (parties: Array<PartyPnpg>) => {
+  expect(parties).toStrictEqual(mockedPnpgParties);
+};
+
+export const fetchParties = () => new Promise((resolve) => resolve(mockedPnpgParties));
+
+export const verifyFetchPartyDetailsMockExecution = (party: PartyPnpg) => {
+  expect(party).toStrictEqual(mockedPnpgParties.find((p) => p.partyId === party.partyId));
+};
+
+export const fetchPartyDetails = (
+  partyId: string,
+  _parties?: Array<PartyPnpg>
+): Promise<PartyPnpg | null> =>
+  new Promise((resolve) => resolve(mockedPnpgParties.find((p) => p.partyId === partyId) ?? null));
