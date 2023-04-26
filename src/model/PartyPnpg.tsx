@@ -30,7 +30,6 @@ export type PartyPnpg = {
   partyId: string;
   fiscalCode: string;
   status: string;
-  certified: boolean;
   description?: string;
   urlLogo?: string;
   address?: string;
@@ -53,7 +52,6 @@ export const institutionPnPGResource2PartyPnpg = (
 ): PartyPnpg => {
   const urlLogo = institutionResourcePnpg.id && buildUrlLogo(institutionResourcePnpg.id);
   return {
-    certified: institutionResourcePnpg.certified,
     address: institutionResourcePnpg.address,
     externalId: institutionResourcePnpg.externalId,
     fiscalCode: institutionResourcePnpg.fiscalCode,

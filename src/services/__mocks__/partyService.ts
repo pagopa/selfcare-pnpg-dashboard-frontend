@@ -12,7 +12,6 @@ export const mockedPnpgParties: Array<PartyPnpg> = [
     originId: 'originId1',
     origin: 'IPA',
     institutionType: 'Azienda privata',
-    certified: true,
     mailAddress: 'emailmock1@testmock.com',
   },
   {
@@ -26,7 +25,6 @@ export const mockedPnpgParties: Array<PartyPnpg> = [
     originId: 'originId1',
     origin: 'IPA',
     institutionType: 'Azienda privata',
-    certified: false,
     mailAddress: 'emailmock2@testmock.com',
   },
   {
@@ -40,7 +38,6 @@ export const mockedPnpgParties: Array<PartyPnpg> = [
     originId: 'originId1',
     origin: 'IPA',
     institutionType: 'Azienda privata',
-    certified: true,
     mailAddress: 'emailmock3@testmock.com',
   },
   {
@@ -54,7 +51,6 @@ export const mockedPnpgParties: Array<PartyPnpg> = [
     originId: 'originId1',
     origin: 'IPA',
     institutionType: 'Azienda privata',
-    certified: true,
     mailAddress: 'emailmock4@testmock.com',
   },
 ];

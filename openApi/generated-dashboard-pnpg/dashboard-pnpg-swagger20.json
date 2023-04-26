@@ -2944,11 +2944,6 @@
           "description": "Institution's category",
           "type": "string"
         },
-        "certified": {
-          "description": "${swagger.onboarding.pnPGInstitutions.model.certified}",
-          "example": false,
-          "type": "boolean"
-        },
         "externalId": {
           "description": "Institution's unique external identifier",
           "type": "string"
@@ -3006,7 +3001,6 @@
         }
       },
       "required": [
-        "certified",
         "externalId",
         "fiscalCode",
         "id",
