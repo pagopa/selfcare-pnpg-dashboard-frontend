@@ -36,7 +36,7 @@ export type PartyPnpg = {
   category?: string;
   geographicTaxonomies?: Array<GeographicTaxonomyResource>;
   institutionType?: string;
-  digitalAddress?: string;
+  mailAddress?: string;
   origin?: string;
   originId?: string;
   recipientCode?: string;
@@ -63,7 +63,7 @@ export const institutionPnPGResource2PartyPnpg = (
     geographicTaxonomies:
       institutionResourcePnpg.geographicTaxonomies as Array<GeographicTaxonomyResource>,
     institutionType: institutionResourcePnpg.institutionType,
-    digitalAddress: institutionResourcePnpg.mailAddress,
+    mailAddress: institutionResourcePnpg.mailAddress,
     origin: institutionResourcePnpg.origin,
     originId: institutionResourcePnpg.originId,
     recipientCode: institutionResourcePnpg.recipientCode,

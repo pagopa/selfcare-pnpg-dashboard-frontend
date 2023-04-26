@@ -5,8 +5,7 @@ import { ButtonNaked } from '@pagopa/mui-italia';
 import { MouseEventHandler } from 'react';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { Box } from '@mui/system';
-
-// Utility to wait some time
+import UploadIcon from '@mui/icons-material/Upload';
 
 type Props = {
   labelLink: string;
@@ -17,13 +16,21 @@ type Props = {
 
 export function PartyDescription({ labelLink, open, loading }: Props) {
   const { t } = useTranslation();
+
+  const isLogoNotPresent = document.querySelector('#partyLogo')?.children[0].tagName === 'svg';
   return (
     <Stack>
       <Box display="flex">
         <ButtonNaked
           component="button"
           onClick={open}
-          startIcon={!loading ? <EditIcon /> : undefined}
+          startIcon={
+            !loading && isLogoNotPresent ? (
+              <UploadIcon sx={{ fontSize: '23px !important' }} />
+            ) : (
+              <EditIcon />
+            )
+          }
           sx={{ color: 'primary.main' }}
           weight="default"
         >

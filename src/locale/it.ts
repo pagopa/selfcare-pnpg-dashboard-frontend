@@ -10,8 +10,7 @@ export default {
     title: 'Seleziona la tua impresa',
     subTitle:
       'Se leggi le notifiche di più aziende, potrai modificare la tua scelta dopo avere effettuato l’accesso.',
-    onboardAnotherBusiness:
-      'Sei un Legale Rappresentante e non trovi la tua impresa? <1>Registrane una nuova</1>',
+    onboardAnotherBusiness: 'Sei un Legale Rappresentante? <1>Registra una nuova impresa</1>',
     search: 'Cerca impresa',
     signIn: 'Accedi',
     noBusinessFound: {
@@ -65,6 +64,7 @@ export default {
     partyDetail: {
       businessName: 'Ragione sociale',
       fiscalCode: 'Codice Fiscale',
+      mailAddress: 'Email',
     },
   },
 };

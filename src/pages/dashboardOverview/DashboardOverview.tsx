@@ -8,6 +8,7 @@ import { partiesSelectors } from '../../redux/slices/partiesSlice';
 import { useAppSelector } from '../../redux/hooks';
 import SendIcon from '../../assets/send.svg';
 import { useTokenExchange } from '../../hooks/useTokenExchange';
+import ActiveProductCard from './components/activeProductsSection/components/DigitalNotificationCard';
 import WelcomeDashboard from './components/welcomeDashboard/WelcomeDashboard';
 import PartyCard from './components/partyCard/PartyCard';
 import { PartyLogoUploader } from './components/partyCard/components/partyLogoUploader/PartyLogoUploader';
@@ -54,13 +55,29 @@ const DashboardOverview = () => {
           titleFontSize="28px"
         />
         <Grid container mb={44}>
-          <DigitalNotificationCard
-            cardTitle={t('overview.notificationAreaProduct.card.title')}
-            urlLogo={SendIcon}
-            btnAction={() =>
-              prodPnpg && selectedParty ? invokeProductBo(prodPnpg, selectedParty) : undefined
-            }
-          />
+          {prodPnpg && (
+            <DigitalNotificationCard
+              cardTitle={t('overview.notificationAreaProduct.card.title')}
+              urlLogo={SendIcon}
+              btnAction={() =>
+                prodPnpg && selectedParty ? invokeProductBo(prodPnpg, selectedParty) : undefined
+              }
+            />
+          )}
+          {products &&
+            products
+              .filter((p) => p.status === 'ACTIVE' && p.id !== 'prod-pn-pg')
+              .map((p) => (
+                <Box key={p.id} marginLeft={3}>
+                  <ActiveProductCard
+                    cardTitle={p.title}
+                    urlLogo={p.logo}
+                    btnAction={() =>
+                      selectedParty ? invokeProductBo(p, selectedParty) : undefined
+                    }
+                  />
+                </Box>
+              ))}
         </Grid>
       </Grid>
     </Box>

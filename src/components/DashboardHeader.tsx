@@ -67,7 +67,8 @@ const DashboardHeader = ({ onExit, loggedUser, parties }: Props) => {
               productUrl: resolvePathVariables(DASHBOARD_ROUTES.OVERVIEW.path, {
                 partyId: selectedParty?.partyId ?? '',
               }),
-            }) as Array<ProductSwitchItem>
+            })
+            .reverse() as Array<ProductSwitchItem>
         }
         partyList={parties.map((p) => ({
           logoUrl: p.urlLogo ?? '',
