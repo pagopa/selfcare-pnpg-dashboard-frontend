@@ -49,7 +49,6 @@ test('Test institutionResource2Party', () => {
     geographicTaxonomies: [{ code: '', desc: '' }],
     institutionType: 'GSP',
     id: '44444444444',
-    mailAddress: undefined,
     name: 'BusinessName',
     recipientCode: 'MDSSFDF',
     status: 'TestStatus1',
@@ -57,6 +56,7 @@ test('Test institutionResource2Party', () => {
     category: 'categoryTest2',
     origin: 'originTest2',
     originId: 'originIdTest2',
+    mailAddress: undefined,
     userRole: undefined,
     zipCode: undefined,
   };
@@ -68,7 +68,6 @@ test('Test institutionResource2Party', () => {
     geographicTaxonomies: [{ code: '', desc: '' }],
     institutionType: 'GSP',
     partyId: '44444444444',
-    digitalAddress: undefined,
     description: 'BusinessName',
     recipientCode: 'MDSSFDF',
     status: 'TestStatus1',
@@ -77,6 +76,7 @@ test('Test institutionResource2Party', () => {
     origin: 'originTest2',
     originId: 'originIdTest2',
     urlLogo: 'http://checkout.selfcare/institutions/44444444444/logo.png',
+    mailAddress: undefined,
     userRole: undefined,
     zipCode: undefined,
   });

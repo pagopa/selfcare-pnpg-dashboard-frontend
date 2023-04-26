@@ -98,7 +98,7 @@ export const mockedProductResources: Array<ProductsResource> = [
   {
     logo: 'https://selcdcheckoutsa.z6.web.core.windows.net/resources/products/prod-pn/logo.svg',
     title: 'SEND',
-    description: 'SEND',
+    description: 'Descrizione SEND',
     id: 'prod-pn-pg',
     authorized: true,
     status: StatusEnum.ACTIVE,

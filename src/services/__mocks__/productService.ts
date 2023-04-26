@@ -75,6 +75,23 @@ export const mockedPartyProducts: Array<Product> = [
     logoBgColor: 'pagoPA.main',
     userRole: 'ADMIN',
   },
+  {
+    logo: 'https://selcdcheckoutsa.z6.web.core.windows.net/resources/products/prod-pn/logo.svg',
+    id: 'prod-pn-pg-dev',
+    title: 'SEND dev',
+    description: 'Descrizione SEND dev',
+    authorized: true,
+    productOnBoardingStatus: ProductOnBoardingStatusEnum.ACTIVE,
+    status: StatusEnum.ACTIVE,
+    urlBO: 'http://notifiche/bo?token=<IdentityToken>',
+    activationDateTime: new Date(2021, 1, 2),
+    urlPublic: 'http://notifiche/public',
+    imageUrl:
+      'https://selcdcheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg',
+    subProducts: [],
+    logoBgColor: 'pagoPA.main',
+    userRole: 'ADMIN',
+  },
 ];
 
 export const mockedProductRoles: Array<ProductRole> = [
