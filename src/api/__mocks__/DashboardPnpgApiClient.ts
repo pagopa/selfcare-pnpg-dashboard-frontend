@@ -101,9 +101,35 @@ export const mockedPnPGInstitutionsResource: Array<PnPGInstitutionResource> = [
 export const mockedProductResources: Array<ProductsResource> = [
   {
     logo: 'https://selcdcheckoutsa.z6.web.core.windows.net/resources/products/prod-pn/logo.svg',
-    title: 'Piattaforma Notifiche Persone Giuridiche',
-    description: 'Piattaforma Notifiche Persone Giuridiche',
+    title: 'SEND',
+    description: 'SEND',
     id: 'prod-pn-pg',
+    authorized: true,
+    status: StatusEnum.ACTIVE,
+    productOnBoardingStatus: ProductOnBoardingStatusEnum.ACTIVE,
+    urlBO: 'http://notifiche/bo?token=<IdentityToken>',
+    urlPublic: 'http://notifiche/public',
+    imageUrl:
+      'https://selcdcheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg',
+  },
+  {
+    logo: 'https://selcdcheckoutsa.z6.web.core.windows.net/resources/products/prod-pn/logo.svg',
+    title: 'SEND ambiente sviluppo',
+    description: 'SEND ambiente sviluppo',
+    id: 'prod-pn-pg-svil',
+    authorized: true,
+    status: StatusEnum.ACTIVE,
+    productOnBoardingStatus: ProductOnBoardingStatusEnum.ACTIVE,
+    urlBO: 'http://notifiche/bo?token=<IdentityToken>',
+    urlPublic: 'http://notifiche/public',
+    imageUrl:
+      'https://selcdcheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg',
+  },
+  {
+    logo: 'https://selcdcheckoutsa.z6.web.core.windows.net/resources/products/prod-pn/logo.svg',
+    title: 'SEND ambiente collaudo',
+    description: 'SEND ambiente collaudo',
+    id: 'prod-pn-pg-coll',
     authorized: true,
     status: StatusEnum.ACTIVE,
     productOnBoardingStatus: ProductOnBoardingStatusEnum.ACTIVE,
