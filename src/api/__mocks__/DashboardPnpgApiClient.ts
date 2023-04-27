@@ -42,6 +42,7 @@ export const mockedInstitutionPnPG: InstitutionsPnpg = {
 export const mockedPnPGInstitutionsResource: Array<PnPGInstitutionResource> = [
   {
     userRole: 'ADMIN',
+    certified: true,
     name: 'mockedBusiness1',
     status: 'ACTIVE',
     id: '5b321318-3df7-48c1-67c8-1111e6707c3d',
@@ -55,6 +56,7 @@ export const mockedPnPGInstitutionsResource: Array<PnPGInstitutionResource> = [
   },
   {
     userRole: 'ADMIN',
+    certified: true,
     name: 'mockedBusiness2',
     status: 'ACTIVE',
     id: '5b123318-7ff7-48c1-67c8-1111e6707c3d',
@@ -68,6 +70,7 @@ export const mockedPnPGInstitutionsResource: Array<PnPGInstitutionResource> = [
   },
   {
     userRole: 'ADMIN',
+    certified: false,
     name: 'mockedBusiness3',
     status: 'ACTIVE',
     id: '5b971318-3df7-11c1-67c8-1111e6707c3d',
@@ -81,6 +84,7 @@ export const mockedPnPGInstitutionsResource: Array<PnPGInstitutionResource> = [
   },
   {
     userRole: 'ADMIN',
+    certified: false,
     name: 'mockedBusiness4',
     status: 'ACTIVE',
     id: '5b971318-3df7-11c1-67c8-1111e6707dgt',
