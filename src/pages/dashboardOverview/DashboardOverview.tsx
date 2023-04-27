@@ -66,7 +66,12 @@ const DashboardOverview = () => {
           )}
           {products &&
             products
-              .filter((p) => p.status === 'ACTIVE' && p.id !== 'prod-pn-pg')
+              .filter(
+                (p) =>
+                  p.status === 'ACTIVE' &&
+                  p.productOnBoardingStatus === 'ACTIVE' &&
+                  p.id !== 'prod-pn-pg'
+              )
               .map((p) => (
                 <Box key={p.id} marginLeft={3}>
                   <ActiveProductCard
