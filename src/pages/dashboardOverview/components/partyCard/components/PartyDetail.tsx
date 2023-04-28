@@ -32,7 +32,7 @@ export default function PartyDetail({ party }: Props) {
             <Typography sx={{ ...infoStyles, maxWidth: '100% !important' }} className="ShowDots">
               {party?.description}
             </Typography>
-            {!party?.certified && (
+            {party?.origin === 'ADE' && (
               <ButtonNaked
                 component="button"
                 onClick={() => setOpenBusinessNameEditModal(true)}

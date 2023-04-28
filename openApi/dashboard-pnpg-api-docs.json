@@ -3409,7 +3409,7 @@
       },
       "PnPGInstitutionResource": {
         "title": "PnPGInstitutionResource",
-        "required": ["certified", "externalId", "fiscalCode", "id", "status"],
+        "required": ["externalId", "fiscalCode", "id", "status"],
         "type": "object",
         "properties": {
           "address": {
@@ -3419,11 +3419,6 @@
           "category": {
             "type": "string",
             "description": "Institution's category"
-          },
-          "certified": {
-            "type": "boolean",
-            "description": "${swagger.onboarding.pnPGInstitutions.model.certified}",
-            "example": false
           },
           "externalId": {
             "type": "string",
@@ -3790,9 +3785,26 @@
         "required": ["id", "productOnBoardingStatus", "status", "title"],
         "type": "object",
         "properties": {
+          "description": {
+            "type": "string",
+            "description": "Product's description"
+          },
           "id": {
             "type": "string",
             "description": "Product's unique identifier"
+          },
+          "imageUrl": {
+            "type": "string",
+            "description": "Product's depict image"
+          },
+          "logo": {
+            "type": "string",
+            "description": "Product's logo"
+          },
+          "logoBgColor": {
+            "pattern": "^#[0-9A-F]{6}$",
+            "type": "string",
+            "description": "Product logo's background color"
           },
           "productOnBoardingStatus": {
             "type": "string",
@@ -3807,6 +3819,10 @@
           "title": {
             "type": "string",
             "description": "Product's title"
+          },
+          "urlPublic": {
+            "type": "string",
+            "description": "URL that redirects to the public information webpage of the product"
           }
         }
       },

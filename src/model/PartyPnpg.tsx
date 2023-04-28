@@ -30,7 +30,6 @@ export type PartyPnpg = {
   partyId: string;
   fiscalCode: string;
   status: string;
-  certified: boolean;
   description?: string;
   urlLogo?: string;
   address?: string;
@@ -57,7 +56,6 @@ export const institutionPnPGResource2PartyPnpg = (
     externalId: institutionResourcePnpg.externalId,
     fiscalCode: institutionResourcePnpg.fiscalCode,
     partyId: institutionResourcePnpg.id,
-    certified: institutionResourcePnpg.certified,
     description: institutionResourcePnpg.name,
     status: institutionResourcePnpg.status,
     urlLogo,

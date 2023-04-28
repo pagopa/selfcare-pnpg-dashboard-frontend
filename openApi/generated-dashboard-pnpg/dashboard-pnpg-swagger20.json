@@ -2944,11 +2944,6 @@
           "description": "Institution's category",
           "type": "string"
         },
-        "certified": {
-          "description": "${swagger.onboarding.pnPGInstitutions.model.certified}",
-          "example": false,
-          "type": "boolean"
-        },
         "externalId": {
           "description": "Institution's unique external identifier",
           "type": "string"
@@ -3006,7 +3001,6 @@
         }
       },
       "required": [
-        "certified",
         "externalId",
         "fiscalCode",
         "id",
@@ -3372,8 +3366,25 @@
     },
     "SubProductResource": {
       "properties": {
+        "description": {
+          "description": "Product's description",
+          "type": "string"
+        },
         "id": {
           "description": "Product's unique identifier",
+          "type": "string"
+        },
+        "imageUrl": {
+          "description": "Product's depict image",
+          "type": "string"
+        },
+        "logo": {
+          "description": "Product's logo",
+          "type": "string"
+        },
+        "logoBgColor": {
+          "description": "Product logo's background color",
+          "pattern": "^#[0-9A-F]{6}$",
           "type": "string"
         },
         "productOnBoardingStatus": {
@@ -3397,6 +3408,10 @@
         },
         "title": {
           "description": "Product's title",
+          "type": "string"
+        },
+        "urlPublic": {
+          "description": "URL that redirects to the public information webpage of the product",
           "type": "string"
         }
       },

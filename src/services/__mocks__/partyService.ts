@@ -3,7 +3,6 @@ import { PartyPnpg } from '../../model/PartyPnpg';
 export const mockedPnpgParties: Array<PartyPnpg> = [
   {
     userRole: 'ADMIN',
-    certified: true,
     description: 'mockedBusiness1',
     status: 'ACTIVE',
     partyId: '5b321318-3df7-48c1-67c8-1111e6707c3d',
@@ -17,7 +16,6 @@ export const mockedPnpgParties: Array<PartyPnpg> = [
   },
   {
     userRole: 'ADMIN',
-    certified: true,
     description: 'mockedBusiness2',
     status: 'ACTIVE',
     partyId: '5b123318-7ff7-48c1-67c8-1111e6707c3d',
@@ -31,7 +29,6 @@ export const mockedPnpgParties: Array<PartyPnpg> = [
   },
   {
     userRole: 'ADMIN',
-    certified: false,
     description: 'mockedBusiness3',
     status: 'ACTIVE',
     partyId: '5b971318-3df7-11c1-67c8-1111e6707c3d',
@@ -45,7 +42,6 @@ export const mockedPnpgParties: Array<PartyPnpg> = [
   },
   {
     userRole: 'ADMIN',
-    certified: false,
     description: 'mockedBusiness4',
     status: 'ACTIVE',
     partyId: '5b971318-3df7-11c1-67c8-1111e6707dgt',
