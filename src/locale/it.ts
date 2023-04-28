@@ -66,5 +66,14 @@ export default {
       fiscalCode: 'Codice Fiscale',
       mailAddress: 'E-mail istituzionale',
     },
+    editBusinessName: 'Modifica',
+    editBusinessNameModal: {
+      title: 'Modifica la ragione sociale',
+      subTitle: 'Se la ragione sociale non è corretta, modificala qui.',
+      textFieldLabel: 'Ragione sociale',
+      disclaimer: 'Sarai responsabile dell’inserimento di dati diversi da quelli indicati.',
+      cancel: 'Annulla',
+      confirm: 'Conferma',
+    },
   },
 };

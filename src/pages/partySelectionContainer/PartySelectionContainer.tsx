@@ -11,7 +11,7 @@ const PartySelectionContainer = () => {
   return !parties ? (
     <></>
   ) : (
-    <Grid item xs={12} py={11}>
+    <Grid item xs={12} py={11} display={'flex'}>
       {parties.filter((party) => party.status === 'ACTIVE').length >= 1 ? (
         <PartySelection parties={parties} />
       ) : (

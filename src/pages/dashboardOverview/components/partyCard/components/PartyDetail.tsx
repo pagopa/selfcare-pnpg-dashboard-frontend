@@ -40,7 +40,7 @@ export default function PartyDetail({ party }: Props) {
                 sx={{ color: 'primary.main', flexDirection: 'row', marginLeft: 2 }}
                 weight="default"
               >
-                Modifica
+                {t('overview.partyDetail.editBusinessName')}
               </ButtonNaked>
             )}
           </Grid>
@@ -64,14 +64,14 @@ export default function PartyDetail({ party }: Props) {
       </Grid>
       <SessionModal
         open={openBusinessNameEditModal}
-        title="Modifica la ragione sociale"
+        title={t('overview.partyDetail.editBusinessNameModal.title')}
         message={
           <>
-            Se la ragione sociale non è corretta, modificala qui.
+            {t('overview.partyDetail.editBusinessNameModal.subTitle')}
             <TextField
               id="businessname-textfield"
               size="small"
-              label={'Ragione sociale'}
+              label={t('overview.partyDetail.editBusinessNameModal.textFieldLabel')}
               variant="outlined"
               onChange={() => {}}
               sx={{ width: '100%', marginY: 2 }}
@@ -91,14 +91,14 @@ export default function PartyDetail({ party }: Props) {
                 sx={{ width: '20px', height: '20spx', mx: 1, color: '#6BCFFB', marginX: 2 }}
               />
               <Typography variant="body2">
-                Sarai responsabile dell’inserimento di dati diversi da quelli indicati.
+                {t('overview.partyDetail.editBusinessNameModal.disclaimer')}
               </Typography>
             </Box>
           </>
         }
-        onCloseLabel="Annulla"
+        onCloseLabel={t('overview.partyDetail.editBusinessNameModal.cancel')}
         handleClose={() => setOpenBusinessNameEditModal(false)}
-        onConfirmLabel="Conferma"
+        onConfirmLabel={t('overview.partyDetail.editBusinessNameModal.confirm')}
         onConfirm={() => {}}
       />
     </>
