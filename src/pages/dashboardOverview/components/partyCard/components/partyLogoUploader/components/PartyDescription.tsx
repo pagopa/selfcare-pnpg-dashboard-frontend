@@ -17,7 +17,8 @@ type Props = {
 export function PartyDescription({ labelLink, open, loading }: Props) {
   const { t } = useTranslation();
 
-  const isLogoNotPresent = document.querySelector('#partyLogo')?.children[0].tagName === 'svg';
+  const isLogoNotPresent = document.querySelector('#businessLogo')?.children[0].tagName === 'svg';
+
   return (
     <Stack>
       <Box display="flex">
