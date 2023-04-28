@@ -3366,8 +3366,25 @@
     },
     "SubProductResource": {
       "properties": {
+        "description": {
+          "description": "Product's description",
+          "type": "string"
+        },
         "id": {
           "description": "Product's unique identifier",
+          "type": "string"
+        },
+        "imageUrl": {
+          "description": "Product's depict image",
+          "type": "string"
+        },
+        "logo": {
+          "description": "Product's logo",
+          "type": "string"
+        },
+        "logoBgColor": {
+          "description": "Product logo's background color",
+          "pattern": "^#[0-9A-F]{6}$",
           "type": "string"
         },
         "productOnBoardingStatus": {
@@ -3391,6 +3408,10 @@
         },
         "title": {
           "description": "Product's title",
+          "type": "string"
+        },
+        "urlPublic": {
+          "description": "URL that redirects to the public information webpage of the product",
           "type": "string"
         }
       },

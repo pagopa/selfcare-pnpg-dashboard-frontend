@@ -3785,9 +3785,26 @@
         "required": ["id", "productOnBoardingStatus", "status", "title"],
         "type": "object",
         "properties": {
+          "description": {
+            "type": "string",
+            "description": "Product's description"
+          },
           "id": {
             "type": "string",
             "description": "Product's unique identifier"
+          },
+          "imageUrl": {
+            "type": "string",
+            "description": "Product's depict image"
+          },
+          "logo": {
+            "type": "string",
+            "description": "Product's logo"
+          },
+          "logoBgColor": {
+            "pattern": "^#[0-9A-F]{6}$",
+            "type": "string",
+            "description": "Product logo's background color"
           },
           "productOnBoardingStatus": {
             "type": "string",
@@ -3802,6 +3819,10 @@
           "title": {
             "type": "string",
             "description": "Product's title"
+          },
+          "urlPublic": {
+            "type": "string",
+            "description": "URL that redirects to the public information webpage of the product"
           }
         }
       },
