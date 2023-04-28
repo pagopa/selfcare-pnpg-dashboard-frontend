@@ -40,7 +40,7 @@ export type PartyPnpg = {
   origin?: string;
   originId?: string;
   recipientCode?: string;
-  userRole?: string;
+  userRole?: UserRole;
   zipCode?: string;
 };
 
@@ -67,7 +67,7 @@ export const institutionPnPGResource2PartyPnpg = (
     origin: institutionResourcePnpg.origin,
     originId: institutionResourcePnpg.originId,
     recipientCode: institutionResourcePnpg.recipientCode,
-    userRole: institutionResourcePnpg.userRole,
+    userRole: institutionResourcePnpg.userRole as UserRole,
     zipCode: institutionResourcePnpg.zipCode,
   };
 };

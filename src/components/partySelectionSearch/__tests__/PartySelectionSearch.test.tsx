@@ -8,7 +8,7 @@ let selectedParty: PartyPnpg | null = null;
 
 const parties: Array<PartyPnpg> = [
   {
-    userRole: 'ADMIN',
+    userRole: 'LIMITED',
     description: 'mockedBusiness1',
     urlLogo: 'image',
     status: 'ACTIVE',
@@ -36,7 +36,7 @@ const parties: Array<PartyPnpg> = [
     institutionType: 'Azienda privata',
   },
   {
-    userRole: 'ADMIN',
+    userRole: 'LIMITED',
     description: 'mockedBusiness3',
     urlLogo: 'image',
     status: 'ACTIVE',
