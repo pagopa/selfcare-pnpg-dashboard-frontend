@@ -87,15 +87,17 @@ export default function PartyDetail({ party }: Props) {
             <Typography sx={{ ...infoStyles, maxWidth: '100% !important' }} className="ShowDots">
               {party?.mailAddress}
             </Typography>
-            <ButtonNaked
-              component="button"
-              onClick={() => setOpenBusinessEmailEditModal(true)}
-              startIcon={<EditIcon />}
-              sx={{ color: 'primary.main', flexDirection: 'row', marginLeft: 2 }}
-              weight="default"
-            >
-              {t('overview.partyDetail.editBusinessEmail')}
-            </ButtonNaked>
+            {party?.mailAddress && ( // TODO Remove me
+              <ButtonNaked
+                component="button"
+                onClick={() => setOpenBusinessEmailEditModal(true)}
+                startIcon={<EditIcon />}
+                sx={{ color: 'primary.main', flexDirection: 'row', marginLeft: 2 }}
+                weight="default"
+              >
+                {t('overview.partyDetail.editBusinessEmail')}
+              </ButtonNaked>
+            )}
           </Grid>
           <Grid item xs={4}>
             <Typography variant="body2">{t('overview.partyDetail.fiscalCode')}</Typography>
