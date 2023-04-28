@@ -50,7 +50,7 @@ export const mockedPnPGInstitutionsResource: Array<PnPGInstitutionResource> = [
     category: '',
     externalId: '01113570210',
     originId: 'originId1',
-    origin: 'IPA',
+    origin: 'INFOCAMERE',
     institutionType: 'Azienda privata',
   },
   {
@@ -63,7 +63,7 @@ export const mockedPnPGInstitutionsResource: Array<PnPGInstitutionResource> = [
     category: '',
     externalId: '03343570210',
     originId: 'originId1',
-    origin: 'IPA',
+    origin: 'INFOCAMERE',
     institutionType: 'Azienda privata',
   },
   {
@@ -76,7 +76,7 @@ export const mockedPnPGInstitutionsResource: Array<PnPGInstitutionResource> = [
     category: '',
     externalId: '05923570210',
     originId: 'originId1',
-    origin: 'IPA',
+    origin: 'ADE',
     institutionType: 'Azienda privata',
   },
   {
@@ -89,7 +89,7 @@ export const mockedPnPGInstitutionsResource: Array<PnPGInstitutionResource> = [
     category: '',
     externalId: '05923570510',
     originId: 'originId1',
-    origin: 'IPA',
+    origin: 'ADE',
     institutionType: 'Azienda privata',
   },
 ];
