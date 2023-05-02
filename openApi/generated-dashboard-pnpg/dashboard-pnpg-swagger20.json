@@ -981,9 +981,13 @@
         "summary": "getPnPGInstitutions"
       }
     },
-    "/pnPGInstitutions/{institutionId}/description": {
+    "/pnPGInstitutions/{institutionId}": {
       "put": {
+        "consumes": [
+          "application/json"
+        ],
         "produces": [
+          "application/json",
           "application/problem+json"
         ],
         "parameters": [
@@ -995,16 +999,19 @@
             "type": "string"
           },
           {
-            "description": "Institution description",
-            "in": "query",
-            "name": "description",
-            "required": true,
-            "type": "string"
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/UpdatePnPGInstitutionDto"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Institution"
+            }
           },
           "400": {
             "description": "Bad Request",
@@ -2369,6 +2376,21 @@
     }
   },
   "definitions" : {"ProductRoleMappingsResourceArray":{"type": "array", "items": {"$ref": "#/definitions/ProductRoleMappingsResource"}},"PartyProductArray":{"type": "array", "items": {"$ref": "#/definitions/PartyProduct"}},"PnPGInstitutionResourceArray":{"type": "array", "items": {"$ref": "#/definitions/PnPGInstitutionResource"}},"InstitutionUserResourceArray":{"type": "array", "items": {"$ref": "#/definitions/InstitutionUserResource"}},"ProductUserResourceArray":{"type": "array", "items": {"$ref": "#/definitions/ProductUserResource"}},"ProductsResourceArray":{"type": "array", "items": {"$ref": "#/definitions/ProductsResource"}},"GeographicTaxonomyResourceArray":{"type": "array", "items": {"$ref": "#/definitions/GeographicTaxonomyResource"}},"STRINGWrapper":{"type": "string"},"STRINGArray":{"type": "array", "items": {"type": "string"}},"InstitutionResourceArray":{"type": "array", "items": {"$ref": "#/definitions/InstitutionResource"}},
+    "Attribute": {
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "origin": {
+          "type": "string"
+        }
+      },
+      "title": "Attribute",
+      "type": "object"
+    },
     "BackOfficeConfigurationsResource": {
       "properties": {
         "environment": {
@@ -2507,6 +2529,18 @@
       "title": "DpoData",
       "type": "object"
     },
+    "GeographicTaxonomy": {
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "desc": {
+          "type": "string"
+        }
+      },
+      "title": "GeographicTaxonomy",
+      "type": "object"
+    },
     "GeographicTaxonomyDto": {
       "properties": {
         "code": {
@@ -2570,6 +2604,62 @@
         "token"
       ],
       "title": "IdentityTokenResource",
+      "type": "object"
+    },
+    "Institution": {
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "attributes": {
+          "items": {
+            "$ref": "#/definitions/Attribute"
+          },
+          "type": "array"
+        },
+        "description": {
+          "type": "string"
+        },
+        "digitalAddress": {
+          "type": "string"
+        },
+        "externalId": {
+          "type": "string"
+        },
+        "geographicTaxonomies": {
+          "items": {
+            "$ref": "#/definitions/GeographicTaxonomy"
+          },
+          "type": "array"
+        },
+        "id": {
+          "type": "string"
+        },
+        "institutionType": {
+          "enum": [
+            "GSP",
+            "PA",
+            "PG",
+            "PSP",
+            "PT",
+            "SCP"
+          ],
+          "type": "string"
+        },
+        "origin": {
+          "type": "string"
+        },
+        "originId": {
+          "type": "string"
+        },
+        "taxCode": {
+          "type": "string"
+        },
+        "zipCode": {
+          "type": "string"
+        }
+      },
+      "title": "Institution",
       "type": "object"
     },
     "InstitutionInfo": {
@@ -3495,6 +3585,20 @@
         }
       },
       "title": "SupportContactResource",
+      "type": "object"
+    },
+    "UpdatePnPGInstitutionDto": {
+      "properties": {
+        "description": {
+          "description": "Institution's description",
+          "type": "string"
+        },
+        "digitalAddress": {
+          "description": "Institution's email address",
+          "type": "string"
+        }
+      },
+      "title": "UpdatePnPGInstitutionDto",
       "type": "object"
     },
     "UpdateUserDto": {

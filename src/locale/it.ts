@@ -85,6 +85,7 @@ export default {
         title: 'Modifica l’indirizzo e-mail istituzionale',
         subTitle: 'Se l’indirizzo e-mail non è corretto, modificalo qui.',
         textFieldLabel: 'E-mail istituzionale',
+        invalidEmail: "L'indirizzo e-mail inserito non è corretto",
         disclaimer: 'Sarai responsabile dell’inserimento di dati diversi da quelli indicati.',
         cancel: 'Annulla',
         confirm: 'Conferma',
