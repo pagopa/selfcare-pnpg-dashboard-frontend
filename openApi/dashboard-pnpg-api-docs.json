@@ -1270,7 +1270,7 @@
         ]
       }
     },
-    "/pnPGInstitutions/{institutionId}/description": {
+    "/pnPGInstitutions/{institutionId}": {
       "put": {
         "tags": ["pnPGInstitutions"],
         "summary": "updateInstitutionDescription",
@@ -1286,21 +1286,27 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "name": "description",
-            "in": "query",
-            "description": "Institution description",
-            "required": true,
-            "style": "form",
-            "schema": {
-              "type": "string"
-            }
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePnPGInstitutionDto"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Institution"
+                }
+              }
+            }
           },
           "400": {
             "description": "Bad Request",
@@ -2945,6 +2951,21 @@
   },
   "components": {
     "schemas": {
+      "Attribute": {
+        "title": "Attribute",
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "origin": {
+            "type": "string"
+          }
+        }
+      },
       "BackOfficeConfigurationsResource": {
         "title": "BackOfficeConfigurationsResource",
         "required": ["environment", "url"],
@@ -3064,6 +3085,18 @@
           }
         }
       },
+      "GeographicTaxonomy": {
+        "title": "GeographicTaxonomy",
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "desc": {
+            "type": "string"
+          }
+        }
+      },
       "GeographicTaxonomyDto": {
         "title": "GeographicTaxonomyDto",
         "required": ["code", "desc"],
@@ -3116,6 +3149,55 @@
           "token": {
             "type": "string",
             "description": "The Identity Token"
+          }
+        }
+      },
+      "Institution": {
+        "title": "Institution",
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string"
+          },
+          "attributes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Attribute"
+            }
+          },
+          "description": {
+            "type": "string"
+          },
+          "digitalAddress": {
+            "type": "string"
+          },
+          "externalId": {
+            "type": "string"
+          },
+          "geographicTaxonomies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GeographicTaxonomy"
+            }
+          },
+          "id": {
+            "type": "string"
+          },
+          "institutionType": {
+            "type": "string",
+            "enum": ["GSP", "PA", "PG", "PSP", "PT", "SCP"]
+          },
+          "origin": {
+            "type": "string"
+          },
+          "originId": {
+            "type": "string"
+          },
+          "taxCode": {
+            "type": "string"
+          },
+          "zipCode": {
+            "type": "string"
           }
         }
       },
@@ -3907,6 +3989,20 @@
           "supportPhone": {
             "type": "string",
             "description": "Institution's support phone contact"
+          }
+        }
+      },
+      "UpdatePnPGInstitutionDto": {
+        "title": "UpdatePnPGInstitutionDto",
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Institution's description"
+          },
+          "digitalAddress": {
+            "type": "string",
+            "description": "Institution's email address"
           }
         }
       },

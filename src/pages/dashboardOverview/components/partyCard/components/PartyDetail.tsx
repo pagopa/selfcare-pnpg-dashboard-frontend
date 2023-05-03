@@ -3,10 +3,12 @@ import { ButtonNaked, theme } from '@pagopa/mui-italia';
 import { useTranslation } from 'react-i18next';
 import EditIcon from '@mui/icons-material/Edit';
 import { SessionModal, useErrorDispatcher, useUserNotify } from '@pagopa/selfcare-common-frontend';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { InfoOutlined } from '@mui/icons-material';
 import { PartyPnpg } from '../../../../../model/PartyPnpg';
-import { updateBusinessName } from '../../../../../services/partyService';
+import { updateBusinessData } from '../../../../../services/partyService';
+
+const emailRegexp = new RegExp('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$');
 
 type Props = {
   party?: PartyPnpg;
@@ -21,34 +23,63 @@ export default function PartyDetail({ party }: Props) {
   const [_loading, setLoading] = useState<boolean>(false);
   const [openBusinessNameEditModal, setOpenBusinessNameEditModal] = useState<boolean>(false);
   const [openBusinessEmailEditModal, setOpenBusinessEmailEditModal] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
   const [insertedBusinessName, setInsertedBusinessName] = useState<string>();
+  const [insertedBusinessEmail, setInsertedBusinessEmail] = useState<string>();
+  const [newBusinessName, setNewBusinessName] = useState<string>();
+  const [newBusinessEmail, setNewBusinessEmail] = useState<string>();
 
-  const updateBusinessData = (institutionId: string, businessName: string) => {
+  useEffect(() => {
+    setIsError(insertedBusinessEmail ? !emailRegexp.test(insertedBusinessEmail) : false);
+  }, [insertedBusinessEmail]);
+
+  const handleInputChange = (e: any, isBusinessEmail: boolean) => {
+    const input = e.target.value;
+    if (isBusinessEmail) {
+      setInsertedBusinessEmail(input);
+    } else {
+      setInsertedBusinessName(input);
+    }
+  };
+
+  const updateBusiness = (institutionId: string, businessEmail?: string, businessName?: string) => {
     setLoading(true);
-    updateBusinessName(institutionId, businessName)
-      .then(() =>
+    (businessEmail
+      ? updateBusinessData(institutionId, businessEmail)
+      : updateBusinessData(institutionId, undefined, businessName)
+    )
+      .then(() => {
+        if (businessEmail) {
+          setNewBusinessEmail(businessEmail);
+        } else {
+          setNewBusinessName(businessName);
+        }
         addNotify({
           component: 'Toast',
-          id: 'UPDATE_BUSINESS_NAME',
+          id: businessEmail ? 'UPDATE_BUSINESS_EMAIL' : 'UPDATE_BUSINESS_NAME',
           title: '',
-          message: t('overview.partyDetail.editBusinessNameModal.success.description'),
-        })
-      )
+          message: businessEmail
+            ? t('overview.partyDetail.editBusinessEmailModal.success.description')
+            : t('overview.partyDetail.editBusinessNameModal.success.description'),
+        });
+      })
       .catch((reason) =>
         addError({
           component: 'Toast',
-          id: 'UPDATE_BUSINESS_NAME_ERROR',
-          displayableDescription: t('overview.partyDetail.editBusinessNameModal.error.description'),
+          id: businessEmail ? 'UPDATE_BUSINESS_EMAIL_ERROR' : 'UPDATE_BUSINESS_NAME_ERROR',
+          displayableDescription: businessEmail
+            ? t('overview.partyDetail.editBusinessEmailModal.error.description')
+            : t('overview.partyDetail.editBusinessNameModal.error.description'),
           error: reason,
           blocking: false,
           toNotify: true,
-          techDescription: `An error occurred while changing the business name for the party with institutionId: ${institutionId}`,
+          techDescription: `An error occurred while changing the business data for the party with institutionId: ${institutionId}`,
         })
       )
       .finally(() => {
         setLoading(false);
-        setOpenBusinessNameEditModal(false);
         setOpenBusinessEmailEditModal(false);
+        setOpenBusinessNameEditModal(false);
       });
   };
 
@@ -66,7 +97,7 @@ export default function PartyDetail({ party }: Props) {
           </Grid>
           <Grid item xs={8} sx={{ display: 'flex' }}>
             <Typography sx={{ ...infoStyles, maxWidth: '100% !important' }} className="ShowDots">
-              {party?.description}
+              {newBusinessName ?? party?.description}
             </Typography>
             {party?.origin === 'ADE' && (
               <ButtonNaked
@@ -85,9 +116,9 @@ export default function PartyDetail({ party }: Props) {
           </Grid>
           <Grid item xs={8} sx={{ display: 'flex' }}>
             <Typography sx={{ ...infoStyles, maxWidth: '100% !important' }} className="ShowDots">
-              {party?.mailAddress}
+              {newBusinessEmail ?? party?.mailAddress}
             </Typography>
-            {party?.mailAddress && ( // TODO Remove me
+            {party?.mailAddress && (
               <ButtonNaked
                 component="button"
                 onClick={() => setOpenBusinessEmailEditModal(true)}
@@ -120,7 +151,7 @@ export default function PartyDetail({ party }: Props) {
               size="small"
               label={t('overview.partyDetail.editBusinessNameModal.textFieldLabel')}
               variant="outlined"
-              onChange={(e) => setInsertedBusinessName(e.target.value)}
+              onChange={(e) => handleInputChange(e, false)}
               sx={{ width: '100%', marginY: 2 }}
             />
             <Box
@@ -144,13 +175,15 @@ export default function PartyDetail({ party }: Props) {
           </>
         }
         onCloseLabel={t('overview.partyDetail.editBusinessNameModal.cancel')}
-        handleClose={() => setOpenBusinessNameEditModal(false)}
+        handleClose={() => {
+          setOpenBusinessNameEditModal(false);
+          setInsertedBusinessName(undefined);
+        }}
         onConfirmLabel={t('overview.partyDetail.editBusinessNameModal.confirm')}
         onConfirm={() =>
-          party && insertedBusinessName
-            ? updateBusinessData(party.partyId, insertedBusinessName)
-            : undefined
+          party ? updateBusiness(party.partyId, undefined, insertedBusinessName) : undefined
         }
+        onConfirmEnabled={!!insertedBusinessName && insertedBusinessName.trim().length > 0}
       />
       <SessionModal
         open={openBusinessEmailEditModal}
@@ -161,9 +194,13 @@ export default function PartyDetail({ party }: Props) {
             <TextField
               id="email-textfield"
               size="small"
+              error={isError}
+              helperText={
+                isError ? t('overview.partyDetail.editBusinessEmailModal.invalidEmail') : undefined
+              }
               label={t('overview.partyDetail.editBusinessEmailModal.textFieldLabel')}
               variant="outlined"
-              onChange={() => {}}
+              onChange={(e) => handleInputChange(e, true)}
               sx={{ width: '100%', marginY: 2 }}
             />
             <Box
@@ -187,9 +224,13 @@ export default function PartyDetail({ party }: Props) {
           </>
         }
         onCloseLabel={t('overview.partyDetail.editBusinessEmailModal.cancel')}
-        handleClose={() => setOpenBusinessEmailEditModal(false)}
+        handleClose={() => {
+          setOpenBusinessEmailEditModal(false);
+          setInsertedBusinessEmail(undefined);
+        }}
         onConfirmLabel={t('overview.partyDetail.editBusinessEmailModal.confirm')}
-        onConfirm={() => {}}
+        onConfirm={() => (party ? updateBusiness(party.partyId, insertedBusinessEmail) : undefined)}
+        onConfirmEnabled={!!insertedBusinessEmail && !isError}
       />
     </>
   );
