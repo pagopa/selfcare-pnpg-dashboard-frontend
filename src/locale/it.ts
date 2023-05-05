@@ -64,7 +64,39 @@ export default {
     partyDetail: {
       businessName: 'Ragione sociale',
       fiscalCode: 'Codice Fiscale',
-      mailAddress: 'Email',
+      mailAddress: 'E-mail istituzionale',
+      editBusinessName: 'Modifica',
+      editBusinessNameModal: {
+        title: 'Modifica la ragione sociale',
+        subTitle: 'Se la ragione sociale non è corretta, modificala qui.',
+        textFieldLabel: 'Ragione sociale',
+        invalidBusinessName: 'Inserisci una ragione sociale',
+        disclaimer: 'Sarai responsabile dell’inserimento di dati diversi da quelli indicati.',
+        cancel: 'Annulla',
+        confirm: 'Conferma',
+        success: {
+          description: 'Ragione sociale modificata correttamente',
+        },
+        error: {
+          description: 'Si è verificato un errore durante l’inserimento. Riprova.',
+        },
+      },
+      editBusinessEmail: 'Modifica',
+      editBusinessEmailModal: {
+        title: 'Modifica l’indirizzo e-mail istituzionale',
+        subTitle: 'Se l’indirizzo e-mail non è corretto, modificalo qui.',
+        textFieldLabel: 'E-mail istituzionale',
+        invalidEmail: "L'indirizzo e-mail inserito non è corretto",
+        disclaimer: 'Sarai responsabile dell’inserimento di dati diversi da quelli indicati.',
+        cancel: 'Annulla',
+        confirm: 'Conferma',
+        success: {
+          description: 'E-mail istituzionale modificata correttamente',
+        },
+        error: {
+          description: 'Si è verificato un errore durante l’inserimento. Riprova.',
+        },
+      },
     },
   },
 };

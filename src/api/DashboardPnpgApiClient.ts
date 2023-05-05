@@ -44,6 +44,21 @@ export const DashboardPnpgApi = {
     return extractResponse(result, 200, onRedirectToLogin);
   },
 
+  updateBusinessData: async (
+    institutionId: string,
+    digitalAddress?: string,
+    businessName?: string
+  ): Promise<boolean> => {
+    const result = await apiClient.updateInstitutionDescriptionUsingPUT({
+      institutionId,
+      body: {
+        description: businessName,
+        digitalAddress,
+      },
+    });
+    return extractResponse(result, 200, onRedirectToLogin);
+  },
+
   retrieveProductBackoffice: async (
     productId: string,
     institutionId: string,

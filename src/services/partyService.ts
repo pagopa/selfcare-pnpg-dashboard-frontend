@@ -42,6 +42,19 @@ const retrieveParty = (
   }
 };
 
+export const updateBusinessData = (
+  institutionId: string,
+  businessEmail?: string,
+  businessName?: string
+): Promise<boolean> => {
+  /* istanbul ignore if */
+  if (process.env.REACT_APP_MOCK_API === 'true') {
+    return new Promise((resolve) => resolve(true));
+  } else {
+    return DashboardPnpgApi.updateBusinessData(institutionId, businessEmail, businessName);
+  }
+};
+
 export const retrieveProductBackoffice = (
   productId: string,
   institutionId: string,

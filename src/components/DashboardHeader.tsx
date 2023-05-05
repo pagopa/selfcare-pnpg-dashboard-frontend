@@ -7,6 +7,7 @@ import { useMemo, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useTranslation, Trans } from 'react-i18next';
 import { ProductSwitchItem } from '@pagopa/mui-italia';
+import { pnpgRoleLabels } from '@pagopa/selfcare-common-frontend/utils/constants';
 import withParties, { WithPartiesProps } from '../decorators/withParties';
 import { useTokenExchange } from '../hooks/useTokenExchange';
 import { Product } from '../model/Product';
@@ -54,6 +55,7 @@ const DashboardHeader = ({ onExit, loggedUser, parties }: Props) => {
         selectedPartyId={selectedParty?.partyId}
         productsList={
           products
+            ?.filter((p) => p.status === 'ACTIVE' && p.productOnBoardingStatus === 'ACTIVE')
             ?.map((p) => ({
               id: p.id,
               title: t('productsList.digitalNotifications'),
@@ -74,7 +76,7 @@ const DashboardHeader = ({ onExit, loggedUser, parties }: Props) => {
           logoUrl: p.urlLogo ?? '',
           id: p.partyId ?? '',
           name: p.description ?? '',
-          productRole: p.fiscalCode ?? '',
+          productRole: p.userRole ? t(pnpgRoleLabels[p.userRole].longLabelKey) : '',
         }))}
         loggedUser={
           loggedUser

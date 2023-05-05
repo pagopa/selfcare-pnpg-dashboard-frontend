@@ -8,7 +8,7 @@ let selectedParty: PartyPnpg | null = null;
 
 const parties: Array<PartyPnpg> = [
   {
-    userRole: 'ADMIN',
+    userRole: 'LIMITED',
     description: 'mockedBusiness1',
     urlLogo: 'image',
     status: 'ACTIVE',
@@ -18,7 +18,7 @@ const parties: Array<PartyPnpg> = [
     category: '',
     externalId: '01113570210',
     originId: 'originId1',
-    origin: 'IPA',
+    origin: 'INFOCAMERE',
     institutionType: 'Azienda privata',
   },
   {
@@ -32,11 +32,11 @@ const parties: Array<PartyPnpg> = [
     category: '',
     externalId: '03343570210',
     originId: 'originId1',
-    origin: 'IPA',
+    origin: 'INFOCAMERE',
     institutionType: 'Azienda privata',
   },
   {
-    userRole: 'ADMIN',
+    userRole: 'LIMITED',
     description: 'mockedBusiness3',
     urlLogo: 'image',
     status: 'ACTIVE',
@@ -46,7 +46,7 @@ const parties: Array<PartyPnpg> = [
     category: '',
     externalId: '05923570210',
     originId: 'originId1',
-    origin: 'IPA',
+    origin: 'ADE',
     institutionType: 'Azienda privata',
   },
   {
@@ -60,7 +60,7 @@ const parties: Array<PartyPnpg> = [
     category: '',
     externalId: '05923570510',
     originId: 'originId1',
-    origin: 'IPA',
+    origin: 'ADE',
     institutionType: 'Azienda privata',
   },
 ];

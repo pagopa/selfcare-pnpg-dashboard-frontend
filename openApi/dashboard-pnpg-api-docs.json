@@ -1270,6 +1270,82 @@
         ]
       }
     },
+    "/pnPGInstitutions/{institutionId}": {
+      "put": {
+        "tags": ["pnPGInstitutions"],
+        "summary": "updateInstitutionDescription",
+        "description": "Update institution description",
+        "operationId": "updateInstitutionDescriptionUsingPUT",
+        "parameters": [
+          {
+            "name": "institutionId",
+            "in": "path",
+            "description": "Institution's unique internal identifier",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePnPGInstitutionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Institution"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": ["global"]
+          }
+        ]
+      }
+    },
     "/pnPGInstitutions/{institutionId}/products": {
       "get": {
         "tags": ["pnPGInstitutions"],
@@ -2875,6 +2951,21 @@
   },
   "components": {
     "schemas": {
+      "Attribute": {
+        "title": "Attribute",
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "origin": {
+            "type": "string"
+          }
+        }
+      },
       "BackOfficeConfigurationsResource": {
         "title": "BackOfficeConfigurationsResource",
         "required": ["environment", "url"],
@@ -2994,6 +3085,18 @@
           }
         }
       },
+      "GeographicTaxonomy": {
+        "title": "GeographicTaxonomy",
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "desc": {
+            "type": "string"
+          }
+        }
+      },
       "GeographicTaxonomyDto": {
         "title": "GeographicTaxonomyDto",
         "required": ["code", "desc"],
@@ -3046,6 +3149,55 @@
           "token": {
             "type": "string",
             "description": "The Identity Token"
+          }
+        }
+      },
+      "Institution": {
+        "title": "Institution",
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string"
+          },
+          "attributes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Attribute"
+            }
+          },
+          "description": {
+            "type": "string"
+          },
+          "digitalAddress": {
+            "type": "string"
+          },
+          "externalId": {
+            "type": "string"
+          },
+          "geographicTaxonomies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GeographicTaxonomy"
+            }
+          },
+          "id": {
+            "type": "string"
+          },
+          "institutionType": {
+            "type": "string",
+            "enum": ["GSP", "PA", "PG", "PSP", "PT", "SCP"]
+          },
+          "origin": {
+            "type": "string"
+          },
+          "originId": {
+            "type": "string"
+          },
+          "taxCode": {
+            "type": "string"
+          },
+          "zipCode": {
+            "type": "string"
           }
         }
       },
@@ -3785,9 +3937,26 @@
         "required": ["id", "productOnBoardingStatus", "status", "title"],
         "type": "object",
         "properties": {
+          "description": {
+            "type": "string",
+            "description": "Product's description"
+          },
           "id": {
             "type": "string",
             "description": "Product's unique identifier"
+          },
+          "imageUrl": {
+            "type": "string",
+            "description": "Product's depict image"
+          },
+          "logo": {
+            "type": "string",
+            "description": "Product's logo"
+          },
+          "logoBgColor": {
+            "pattern": "^#[0-9A-F]{6}$",
+            "type": "string",
+            "description": "Product logo's background color"
           },
           "productOnBoardingStatus": {
             "type": "string",
@@ -3802,6 +3971,10 @@
           "title": {
             "type": "string",
             "description": "Product's title"
+          },
+          "urlPublic": {
+            "type": "string",
+            "description": "URL that redirects to the public information webpage of the product"
           }
         }
       },
@@ -3816,6 +3989,20 @@
           "supportPhone": {
             "type": "string",
             "description": "Institution's support phone contact"
+          }
+        }
+      },
+      "UpdatePnPGInstitutionDto": {
+        "title": "UpdatePnPGInstitutionDto",
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Institution's description"
+          },
+          "digitalAddress": {
+            "type": "string",
+            "description": "Institution's email address"
           }
         }
       },
