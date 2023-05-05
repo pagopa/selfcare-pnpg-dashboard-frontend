@@ -3,7 +3,7 @@ import { ButtonNaked, theme } from '@pagopa/mui-italia';
 import { useTranslation } from 'react-i18next';
 import EditIcon from '@mui/icons-material/Edit';
 import { SessionModal, useErrorDispatcher, useUserNotify } from '@pagopa/selfcare-common-frontend';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { InfoOutlined } from '@mui/icons-material';
 import { PartyPnpg } from '../../../../../model/PartyPnpg';
 import { updateBusinessData } from '../../../../../services/partyService';
@@ -23,15 +23,10 @@ export default function PartyDetail({ party }: Props) {
   const [_loading, setLoading] = useState<boolean>(false);
   const [openBusinessNameEditModal, setOpenBusinessNameEditModal] = useState<boolean>(false);
   const [openBusinessEmailEditModal, setOpenBusinessEmailEditModal] = useState<boolean>(false);
-  const [isError, setIsError] = useState<boolean>(false);
   const [insertedBusinessName, setInsertedBusinessName] = useState<string>();
   const [insertedBusinessEmail, setInsertedBusinessEmail] = useState<string>();
   const [newBusinessName, setNewBusinessName] = useState<string>();
   const [newBusinessEmail, setNewBusinessEmail] = useState<string>();
-
-  useEffect(() => {
-    setIsError(insertedBusinessEmail ? !emailRegexp.test(insertedBusinessEmail) : false);
-  }, [insertedBusinessEmail]);
 
   const handleInputChange = (e: any, isBusinessEmail: boolean) => {
     const input = e.target.value;
@@ -87,6 +82,9 @@ export default function PartyDetail({ party }: Props) {
     fontWeight: theme.typography.fontWeightMedium,
     fontSize: theme.typography.fontSize,
   };
+
+  const notValidBusinessEmail = !!insertedBusinessEmail && !emailRegexp.test(insertedBusinessEmail);
+  const notValidBusinessName = !!insertedBusinessName && insertedBusinessName.trim().length === 0;
 
   return (
     <>
@@ -151,6 +149,12 @@ export default function PartyDetail({ party }: Props) {
               size="small"
               label={t('overview.partyDetail.editBusinessNameModal.textFieldLabel')}
               variant="outlined"
+              error={notValidBusinessName}
+              helperText={
+                notValidBusinessName
+                  ? t('overview.partyDetail.editBusinessNameModal.invalidBusinessName')
+                  : undefined
+              }
               onChange={(e) => handleInputChange(e, false)}
               sx={{ width: '100%', marginY: 2 }}
             />
@@ -183,7 +187,9 @@ export default function PartyDetail({ party }: Props) {
         onConfirm={() =>
           party ? updateBusiness(party.partyId, undefined, insertedBusinessName) : undefined
         }
-        onConfirmEnabled={!!insertedBusinessName && insertedBusinessName.trim().length > 0}
+        onConfirmEnabled={
+          !notValidBusinessName && !!insertedBusinessName && insertedBusinessName.length > 0
+        }
       />
       <SessionModal
         open={openBusinessEmailEditModal}
@@ -194,9 +200,11 @@ export default function PartyDetail({ party }: Props) {
             <TextField
               id="email-textfield"
               size="small"
-              error={isError}
+              error={notValidBusinessEmail}
               helperText={
-                isError ? t('overview.partyDetail.editBusinessEmailModal.invalidEmail') : undefined
+                notValidBusinessEmail
+                  ? t('overview.partyDetail.editBusinessEmailModal.invalidEmail')
+                  : undefined
               }
               label={t('overview.partyDetail.editBusinessEmailModal.textFieldLabel')}
               variant="outlined"
@@ -230,7 +238,7 @@ export default function PartyDetail({ party }: Props) {
         }}
         onConfirmLabel={t('overview.partyDetail.editBusinessEmailModal.confirm')}
         onConfirm={() => (party ? updateBusiness(party.partyId, insertedBusinessEmail) : undefined)}
-        onConfirmEnabled={!!insertedBusinessEmail && !isError}
+        onConfirmEnabled={!notValidBusinessEmail}
       />
     </>
   );

@@ -70,6 +70,7 @@ export default {
         title: 'Modifica la ragione sociale',
         subTitle: 'Se la ragione sociale non è corretta, modificala qui.',
         textFieldLabel: 'Ragione sociale',
+        invalidBusinessName: 'Inserisci una ragione sociale',
         disclaimer: 'Sarai responsabile dell’inserimento di dati diversi da quelli indicati.',
         cancel: 'Annulla',
         confirm: 'Conferma',
