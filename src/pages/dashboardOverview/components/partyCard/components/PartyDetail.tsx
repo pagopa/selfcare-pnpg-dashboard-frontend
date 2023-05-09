@@ -14,6 +14,7 @@ type Props = {
   party?: PartyPnpg;
 };
 
+// eslint-disable-next-line sonarjs/cognitive-complexity
 export default function PartyDetail({ party }: Props) {
   const { t } = useTranslation();
 
@@ -27,13 +28,27 @@ export default function PartyDetail({ party }: Props) {
   const [insertedBusinessEmail, setInsertedBusinessEmail] = useState<string>();
   const [newBusinessName, setNewBusinessName] = useState<string>();
   const [newBusinessEmail, setNewBusinessEmail] = useState<string>();
+  const [isBusinessEmailEqualToSavedValue, setIsBusinessEmailEqualToSavedValue] =
+    useState<boolean>(false);
+  const [isBusinessNameEqualToSavedValue, setIsBusinessNameEqualToSavedValue] =
+    useState<boolean>(false);
 
   const handleInputChange = (e: any, isBusinessEmail: boolean) => {
     const input = e.target.value;
     if (isBusinessEmail) {
-      setInsertedBusinessEmail(input);
+      if (input === party?.mailAddress) {
+        setIsBusinessEmailEqualToSavedValue(true);
+      } else {
+        setInsertedBusinessEmail(input);
+        setIsBusinessEmailEqualToSavedValue(false);
+      }
     } else {
-      setInsertedBusinessName(input);
+      if (input === party?.description) {
+        setIsBusinessNameEqualToSavedValue(true);
+      } else {
+        setInsertedBusinessName(input);
+        setIsBusinessNameEqualToSavedValue(false);
+      }
     }
   };
 
@@ -116,17 +131,15 @@ export default function PartyDetail({ party }: Props) {
             <Typography sx={{ ...infoStyles, maxWidth: '100% !important' }} className="ShowDots">
               {newBusinessEmail ?? party?.mailAddress}
             </Typography>
-            {party?.mailAddress && (
-              <ButtonNaked
-                component="button"
-                onClick={() => setOpenBusinessEmailEditModal(true)}
-                startIcon={<EditIcon />}
-                sx={{ color: 'primary.main', flexDirection: 'row', marginLeft: 2 }}
-                weight="default"
-              >
-                {t('overview.partyDetail.editBusinessEmail')}
-              </ButtonNaked>
-            )}
+            <ButtonNaked
+              component="button"
+              onClick={() => setOpenBusinessEmailEditModal(true)}
+              startIcon={<EditIcon />}
+              sx={{ color: 'primary.main', flexDirection: 'row', marginLeft: 2 }}
+              weight="default"
+            >
+              {t('overview.partyDetail.editBusinessEmail')}
+            </ButtonNaked>
           </Grid>
           <Grid item xs={4}>
             <Typography variant="body2">{t('overview.partyDetail.fiscalCode')}</Typography>
@@ -149,10 +162,12 @@ export default function PartyDetail({ party }: Props) {
               size="small"
               label={t('overview.partyDetail.editBusinessNameModal.textFieldLabel')}
               variant="outlined"
-              error={notValidBusinessName}
+              error={notValidBusinessName || isBusinessNameEqualToSavedValue}
               helperText={
                 notValidBusinessName
                   ? t('overview.partyDetail.editBusinessNameModal.invalidBusinessName')
+                  : isBusinessNameEqualToSavedValue
+                  ? t('overview.partyDetail.editBusinessNameModal.notEqualBusinessName')
                   : undefined
               }
               onChange={(e) => handleInputChange(e, false)}
@@ -181,6 +196,7 @@ export default function PartyDetail({ party }: Props) {
         onCloseLabel={t('overview.partyDetail.editBusinessNameModal.cancel')}
         handleClose={() => {
           setOpenBusinessNameEditModal(false);
+          setIsBusinessNameEqualToSavedValue(false);
           setInsertedBusinessName(undefined);
         }}
         onConfirmLabel={t('overview.partyDetail.editBusinessNameModal.confirm')}
@@ -188,7 +204,10 @@ export default function PartyDetail({ party }: Props) {
           party ? updateBusiness(party.partyId, undefined, insertedBusinessName) : undefined
         }
         onConfirmEnabled={
-          !notValidBusinessName && !!insertedBusinessName && insertedBusinessName.length > 0
+          !notValidBusinessName &&
+          !!insertedBusinessName &&
+          insertedBusinessName.length > 0 &&
+          !isBusinessNameEqualToSavedValue
         }
       />
       <SessionModal
@@ -200,10 +219,12 @@ export default function PartyDetail({ party }: Props) {
             <TextField
               id="email-textfield"
               size="small"
-              error={notValidBusinessEmail}
+              error={notValidBusinessEmail || isBusinessEmailEqualToSavedValue}
               helperText={
                 notValidBusinessEmail
                   ? t('overview.partyDetail.editBusinessEmailModal.invalidEmail')
+                  : isBusinessEmailEqualToSavedValue
+                  ? t('overview.partyDetail.editBusinessEmailModal.notEqualBusinessEmail')
                   : undefined
               }
               label={t('overview.partyDetail.editBusinessEmailModal.textFieldLabel')}
@@ -234,11 +255,17 @@ export default function PartyDetail({ party }: Props) {
         onCloseLabel={t('overview.partyDetail.editBusinessEmailModal.cancel')}
         handleClose={() => {
           setOpenBusinessEmailEditModal(false);
+          setIsBusinessEmailEqualToSavedValue(false);
           setInsertedBusinessEmail(undefined);
         }}
         onConfirmLabel={t('overview.partyDetail.editBusinessEmailModal.confirm')}
         onConfirm={() => (party ? updateBusiness(party.partyId, insertedBusinessEmail) : undefined)}
-        onConfirmEnabled={!notValidBusinessEmail}
+        onConfirmEnabled={
+          !notValidBusinessEmail &&
+          !!insertedBusinessEmail &&
+          insertedBusinessEmail.length > 0 &&
+          !isBusinessEmailEqualToSavedValue
+        }
       />
     </>
   );

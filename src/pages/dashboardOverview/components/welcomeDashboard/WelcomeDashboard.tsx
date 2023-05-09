@@ -7,12 +7,14 @@ type Props = {
 
 export default function WelcomeDashboard({ businessName }: Props) {
   const { t } = useTranslation();
+
   const title = t('overview.title');
   const subTitle = (
     <Trans i18nkey="overview.subTitle">
       Visualizza il riepilogo dei dati e leggi le notifiche di {{ businessName }}.
     </Trans>
   );
+
   return (
     <TitleBox
       title={title}
