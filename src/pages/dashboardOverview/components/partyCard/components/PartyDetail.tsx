@@ -3,7 +3,7 @@ import { ButtonNaked, theme } from '@pagopa/mui-italia';
 import { useTranslation } from 'react-i18next';
 import EditIcon from '@mui/icons-material/Edit';
 import { SessionModal, useErrorDispatcher, useUserNotify } from '@pagopa/selfcare-common-frontend';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { InfoOutlined } from '@mui/icons-material';
 import { PartyPnpg } from '../../../../../model/PartyPnpg';
 import { updateBusinessData } from '../../../../../services/partyService';
@@ -14,6 +14,7 @@ type Props = {
   party?: PartyPnpg;
 };
 
+// eslint-disable-next-line sonarjs/cognitive-complexity
 export default function PartyDetail({ party }: Props) {
   const { t } = useTranslation();
 
@@ -35,16 +36,21 @@ export default function PartyDetail({ party }: Props) {
   const handleInputChange = (e: any, isBusinessEmail: boolean) => {
     const input = e.target.value;
     if (isBusinessEmail) {
-      setInsertedBusinessEmail(input);
+      if (input === party?.mailAddress) {
+        setIsBusinessEmailEqualToSavedValue(true);
+      } else {
+        setInsertedBusinessEmail(input);
+        setIsBusinessEmailEqualToSavedValue(false);
+      }
     } else {
-      setInsertedBusinessName(input);
+      if (input === party?.description) {
+        setIsBusinessNameEqualToSavedValue(true);
+      } else {
+        setInsertedBusinessName(input);
+        setIsBusinessNameEqualToSavedValue(false);
+      }
     }
   };
-
-  useEffect(() => {
-    setIsBusinessEmailEqualToSavedValue(insertedBusinessEmail === party?.mailAddress);
-    setIsBusinessNameEqualToSavedValue(insertedBusinessName === party?.description);
-  }, [insertedBusinessEmail, insertedBusinessName]);
 
   const updateBusiness = (institutionId: string, businessEmail?: string, businessName?: string) => {
     setLoading(true);
@@ -190,6 +196,7 @@ export default function PartyDetail({ party }: Props) {
         onCloseLabel={t('overview.partyDetail.editBusinessNameModal.cancel')}
         handleClose={() => {
           setOpenBusinessNameEditModal(false);
+          setIsBusinessNameEqualToSavedValue(false);
           setInsertedBusinessName(undefined);
         }}
         onConfirmLabel={t('overview.partyDetail.editBusinessNameModal.confirm')}
@@ -197,7 +204,10 @@ export default function PartyDetail({ party }: Props) {
           party ? updateBusiness(party.partyId, undefined, insertedBusinessName) : undefined
         }
         onConfirmEnabled={
-          !notValidBusinessName && !!insertedBusinessName && insertedBusinessName.length > 0
+          !notValidBusinessName &&
+          !!insertedBusinessName &&
+          insertedBusinessName.length > 0 &&
+          !isBusinessNameEqualToSavedValue
         }
       />
       <SessionModal
@@ -245,11 +255,17 @@ export default function PartyDetail({ party }: Props) {
         onCloseLabel={t('overview.partyDetail.editBusinessEmailModal.cancel')}
         handleClose={() => {
           setOpenBusinessEmailEditModal(false);
+          setIsBusinessEmailEqualToSavedValue(false);
           setInsertedBusinessEmail(undefined);
         }}
         onConfirmLabel={t('overview.partyDetail.editBusinessEmailModal.confirm')}
         onConfirm={() => (party ? updateBusiness(party.partyId, insertedBusinessEmail) : undefined)}
-        onConfirmEnabled={!notValidBusinessEmail}
+        onConfirmEnabled={
+          !notValidBusinessEmail &&
+          !!insertedBusinessEmail &&
+          insertedBusinessEmail.length > 0 &&
+          !isBusinessEmailEqualToSavedValue
+        }
       />
     </>
   );
