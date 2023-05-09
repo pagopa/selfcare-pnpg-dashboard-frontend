@@ -3,7 +3,7 @@ import { ButtonNaked, theme } from '@pagopa/mui-italia';
 import { useTranslation } from 'react-i18next';
 import EditIcon from '@mui/icons-material/Edit';
 import { SessionModal, useErrorDispatcher, useUserNotify } from '@pagopa/selfcare-common-frontend';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { InfoOutlined } from '@mui/icons-material';
 import { PartyPnpg } from '../../../../../model/PartyPnpg';
 import { updateBusinessData } from '../../../../../services/partyService';
@@ -27,6 +27,10 @@ export default function PartyDetail({ party }: Props) {
   const [insertedBusinessEmail, setInsertedBusinessEmail] = useState<string>();
   const [newBusinessName, setNewBusinessName] = useState<string>();
   const [newBusinessEmail, setNewBusinessEmail] = useState<string>();
+  const [isBusinessEmailEqualToSavedValue, setIsBusinessEmailEqualToSavedValue] =
+    useState<boolean>(false);
+  const [isBusinessNameEqualToSavedValue, setIsBusinessNameEqualToSavedValue] =
+    useState<boolean>(false);
 
   const handleInputChange = (e: any, isBusinessEmail: boolean) => {
     const input = e.target.value;
@@ -36,6 +40,11 @@ export default function PartyDetail({ party }: Props) {
       setInsertedBusinessName(input);
     }
   };
+
+  useEffect(() => {
+    setIsBusinessEmailEqualToSavedValue(insertedBusinessEmail === party?.mailAddress);
+    setIsBusinessNameEqualToSavedValue(insertedBusinessName === party?.description);
+  }, [insertedBusinessEmail, insertedBusinessName]);
 
   const updateBusiness = (institutionId: string, businessEmail?: string, businessName?: string) => {
     setLoading(true);
@@ -116,17 +125,15 @@ export default function PartyDetail({ party }: Props) {
             <Typography sx={{ ...infoStyles, maxWidth: '100% !important' }} className="ShowDots">
               {newBusinessEmail ?? party?.mailAddress}
             </Typography>
-            {party?.mailAddress && (
-              <ButtonNaked
-                component="button"
-                onClick={() => setOpenBusinessEmailEditModal(true)}
-                startIcon={<EditIcon />}
-                sx={{ color: 'primary.main', flexDirection: 'row', marginLeft: 2 }}
-                weight="default"
-              >
-                {t('overview.partyDetail.editBusinessEmail')}
-              </ButtonNaked>
-            )}
+            <ButtonNaked
+              component="button"
+              onClick={() => setOpenBusinessEmailEditModal(true)}
+              startIcon={<EditIcon />}
+              sx={{ color: 'primary.main', flexDirection: 'row', marginLeft: 2 }}
+              weight="default"
+            >
+              {t('overview.partyDetail.editBusinessEmail')}
+            </ButtonNaked>
           </Grid>
           <Grid item xs={4}>
             <Typography variant="body2">{t('overview.partyDetail.fiscalCode')}</Typography>
@@ -149,10 +156,12 @@ export default function PartyDetail({ party }: Props) {
               size="small"
               label={t('overview.partyDetail.editBusinessNameModal.textFieldLabel')}
               variant="outlined"
-              error={notValidBusinessName}
+              error={notValidBusinessName || isBusinessNameEqualToSavedValue}
               helperText={
                 notValidBusinessName
                   ? t('overview.partyDetail.editBusinessNameModal.invalidBusinessName')
+                  : isBusinessNameEqualToSavedValue
+                  ? t('overview.partyDetail.editBusinessNameModal.notEqualBusinessName')
                   : undefined
               }
               onChange={(e) => handleInputChange(e, false)}
@@ -200,10 +209,12 @@ export default function PartyDetail({ party }: Props) {
             <TextField
               id="email-textfield"
               size="small"
-              error={notValidBusinessEmail}
+              error={notValidBusinessEmail || isBusinessEmailEqualToSavedValue}
               helperText={
                 notValidBusinessEmail
                   ? t('overview.partyDetail.editBusinessEmailModal.invalidEmail')
+                  : isBusinessEmailEqualToSavedValue
+                  ? t('overview.partyDetail.editBusinessEmailModal.notEqualBusinessEmail')
                   : undefined
               }
               label={t('overview.partyDetail.editBusinessEmailModal.textFieldLabel')}
