@@ -31,8 +31,6 @@ const DashboardOverview = () => {
     setSelectedParty(chosenParty);
   }, [partyId]);
 
-  const prodPnpg = products?.find((p) => p.id === 'prod-pn-pg');
-
   return (
     <Box p={3} sx={{ width: '100%' }}>
       <WelcomeDashboard businessName={selectedParty?.description} />
@@ -61,9 +59,11 @@ const DashboardOverview = () => {
                 <Box key={p.id} marginTop={3} marginLeft={3}>
                   <DigitalNotificationCard
                     cardTitle={
-                      prodPnpg ? t('overview.notificationAreaProduct.card.title') : p.title
+                      p.id === 'prod-pn-pg'
+                        ? t('overview.notificationAreaProduct.card.title')
+                        : p.title
                     }
-                    urlLogo={prodPnpg ? SendIcon : p.logo}
+                    urlLogo={p.id === 'prod-pn-pg' ? SendIcon : p.logo}
                     btnAction={() =>
                       selectedParty ? invokeProductBo(p, selectedParty) : undefined
                     }
