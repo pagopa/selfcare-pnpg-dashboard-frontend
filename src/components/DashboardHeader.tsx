@@ -58,7 +58,7 @@ const DashboardHeader = ({ onExit, loggedUser, parties }: Props) => {
             ?.filter((p) => p.status === 'ACTIVE' && p.productOnBoardingStatus === 'ACTIVE')
             ?.map((p) => ({
               id: p.id,
-              title: t('productsList.digitalNotifications'),
+              title: p.id === 'prod-pn-pg' ? t('productsList.digitalNotifications') : p.title,
               linkType: 'external',
               productUrl: p.urlPublic,
             }))

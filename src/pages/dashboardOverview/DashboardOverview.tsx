@@ -8,7 +8,6 @@ import { partiesSelectors } from '../../redux/slices/partiesSlice';
 import { useAppSelector } from '../../redux/hooks';
 import SendIcon from '../../assets/send.svg';
 import { useTokenExchange } from '../../hooks/useTokenExchange';
-import ActiveProductCard from './components/activeProductsSection/components/DigitalNotificationCard';
 import WelcomeDashboard from './components/welcomeDashboard/WelcomeDashboard';
 import PartyCard from './components/partyCard/PartyCard';
 import { PartyLogoUploader } from './components/partyCard/components/partyLogoUploader/PartyLogoUploader';
@@ -54,29 +53,17 @@ const DashboardOverview = () => {
           variantTitle="h4"
           titleFontSize="28px"
         />
-        <Grid container mb={44}>
-          {prodPnpg && (
-            <DigitalNotificationCard
-              cardTitle={t('overview.notificationAreaProduct.card.title')}
-              urlLogo={SendIcon}
-              btnAction={() =>
-                prodPnpg && selectedParty ? invokeProductBo(prodPnpg, selectedParty) : undefined
-              }
-            />
-          )}
+        <Grid container spacing={3} mb={44}>
           {products &&
             products
-              .filter(
-                (p) =>
-                  p.status === 'ACTIVE' &&
-                  p.productOnBoardingStatus === 'ACTIVE' &&
-                  p.id !== 'prod-pn-pg'
-              )
+              .filter((p) => p.status === 'ACTIVE' && p.productOnBoardingStatus === 'ACTIVE')
               .map((p) => (
-                <Box key={p.id} marginLeft={3}>
-                  <ActiveProductCard
-                    cardTitle={p.title}
-                    urlLogo={p.logo}
+                <Box key={p.id} marginTop={3} marginLeft={3}>
+                  <DigitalNotificationCard
+                    cardTitle={
+                      prodPnpg ? t('overview.notificationAreaProduct.card.title') : p.title
+                    }
+                    urlLogo={prodPnpg ? SendIcon : p.logo}
                     btnAction={() =>
                       selectedParty ? invokeProductBo(p, selectedParty) : undefined
                     }
