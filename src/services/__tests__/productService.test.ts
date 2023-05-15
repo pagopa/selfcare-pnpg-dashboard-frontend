@@ -1,45 +1,36 @@
 import { mockedProductResources } from '../../api/__mocks__/DashboardPnpgApiClient';
 import { fetchProducts, fetchProductRoles } from '../productService';
-import { mockedPartyProducts } from '../__mocks__/productService';
+import { productResource2Product } from '../../model/Product';
+import {
+  mockedMappedProductRoles,
+  mockedPartyProducts,
+  mockedProductRoles,
+} from '../__mocks__/productService';
+import { DashboardPnpgApi } from '../../api/DashboardPnpgApiClient';
 
-jest.mock('../productService');
-
-beforeEach(() => {
-  jest.spyOn(require('../productService'), 'fetchProducts');
-  jest.spyOn(require('../productService'), 'fetchProductRoles');
-});
+jest.mock('../../api/DashboardPnpgApiClient', () => ({
+  DashboardPnpgApi: {
+    getProducts: jest.fn(),
+    getProductRoles: jest.fn(),
+  },
+}));
 
 test('Test fetchProducts', async () => {
+  DashboardPnpgApi.getProducts.mockResolvedValue(mockedProductResources);
+
   const products = await fetchProducts('5b321318-3df7-48c1-67c8-1111e6707c3d');
 
-  expect(products).toMatchObject(mockedProductResources[0]);
+  expect(products).toMatchObject(mockedProductResources.map(productResource2Product));
 
-  expect(fetchProducts).toBeCalledTimes(1);
+  expect(DashboardPnpgApi.getProducts).toBeCalledTimes(1);
 });
 
 test('Test fetchProductRoles', async () => {
-  const productRoles = await fetchProductRoles(mockedPartyProducts[0]);
+  DashboardPnpgApi.getProductRoles.mockResolvedValue(mockedMappedProductRoles);
 
-  expect(productRoles).toStrictEqual([
-    {
-      productId: 'prod-pn-pg',
-      partyRole: 'MANAGER',
-      selcRole: 'ADMIN',
-      multiroleAllowed: false,
-      productRole: 'pg-admin',
-      title: 'Amministratore',
-      description: 'Stipula il contratto e identifica gli amministratori',
-    },
-    {
-      productId: 'prod-pn-pg',
-      partyRole: 'OPERATOR',
-      selcRole: 'LIMITED',
-      multiroleAllowed: false,
-      productRole: 'pg-operator',
-      title: 'Gestore Notifiche',
-      description: "Gestisce l'integrazione tecnologica e/o l'operatività dei servizi",
-    },
-  ]);
+  const productRoles = await await fetchProductRoles(mockedPartyProducts[0]);
 
-  expect(fetchProductRoles).toBeCalledWith(mockedPartyProducts[0]);
+  expect(productRoles).toMatchObject(mockedProductRoles);
+
+  expect(DashboardPnpgApi.getProductRoles).toBeCalledWith(mockedPartyProducts[0].id);
 });
