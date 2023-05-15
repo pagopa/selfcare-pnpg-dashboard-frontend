@@ -21,11 +21,11 @@ test('renders the RemoteRoutingUsers and navigate its path', async () => {
         activeProducts={mockedProductResources as Array<Product>}
       />
     </Router>
-  ); // renderizza la componente <Remote> in un Router che utilizza una history di memoria
+  );
 
   history.push('/dashboard/5b321318-3df7-48c1-67c8-1111e6707c3d/users');
 
-  expect(history.location.pathname).toBe('/dashboard/5b321318-3df7-48c1-67c8-1111e6707c3d/users'); // controlla che la navigazione abbia funzionato correttamente
+  expect(history.location.pathname).toBe('/dashboard/5b321318-3df7-48c1-67c8-1111e6707c3d/users');
 });
 
 test('renders the RemoteRoutingGroups and navigate its path', async () => {
@@ -37,11 +37,11 @@ test('renders the RemoteRoutingGroups and navigate its path', async () => {
         activeProducts={mockedProductResources as Array<Product>}
       />
     </Router>
-  ); // renderizza la componente <Remote> in un Router che utilizza una history di memoria
+  );
 
   history.push('/dashboard/5b321318-3df7-48c1-67c8-1111e6707c3d/groups');
 
-  expect(history.location.pathname).toBe('/dashboard/5b321318-3df7-48c1-67c8-1111e6707c3d/groups'); // controlla che la navigazione abbia funzionato correttamente
+  expect(history.location.pathname).toBe('/dashboard/5b321318-3df7-48c1-67c8-1111e6707c3d/groups');
 });
 
 test('renders the RemoteRoutingGroups and navigate its path', async () => {
@@ -53,11 +53,11 @@ test('renders the RemoteRoutingGroups and navigate its path', async () => {
         activeProducts={mockedProductResources as Array<Product>}
       />
     </Router>
-  ); // renderizza la componente <Remote> in un Router che utilizza una history di memoria
+  );
 
   history.push('/dashboard/5b321318-3df7-48c1-67c8-1111e6707c3d/prod-pn-pg/users');
 
   expect(history.location.pathname).toBe(
     '/dashboard/5b321318-3df7-48c1-67c8-1111e6707c3d/prod-pn-pg/users'
-  ); // controlla che la navigazione abbia funzionato correttamente
+  );
 });
