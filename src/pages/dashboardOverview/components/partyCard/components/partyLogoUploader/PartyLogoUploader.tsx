@@ -60,20 +60,20 @@ export function PartyLogoUploader({ partyId }: Props) {
       setUploadedFiles(files);
       setLabelLink(files[0].name);
       const requestId = uniqueId();
-      trackEvent('DASHBOARD_PARTY_CHANGE_LOGO', { party_id: partyId, request_id: requestId });
+      trackEvent('DASHBOARD_BUSINESS_CHANGE_LOGO', { party_id: partyId, request_id: requestId });
 
       DashboardPnpgApi.saveInstitutionLogo(partyId, files[0])
         .then(() => {
           setUrlLogo(urlLogo);
           setLoading(false);
           setLabelLink(t('overview.businessLogo.modify'));
-          trackEvent('DASHBOARD_PARTY_CHANGE_LOGO_SUCCESS', {
+          trackEvent('DASHBOARD_BUSINESS_CHANGE_LOGO_SUCCESS', {
             party_id: partyId,
             request_id: requestId,
           });
         })
         .catch((reason) => {
-          trackEvent('DASHBOARD_PARTY_CHANGE_LOGO_FAILURE', {
+          trackEvent('DASHBOARD_BUSINESS_CHANGE_LOGO_FAILURE', {
             party_id: partyId,
             request_id: requestId,
           });

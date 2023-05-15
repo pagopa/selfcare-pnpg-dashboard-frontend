@@ -1,4 +1,9 @@
 import {
+  PartyRoleEnum,
+  ProductRoleMappingsResource,
+  SelcRoleEnum,
+} from '../../api/generated/b4f-dashboard-pnpg/ProductRoleMappingsResource';
+import {
   ProductOnBoardingStatusEnum,
   StatusEnum,
 } from '../../api/generated/b4f-dashboard-pnpg/SubProductResource';
@@ -112,6 +117,33 @@ export const mockedProductRoles: Array<ProductRole> = [
     productRole: 'pg-operator',
     title: 'Gestore Notifiche',
     description: "Gestisce l'integrazione tecnologica e/o l'operatività dei servizi",
+  },
+];
+
+export const mockedMappedProductRoles: Array<ProductRoleMappingsResource> = [
+  {
+    partyRole: PartyRoleEnum.MANAGER,
+    selcRole: SelcRoleEnum.ADMIN,
+    multiroleAllowed: false,
+    productRoles: [
+      {
+        code: 'pg-admin',
+        description: 'Stipula il contratto e identifica gli amministratori',
+        label: 'Amministratore',
+      },
+    ],
+  },
+  {
+    partyRole: PartyRoleEnum.OPERATOR,
+    selcRole: SelcRoleEnum.LIMITED,
+    multiroleAllowed: false,
+    productRoles: [
+      {
+        code: 'pg-operator',
+        description: "Gestisce l'integrazione tecnologica e/o l'operatività dei servizi",
+        label: 'Gestore Notifiche',
+      },
+    ],
   },
 ];
 
