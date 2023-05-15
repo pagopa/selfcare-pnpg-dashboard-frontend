@@ -1,16 +1,16 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import RemoteRoutingUsers from '../RemoteRoutingUsers'; // importa la componente <Remote>
+import RemoteRoutingUsers from '../users/RemoteRoutingUsers'; // importa la componente <Remote>
 import {
   mockedPnPGInstitutionsResource,
   mockedProductResources,
-} from '../../../api/__mocks__/DashboardPnpgApiClient';
-import { Product } from '../../../model/Product';
-import { PartyPnpg } from '../../../model/PartyPnpg';
+} from '../../api/__mocks__/DashboardPnpgApiClient';
+import { Product } from '../../model/Product';
+import { PartyPnpg } from '../../model/PartyPnpg';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
-import RemoteRoutingGroups from '../../groups/RemoteRoutingGroups';
-import RemoteRoutingProductUsers from '../RemoteRoutingProductUsers';
+import RemoteRoutingGroups from '../groups/RemoteRoutingGroups';
+import RemoteRoutingProductUsers from '../users/RemoteRoutingProductUsers';
 
 test('renders the RemoteRoutingUsers and navigate its path', async () => {
   const history = createMemoryHistory();
@@ -23,7 +23,7 @@ test('renders the RemoteRoutingUsers and navigate its path', async () => {
     </Router>
   );
 
-  history.push('/dashboard/5b321318-3df7-48c1-67c8-1111e6707c3d/users');
+  history.push(`/dashboard/5b321318-3df7-48c1-67c8-1111e6707c3d/users`);
 
   expect(history.location.pathname).toBe('/dashboard/5b321318-3df7-48c1-67c8-1111e6707c3d/users');
 });
