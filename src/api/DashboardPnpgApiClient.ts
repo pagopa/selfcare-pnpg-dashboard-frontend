@@ -5,9 +5,9 @@ import i18n from '@pagopa/selfcare-common-frontend/locale/locale-utils';
 import { ENV } from '../utils/env';
 import { store } from '../redux/store';
 import { createClient, WithDefaultsT } from './generated/b4f-dashboard-pnpg/client';
-import { PnPGInstitutionResourceArray } from './generated/b4f-dashboard-pnpg/PnPGInstitutionResourceArray';
 import { ProductsResource } from './generated/b4f-dashboard-pnpg/ProductsResource';
 import { ProductRoleMappingsResource } from './generated/b4f-dashboard-pnpg/ProductRoleMappingsResource';
+import { InstitutionResource } from './generated/b4f-dashboard-pnpg/InstitutionResource';
 
 const withBearerAndInstitutionId: WithDefaultsT<'bearerAuth'> =
   (wrappedOperation) => (params: any) => {
@@ -39,8 +39,8 @@ const onRedirectToLogin = () =>
   );
 
 export const DashboardPnpgApi = {
-  fetchParties: async (): Promise<PnPGInstitutionResourceArray> => {
-    const result = await apiClient.getPnPGInstitutionsUsingGET({});
+  fetchParties: async (): Promise<Array<InstitutionResource>> => {
+    const result = await apiClient.getInstitutionsUsingGET({});
     return extractResponse(result, 200, onRedirectToLogin);
   },
 
