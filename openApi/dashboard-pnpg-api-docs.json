@@ -3342,7 +3342,6 @@
       "InstitutionResource": {
         "title": "InstitutionResource",
         "required": [
-          "address",
           "externalId",
           "fiscalCode",
           "geographicTaxonomies",
@@ -3352,8 +3351,7 @@
           "origin",
           "originId",
           "status",
-          "userRole",
-          "zipCode"
+          "userRole"
         ],
         "type": "object",
         "properties": {

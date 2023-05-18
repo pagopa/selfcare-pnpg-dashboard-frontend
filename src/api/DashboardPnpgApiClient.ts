@@ -4,10 +4,10 @@ import { buildFetchApi, extractResponse } from '@pagopa/selfcare-common-frontend
 import i18n from '@pagopa/selfcare-common-frontend/locale/locale-utils';
 import { ENV } from '../utils/env';
 import { store } from '../redux/store';
+import { InstitutionResource } from './generated/b4f-dashboard-pnpg/InstitutionResource';
 import { createClient, WithDefaultsT } from './generated/b4f-dashboard-pnpg/client';
 import { ProductsResource } from './generated/b4f-dashboard-pnpg/ProductsResource';
 import { ProductRoleMappingsResource } from './generated/b4f-dashboard-pnpg/ProductRoleMappingsResource';
-import { InstitutionResource } from './generated/b4f-dashboard-pnpg/InstitutionResource';
 
 const withBearerAndInstitutionId: WithDefaultsT<'bearerAuth'> =
   (wrappedOperation) => (params: any) => {
