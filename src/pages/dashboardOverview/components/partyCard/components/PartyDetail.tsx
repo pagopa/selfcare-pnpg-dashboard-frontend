@@ -7,8 +7,8 @@ import { useState } from 'react';
 import { InfoOutlined } from '@mui/icons-material';
 import { PartyPnpg } from '../../../../../model/PartyPnpg';
 import { updateBusinessData } from '../../../../../services/partyService';
-import { partiesActions } from '../../../../../redux/slices/partiesSlice';
-import { useAppDispatch } from '../../../../../redux/hooks';
+import { partiesActions, partiesSelectors } from '../../../../../redux/slices/partiesSlice';
+import { useAppDispatch, useAppSelector } from '../../../../../redux/hooks';
 
 const emailRegexp = new RegExp('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$');
 
@@ -26,6 +26,7 @@ export default function PartyDetail({ party }: Props) {
 
   const setBusinessData = (businessData?: PartyPnpg) =>
     dispatch(partiesActions.setPartySelected(businessData));
+  const business = useAppSelector(partiesSelectors.selectPartySelected);
 
   const [_loading, setLoading] = useState<boolean>(false);
   const [openBusinessNameEditModal, setOpenBusinessNameEditModal] = useState<boolean>(false);
@@ -118,7 +119,7 @@ export default function PartyDetail({ party }: Props) {
           </Grid>
           <Grid item xs={8} sx={{ display: 'flex' }}>
             <Typography sx={{ ...infoStyles, maxWidth: '100% !important' }} className="ShowDots">
-              {party?.description}
+              {business?.description}
             </Typography>
             {party?.origin === 'ADE' && (
               <ButtonNaked
@@ -137,7 +138,7 @@ export default function PartyDetail({ party }: Props) {
           </Grid>
           <Grid item xs={8} sx={{ display: 'flex' }}>
             <Typography sx={{ ...infoStyles, maxWidth: '100% !important' }} className="ShowDots">
-              {party?.mailAddress}
+              {business?.mailAddress}
             </Typography>
             <ButtonNaked
               component="button"
