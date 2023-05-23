@@ -44,6 +44,11 @@ export const DashboardPnpgApi = {
     return extractResponse(result, 200, onRedirectToLogin);
   },
 
+  fetchPartyDetail: async (institutionId: string): Promise<InstitutionResource> => {
+    const result = await apiClient.getInstitutionUsingGET({ institutionId });
+    return extractResponse(result, 200, onRedirectToLogin);
+  },
+
   updateBusinessData: async (
     institutionId: string,
     digitalAddress?: string,

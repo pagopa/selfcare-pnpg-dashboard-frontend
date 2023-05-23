@@ -1,14 +1,14 @@
 import { render, waitFor, screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { createStore } from '../../../redux/store';
+import { createStore } from '../../../../redux/store';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router';
-import PartySelection from '../partySelection/PartySelection';
-import { institutionPnPGResource2PartyPnpg, PartyPnpg } from '../../../model/PartyPnpg';
-import '../../../locale/index';
-import { mockedPnPGInstitutionsResource } from '../../../api/__mocks__/DashboardPnpgApiClient';
+import PartySelection from '../PartySelection';
+import { institutionPnPGResource2PartyPnpg, PartyPnpg } from '../../../../model/PartyPnpg';
+import '../../../../locale/index';
+import { mockedPnPGInstitutionsResource } from '../../../../api/__mocks__/DashboardPnpgApiClient';
 
-jest.mock('../../../decorators/withSelectedParty');
+jest.mock('../../../../decorators/withSelectedParty');
 
 const mockedParty: Array<PartyPnpg> = [
   {

@@ -7,6 +7,8 @@ import { useState } from 'react';
 import { InfoOutlined } from '@mui/icons-material';
 import { PartyPnpg } from '../../../../../model/PartyPnpg';
 import { updateBusinessData } from '../../../../../services/partyService';
+import { partiesActions } from '../../../../../redux/slices/partiesSlice';
+import { useAppDispatch } from '../../../../../redux/hooks';
 
 const emailRegexp = new RegExp('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$');
 
@@ -20,14 +22,17 @@ export default function PartyDetail({ party }: Props) {
 
   const addError = useErrorDispatcher();
   const addNotify = useUserNotify();
+  const dispatch = useAppDispatch();
+
+  const setBusinessData = (businessData?: PartyPnpg) =>
+    dispatch(partiesActions.setPartySelected(businessData));
 
   const [_loading, setLoading] = useState<boolean>(false);
   const [openBusinessNameEditModal, setOpenBusinessNameEditModal] = useState<boolean>(false);
   const [openBusinessEmailEditModal, setOpenBusinessEmailEditModal] = useState<boolean>(false);
   const [insertedBusinessName, setInsertedBusinessName] = useState<string>();
   const [insertedBusinessEmail, setInsertedBusinessEmail] = useState<string>();
-  const [newBusinessName, setNewBusinessName] = useState<string>();
-  const [newBusinessEmail, setNewBusinessEmail] = useState<string>();
+
   const [isBusinessEmailEqualToSavedValue, setIsBusinessEmailEqualToSavedValue] =
     useState<boolean>(false);
   const [isBusinessNameEqualToSavedValue, setIsBusinessNameEqualToSavedValue] =
@@ -52,45 +57,48 @@ export default function PartyDetail({ party }: Props) {
     }
   };
 
+  // eslint-disable-next-line sonarjs/cognitive-complexity
   const updateBusiness = (institutionId: string, businessEmail?: string, businessName?: string) => {
-    setLoading(true);
-    (businessEmail
-      ? updateBusinessData(institutionId, businessEmail)
-      : updateBusinessData(institutionId, undefined, businessName)
-    )
-      .then(() => {
-        if (businessEmail) {
-          setNewBusinessEmail(businessEmail);
-        } else {
-          setNewBusinessName(businessName);
-        }
-        addNotify({
-          component: 'Toast',
-          id: businessEmail ? 'UPDATE_BUSINESS_EMAIL' : 'UPDATE_BUSINESS_NAME',
-          title: '',
-          message: businessEmail
-            ? t('overview.partyDetail.editBusinessEmailModal.success.description')
-            : t('overview.partyDetail.editBusinessNameModal.success.description'),
-        });
-      })
-      .catch((reason) =>
-        addError({
-          component: 'Toast',
-          id: businessEmail ? 'UPDATE_BUSINESS_EMAIL_ERROR' : 'UPDATE_BUSINESS_NAME_ERROR',
-          displayableDescription: businessEmail
-            ? t('overview.partyDetail.editBusinessEmailModal.error.description')
-            : t('overview.partyDetail.editBusinessNameModal.error.description'),
-          error: reason,
-          blocking: false,
-          toNotify: true,
-          techDescription: `An error occurred while changing the business data for the party with institutionId: ${institutionId}`,
-        })
+    if (party) {
+      setLoading(true);
+      (businessEmail
+        ? updateBusinessData(institutionId, businessEmail)
+        : updateBusinessData(institutionId, undefined, businessName)
       )
-      .finally(() => {
-        setLoading(false);
-        setOpenBusinessEmailEditModal(false);
-        setOpenBusinessNameEditModal(false);
-      });
+        .then(() => {
+          if (businessEmail) {
+            setBusinessData({ ...party, mailAddress: businessEmail });
+          } else {
+            setBusinessData({ ...party, description: businessName });
+          }
+          addNotify({
+            component: 'Toast',
+            id: businessEmail ? 'UPDATE_BUSINESS_EMAIL' : 'UPDATE_BUSINESS_NAME',
+            title: '',
+            message: businessEmail
+              ? t('overview.partyDetail.editBusinessEmailModal.success.description')
+              : t('overview.partyDetail.editBusinessNameModal.success.description'),
+          });
+        })
+        .catch((reason) =>
+          addError({
+            component: 'Toast',
+            id: businessEmail ? 'UPDATE_BUSINESS_EMAIL_ERROR' : 'UPDATE_BUSINESS_NAME_ERROR',
+            displayableDescription: businessEmail
+              ? t('overview.partyDetail.editBusinessEmailModal.error.description')
+              : t('overview.partyDetail.editBusinessNameModal.error.description'),
+            error: reason,
+            blocking: false,
+            toNotify: true,
+            techDescription: `An error occurred while changing the business data for the party with institutionId: ${institutionId}`,
+          })
+        )
+        .finally(() => {
+          setLoading(false);
+          setOpenBusinessEmailEditModal(false);
+          setOpenBusinessNameEditModal(false);
+        });
+    }
   };
 
   const infoStyles = {
@@ -110,7 +118,7 @@ export default function PartyDetail({ party }: Props) {
           </Grid>
           <Grid item xs={8} sx={{ display: 'flex' }}>
             <Typography sx={{ ...infoStyles, maxWidth: '100% !important' }} className="ShowDots">
-              {newBusinessName ?? party?.description}
+              {party?.description}
             </Typography>
             {party?.origin === 'ADE' && (
               <ButtonNaked
@@ -129,7 +137,7 @@ export default function PartyDetail({ party }: Props) {
           </Grid>
           <Grid item xs={8} sx={{ display: 'flex' }}>
             <Typography sx={{ ...infoStyles, maxWidth: '100% !important' }} className="ShowDots">
-              {newBusinessEmail ?? party?.mailAddress}
+              {party?.mailAddress}
             </Typography>
             <ButtonNaked
               component="button"

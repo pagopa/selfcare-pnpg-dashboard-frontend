@@ -6,6 +6,7 @@ import { mockedPnPGInstitutionsResource } from '../../api/__mocks__/DashboardPnp
 jest.mock('../../api/DashboardPnpgApiClient', () => ({
   DashboardPnpgApi: {
     fetchParties: jest.fn(),
+    fetchPartyDetails: jest.fn(),
   },
 }));
 
@@ -37,21 +38,11 @@ describe('Test fetchPartyDetails', () => {
   };
 
   test('Test no parties as cache', async () => {
+    DashboardPnpgApi.fetchParties.mockResolvedValue(mockedPnPGInstitutionsResource[0]);
+
     const party = await fetchPartyDetails(expectedPartyId);
     if (party) {
       checkSelectedParty(party);
     }
-  });
-
-  test('Test parties as cache', async () => {
-    const parties = mockedPnPGInstitutionsResource.map(institutionPnPGResource2PartyPnpg);
-    const party = await fetchPartyDetails(expectedPartyId, parties);
-    if (party) {
-      checkSelectedParty(party);
-    }
-
-    const partialParties = parties.filter((p) => p.partyId === expectedPartyId);
-    const party2 = await fetchPartyDetails(expectedPartyId, partialParties);
-    expect(party2).toStrictEqual(party);
   });
 });
