@@ -1,5 +1,7 @@
 import { fetchParties, fetchPartyDetails } from '../partyService';
+import { fetchParties, fetchPartyDetails } from '../partyService';
 import { institutionPnPGResource2PartyPnpg, PartyPnpg } from '../../model/PartyPnpg';
+import { DashboardPnpgApi } from '../../api/DashboardPnpgApiClient';
 import { DashboardPnpgApi } from '../../api/DashboardPnpgApiClient';
 import { mockedPnPGInstitutionsResource } from '../../api/__mocks__/DashboardPnpgApiClient';
 
@@ -23,7 +25,7 @@ test('Test fetchParties', async () => {
     expect(p.urlLogo).toBe(`http://checkout.selfcare/institutions/${p.partyId}/logo.png`)
   );
 
-  expect(DashboardPnpgApi.fetchParties).toBeCalledTimes(1);
+  expect(DashboardPnpgApi.DashboardPnpgApi.fetchParties).toBeCalledTimes(1);
 });
 
 describe('Test fetchPartyDetails', () => {
@@ -33,6 +35,8 @@ describe('Test fetchPartyDetails', () => {
     expect(party).toMatchObject(
       institutionPnPGResource2PartyPnpg(mockedPnPGInstitutionsResource[0])
     );
+
+    expect(party.urlLogo).toBe(`http://checkout.selfcare/institutions/${expectedPartyId}/logo.png`);
 
     expect(party.urlLogo).toBe(`http://checkout.selfcare/institutions/${expectedPartyId}/logo.png`);
   };
