@@ -26,17 +26,20 @@ export const fetchPartyDetails = (
         .map(institutionPnPGResource2PartyPnpg)
         .find((p) => p.partyId === partyId || p.externalId === partyId) ?? null;
     return new Promise((resolve) => resolve(selectedPartyDetail));
+  } else {
+    return retrieveParty_fetch(partyId, parties);
   }
-  return retrieveParty(partyId, parties);
 };
 
-const retrieveParty = (
+const retrieveParty_fetch = (
   partyId: string,
-  parties: Array<PartyPnpg> | undefined
+  parties?: Array<PartyPnpg>
 ): Promise<PartyPnpg | null> => {
-  const selectedParty = parties?.find((p) => p.partyId === partyId || p.externalId === partyId);
-  if (selectedParty) {
-    return new Promise((resolve) => resolve(selectedParty));
+  const matchedPartyId = parties?.find((p) => p.partyId === partyId || p.externalId === partyId);
+  if (matchedPartyId) {
+    return DashboardPnpgApi.fetchPartyDetail(matchedPartyId?.partyId).then((institutionResource) =>
+      institutionResource ? institutionPnPGResource2PartyPnpg(institutionResource) : null
+    );
   } else {
     return new Promise((resolve) => resolve(null));
   }

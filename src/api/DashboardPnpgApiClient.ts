@@ -4,8 +4,8 @@ import { buildFetchApi, extractResponse } from '@pagopa/selfcare-common-frontend
 import i18n from '@pagopa/selfcare-common-frontend/locale/locale-utils';
 import { ENV } from '../utils/env';
 import { store } from '../redux/store';
+import { InstitutionResource } from './generated/b4f-dashboard-pnpg/InstitutionResource';
 import { createClient, WithDefaultsT } from './generated/b4f-dashboard-pnpg/client';
-import { PnPGInstitutionResourceArray } from './generated/b4f-dashboard-pnpg/PnPGInstitutionResourceArray';
 import { ProductsResource } from './generated/b4f-dashboard-pnpg/ProductsResource';
 import { ProductRoleMappingsResource } from './generated/b4f-dashboard-pnpg/ProductRoleMappingsResource';
 
@@ -39,8 +39,13 @@ const onRedirectToLogin = () =>
   );
 
 export const DashboardPnpgApi = {
-  fetchParties: async (): Promise<PnPGInstitutionResourceArray> => {
-    const result = await apiClient.getPnPGInstitutionsUsingGET({});
+  fetchParties: async (): Promise<Array<InstitutionResource>> => {
+    const result = await apiClient.getInstitutionsUsingGET({});
+    return extractResponse(result, 200, onRedirectToLogin);
+  },
+
+  fetchPartyDetail: async (institutionId: string): Promise<InstitutionResource> => {
+    const result = await apiClient.getInstitutionUsingGET({ institutionId });
     return extractResponse(result, 200, onRedirectToLogin);
   },
 
