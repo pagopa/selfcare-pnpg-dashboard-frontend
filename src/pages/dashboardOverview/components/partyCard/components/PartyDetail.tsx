@@ -16,7 +16,6 @@ type Props = {
   party?: PartyPnpg;
 };
 
-// eslint-disable-next-line sonarjs/cognitive-complexity
 export default function PartyDetail({ party }: Props) {
   const { t } = useTranslation();
 
