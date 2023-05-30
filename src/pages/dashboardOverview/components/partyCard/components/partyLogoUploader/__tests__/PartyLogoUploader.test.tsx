@@ -1,10 +1,10 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { mockedPnpgParties } from '../../../../../../../services/__mocks__/partyService';
+import { mockedInstitutions } from '../../../../../../../services/__mocks__/partyService';
 import '../../../../../../../locale';
 import { PartyLogoUploader } from '../PartyLogoUploader';
 import { Provider } from 'react-redux';
 import { createStore } from '../../../../../../../redux/store';
-import { DashboardPnpgApi } from '../../../../../../../api/DashboardPnpgApiClient';
+import { DashboardApi } from '../../../../../../../api/DashboardApi';
 
 beforeEach(() => {
   jest.spyOn(require('../../../../../../../services/partyService'), 'saveInstitutionLogo');
@@ -13,7 +13,7 @@ beforeEach(() => {
 const renderComponent = () => {
   render(
     <Provider store={createStore()}>
-      <PartyLogoUploader partyId={mockedPnpgParties[0].partyId} />
+      <PartyLogoUploader partyId={mockedInstitutions[0].partyId} />
     </Provider>
   );
 };
@@ -35,7 +35,7 @@ test('Test business logo upload success', async () => {
 test('Test business logo fail', async () => {
   renderComponent();
 
-  jest.spyOn(DashboardPnpgApi, 'saveInstitutionLogo').mockImplementation(() => {
+  jest.spyOn(DashboardApi, 'saveInstitutionLogo').mockImplementation(() => {
     return Promise.reject(new Error('Errore durante il caricamento del logo'));
   });
 

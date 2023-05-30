@@ -1,12 +1,12 @@
 import { fireEvent, getByText, render, screen } from '@testing-library/react';
-import { PartyPnpg } from '../../../model/PartyPnpg';
+import { Party } from '../../../model/Party';
 import PartyAccountItemSelection from '../PartyAccountItemSelection';
 import PartySelectionSearch from '../PartySelectionSearch';
 import './../../../locale';
 
-let selectedParty: PartyPnpg | null = null;
+let selectedParty: Party | null = null;
 
-const parties: Array<PartyPnpg> = [
+const parties: Array<Party> = [
   {
     userRole: 'LIMITED',
     description: 'mockedBusiness1',

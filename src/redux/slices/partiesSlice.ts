@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
-import { PartyPnpg } from '../../model/PartyPnpg';
+import { Party } from '../../model/Party';
 import { Product } from '../../model/Product';
 import { ProductRolesLists, ProductsRolesMap } from '../../model/ProductRole';
 
 interface PartiesState {
-  list?: Array<PartyPnpg>;
-  selected?: PartyPnpg;
+  list?: Array<Party>;
+  selected?: Party;
   selectedPartyLogoUrl?: string;
   selectedProducts?: Array<Product>;
   selectedProductsRolesMap?: ProductsRolesMap;
@@ -19,10 +19,10 @@ export const partiesSlice = createSlice({
   name: 'parties',
   initialState,
   reducers: {
-    setPartiesList: (state, action: PayloadAction<Array<PartyPnpg>>) => {
+    setPartiesList: (state, action: PayloadAction<Array<Party>>) => {
       state.list = action.payload;
     },
-    setPartySelected: (state, action: PayloadAction<PartyPnpg | undefined>) => {
+    setPartySelected: (state, action: PayloadAction<Party | undefined>) => {
       state.selected = action.payload;
       state.selectedPartyLogoUrl = action.payload?.urlLogo;
     },
@@ -53,8 +53,8 @@ export const partiesActions = partiesSlice.actions;
 export const partiesReducer = partiesSlice.reducer;
 
 export const partiesSelectors = {
-  selectPartiesList: (state: RootState): Array<PartyPnpg> | undefined => state.parties.list,
-  selectPartySelected: (state: RootState): PartyPnpg | undefined => state.parties.selected,
+  selectPartiesList: (state: RootState): Array<Party> | undefined => state.parties.list,
+  selectPartySelected: (state: RootState): Party | undefined => state.parties.selected,
   selectPartySelectedLogo: (state: RootState): string | undefined =>
     state.parties.selectedPartyLogoUrl,
   selectPartySelectedProducts: (state: RootState): Array<Product> | undefined =>

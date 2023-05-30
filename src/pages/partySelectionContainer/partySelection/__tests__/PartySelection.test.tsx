@@ -4,13 +4,13 @@ import { createStore } from '../../../../redux/store';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router';
 import PartySelection from '../PartySelection';
-import { institutionPnPGResource2PartyPnpg, PartyPnpg } from '../../../../model/PartyPnpg';
+import { institutionResource2Party, Party } from '../../../../model/Party';
 import '../../../../locale/index';
-import { mockedPnPGInstitutionsResource } from '../../../../api/__mocks__/DashboardPnpgApiClient';
+import { mockedInstitutionsResource } from '../../../../api/__mocks__/DashboardApi';
 
 jest.mock('../../../../decorators/withSelectedParty');
 
-const mockedParty: Array<PartyPnpg> = [
+const mockedParty: Array<Party> = [
   {
     externalId: 'externalId01',
     partyId: 'partyId01',
@@ -20,9 +20,9 @@ const mockedParty: Array<PartyPnpg> = [
   },
 ];
 
-const mockedParties = mockedPnPGInstitutionsResource.map(institutionPnPGResource2PartyPnpg);
+const mockedParties = mockedInstitutionsResource.map(institutionResource2Party);
 
-const renderComponent = (parties: Array<PartyPnpg>) => {
+const renderComponent = (parties: Array<Party>) => {
   const store = createStore();
   const history = createMemoryHistory();
   render(

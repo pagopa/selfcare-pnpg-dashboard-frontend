@@ -9,7 +9,7 @@ test('Test productRoles2ProductRolesList', () => {
       ADMIN: [
         {
           productId: 'prod-pn-pg',
-          partyRole: 'MANAGER',
+          partyRole: 'SUB_DELEGATE',
           selcRole: 'ADMIN',
           multiroleAllowed: false,
           productRole: 'pg-admin',
@@ -24,24 +24,14 @@ test('Test productRoles2ProductRolesList', () => {
           selcRole: 'LIMITED',
           multiroleAllowed: false,
           productRole: 'pg-operator',
-          title: 'Gestore Notifiche',
+          title: 'Tecnico',
           description: "Gestisce l'integrazione tecnologica e/o l'operatività dei servizi",
         },
       ],
     },
     groupByPartyRole: {
       DELEGATE: [],
-      MANAGER: [
-        {
-          productId: 'prod-pn-pg',
-          partyRole: 'MANAGER',
-          selcRole: 'ADMIN',
-          multiroleAllowed: false,
-          productRole: 'pg-admin',
-          title: 'Amministratore',
-          description: 'Stipula il contratto e identifica gli amministratori',
-        },
-      ],
+      MANAGER: [],
       OPERATOR: [
         {
           productId: 'prod-pn-pg',
@@ -49,16 +39,26 @@ test('Test productRoles2ProductRolesList', () => {
           selcRole: 'LIMITED',
           multiroleAllowed: false,
           productRole: 'pg-operator',
-          title: 'Gestore Notifiche',
+          title: 'Tecnico',
           description: "Gestisce l'integrazione tecnologica e/o l'operatività dei servizi",
         },
       ],
-      SUB_DELEGATE: [],
+      SUB_DELEGATE: [
+        {
+          productId: 'prod-pn-pg',
+          partyRole: 'SUB_DELEGATE',
+          selcRole: 'ADMIN',
+          multiroleAllowed: false,
+          productRole: 'pg-admin',
+          title: 'Amministratore',
+          description: 'Stipula il contratto e identifica gli amministratori',
+        },
+      ],
     },
     groupByProductRole: {
       'pg-admin': {
         productId: 'prod-pn-pg',
-        partyRole: 'MANAGER',
+        partyRole: 'SUB_DELEGATE',
         selcRole: 'ADMIN',
         multiroleAllowed: false,
         productRole: 'pg-admin',
@@ -71,7 +71,7 @@ test('Test productRoles2ProductRolesList', () => {
         selcRole: 'LIMITED',
         multiroleAllowed: false,
         productRole: 'pg-operator',
-        title: 'Gestore Notifiche',
+        title: 'Tecnico',
         description: "Gestisce l'integrazione tecnologica e/o l'operatività dei servizi",
       },
     },

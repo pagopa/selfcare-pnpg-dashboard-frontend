@@ -1,7 +1,6 @@
-import { render, waitFor, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { createStore } from '../../../redux/store';
-import { verifyMockExecution as verifySelectedPartyMockExecution } from '../../../decorators/__mocks__/withSelectedParty';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router';
 import NoParty from '../NoParty';

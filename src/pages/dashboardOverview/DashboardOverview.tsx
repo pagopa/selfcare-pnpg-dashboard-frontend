@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import TitleBox from '@pagopa/selfcare-common-frontend/components/TitleBox';
 import { useTranslation } from 'react-i18next';
-import { PartyPnpg } from '../../model/PartyPnpg';
+import { Party } from '../../model/Party';
 import { partiesSelectors } from '../../redux/slices/partiesSlice';
 import { useAppSelector } from '../../redux/hooks';
 import SendIcon from '../../assets/send.svg';
@@ -24,7 +24,7 @@ const DashboardOverview = () => {
   const parties = useAppSelector(partiesSelectors.selectPartiesList);
   const products = useAppSelector(partiesSelectors.selectPartySelectedProducts);
 
-  const [selectedParty, setSelectedParty] = useState<PartyPnpg>();
+  const [selectedParty, setSelectedParty] = useState<Party>();
 
   useEffect(() => {
     const chosenParty = parties?.find((p) => p.externalId === partyId || p.partyId === partyId);

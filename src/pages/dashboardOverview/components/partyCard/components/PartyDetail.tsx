@@ -5,7 +5,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { SessionModal, useErrorDispatcher, useUserNotify } from '@pagopa/selfcare-common-frontend';
 import { useState } from 'react';
 import { InfoOutlined } from '@mui/icons-material';
-import { PartyPnpg } from '../../../../../model/PartyPnpg';
+import { Party } from '../../../../../model/Party';
 import { updateBusinessData } from '../../../../../services/partyService';
 import { partiesActions, partiesSelectors } from '../../../../../redux/slices/partiesSlice';
 import { useAppDispatch, useAppSelector } from '../../../../../redux/hooks';
@@ -13,7 +13,7 @@ import { useAppDispatch, useAppSelector } from '../../../../../redux/hooks';
 const emailRegexp = new RegExp('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$');
 
 type Props = {
-  party?: PartyPnpg;
+  party?: Party;
 };
 
 export default function PartyDetail({ party }: Props) {
@@ -23,7 +23,7 @@ export default function PartyDetail({ party }: Props) {
   const addNotify = useUserNotify();
   const dispatch = useAppDispatch();
 
-  const setBusinessData = (businessData?: PartyPnpg) =>
+  const setBusinessData = (businessData?: Party) =>
     dispatch(partiesActions.setPartySelected(businessData));
   const business = useAppSelector(partiesSelectors.selectPartySelected);
 

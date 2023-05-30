@@ -1,10 +1,10 @@
 import { PartyAccountItem } from '@pagopa/mui-italia';
 import { Box, IconButton } from '@mui/material';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
-import { PartyPnpg } from '../../model/PartyPnpg';
+import { Party } from '../../model/Party';
 
 type Props = {
-  selectedParty: PartyPnpg | null;
+  selectedParty: Party | null;
   clearField: () => void;
 };
 

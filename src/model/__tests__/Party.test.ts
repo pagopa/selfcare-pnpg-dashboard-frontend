@@ -1,16 +1,15 @@
 import { PnPGInstitutionResource } from '../../api/generated/b4f-dashboard-pnpg/PnPGInstitutionResource';
-import { InstitutionTypeEnum } from '../../api/generated/b4f-dashboard-pnpg/InstitutionResource';
-import { institutionPnPGResource2PartyPnpg, PartyPnpg } from '../PartyPnpg';
+import { institutionResource2Party, Party } from '../Party';
 
 test('Test Party', () => {
-  const party: PartyPnpg = {
+  const party: Party = {
     externalId: '44444444444',
     fiscalCode: '44444444444',
     geographicTaxonomies: [{ code: '', desc: '' }],
-    id: '44444444444',
+    partyId: '44444444444',
     institutionType: 'GSP',
     mailAddress: undefined,
-    name: 'BusinessName',
+    description: 'BusinessName',
     recipientCode: 'MDSSFDF',
     status: 'TestStatus1',
     address: 'LegalAddressTest2',
@@ -26,10 +25,10 @@ test('Test Party', () => {
     externalId: '44444444444',
     fiscalCode: '44444444444',
     geographicTaxonomies: [{ code: '', desc: '' }],
-    id: '44444444444',
+    partyId: '44444444444',
     institutionType: 'GSP',
     mailAddress: undefined,
-    name: 'BusinessName',
+    description: 'BusinessName',
     recipientCode: 'MDSSFDF',
     status: 'TestStatus1',
     address: 'LegalAddressTest2',
@@ -61,7 +60,7 @@ test('Test institutionResource2Party', () => {
     zipCode: undefined,
   };
 
-  const party = institutionPnPGResource2PartyPnpg(institutionResource);
+  const party = institutionResource2Party(institutionResource);
   expect(party).toStrictEqual({
     externalId: '44444444444',
     fiscalCode: '44444444444',

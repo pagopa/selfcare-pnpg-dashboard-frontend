@@ -1,9 +1,9 @@
 import { Card } from '@mui/material';
-import { PartyPnpg } from '../../../../model/PartyPnpg';
+import { Party } from '../../../../model/Party';
 import PartyDetail from './components/PartyDetail';
 
 type Props = {
-  party?: PartyPnpg;
+  party?: Party;
 };
 
 export default function PartyCard({ party }: Props) {

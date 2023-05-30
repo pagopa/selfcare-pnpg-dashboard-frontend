@@ -1,29 +1,29 @@
-import { DashboardPnpgApi } from '../api/DashboardPnpgApiClient';
-import { mockedPnPGInstitutionsResource } from '../api/__mocks__/DashboardPnpgApiClient';
-import { institutionPnPGResource2PartyPnpg, PartyPnpg } from '../model/PartyPnpg';
+import { DashboardApi } from '../api/DashboardApi';
+import { mockedInstitutionsResource } from '../api/__mocks__/DashboardApi';
+import { institutionResource2Party, Party } from '../model/Party';
 
-export const fetchParties = (): Promise<Array<PartyPnpg>> => {
+export const fetchParties = (): Promise<Array<Party>> => {
   /* istanbul ignore if */
   if (process.env.REACT_APP_MOCK_API === 'true') {
     return new Promise((resolve) =>
-      resolve(mockedPnPGInstitutionsResource.map(institutionPnPGResource2PartyPnpg))
+      resolve(mockedInstitutionsResource.map(institutionResource2Party))
     );
   } else {
-    return DashboardPnpgApi.fetchParties().then((institutions) =>
-      institutions ? institutions.map(institutionPnPGResource2PartyPnpg) : []
+    return DashboardApi.getInstitutions().then((institutions) =>
+      institutions ? institutions.map(institutionResource2Party) : []
     );
   }
 };
 
 export const fetchPartyDetails = (
   partyId: string,
-  parties?: Array<PartyPnpg>
-): Promise<PartyPnpg | null> => {
+  parties?: Array<Party>
+): Promise<Party | null> => {
   /* istanbul ignore if */
-  if (process.env.REACT_APP_API_MOCK_PARTIES === 'true') {
+  if (process.env.REACT_APP_MOCK_API === 'true') {
     const selectedPartyDetail =
-      mockedPnPGInstitutionsResource
-        .map(institutionPnPGResource2PartyPnpg)
+      mockedInstitutionsResource
+        .map(institutionResource2Party)
         .find((p) => p.partyId === partyId || p.externalId === partyId) ?? null;
     return new Promise((resolve) => resolve(selectedPartyDetail));
   } else {
@@ -31,14 +31,11 @@ export const fetchPartyDetails = (
   }
 };
 
-const retrieveParty_fetch = (
-  partyId: string,
-  parties?: Array<PartyPnpg>
-): Promise<PartyPnpg | null> => {
+const retrieveParty_fetch = (partyId: string, parties?: Array<Party>): Promise<Party | null> => {
   const matchedPartyId = parties?.find((p) => p.partyId === partyId || p.externalId === partyId);
   if (matchedPartyId) {
-    return DashboardPnpgApi.fetchPartyDetail(matchedPartyId?.partyId).then((institutionResource) =>
-      institutionResource ? institutionPnPGResource2PartyPnpg(institutionResource) : null
+    return DashboardApi.getInstitution(matchedPartyId?.partyId).then((institutionResource) =>
+      institutionResource ? institutionResource2Party(institutionResource) : null
     );
   } else {
     return new Promise((resolve) => resolve(null));
@@ -54,7 +51,7 @@ export const updateBusinessData = (
   if (process.env.REACT_APP_MOCK_API === 'true') {
     return new Promise((resolve) => resolve(true));
   } else {
-    return DashboardPnpgApi.updateBusinessData(institutionId, businessEmail, businessName);
+    return DashboardApi.updateBusinessData(institutionId, businessEmail, businessName);
   }
 };
 
@@ -67,7 +64,7 @@ export const retrieveProductBackoffice = (
   if (process.env.REACT_APP_MOCK_API === 'true') {
     return new Promise((resolve) => resolve('dummyUrl'));
   } else {
-    return DashboardPnpgApi.retrieveProductBackoffice(productId, institutionId, environment);
+    return DashboardApi.retrieveProductBackoffice(productId, institutionId, environment);
   }
 };
 
@@ -76,6 +73,6 @@ export const saveInstitutionLogo = (institutionId: string, logo: File): Promise<
   if (process.env.REACT_APP_MOCK_API === 'true') {
     return new Promise((resolve) => resolve(true));
   } else {
-    return DashboardPnpgApi.saveInstitutionLogo(institutionId, logo);
+    return DashboardApi.saveInstitutionLogo(institutionId, logo);
   }
 };
