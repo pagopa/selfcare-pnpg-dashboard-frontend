@@ -14,7 +14,7 @@ import { Product } from '../model/Product';
 import { useAppSelector } from '../redux/hooks';
 import { partiesSelectors } from '../redux/slices/partiesSlice';
 import ROUTES, { DASHBOARD_ROUTES } from '../routes';
-import { PartyPnpg } from '../model/PartyPnpg';
+import { Party } from '../model/Party';
 import { ENV } from './../utils/env';
 
 type Props = WithPartiesProps & {
@@ -33,7 +33,7 @@ const DashboardHeader = ({ onExit, loggedUser, parties }: Props) => {
 
   const [_productSelected, setProductSelected] = useState<Product>();
   const actualActiveProducts = useRef<Array<Product>>([]);
-  const actualSelectedParty = useRef<PartyPnpg>();
+  const actualSelectedParty = useRef<Party>();
 
   const activeProducts: Array<Product> = useMemo(
     () => products?.filter((p) => p.productOnBoardingStatus === 'ACTIVE' && p.authorized) ?? [],
@@ -96,7 +96,7 @@ const DashboardHeader = ({ onExit, loggedUser, parties }: Props) => {
             if (selectedProduct && selectedProduct.id !== 'prod-selfcare') {
               void invokeProductBo(
                 selectedProduct as Product,
-                actualSelectedParty.current as PartyPnpg
+                actualSelectedParty.current as Party
               );
             }
           });

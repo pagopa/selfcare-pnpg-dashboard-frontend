@@ -1,6 +1,6 @@
-import { PartyPnpg } from '../../model/PartyPnpg';
+import { Party } from '../../model/Party';
 
-export const mockedPnpgParties: Array<PartyPnpg> = [
+export const mockedInstitutions: Array<Party> = [
   {
     userRole: 'LIMITED',
     description: 'mockedBusiness1',
@@ -55,18 +55,18 @@ export const mockedPnpgParties: Array<PartyPnpg> = [
   },
 ];
 
-export const verifyFetchPartiesMockExecution = (parties: Array<PartyPnpg>) => {
-  expect(parties).toStrictEqual(mockedPnpgParties);
+export const verifyFetchPartiesMockExecution = (parties: Array<Party>) => {
+  expect(parties).toStrictEqual(mockedInstitutions);
 };
 
-export const fetchParties = () => new Promise((resolve) => resolve(mockedPnpgParties));
+export const fetchParties = () => new Promise((resolve) => resolve(mockedInstitutions));
 
-export const verifyFetchPartyDetailsMockExecution = (party: PartyPnpg) => {
-  expect(party).toStrictEqual(mockedPnpgParties.find((p) => p.partyId === party.partyId));
+export const verifyFetchPartyDetailsMockExecution = (party: Party) => {
+  expect(party).toStrictEqual(mockedInstitutions.find((p) => p.partyId === party.partyId));
 };
 
 export const fetchPartyDetails = (
   partyId: string,
-  _parties?: Array<PartyPnpg>
-): Promise<PartyPnpg | null> =>
-  new Promise((resolve) => resolve(mockedPnpgParties.find((p) => p.partyId === partyId) ?? null));
+  _parties?: Array<Party>
+): Promise<Party | null> =>
+  new Promise((resolve) => resolve(mockedInstitutions.find((p) => p.partyId === partyId) ?? null));

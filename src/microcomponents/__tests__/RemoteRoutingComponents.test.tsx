@@ -1,12 +1,12 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import RemoteRoutingUsers from '../users/RemoteRoutingUsers'; // importa la componente <Remote>
+import { render } from '@testing-library/react';
+import RemoteRoutingUsers from '../users/RemoteRoutingUsers';
 import {
-  mockedPnPGInstitutionsResource,
+  mockedInstitutionsResource,
   mockedProductResources,
-} from '../../api/__mocks__/DashboardPnpgApiClient';
+} from '../../api/__mocks__/DashboardApi';
 import { Product } from '../../model/Product';
-import { PartyPnpg } from '../../model/PartyPnpg';
+import { Party } from '../../model/Party';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 import RemoteRoutingGroups from '../groups/RemoteRoutingGroups';
@@ -17,7 +17,7 @@ test('renders the RemoteRoutingUsers and navigate its path', async () => {
   await render(
     <Router history={history}>
       <RemoteRoutingUsers
-        party={mockedPnPGInstitutionsResource[0] as unknown as PartyPnpg}
+        party={mockedInstitutionsResource[0] as unknown as Party}
         activeProducts={mockedProductResources as Array<Product>}
       />
     </Router>
@@ -33,7 +33,7 @@ test('renders the RemoteRoutingGroups and navigate its path', async () => {
   await render(
     <Router history={history}>
       <RemoteRoutingGroups
-        party={mockedPnPGInstitutionsResource[0] as unknown as PartyPnpg}
+        party={mockedInstitutionsResource[0] as unknown as Party}
         activeProducts={mockedProductResources as Array<Product>}
       />
     </Router>
@@ -49,7 +49,7 @@ test('renders the RemoteRoutingGroups and navigate its path', async () => {
   await render(
     <Router history={history}>
       <RemoteRoutingProductUsers
-        party={mockedPnPGInstitutionsResource[0] as unknown as PartyPnpg}
+        party={mockedInstitutionsResource[0] as unknown as Party}
         activeProducts={mockedProductResources as Array<Product>}
       />
     </Router>

@@ -5,7 +5,7 @@ import useErrorDispatcher from '@pagopa/selfcare-common-frontend/hooks/useErrorD
 import { trackEvent } from '@pagopa/selfcare-common-frontend/services/analyticsService';
 import { uniqueId } from 'lodash';
 import { TFunction, useTranslation } from 'react-i18next';
-import { DashboardPnpgApi } from '../../../../../../api/DashboardPnpgApiClient';
+import { DashboardApi } from '../../../../../../api/DashboardApi';
 import { useAppDispatch, useAppSelector } from '../../../../../../redux/hooks';
 import { partiesActions, partiesSelectors } from '../../../../../../redux/slices/partiesSlice';
 import { PartyDescription } from './components/PartyDescription';
@@ -62,7 +62,7 @@ export function PartyLogoUploader({ partyId }: Props) {
       const requestId = uniqueId();
       trackEvent('DASHBOARD_BUSINESS_CHANGE_LOGO', { party_id: partyId, request_id: requestId });
 
-      DashboardPnpgApi.saveInstitutionLogo(partyId, files[0])
+      DashboardApi.saveInstitutionLogo(partyId, files[0])
         .then(() => {
           setUrlLogo(urlLogo);
           setLoading(false);
@@ -147,6 +147,7 @@ export function PartyLogoUploader({ partyId }: Props) {
         display="flex"
         justifyItems={'center'}
         alignItems={'center'}
+        data-testid="dropzone"
       >
         <>
           <Box>

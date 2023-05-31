@@ -1,36 +1,47 @@
-import { mockedProductResources } from '../../api/__mocks__/DashboardPnpgApiClient';
+import { mockedProductResources } from '../../api/__mocks__/DashboardApi';
 import { fetchProducts, fetchProductRoles } from '../productService';
 import { productResource2Product } from '../../model/Product';
-import {
-  mockedMappedProductRoles,
-  mockedPartyProducts,
-  mockedProductRoles,
-} from '../__mocks__/productService';
-import { DashboardPnpgApi } from '../../api/DashboardPnpgApiClient';
+import { mockedPartyProducts } from '../__mocks__/productService';
+import { DashboardApi } from '../../api/DashboardApi';
 
-jest.mock('../../api/DashboardPnpgApiClient', () => ({
-  DashboardPnpgApi: {
-    getProducts: jest.fn(),
-    getProductRoles: jest.fn(),
-  },
-}));
+jest.mock('../../api/DashboardApi');
+
+beforeEach(() => {
+  jest.spyOn(DashboardApi, 'getProducts');
+  jest.spyOn(DashboardApi, 'getProductRoles');
+});
 
 test('Test fetchProducts', async () => {
-  DashboardPnpgApi.getProducts.mockResolvedValue(mockedProductResources);
-
   const products = await fetchProducts('5b321318-3df7-48c1-67c8-1111e6707c3d');
 
   expect(products).toMatchObject(mockedProductResources.map(productResource2Product));
 
-  expect(DashboardPnpgApi.getProducts).toBeCalledTimes(1);
+  expect(DashboardApi.getProducts).toBeCalledTimes(1);
 });
 
 test('Test fetchProductRoles', async () => {
-  DashboardPnpgApi.getProductRoles.mockResolvedValue(mockedMappedProductRoles);
+  const productRoles = await fetchProductRoles(mockedPartyProducts[0]);
 
-  const productRoles = await await fetchProductRoles(mockedPartyProducts[0]);
+  expect(productRoles).toStrictEqual([
+    {
+      productId: mockedPartyProducts[0].id,
+      partyRole: 'SUB_DELEGATE',
+      selcRole: 'ADMIN',
+      multiroleAllowed: false,
+      productRole: 'pg-admin',
+      title: 'Amministratore',
+      description: 'Stipula il contratto e identifica gli amministratori',
+    },
+    {
+      productId: mockedPartyProducts[0].id,
+      partyRole: 'OPERATOR',
+      selcRole: 'LIMITED',
+      multiroleAllowed: false,
+      productRole: 'pg-operator',
+      title: 'Tecnico',
+      description: "Gestisce l'integrazione tecnologica e/o l'operatività dei servizi",
+    },
+  ]);
 
-  expect(productRoles).toMatchObject(mockedProductRoles);
-
-  expect(DashboardPnpgApi.getProductRoles).toBeCalledWith(mockedPartyProducts[0].id);
+  expect(DashboardApi.getProductRoles).toBeCalledWith(mockedPartyProducts[0].id);
 });

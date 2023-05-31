@@ -1,47 +1,27 @@
-import { fireEvent, render, screen } from '@testing-library/react';
-import { mockedPnpgParties } from '../../../../../../../services/__mocks__/partyService';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { mockedInstitutions } from '../../../../../../../services/__mocks__/partyService';
 import '../../../../../../../locale';
 import { PartyLogoUploader } from '../PartyLogoUploader';
 import { Provider } from 'react-redux';
 import { createStore } from '../../../../../../../redux/store';
-import { DashboardPnpgApi } from '../../../../../../../api/DashboardPnpgApiClient';
+import { DashboardApi } from '../../../../../../../api/DashboardApi';
+import { saveInstitutionLogo } from '../../../../../../../services/partyService';
 
-beforeEach(() => {
-  jest.spyOn(require('../../../../../../../services/partyService'), 'saveInstitutionLogo');
-});
+jest.mock('../../../../../../../api/DashboardApi', () => ({
+  saveInstitutionLogo: jest.fn(),
+}));
 
-const renderComponent = () => {
+test('test onDropAccepted behavior', async () => {
+  const expectedPartyId = '5b321318-3df7-48c1-67c8-1111e6707c3d';
+
   render(
     <Provider store={createStore()}>
-      <PartyLogoUploader partyId={mockedPnpgParties[0].partyId} />
+      <PartyLogoUploader partyId={expectedPartyId} />
     </Provider>
   );
-};
 
-test('Render test', () => {
-  renderComponent();
-});
+  const dropzoneElement = screen.getByTestId('dropzone');
+  const file = new File(['logo.png'], 'logo.png', { type: 'image/png' });
 
-test('Test business logo upload success', async () => {
-  renderComponent();
-
-  const file = new File(['logo'], 'logo.png', { type: 'image/png' });
-  const input = screen.getByText("Modifica il logo dell'impresa");
-  fireEvent.click(input);
-
-  fireEvent.change(input, { target: { files: [file] } });
-});
-
-test('Test business logo fail', async () => {
-  renderComponent();
-
-  jest.spyOn(DashboardPnpgApi, 'saveInstitutionLogo').mockImplementation(() => {
-    return Promise.reject(new Error('Errore durante il caricamento del logo'));
-  });
-
-  const file = new File(['logo'], 'logo.png', { type: 'image/png' });
-  const input = screen.getByText("Modifica il logo dell'impresa");
-  fireEvent.click(input);
-
-  fireEvent.change(input, { target: { files: [file] } });
+  fireEvent.change(dropzoneElement, { target: { files: [file] } });
 });

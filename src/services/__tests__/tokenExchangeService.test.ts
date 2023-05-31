@@ -1,17 +1,20 @@
-import { fetchParties } from '../__mocks__/partyService';
+import { mockedInstitutions } from '../__mocks__/partyService';
 import { retrieveBackOfficeUrl } from '../tokenExchangeService';
 import { mockedPartyProducts } from '../__mocks__/productService';
+import { DashboardApi } from '../../api/DashboardApi';
 
-jest.mock('../tokenExchangeService');
+jest.mock('../../api/DashboardApi');
+
+let retrieveProductBackofficeSpy;
 
 beforeEach(() => {
-  jest.spyOn(require('../tokenExchangeService'), 'retrieveBackOfficeUrl');
+  retrieveProductBackofficeSpy = jest.spyOn(DashboardApi, 'retrieveProductBackoffice');
 });
 
 test('Test retrieveTokenExchange', async () => {
-  const url = await retrieveBackOfficeUrl(fetchParties[0], mockedPartyProducts[0]);
+  const url = await retrieveBackOfficeUrl(mockedInstitutions[0], mockedPartyProducts[0]);
 
   expect(url).toBe('https://hostname/path?id=DUMMYTOKEN');
 
-  expect(retrieveBackOfficeUrl).toBeCalledTimes(1);
+  expect(retrieveProductBackofficeSpy).toBeCalledTimes(1);
 });

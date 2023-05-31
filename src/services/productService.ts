@@ -1,4 +1,4 @@
-import { DashboardPnpgApi } from '../api/DashboardPnpgApiClient';
+import { DashboardApi } from '../api/DashboardApi';
 import { Product, productResource2Product } from '../model/Product';
 import { ProductRole } from '../model/ProductRole';
 import {
@@ -11,7 +11,7 @@ export const fetchProducts = (partyId: string): Promise<Array<Product>> => {
   if (process.env.REACT_APP_MOCK_API === 'true') {
     return new Promise((resolve) => resolve(mockedPartyProducts));
   } else {
-    return DashboardPnpgApi.getProducts(partyId).then((productResources) =>
+    return DashboardApi.getProducts(partyId).then((productResources) =>
       productResources ? productResources.map(productResource2Product) : []
     );
   }
@@ -22,7 +22,7 @@ export const fetchProductRoles = (product: Product): Promise<Array<ProductRole>>
   if (process.env.REACT_APP_MOCK_API === 'true') {
     return fetchProductRolesMocked(product);
   } else {
-    return DashboardPnpgApi.getProductRoles(product.id).then((roles) =>
+    return DashboardApi.getProductRoles(product.id).then((roles) =>
       roles
         .map((pr) =>
           pr.productRoles.map((r) => ({

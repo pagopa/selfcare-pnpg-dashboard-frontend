@@ -2,13 +2,13 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import '../../../../../../locale';
 import { Provider } from 'react-redux';
 import { createStore } from '../../../../../../redux/store';
-import { institutionPnPGResource2PartyPnpg, PartyPnpg } from '../../../../../../model/PartyPnpg';
-import { mockedPnPGInstitutionsResource } from '../../../../../../api/__mocks__/DashboardPnpgApiClient';
+import { institutionResource2Party, Party } from '../../../../../../model/Party';
+import { mockedInstitutionsResource } from '../../../../../../api/__mocks__/DashboardApi';
 import PartyDetail from '../PartyDetail';
 
-const mockedBusinesses = mockedPnPGInstitutionsResource.map(institutionPnPGResource2PartyPnpg);
+const mockedBusinesses = mockedInstitutionsResource.map(institutionResource2Party);
 
-const renderPartyDetail = (party: PartyPnpg) => {
+const renderPartyDetail = (party: Party) => {
   render(
     <Provider store={createStore()}>
       <PartyDetail party={party} />
