@@ -147,6 +147,7 @@ export function PartyLogoUploader({ partyId }: Props) {
         display="flex"
         justifyItems={'center'}
         alignItems={'center'}
+        data-testid="dropzone"
       >
         <>
           <Box>
