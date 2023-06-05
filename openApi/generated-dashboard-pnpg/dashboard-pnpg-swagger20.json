@@ -123,6 +123,70 @@
         "description": "Service to get a specific institution related to logged user",
         "operationId": "getInstitutionUsingGET",
         "summary": "getInstitution"
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json",
+          "application/problem+json"
+        ],
+        "parameters": [
+          {
+            "description": "Institution's unique internal identifier",
+            "in": "path",
+            "name": "institutionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/UpdateInstitutionDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Institution"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/Problem"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/Problem"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Problem"
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": [
+              "global"
+            ]
+          }
+        ],
+        "tags": [
+          "institutions"
+        ],
+        "description": "Update institution description",
+        "operationId": "updateInstitutionDescriptionUsingPUT",
+        "summary": "updateInstitutionDescription"
       }
     },
     "/institutions/{institutionId}/geographicTaxonomy": {
@@ -1002,7 +1066,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/UpdatePnPGInstitutionDto"
+              "$ref": "#/definitions/UpdateInstitutionDto"
             }
           }
         ],
@@ -1043,7 +1107,7 @@
           "pnPGInstitutions"
         ],
         "description": "Update institution description",
-        "operationId": "updateInstitutionDescriptionUsingPUT",
+        "operationId": "updateInstitutionDescriptionUsingPUT_1",
         "summary": "updateInstitutionDescription"
       }
     },
@@ -2821,7 +2885,6 @@
         }
       },
       "required": [
-        "address",
         "externalId",
         "fiscalCode",
         "geographicTaxonomies",
@@ -2831,8 +2894,7 @@
         "origin",
         "originId",
         "status",
-        "userRole",
-        "zipCode"
+        "userRole"
       ],
       "title": "InstitutionResource",
       "type": "object"
@@ -3587,7 +3649,7 @@
       "title": "SupportContactResource",
       "type": "object"
     },
-    "UpdatePnPGInstitutionDto": {
+    "UpdateInstitutionDto": {
       "properties": {
         "description": {
           "description": "Institution's description",
@@ -3598,7 +3660,7 @@
           "type": "string"
         }
       },
-      "title": "UpdatePnPGInstitutionDto",
+      "title": "UpdateInstitutionDto",
       "type": "object"
     },
     "UpdateUserDto": {

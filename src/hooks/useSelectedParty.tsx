@@ -1,6 +1,6 @@
 import useLoading from '@pagopa/selfcare-common-frontend/hooks/useLoading';
 import { resolvePathVariables } from '@pagopa/selfcare-common-frontend/utils/routes-utils';
-import { PartyPnpg } from '../model/PartyPnpg';
+import { Party } from '../model/Party';
 import { Product } from '../model/Product';
 import { ProductsRolesMap } from '../model/ProductRole';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
@@ -11,20 +11,20 @@ import { LOADING_TASK_SEARCH_PARTY, LOADING_TASK_SEARCH_PRODUCTS } from '../util
 import { ENV } from '../utils/env';
 
 export const useSelectedParty = (): {
-  fetchSelectedParty: (partyId: string) => Promise<[PartyPnpg | null, Array<Product> | null]>;
+  fetchSelectedParty: (partyId: string) => Promise<[Party | null, Array<Product> | null]>;
 } => {
   const dispatch = useAppDispatch();
   const selectedParty = useAppSelector(partiesSelectors.selectPartySelected);
   const selectedPartyProducts = useAppSelector(partiesSelectors.selectPartySelectedProducts);
   const parties = useAppSelector(partiesSelectors.selectPartiesList);
-  const setParty = (party?: PartyPnpg) => dispatch(partiesActions.setPartySelected(party));
+  const setParty = (party?: Party) => dispatch(partiesActions.setPartySelected(party));
   const setPartyProducts = (products?: Array<Product>) =>
     dispatch(partiesActions.setPartySelectedProducts(products));
   const setLoadingDetails = useLoading(LOADING_TASK_SEARCH_PARTY);
   const setLoadingProducts = useLoading(LOADING_TASK_SEARCH_PRODUCTS);
   const productsRolesMap = useAppSelector(partiesSelectors.selectPartySelectedProductsRolesMap);
 
-  const fetchParty = (partyId: string): Promise<PartyPnpg | null> =>
+  const fetchParty = (partyId: string): Promise<Party | null> =>
     fetchPartyDetails(partyId, parties).then((party) => {
       if (party) {
         if (party.status !== 'ACTIVE') {
@@ -77,7 +77,7 @@ export const useSelectedParty = (): {
       setLoadingDetails(true);
       setLoadingProducts(true);
 
-      const partyDetailPromise: Promise<PartyPnpg | null> = fetchParty(partyId).finally(() =>
+      const partyDetailPromise: Promise<Party | null> = fetchParty(partyId).finally(() =>
         setLoadingDetails(false)
       );
 
@@ -92,7 +92,7 @@ export const useSelectedParty = (): {
       });
     } else {
       return Promise.all([
-        new Promise<PartyPnpg>((resolve) => resolve(selectedParty)),
+        new Promise<Party>((resolve) => resolve(selectedParty)),
         new Promise<Array<Product>>((resolve) => resolve(selectedPartyProducts ?? [])),
       ]);
     }

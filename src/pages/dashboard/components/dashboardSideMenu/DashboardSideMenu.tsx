@@ -8,11 +8,11 @@ import PeopleAlt from '@mui/icons-material/PeopleAlt';
 import SupervisedUserCircle from '@mui/icons-material/SupervisedUserCircle';
 import { DASHBOARD_ROUTES } from '../../../../routes';
 import { ENV } from '../../../../utils/env';
-import { PartyPnpg } from '../../../../model/PartyPnpg';
+import { Party } from '../../../../model/Party';
 import DashboardSidenavItem from './DashboardSidenavItem';
 
 type Props = {
-  party: PartyPnpg;
+  party: Party;
 };
 
 export default function DashboardSideMenu({ party }: Props) {

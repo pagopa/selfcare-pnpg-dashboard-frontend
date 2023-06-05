@@ -1,9 +1,9 @@
 import useReduxCachedValue from '@pagopa/selfcare-common-frontend/hooks/useReduxCachedValue';
-import { PartyPnpg } from '../model/PartyPnpg';
+import { Party } from '../model/Party';
 import { partiesActions, partiesSelectors } from '../redux/slices/partiesSlice';
 import { fetchParties } from '../services/partyService';
 
-export const useParties = (): (() => Promise<Array<PartyPnpg>>) =>
+export const useParties = (): (() => Promise<Array<Party>>) =>
   useReduxCachedValue(
     'PARTIES',
     fetchParties,

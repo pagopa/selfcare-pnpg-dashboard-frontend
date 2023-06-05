@@ -4,7 +4,7 @@ import { trackEvent } from '@pagopa/selfcare-common-frontend/services/analyticsS
 import { LOADING_TASK_TOKEN_EXCHANGE } from '../utils/constants';
 import { Product } from '../model/Product';
 import { retrieveBackOfficeUrl } from '../services/tokenExchangeService';
-import { PartyPnpg } from '../model/PartyPnpg';
+import { Party } from '../model/Party';
 
 const hostnameRegexp = /^(?:https?:\/\/)([-.a-zA-Z0-9_]+)/;
 
@@ -14,7 +14,7 @@ export const useTokenExchange = () => {
 
   const invokeProductBo = async (
     product: Product,
-    selectedParty: PartyPnpg,
+    selectedParty: Party,
     selectedEnvironment?: string
   ): Promise<void> => {
     const selectedEnvironmentUrl = product.backOfficeEnvironmentConfigurations?.find(

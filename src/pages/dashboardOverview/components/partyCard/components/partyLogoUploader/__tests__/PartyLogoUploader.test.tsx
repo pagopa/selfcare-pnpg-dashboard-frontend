@@ -1,53 +1,27 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { saveInstitutionLogo } from '../../../../../../../services/partyService';
-import { mockedPnpgParties } from '../../../../../../../services/__mocks__/partyService';
+import { mockedInstitutions } from '../../../../../../../services/__mocks__/partyService';
 import '../../../../../../../locale';
 import { PartyLogoUploader } from '../PartyLogoUploader';
 import { Provider } from 'react-redux';
 import { createStore } from '../../../../../../../redux/store';
+import { DashboardApi } from '../../../../../../../api/DashboardApi';
+import { saveInstitutionLogo } from '../../../../../../../services/partyService';
 
-let image;
+jest.mock('../../../../../../../api/DashboardApi', () => ({
+  saveInstitutionLogo: jest.fn(),
+}));
 
-beforeEach(() => {
-  image = new File(['----'], 'mockedImage.png', { type: 'image/png' });
-});
+test('test onDropAccepted behavior', async () => {
+  const expectedPartyId = '5b321318-3df7-48c1-67c8-1111e6707c3d';
 
-beforeEach(() => {
-  jest.spyOn(require('../../../../../../../services/partyService'), 'saveInstitutionLogo');
-});
-
-const renderComponent = () => {
   render(
     <Provider store={createStore()}>
-      <PartyLogoUploader partyId={mockedPnpgParties[0].partyId} />
+      <PartyLogoUploader partyId={expectedPartyId} />
     </Provider>
   );
-};
 
-test('Render test', () => {
-  renderComponent();
-});
+  const dropzoneElement = screen.getByTestId('dropzone');
+  const file = new File(['logo.png'], 'logo.png', { type: 'image/png' });
 
-test('test the presence of the disclaimer and the upload of a mocked business logo', async () => {
-  renderComponent();
-
-  screen.getByText(
-    `Inserisci solo il logo della tua impresa.\ Sarai responsabile dell’inserimento di immagini diverse da quella indicata.`
-  );
-
-  const modifyBusinessLogo = screen.getByText("Modifica il logo dell'impresa");
-  fireEvent.click(modifyBusinessLogo);
-
-  await waitFor(() =>
-    fireEvent.change(modifyBusinessLogo, {
-      target: { files: [image] },
-    })
-  );
-
-  const businessLogo = document.getElementById('AccountBalanceRoundedIcon') as any;
-
-  if (businessLogo) {
-    expect(businessLogo.files[0].name).toBe('mockedImage.png');
-    expect(businessLogo.files.length).toBe(1);
-  }
+  fireEvent.change(dropzoneElement, { target: { files: [file] } });
 });

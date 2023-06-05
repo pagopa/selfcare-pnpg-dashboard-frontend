@@ -4,7 +4,7 @@ import {
   StatusEnum,
 } from '../api/generated/b4f-dashboard-pnpg/SubProductResource';
 
-import { UserRole } from './PartyPnpg';
+import { UserRole } from './Party';
 
 export type Product = {
   activationDateTime?: Date;

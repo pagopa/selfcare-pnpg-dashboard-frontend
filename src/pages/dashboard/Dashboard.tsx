@@ -7,7 +7,7 @@ import withSelectedParty from '../../decorators/withSelectedParty';
 import withProductRolesMap from '../../decorators/withProductsRolesMap';
 import withSelectedProduct from '../../decorators/withSelectedPartyProduct';
 import withSelectedProductRoles from '../../decorators/withSelectedPartyProductAndRoles';
-import { PartyPnpg } from '../../model/PartyPnpg';
+import { Party } from '../../model/Party';
 import { buildProductsMap, Product, ProductsMap } from '../../model/Product';
 import { useAppSelector } from '../../redux/hooks';
 import { partiesSelectors } from '../../redux/slices/partiesSlice';
@@ -18,7 +18,7 @@ import RemoteRoutingGroups from '../../microcomponents/groups/RemoteRoutingGroup
 import DashboardSideMenu from './components/dashboardSideMenu/DashboardSideMenu';
 
 export type DashboardPageProps = {
-  party: PartyPnpg;
+  party: Party;
   products: Array<Product>;
   activeProducts: Array<Product>;
   productsMap: ProductsMap;
@@ -46,7 +46,7 @@ const reduceDecorators = (
   );
 
 export const buildRoutes = (
-  party: PartyPnpg,
+  party: Party,
   products: Array<Product>,
   activeProducts: Array<Product>,
   productsMap: ProductsMap,

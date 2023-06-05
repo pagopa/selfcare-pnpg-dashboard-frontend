@@ -1,45 +1,17 @@
-import {
-  BusinessPnpg,
-  institutionPnPGResource2PartyPnpg,
-  InstitutionsPnpg,
-  PartyPnpg,
-} from '../../model/PartyPnpg';
+import { institutionResource2Party } from '../../model/Party';
 import { PnPGInstitutionResource } from '../generated/b4f-dashboard-pnpg/PnPGInstitutionResource';
+import {
+  PartyRoleEnum,
+  ProductRoleMappingsResource,
+  SelcRoleEnum,
+} from '../generated/b4f-dashboard-pnpg/ProductRoleMappingsResource';
 import {
   ProductOnBoardingStatusEnum,
   ProductsResource,
   StatusEnum,
 } from '../generated/b4f-dashboard-pnpg/ProductsResource';
 
-export const mockedAgencies: Array<BusinessPnpg> = [
-  {
-    businessName: 'Ragione Sociale success',
-    businessTaxId: '1',
-  },
-  {
-    businessName: 'Ragione Sociale alreadyOnboarded',
-    businessTaxId: '11111111111',
-  },
-  {
-    businessName: 'Ragione Sociale genericError',
-    businessTaxId: '22222222222',
-  },
-];
-
-export const mockedAgenciesAfterInsertingTaxCode: Array<BusinessPnpg> = [
-  {
-    businessName: '',
-    businessTaxId: '33333333333',
-  },
-];
-
-export const mockedInstitutionPnPG: InstitutionsPnpg = {
-  businesses: mockedAgencies,
-  legalTaxId: '1234567',
-  requestDateTime: 'x',
-};
-
-export const mockedPnPGInstitutionsResource: Array<PnPGInstitutionResource> = [
+export const mockedInstitutionsResource: Array<PnPGInstitutionResource> = [
   {
     userRole: 'LIMITED',
     name: 'mockedBusiness1',
@@ -94,6 +66,9 @@ export const mockedPnPGInstitutionsResource: Array<PnPGInstitutionResource> = [
   },
 ];
 
+export const mockedInstitutionsResource2Party =
+  mockedInstitutionsResource.map(institutionResource2Party);
+
 export const mockedProductResources: Array<ProductsResource> = [
   {
     logo: 'https://selcdcheckoutsa.z6.web.core.windows.net/resources/products/prod-pn/logo.svg',
@@ -136,17 +111,51 @@ export const mockedProductResources: Array<ProductsResource> = [
   },
 ];
 
+export const mockedProductRoles: Array<ProductRoleMappingsResource> = [
+  {
+    partyRole: PartyRoleEnum.SUB_DELEGATE,
+    selcRole: SelcRoleEnum.ADMIN,
+    multiroleAllowed: false,
+    productRoles: [
+      {
+        code: 'pg-admin',
+        description: 'Stipula il contratto e identifica gli amministratori',
+        label: 'Amministratore',
+      },
+    ],
+  },
+  {
+    partyRole: PartyRoleEnum.OPERATOR,
+    selcRole: SelcRoleEnum.LIMITED,
+    multiroleAllowed: false,
+    productRoles: [
+      {
+        code: 'pg-operator',
+        description: "Gestisce l'integrazione tecnologica e/o l'operatività dei servizi",
+        label: 'Tecnico',
+      },
+    ],
+  },
+];
+
 export const DashboardApi = {
-  fetchParties: async (): Promise<Array<PartyPnpg>> =>
-    new Promise((resolve) =>
-      resolve(mockedPnPGInstitutionsResource.map(institutionPnPGResource2PartyPnpg))
-    ),
+  getInstitutions: async (): Promise<Array<PnPGInstitutionResource>> =>
+    new Promise((resolve) => resolve(mockedInstitutionsResource)),
+
+  getInstitution: async (_partyId: string): Promise<PnPGInstitutionResource> =>
+    new Promise((resolve) => resolve(mockedInstitutionsResource[0])),
+
+  getProducts: async (): Promise<Array<ProductsResource>> =>
+    new Promise((resolve) => resolve(mockedProductResources)),
+
+  getProductRoles: async (_productId: string): Promise<Array<ProductRoleMappingsResource>> =>
+    new Promise((resolve) => resolve(mockedProductRoles)),
 
   retrieveProductBackoffice: async (
     _productId: string,
     _institutionId: string,
     _environment?: string
-  ): Promise<string> => new Promise((resolve) => resolve('mockedUrl')),
+  ): Promise<string> => new Promise((resolve) => resolve('https://hostname/path?id=DUMMYTOKEN')),
 
   saveInstitutionLogo: async (_institutionId: string, _logo: File): Promise<boolean> =>
     new Promise((resolve) => resolve(true)),

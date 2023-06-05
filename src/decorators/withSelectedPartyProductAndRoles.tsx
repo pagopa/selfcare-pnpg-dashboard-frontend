@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { PartyPnpg } from '../model/PartyPnpg';
+import { Party } from '../model/Party';
 import { Product, ProductsMap } from '../model/Product';
 import { ProductRolesLists } from '../model/ProductRole';
 
 export type withSelectedPartyProductAndRolesProps = {
-  party: PartyPnpg;
+  party: Party;
   products: Array<Product>;
   productsMap: ProductsMap;
   activeProducts: Array<Product>;
