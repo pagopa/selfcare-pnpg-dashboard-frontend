@@ -52,7 +52,7 @@ export default {
       uploadError: {
         title: 'Caricamento non riuscito',
         description:
-          'Il caricamento del logo non è andato a buon fine. Verifica che il formato e la dimensione siano corretti e caricalo di nuovo',
+          'Il caricamento del logo non è andato a buon fine. Verifica che il formato e la dimensione siano corretti e caricalo di nuovo.',
       },
       modifyError: {
         title: 'Caricamento non riuscito',
