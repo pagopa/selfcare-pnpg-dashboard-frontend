@@ -38,6 +38,8 @@ export default function DashboardSideMenu({ party }: Props) {
   const isRoleSelected = window.location.pathname.startsWith(usersPath);
   const isGroupSelected = window.location.pathname.startsWith(groupsPath);
 
+  const canSeeSection = party.userRole === 'ADMIN';
+
   return (
     <Grid container item mt={1} width="100%">
       <Grid item xs={12}>
@@ -50,18 +52,24 @@ export default function DashboardSideMenu({ party }: Props) {
             isSelected={isOVerviewSelected}
             icon={DashboardCustomize}
           />
-          <DashboardSidenavItem
-            title={t('overview.sideMenu.institutionManagement.referents.title')}
-            handleClick={() => onExit(() => history.push(party.partyId ? usersPath : usersRoute))}
-            isSelected={isRoleSelected}
-            icon={PeopleAlt}
-          />
-          <DashboardSidenavItem
-            title={t('overview.sideMenu.institutionManagement.groups.title')}
-            handleClick={() => onExit(() => history.push(party.partyId ? groupsPath : groupsRoute))}
-            isSelected={isGroupSelected}
-            icon={SupervisedUserCircle}
-          />
+          {canSeeSection && (
+            <DashboardSidenavItem
+              title={t('overview.sideMenu.institutionManagement.referents.title')}
+              handleClick={() => onExit(() => history.push(party.partyId ? usersPath : usersRoute))}
+              isSelected={isRoleSelected}
+              icon={PeopleAlt}
+            />
+          )}
+          {canSeeSection && (
+            <DashboardSidenavItem
+              title={t('overview.sideMenu.institutionManagement.groups.title')}
+              handleClick={() =>
+                onExit(() => history.push(party.partyId ? groupsPath : groupsRoute))
+              }
+              isSelected={isGroupSelected}
+              icon={SupervisedUserCircle}
+            />
+          )}
         </List>
       </Grid>
     </Grid>
