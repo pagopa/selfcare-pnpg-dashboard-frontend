@@ -1,4 +1,4 @@
-import { fetchParties, fetchPartyDetails } from '../partyService';
+import { fetchParties, fetchPartyDetails, updateBusinessData } from '../partyService';
 import { institutionResource2Party, Party } from '../../model/Party';
 import { DashboardApi } from '../../api/DashboardApi';
 import {
@@ -10,10 +10,12 @@ jest.mock('../../api/DashboardApi');
 
 let dashboardApiGetInstitutionSpy;
 let dashboardApiGetInstitutionsSpy;
+let dashboardApiUpdateBusinessDataSpy;
 
 beforeEach(() => {
   dashboardApiGetInstitutionSpy = jest.spyOn(DashboardApi, 'getInstitution');
   dashboardApiGetInstitutionsSpy = jest.spyOn(DashboardApi, 'getInstitutions');
+  dashboardApiUpdateBusinessDataSpy = jest.spyOn(DashboardApi, 'updateBusinessData');
 });
 
 test('Test fetchParties', async () => {
@@ -68,5 +70,25 @@ describe('Test fetchPartyDetails', () => {
     expect(party2).toStrictEqual(party);
 
     checkDashboardInvocation(2);
+  });
+
+  test('Test updateBusinessData api: update the email', async () => {
+    const institutionId = mockedInstitutionsResource.map(institutionResource2Party)[1].partyId;
+    const newEmail = 'mockemail@mocktest.com';
+
+    const businessUpdatedSuccessfully = await updateBusinessData(institutionId, newEmail);
+    expect(businessUpdatedSuccessfully).toBeTruthy();
+
+    expect(dashboardApiUpdateBusinessDataSpy).toBeCalledTimes(1);
+  });
+
+  test('Test updateBusinessData api: update the businessName', async () => {
+    const institutionId = mockedInstitutionsResource.map(institutionResource2Party)[3].partyId;
+    const newEmail = 'mockemail@mocktest.com';
+
+    const businessUpdatedSuccessfully = await updateBusinessData(institutionId, newEmail);
+    expect(businessUpdatedSuccessfully).toBeTruthy();
+
+    expect(dashboardApiUpdateBusinessDataSpy).toBeCalledTimes(1);
   });
 });
