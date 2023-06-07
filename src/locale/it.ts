@@ -9,7 +9,7 @@ export default {
   businessSelection: {
     title: 'Seleziona la tua impresa',
     subTitle:
-      'Se leggi le notifiche di più aziende, potrai modificare la tua scelta dopo avere effettuato l’accesso.',
+      'Se leggi le notifiche di più imprese, potrai modificare la tua scelta dopo avere effettuato l’accesso.',
     onboardAnotherBusiness: 'Sei un Legale Rappresentante? <1>Registra una nuova impresa</1>',
     search: 'Cerca impresa',
     signIn: 'Accedi',
@@ -52,7 +52,7 @@ export default {
       uploadError: {
         title: 'Caricamento non riuscito',
         description:
-          'Il caricamento del logo non è andato a buon fine. Verifica che il formato e la dimensione siano corretti e caricalo di nuovo',
+          'Il caricamento del logo non è andato a buon fine. Verifica che il formato e la dimensione siano corretti e caricalo di nuovo.',
       },
       modifyError: {
         title: 'Caricamento non riuscito',
