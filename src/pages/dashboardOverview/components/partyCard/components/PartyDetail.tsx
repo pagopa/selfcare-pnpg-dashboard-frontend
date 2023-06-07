@@ -41,14 +41,14 @@ export default function PartyDetail({ party }: Props) {
   const handleInputChange = (e: any, isBusinessEmail: boolean) => {
     const input = e.target.value;
     if (isBusinessEmail) {
-      if (input === party?.mailAddress) {
+      if (input === business?.mailAddress) {
         setIsBusinessEmailEqualToSavedValue(true);
       } else {
         setInsertedBusinessEmail(input);
         setIsBusinessEmailEqualToSavedValue(false);
       }
     } else {
-      if (input === party?.description) {
+      if (input === business?.description) {
         setIsBusinessNameEqualToSavedValue(true);
       } else {
         setInsertedBusinessName(input);
@@ -120,7 +120,7 @@ export default function PartyDetail({ party }: Props) {
             <Typography sx={{ ...infoStyles, maxWidth: '100% !important' }} className="ShowDots">
               {business?.description}
             </Typography>
-            {party?.origin === 'ADE' && (
+            {party?.origin === 'ADE' && party.userRole === 'ADMIN' && (
               <ButtonNaked
                 component="button"
                 onClick={() => setOpenBusinessNameEditModal(true)}
@@ -139,15 +139,17 @@ export default function PartyDetail({ party }: Props) {
             <Typography sx={{ ...infoStyles, maxWidth: '100% !important' }} className="ShowDots">
               {business?.mailAddress}
             </Typography>
-            <ButtonNaked
-              component="button"
-              onClick={() => setOpenBusinessEmailEditModal(true)}
-              startIcon={<EditIcon />}
-              sx={{ color: 'primary.main', flexDirection: 'row', marginLeft: 2 }}
-              weight="default"
-            >
-              {t('overview.partyDetail.editBusinessEmail')}
-            </ButtonNaked>
+            {party?.userRole === 'ADMIN' && (
+              <ButtonNaked
+                component="button"
+                onClick={() => setOpenBusinessEmailEditModal(true)}
+                startIcon={<EditIcon />}
+                sx={{ color: 'primary.main', flexDirection: 'row', marginLeft: 2 }}
+                weight="default"
+              >
+                {t('overview.partyDetail.editBusinessEmail')}
+              </ButtonNaked>
+            )}
           </Grid>
           <Grid item xs={4}>
             <Typography variant="body2">{t('overview.partyDetail.fiscalCode')}</Typography>

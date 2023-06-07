@@ -16,16 +16,16 @@ const renderPartyDetail = (party: Party) => {
   );
 };
 
-test('test render component', () => {
-  renderPartyDetail(mockedBusinesses[0]);
+test('test render component', async () => {
+  await renderPartyDetail(mockedBusinesses[3]);
   expect(document.getElementById('partyCard'));
   screen.getByText('Ragione sociale');
 });
 
 test('Test: Edit businessEmail', async () => {
-  renderPartyDetail(mockedBusinesses[0]);
+  await renderPartyDetail(mockedBusinesses[3]);
   screen.getByText('E-mail istituzionale');
-  const editButton = screen.getByText('Modifica');
+  const editButton = screen.getAllByText('Modifica')[1];
   fireEvent.click(editButton);
 
   await screen.getByText('Modifica l’indirizzo e-mail istituzionale');
@@ -52,7 +52,7 @@ test('Test: Edit businessEmail', async () => {
 });
 
 test('Test: change the businessName of a non "certified" company', async () => {
-  renderPartyDetail(mockedBusinesses[2]);
+  await renderPartyDetail(mockedBusinesses[3]);
   screen.getByText('Ragione sociale');
   const editButton = screen.getAllByText('Modifica')[0];
   fireEvent.click(editButton);
