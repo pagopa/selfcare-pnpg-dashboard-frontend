@@ -41,14 +41,14 @@ export default function PartyDetail({ party }: Props) {
   const handleInputChange = (e: any, isBusinessEmail: boolean) => {
     const input = e.target.value;
     if (isBusinessEmail) {
-      if (input === party?.mailAddress) {
+      if (input === business?.mailAddress) {
         setIsBusinessEmailEqualToSavedValue(true);
       } else {
         setInsertedBusinessEmail(input);
         setIsBusinessEmailEqualToSavedValue(false);
       }
     } else {
-      if (input === party?.description) {
+      if (input === business?.description) {
         setIsBusinessNameEqualToSavedValue(true);
       } else {
         setInsertedBusinessName(input);
