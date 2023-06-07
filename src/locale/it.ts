@@ -9,7 +9,7 @@ export default {
   businessSelection: {
     title: 'Seleziona la tua impresa',
     subTitle:
-      'Se leggi le notifiche di più aziende, potrai modificare la tua scelta dopo avere effettuato l’accesso.',
+      'Se leggi le notifiche di più imprese, potrai modificare la tua scelta dopo avere effettuato l’accesso.',
     onboardAnotherBusiness: 'Sei un Legale Rappresentante? <1>Registra una nuova impresa</1>',
     search: 'Cerca impresa',
     signIn: 'Accedi',
