@@ -93,7 +93,7 @@ export default {
         cancel: 'Annulla',
         confirm: 'Conferma',
         success: {
-          description: 'E-mail istituzionale modificata correttamente',
+          description: 'Indirizzo e-mail modificato',
         },
         error: {
           description: 'Si è verificato un errore durante l’inserimento. Riprova.',
