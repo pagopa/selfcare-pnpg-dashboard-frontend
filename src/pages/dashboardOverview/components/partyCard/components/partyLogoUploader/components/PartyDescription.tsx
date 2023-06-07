@@ -37,15 +37,7 @@ export function PartyDescription({ labelLink, open, loading }: Props) {
         >
           {labelLink}
         </ButtonNaked>
-        <Tooltip
-          title={
-            <Trans i18nKey={t('overview.businessLogo.size')}>
-              Dimensione massima 300 x <br /> 300px - Formato .png
-            </Trans>
-          }
-          placement="top"
-          arrow={true}
-        >
+        <Tooltip title={t('overview.businessLogo.size')} placement="top" arrow={true}>
           <InfoOutlinedIcon
             sx={{ color: 'text.secondary', cursor: 'pointer', ml: 1 }}
             fontSize="small"
