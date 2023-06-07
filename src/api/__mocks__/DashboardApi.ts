@@ -145,6 +145,12 @@ export const DashboardApi = {
   getInstitution: async (_partyId: string): Promise<PnPGInstitutionResource> =>
     new Promise((resolve) => resolve(mockedInstitutionsResource[0])),
 
+  updateBusinessData: async (
+    _institutionId: string,
+    _digitalAddress?: string,
+    _businessName?: string
+  ): Promise<boolean> => new Promise((resolve) => resolve(true)),
+
   getProducts: async (): Promise<Array<ProductsResource>> =>
     new Promise((resolve) => resolve(mockedProductResources)),
 

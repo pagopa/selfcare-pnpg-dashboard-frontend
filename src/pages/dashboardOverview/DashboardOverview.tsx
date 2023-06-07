@@ -34,8 +34,14 @@ const DashboardOverview = () => {
   return (
     <Box p={3} sx={{ width: '100%' }}>
       <WelcomeDashboard businessName={selectedParty?.description} />
-      <Grid container direction="row" justifyContent={'center'} alignItems="center" mb={2}>
-        {selectedParty && (
+      <Grid
+        container
+        direction="row"
+        justifyContent={selectedParty?.userRole === 'ADMIN' ? 'center' : 'start'}
+        alignItems="center"
+        mb={2}
+      >
+        {selectedParty && selectedParty.userRole === 'ADMIN' && (
           <Grid item xs={6}>
             <PartyLogoUploader partyId={selectedParty.partyId} />
           </Grid>
