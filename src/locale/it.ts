@@ -14,9 +14,9 @@ export default {
     search: 'Cerca impresa',
     signIn: 'Accedi',
     noBusinessFound: {
-      title: 'L’impresa non è ancora <1/>registrata ',
+      title: 'Per leggere le notifiche devi <1/>prima registrare la tua impresa ',
       description: 'La registrazione può essere effettuata solo da un Legale <1/>Rappresentante.',
-      registerBusiness: 'Registra impresa',
+      registerBusiness: 'Inizia',
     },
   },
   productsList: {
