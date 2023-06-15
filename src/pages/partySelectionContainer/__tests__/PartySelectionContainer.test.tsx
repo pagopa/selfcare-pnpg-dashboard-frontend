@@ -61,7 +61,11 @@ test('Test render PartySelection component', () => {
 test('Test with zero party, NoParty component is rendered', async () => {
   renderComponent('zero');
 
-  await waitFor(() => screen.getByText('L’impresa non è ancora registrata'));
+  await waitFor(() =>
+    screen.getByText('Per leggere le notifiche devi prima registrare la tua impresa', {
+      exact: false,
+    })
+  );
 });
 
 test('Test with more than a party, PartySelection component is rendered', async () => {

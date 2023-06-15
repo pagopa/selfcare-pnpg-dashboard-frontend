@@ -32,8 +32,8 @@ export default function NoParty() {
           </Grid>
           <Typography variant="h3" component="h2">
             <Trans i18nKey="businessSelection.noBusinessFound.title">
-              L’impresa non è ancora <br />
-              registrata
+              Per leggere le notifiche devi <br />
+              prima registrare la tua impresa
             </Trans>
           </Typography>
         </Grid>

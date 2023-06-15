@@ -14,9 +14,9 @@ export default {
     search: 'Cerca impresa',
     signIn: 'Accedi',
     noBusinessFound: {
-      title: 'L’impresa non è ancora <1/>registrata ',
+      title: 'Per leggere le notifiche devi <1/>prima registrare la tua impresa ',
       description: 'La registrazione può essere effettuata solo da un Legale <1/>Rappresentante.',
-      registerBusiness: 'Registra impresa',
+      registerBusiness: 'Inizia',
     },
   },
   productsList: {
@@ -64,7 +64,7 @@ export default {
     partyDetail: {
       businessName: 'Ragione sociale',
       fiscalCode: 'Codice Fiscale',
-      mailAddress: 'E-mail istituzionale',
+      mailAddress: 'Indirizzo PEC primario',
       editBusinessName: 'Modifica',
       editBusinessNameModal: {
         title: 'Modifica la ragione sociale',
@@ -84,16 +84,16 @@ export default {
       },
       editBusinessEmail: 'Modifica',
       editBusinessEmailModal: {
-        title: 'Modifica l’indirizzo e-mail istituzionale',
-        subTitle: 'Se l’indirizzo e-mail non è corretto, modificalo qui.',
-        textFieldLabel: 'E-mail istituzionale',
-        invalidEmail: "L'indirizzo e-mail inserito non è corretto",
-        notEqualBusinessEmail: 'Inserisci una e-mail istituzionale diversa',
+        title: "Modifica l'indirizzo PEC primario",
+        subTitle: 'Se l’indirizzo PEC non è corretto, modificalo qui.',
+        textFieldLabel: 'Indirizzo PEC',
+        invalidEmail: "L'indirizzo PEC inserito non è corretto",
+        notEqualBusinessEmail: 'Inserisci un indirizzo PEC diverso',
         disclaimer: 'Sarai responsabile dell’inserimento di dati diversi da quelli indicati.',
         cancel: 'Annulla',
         confirm: 'Conferma',
         success: {
-          description: 'Indirizzo e-mail modificato',
+          description: 'Indirizzo PEC modificato',
         },
         error: {
           description: 'Si è verificato un errore durante l’inserimento. Riprova.',
