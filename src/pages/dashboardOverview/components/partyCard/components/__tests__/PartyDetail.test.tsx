@@ -16,19 +16,19 @@ const renderPartyDetail = (party: Party) => {
   );
 };
 
-test('test render component', async () => {
-  await renderPartyDetail(mockedBusinesses[3]);
+test('test render component', () => {
+  renderPartyDetail(mockedBusinesses[3]);
   expect(document.getElementById('partyCard'));
   screen.getByText('Ragione sociale');
 });
 
-test('Test: Edit businessEmail', async () => {
-  await renderPartyDetail(mockedBusinesses[3]);
-  screen.getByText('E-mail istituzionale');
+test('Test: Edit businessEmail', () => {
+  renderPartyDetail(mockedBusinesses[3]);
+  screen.getByText('Indirizzo PEC primario');
   const editButton = screen.getAllByText('Modifica')[1];
   fireEvent.click(editButton);
 
-  await screen.getByText('Modifica l’indirizzo e-mail istituzionale');
+  screen.getByText("Modifica l'indirizzo PEC primario");
   const confirmButton = screen.getByText('Conferma');
   expect(confirmButton).toBeDisabled();
 
@@ -36,13 +36,13 @@ test('Test: Edit businessEmail', async () => {
   fireEvent.click(closeButton);
 
   fireEvent.click(editButton);
-  await screen.getByText('Modifica l’indirizzo e-mail istituzionale');
+  screen.getByText("Modifica l'indirizzo PEC primario");
   expect(confirmButton).toBeDisabled();
 
   const businessEmailTextfield = document.getElementById('email-textfield');
 
   fireEvent.change(businessEmailTextfield, { target: { value: 'email' } });
-  screen.getByText("L'indirizzo e-mail inserito non è corretto");
+  screen.getByText("L'indirizzo PEC inserito non è corretto");
 
   fireEvent.change(businessEmailTextfield, { target: { value: 'email@emailtest.com' } });
 
@@ -51,13 +51,13 @@ test('Test: Edit businessEmail', async () => {
   fireEvent.click(confirmButton);
 });
 
-test('Test: change the businessName of a non "certified" company', async () => {
-  await renderPartyDetail(mockedBusinesses[3]);
+test('Test: change the businessName of a non "certified" company', () => {
+  renderPartyDetail(mockedBusinesses[3]);
   screen.getByText('Ragione sociale');
   const editButton = screen.getAllByText('Modifica')[0];
   fireEvent.click(editButton);
 
-  await screen.getByText('Modifica la ragione sociale');
+  screen.getByText('Modifica la ragione sociale');
   const confirmButton = screen.getByText('Conferma');
   expect(confirmButton).toBeDisabled();
 
@@ -65,7 +65,7 @@ test('Test: change the businessName of a non "certified" company', async () => {
   fireEvent.click(closeButton);
 
   fireEvent.click(editButton);
-  await screen.getByText('Modifica la ragione sociale');
+  screen.getByText('Modifica la ragione sociale');
   expect(confirmButton).toBeDisabled();
 
   const businessEmailTextfield = document.getElementById('businessname-textfield');
