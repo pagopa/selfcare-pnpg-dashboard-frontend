@@ -146,7 +146,14 @@ const Dashboard = () => {
           </Box>
         </Grid>
       )}
-      <Grid item component="main" xs={10} sx={{ backgroundColor: '#F5F6F7' }} display="flex" pb={8}>
+      <Grid
+        item
+        component="main"
+        xs={isMobile ? 12 : 10}
+        sx={{ backgroundColor: '#F5F6F7' }}
+        display="flex"
+        pb={8}
+      >
         <Switch>
           <Route path={ENV.ROUTES.USERS} exact={false}>
             <RemoteRoutingUsers

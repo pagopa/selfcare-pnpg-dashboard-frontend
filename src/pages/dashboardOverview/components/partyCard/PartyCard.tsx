@@ -11,7 +11,6 @@ export default function PartyCard({ party }: Props) {
     <Card
       variant="outlined"
       sx={{
-        width: '100%',
         py: 3,
         px: 1,
         backgroundColor: '#EEEEEE',

@@ -1,4 +1,4 @@
-import { Grid, Box } from '@mui/material';
+import { Grid, Box, useTheme, useMediaQuery } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import TitleBox from '@pagopa/selfcare-common-frontend/components/TitleBox';
@@ -17,10 +17,16 @@ type UrlParams = {
   partyId: string;
 };
 
+const useIsMobile = () => {
+  const theme = useTheme();
+  return useMediaQuery(theme.breakpoints.down('md'));
+};
+
 const DashboardOverview = () => {
   const { t } = useTranslation();
   const { partyId } = useParams<UrlParams>();
   const { invokeProductBo } = useTokenExchange();
+  const isMobile = useIsMobile();
   const parties = useAppSelector(partiesSelectors.selectPartiesList);
   const products = useAppSelector(partiesSelectors.selectPartySelectedProducts);
 
@@ -31,23 +37,24 @@ const DashboardOverview = () => {
     setSelectedParty(chosenParty);
   }, [partyId]);
 
+  const isAdmin = selectedParty && selectedParty.userRole === 'ADMIN';
+
   return (
-    <Box p={3} sx={{ width: '100%' }}>
+    <Grid p={3} xs={12}>
       <WelcomeDashboard businessName={selectedParty?.description} />
-      <Grid
-        container
-        direction="row"
-        justifyContent={selectedParty?.userRole === 'ADMIN' ? 'center' : 'start'}
-        alignItems="center"
-        mb={2}
-      >
-        {selectedParty && selectedParty.userRole === 'ADMIN' && (
-          <Grid item xs={6}>
-            <PartyLogoUploader partyId={selectedParty.partyId} />
+      <Grid container direction="row" alignItems="center" mb={2}>
+        <Grid
+          item
+          sx={{
+            display: 'flex',
+            width: 'max-content',
+            flexDirection: isMobile ? 'column' : 'row',
+          }}
+        >
+          {isAdmin && <PartyLogoUploader partyId={selectedParty.partyId} />}
+          <Grid item xs={isMobile ? 12 : isAdmin ? 6 : 8} mt={isAdmin && isMobile ? 4 : 0}>
+            <PartyCard party={selectedParty} />
           </Grid>
-        )}
-        <Grid item xs={6}>
-          <PartyCard party={selectedParty} />
         </Grid>
       </Grid>
       <Grid item container ml={1} mt={5}>
@@ -78,7 +85,7 @@ const DashboardOverview = () => {
               ))}
         </Grid>
       </Grid>
-    </Box>
+    </Grid>
   );
 };
 

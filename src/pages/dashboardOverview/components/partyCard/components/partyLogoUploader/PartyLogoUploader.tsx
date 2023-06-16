@@ -1,4 +1,4 @@
-import { Grid, Box } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import { DropEvent, FileRejection, useDropzone } from 'react-dropzone';
 import { useState, useEffect } from 'react';
 import useErrorDispatcher from '@pagopa/selfcare-common-frontend/hooks/useErrorDispatcher';
@@ -137,7 +137,7 @@ export function PartyLogoUploader({ partyId }: Props) {
   });
 
   return (
-    <Grid container direction="row">
+    <Grid container xs={6}>
       <Box
         {...getRootProps({ className: 'dropzone' })}
         display="flex"
