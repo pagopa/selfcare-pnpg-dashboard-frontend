@@ -1,4 +1,4 @@
-import { Grid, Box } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import { DropEvent, FileRejection, useDropzone } from 'react-dropzone';
 import { useState, useEffect } from 'react';
 import useErrorDispatcher from '@pagopa/selfcare-common-frontend/hooks/useErrorDispatcher';
@@ -126,7 +126,12 @@ export function PartyLogoUploader({ partyId }: Props) {
       }) as Promise<Array<File | DataTransferItem>>;
     },
     validator: (file) => {
-      if ((file as any).height > maxAllowedPx || (file as any).height < minAllowedPx) {
+      if (
+        (file as any).height > maxAllowedPx ||
+        (file as any).weight > maxAllowedPx ||
+        (file as any).height < minAllowedPx ||
+        (file as any).height !== (file as any).weight
+      ) {
         return {
           code: 'height-width',
           message: `Image width and height must be equal with a value betwenn 300-400`,
@@ -137,7 +142,7 @@ export function PartyLogoUploader({ partyId }: Props) {
   });
 
   return (
-    <Grid container direction="row">
+    <Grid container xs={6}>
       <Box
         {...getRootProps({ className: 'dropzone' })}
         display="flex"

@@ -42,7 +42,7 @@ export default function DashboardSideMenu({ party, setDrawerOpen }: Props) {
   const canSeeSection = party.userRole === 'ADMIN';
 
   return (
-    <Grid container item>
+    <Grid container item width="100%">
       <Grid item xs={12}>
         <List>
           <DashboardSidenavItem
