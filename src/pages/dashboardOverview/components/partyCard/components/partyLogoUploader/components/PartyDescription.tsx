@@ -32,7 +32,7 @@ export function PartyDescription({ labelLink, open, loading }: Props) {
               <EditIcon />
             )
           }
-          sx={{ color: 'primary.main' }}
+          sx={{ color: 'primary.main', width: 'max-content' }}
           weight="default"
         >
           {labelLink}

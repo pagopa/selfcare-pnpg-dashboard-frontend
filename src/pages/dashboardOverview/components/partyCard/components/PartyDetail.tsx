@@ -1,4 +1,4 @@
-import { Box, Grid, TextField, Typography } from '@mui/material';
+import { Box, Grid, TextField, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { ButtonNaked, theme } from '@pagopa/mui-italia';
 import { useTranslation } from 'react-i18next';
 import EditIcon from '@mui/icons-material/Edit';
@@ -12,16 +12,23 @@ import { useAppDispatch, useAppSelector } from '../../../../../redux/hooks';
 
 const emailRegexp = new RegExp('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$');
 
+const useIsMobile = () => {
+  const theme = useTheme();
+  return useMediaQuery(theme.breakpoints.down('md'));
+};
+
 type Props = {
   party?: Party;
 };
 
+// eslint-disable-next-line complexity, sonarjs/cognitive-complexity
 export default function PartyDetail({ party }: Props) {
   const { t } = useTranslation();
 
   const addError = useErrorDispatcher();
   const addNotify = useUserNotify();
   const dispatch = useAppDispatch();
+  const isMobile = useIsMobile();
 
   const setBusinessData = (businessData?: Party) =>
     dispatch(partiesActions.setPartySelected(businessData));
@@ -111,12 +118,28 @@ export default function PartyDetail({ party }: Props) {
 
   return (
     <>
-      <Grid container alignItems={'flex-start'} wrap="nowrap" marginLeft={2}>
-        <Grid container item xs={12} alignItems={'flex-start'} spacing={1} pr={2}>
+      <Grid
+        container
+        item
+        xs={12}
+        pr={3}
+        ml={2}
+        sx={{ alignItems: 'flex-start', flexDirection: isMobile ? 'column' : 'row' }}
+      >
+        <Grid
+          container
+          sx={{
+            display: 'flex',
+            alignItems: isMobile ? 'start' : 'center',
+            flexDirection: isMobile ? 'column' : 'row',
+          }}
+        >
           <Grid item xs={4}>
-            <Typography variant="body2">{t('overview.partyDetail.businessName')}</Typography>
+            <Typography variant="body2" width="max-content">
+              {t('overview.partyDetail.businessName')}
+            </Typography>
           </Grid>
-          <Grid item xs={8} sx={{ display: 'flex' }}>
+          <Grid item xs={8} display={isMobile ? 'grid' : 'flex'} mb={isMobile ? 3 : 0}>
             <Typography sx={{ ...infoStyles, maxWidth: '100% !important' }} className="ShowDots">
               {business?.description}
             </Typography>
@@ -125,17 +148,32 @@ export default function PartyDetail({ party }: Props) {
                 component="button"
                 onClick={() => setOpenBusinessNameEditModal(true)}
                 startIcon={<EditIcon />}
-                sx={{ color: 'primary.main', marginLeft: 2 }}
+                sx={{
+                  color: 'primary.main',
+                  marginTop: isMobile ? '4px' : 0,
+                  marginLeft: isMobile ? 0 : 2,
+                  justifyContent: isMobile ? 'start' : 'normal',
+                }}
                 weight="default"
               >
                 {t('overview.partyDetail.editBusinessName')}
               </ButtonNaked>
             )}
           </Grid>
+        </Grid>
+        <Grid
+          container
+          sx={{
+            marginTop: '4px',
+            display: 'flex',
+            alignItems: isMobile ? 'start' : 'center',
+            flexDirection: isMobile ? 'column' : 'row',
+          }}
+        >
           <Grid item xs={4}>
             <Typography variant="body2">{t('overview.partyDetail.mailAddress')}</Typography>
           </Grid>
-          <Grid item xs={8} sx={{ display: 'flex' }}>
+          <Grid item xs={8} display={isMobile ? 'grid' : 'flex'} mb={isMobile ? 3 : 0}>
             <Typography sx={{ ...infoStyles, maxWidth: '100% !important' }} className="ShowDots">
               {business?.mailAddress}
             </Typography>
@@ -144,15 +182,32 @@ export default function PartyDetail({ party }: Props) {
                 component="button"
                 onClick={() => setOpenBusinessEmailEditModal(true)}
                 startIcon={<EditIcon />}
-                sx={{ color: 'primary.main', flexDirection: 'row', marginLeft: 2 }}
+                sx={{
+                  color: 'primary.main',
+                  marginTop: isMobile ? '4px' : 0,
+                  marginLeft: isMobile ? 0 : 2,
+                  justifyContent: isMobile ? 'start' : 'normal',
+                }}
                 weight="default"
               >
                 {t('overview.partyDetail.editBusinessEmail')}
               </ButtonNaked>
             )}
           </Grid>
+        </Grid>
+        <Grid
+          container
+          sx={{
+            display: 'flex',
+            alignItems: isMobile ? 'start' : 'center',
+            flexDirection: isMobile ? 'column' : 'row',
+            marginTop: '4px',
+          }}
+        >
           <Grid item xs={4}>
-            <Typography variant="body2">{t('overview.partyDetail.fiscalCode')}</Typography>
+            <Typography variant="body2" width="max-content">
+              {t('overview.partyDetail.fiscalCode')}
+            </Typography>
           </Grid>
           <Grid item xs={8}>
             <Typography sx={{ ...infoStyles, maxWidth: '100% !important' }}>
