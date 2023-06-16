@@ -37,7 +37,15 @@ export function PartyDescription({ labelLink, open, loading }: Props) {
         >
           {labelLink}
         </ButtonNaked>
-        <Tooltip title={t('overview.businessLogo.size')} placement="top" arrow={true}>
+        <Tooltip
+          title={
+            <Trans i18nKey={t('overview.businessLogo.size')}>
+              Dimensione esatta 300 x <br /> 300px - Formato .png
+            </Trans>
+          }
+          placement="top"
+          arrow={true}
+        >
           <InfoOutlinedIcon
             sx={{ color: 'text.secondary', cursor: 'pointer', ml: 1 }}
             fontSize="small"
@@ -49,11 +57,17 @@ export function PartyDescription({ labelLink, open, loading }: Props) {
           mt={1}
           sx={{ fontSize: '12px', fontWeight: 'fontWeightRegular', color: 'text.secondary' }}
         >
-          <Trans i18nKey="overview.businessLogo.info">
-            Inserisci solo il logo della tua impresa
-            <br />
-            Sarai responsabile dell’inserimento di immagini diverse da quella indicata.
-          </Trans>
+          {isLogoNotPresent ? (
+            <Trans i18nKey="overview.businessLogo.info">
+              Inserisci solo il logo della tua impresa
+              <br />
+              Sarai responsabile dell’inserimento di immagini diverse da quella indicata.
+            </Trans>
+          ) : (
+            <Trans i18nKey={t('overview.businessLogo.size')}>
+              Dimensione esatta 300 x <br /> 300px - Formato .png
+            </Trans>
+          )}
         </Typography>
       </Box>
     </Stack>
