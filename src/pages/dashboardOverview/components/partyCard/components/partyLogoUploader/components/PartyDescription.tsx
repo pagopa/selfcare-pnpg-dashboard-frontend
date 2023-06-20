@@ -37,20 +37,22 @@ export function PartyDescription({ labelLink, open, loading }: Props) {
         >
           {labelLink}
         </ButtonNaked>
-        <Tooltip
-          title={
-            <Trans i18nKey={t('overview.businessLogo.size')}>
-              Dimensione esatta 300 x <br /> 300px - Formato .png
-            </Trans>
-          }
-          placement="top"
-          arrow={true}
-        >
-          <InfoOutlinedIcon
-            sx={{ color: 'text.secondary', cursor: 'pointer', ml: 1 }}
-            fontSize="small"
-          />
-        </Tooltip>
+        {!isLogoNotPresent && (
+          <Tooltip
+            title={
+              <Trans i18nKey={t('overview.businessLogo.size')}>
+                Dimensione esatta 300 x <br /> 300px - Formato .png
+              </Trans>
+            }
+            placement="top"
+            arrow={true}
+          >
+            <InfoOutlinedIcon
+              sx={{ color: 'text.secondary', cursor: 'pointer', ml: 1 }}
+              fontSize="small"
+            />
+          </Tooltip>
+        )}
       </Box>
       <Box>
         <Typography
