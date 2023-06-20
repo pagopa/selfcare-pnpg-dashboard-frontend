@@ -21,7 +21,7 @@ export default {
   },
   productsList: {
     yourBusiness: 'La tua impresa',
-    digitalNotifications: 'Notifiche digitali',
+    digitalNotifications: 'SEND - Servizio Notifiche Digitali',
   },
   overview: {
     title: 'Panoramica',
