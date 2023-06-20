@@ -1,4 +1,4 @@
-import { Grid, Box, useTheme, useMediaQuery, Drawer, Button } from '@mui/material';
+import { Grid, Box, useTheme, Drawer, Button } from '@mui/material';
 import { useMemo, useState } from 'react';
 import { Route, Switch, useHistory } from 'react-router';
 import { useStore } from 'react-redux';
@@ -16,6 +16,7 @@ import { DASHBOARD_ROUTES, RouteConfig, RoutesObject } from '../../routes';
 import { ENV } from '../../utils/env';
 import RemoteRoutingUsers from '../../microcomponents/users/RemoteRoutingUsers';
 import RemoteRoutingGroups from '../../microcomponents/groups/RemoteRoutingGroups';
+import { useIsMobile } from '../../hooks/useIsMobile';
 import DashboardSideMenu from './components/dashboardSideMenu/DashboardSideMenu';
 
 export type DashboardPageProps = {
@@ -31,11 +32,6 @@ export type DashboardDecoratorsType = {
   withSelectedProductRoles: (
     WrappedComponent: React.ComponentType<any>
   ) => React.ComponentType<any>;
-};
-
-const useIsMobile = () => {
-  const theme = useTheme();
-  return useMediaQuery(theme.breakpoints.down('lg'));
 };
 
 const reduceDecorators = (
@@ -90,7 +86,7 @@ const Dashboard = () => {
   const store = useStore();
   const theme = useTheme();
   const { t, i18n } = useTranslation();
-  const isMobile = useIsMobile();
+  const isMobile = useIsMobile('lg');
 
   const [drawerOpen, setDrawerOpen] = useState(false);
 

@@ -1,4 +1,4 @@
-import { Grid, Box, useTheme, useMediaQuery } from '@mui/material';
+import { Grid, Box } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import TitleBox from '@pagopa/selfcare-common-frontend/components/TitleBox';
@@ -8,6 +8,7 @@ import { partiesSelectors } from '../../redux/slices/partiesSlice';
 import { useAppSelector } from '../../redux/hooks';
 import SendIcon from '../../assets/send.svg';
 import { useTokenExchange } from '../../hooks/useTokenExchange';
+import { useIsMobile } from '../../hooks/useIsMobile';
 import WelcomeDashboard from './components/welcomeDashboard/WelcomeDashboard';
 import PartyCard from './components/partyCard/PartyCard';
 import { PartyLogoUploader } from './components/partyCard/components/partyLogoUploader/PartyLogoUploader';
@@ -17,16 +18,11 @@ type UrlParams = {
   partyId: string;
 };
 
-const useIsMobile = () => {
-  const theme = useTheme();
-  return useMediaQuery(theme.breakpoints.down('md'));
-};
-
 const DashboardOverview = () => {
   const { t } = useTranslation();
   const { partyId } = useParams<UrlParams>();
   const { invokeProductBo } = useTokenExchange();
-  const isMobile = useIsMobile();
+  const isMobile = useIsMobile('md');
   const parties = useAppSelector(partiesSelectors.selectPartiesList);
   const products = useAppSelector(partiesSelectors.selectPartySelectedProducts);
 
