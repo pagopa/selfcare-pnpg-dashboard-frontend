@@ -1,4 +1,4 @@
-import { Box, Grid, TextField, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Grid, TextField, Typography } from '@mui/material';
 import { ButtonNaked, theme } from '@pagopa/mui-italia';
 import { useTranslation } from 'react-i18next';
 import EditIcon from '@mui/icons-material/Edit';
@@ -9,13 +9,9 @@ import { Party } from '../../../../../model/Party';
 import { updateBusinessData } from '../../../../../services/partyService';
 import { partiesActions, partiesSelectors } from '../../../../../redux/slices/partiesSlice';
 import { useAppDispatch, useAppSelector } from '../../../../../redux/hooks';
+import { useIsMobile } from '../../../../../hooks/useIsMobile';
 
 const emailRegexp = new RegExp('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$');
-
-const useIsMobile = () => {
-  const theme = useTheme();
-  return useMediaQuery(theme.breakpoints.down('md'));
-};
 
 type Props = {
   party?: Party;
@@ -28,7 +24,7 @@ export default function PartyDetail({ party }: Props) {
   const addError = useErrorDispatcher();
   const addNotify = useUserNotify();
   const dispatch = useAppDispatch();
-  const isMobile = useIsMobile();
+  const isMobile = useIsMobile('md');
 
   const setBusinessData = (businessData?: Party) =>
     dispatch(partiesActions.setPartySelected(businessData));
