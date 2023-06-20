@@ -37,7 +37,7 @@ export function PartyDescription({ labelLink, open, loading }: Props) {
         >
           {labelLink}
         </ButtonNaked>
-        {!isLogoNotPresent && (
+        {isLogoNotPresent && (
           <Tooltip
             title={
               <Trans i18nKey={t('overview.businessLogo.size')}>
