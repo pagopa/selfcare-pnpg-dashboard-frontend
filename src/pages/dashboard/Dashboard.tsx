@@ -145,7 +145,8 @@ const Dashboard = () => {
       <Grid
         item
         component="main"
-        xs={isMobile ? 12 : 10}
+        xs={12}
+        lg={10}
         sx={{ backgroundColor: '#F5F6F7' }}
         display="flex"
         pb={8}

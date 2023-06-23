@@ -9,7 +9,6 @@ import { Party } from '../../../../../model/Party';
 import { updateBusinessData } from '../../../../../services/partyService';
 import { partiesActions, partiesSelectors } from '../../../../../redux/slices/partiesSlice';
 import { useAppDispatch, useAppSelector } from '../../../../../redux/hooks';
-import { useIsMobile } from '../../../../../hooks/useIsMobile';
 
 const emailRegexp = new RegExp('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$');
 
@@ -24,7 +23,6 @@ export default function PartyDetail({ party }: Props) {
   const addError = useErrorDispatcher();
   const addNotify = useUserNotify();
   const dispatch = useAppDispatch();
-  const isMobile = useIsMobile('md');
 
   const setBusinessData = (businessData?: Party) =>
     dispatch(partiesActions.setPartySelected(businessData));
@@ -120,14 +118,24 @@ export default function PartyDetail({ party }: Props) {
         xs={12}
         pr={3}
         ml={2}
-        sx={{ alignItems: 'flex-start', flexDirection: isMobile ? 'column' : 'row' }}
+        sx={{
+          alignItems: 'flex-start',
+          flexDirection: 'row',
+          [theme.breakpoints.down('md')]: {
+            alignItems: 'column',
+          },
+        }}
       >
         <Grid
           container
           sx={{
             display: 'flex',
-            alignItems: isMobile ? 'start' : 'center',
-            flexDirection: isMobile ? 'column' : 'row',
+            alignItems: 'center',
+            flexDirection: 'row',
+            [theme.breakpoints.down('md')]: {
+              alignItems: 'start',
+              flexDirection: 'column',
+            },
           }}
         >
           <Grid item xs={4}>
@@ -135,7 +143,17 @@ export default function PartyDetail({ party }: Props) {
               {t('overview.partyDetail.businessName')}
             </Typography>
           </Grid>
-          <Grid item xs={8} display={isMobile ? 'grid' : 'flex'} mb={isMobile ? 3 : 0}>
+          <Grid
+            item
+            xs={8}
+            display={'flex'}
+            sx={{
+              [theme.breakpoints.down('md')]: {
+                marginBottom: 3,
+                display: 'grid',
+              },
+            }}
+          >
             <Typography sx={{ ...infoStyles, maxWidth: '100% !important' }} className="ShowDots">
               {business?.description}
             </Typography>
@@ -146,9 +164,12 @@ export default function PartyDetail({ party }: Props) {
                 startIcon={<EditIcon />}
                 sx={{
                   color: 'primary.main',
-                  marginTop: isMobile ? '4px' : 0,
-                  marginLeft: isMobile ? 0 : 2,
-                  justifyContent: isMobile ? 'start' : 'normal',
+                  marginLeft: 2,
+                  [theme.breakpoints.down('md')]: {
+                    marginTop: '4px',
+                    marginLeft: 0,
+                    justifyContent: 'start',
+                  },
                 }}
                 weight="default"
               >
@@ -162,14 +183,28 @@ export default function PartyDetail({ party }: Props) {
           sx={{
             marginTop: '4px',
             display: 'flex',
-            alignItems: isMobile ? 'start' : 'center',
-            flexDirection: isMobile ? 'column' : 'row',
+            alignItems: 'center',
+            flexDirection: 'row',
+            [theme.breakpoints.down('md')]: {
+              alignItems: 'start',
+              flexDirection: 'column',
+            },
           }}
         >
           <Grid item xs={4}>
             <Typography variant="body2">{t('overview.partyDetail.mailAddress')}</Typography>
           </Grid>
-          <Grid item xs={8} display={isMobile ? 'grid' : 'flex'} mb={isMobile ? 3 : 0}>
+          <Grid
+            item
+            xs={8}
+            display="flex"
+            sx={{
+              [theme.breakpoints.down('md')]: {
+                marginBottom: 3,
+                display: 'grid',
+              },
+            }}
+          >
             <Typography sx={{ ...infoStyles, maxWidth: '100% !important' }} className="ShowDots">
               {business?.mailAddress}
             </Typography>
@@ -180,9 +215,12 @@ export default function PartyDetail({ party }: Props) {
                 startIcon={<EditIcon />}
                 sx={{
                   color: 'primary.main',
-                  marginTop: isMobile ? '4px' : 0,
-                  marginLeft: isMobile ? 0 : 2,
-                  justifyContent: isMobile ? 'start' : 'normal',
+                  marginLeft: 2,
+                  [theme.breakpoints.down('md')]: {
+                    marginTop: '4px',
+                    marginLeft: 0,
+                    justifyContent: 'start',
+                  },
                 }}
                 weight="default"
               >
@@ -195,8 +233,12 @@ export default function PartyDetail({ party }: Props) {
           container
           sx={{
             display: 'flex',
-            alignItems: isMobile ? 'start' : 'center',
-            flexDirection: isMobile ? 'column' : 'row',
+            alignItems: 'center',
+            flexDirection: 'row',
+            [theme.breakpoints.down('md')]: {
+              alignItems: 'start',
+              flexDirection: 'column',
+            },
             marginTop: '4px',
           }}
         >
