@@ -3,10 +3,10 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import TitleBox from '@pagopa/selfcare-common-frontend/components/TitleBox';
 import { useTranslation } from 'react-i18next';
+import { theme } from '@pagopa/mui-italia';
 import { Party } from '../../model/Party';
 import { partiesSelectors } from '../../redux/slices/partiesSlice';
 import { useAppSelector } from '../../redux/hooks';
-import SendIcon from '../../assets/send.svg';
 import { useTokenExchange } from '../../hooks/useTokenExchange';
 import { useIsMobile } from '../../hooks/useIsMobile';
 import WelcomeDashboard from './components/welcomeDashboard/WelcomeDashboard';
@@ -44,11 +44,14 @@ const DashboardOverview = () => {
           sx={{
             display: 'flex',
             width: 'max-content',
-            flexDirection: isMobile ? 'column' : 'row',
+            flexDirection: 'row',
+            [theme.breakpoints.down('md')]: {
+              flexDirection: 'column',
+            },
           }}
         >
           {isAdmin && <PartyLogoUploader partyId={selectedParty.partyId} />}
-          <Grid item xs={isMobile ? 12 : isAdmin ? 6 : 8} mt={isAdmin && isMobile ? 4 : 0}>
+          <Grid item xs={12} md={isAdmin ? 6 : 8} mt={isAdmin && isMobile ? 4 : 0}>
             <PartyCard party={selectedParty} />
           </Grid>
         </Grid>
@@ -72,7 +75,7 @@ const DashboardOverview = () => {
                         ? t('overview.notificationAreaProduct.card.title')
                         : p.title
                     }
-                    urlLogo={p.id === 'prod-pn-pg' ? SendIcon : p.logo}
+                    urlLogo={p.logo}
                     btnAction={() =>
                       selectedParty ? invokeProductBo(p, selectedParty) : undefined
                     }

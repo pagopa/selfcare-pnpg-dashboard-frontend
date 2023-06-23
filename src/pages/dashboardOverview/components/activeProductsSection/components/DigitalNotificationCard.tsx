@@ -1,5 +1,4 @@
 import { Typography, Box, Grid, Card, useTheme, Tooltip, Fab } from '@mui/material';
-import { ProductAvatar } from '@pagopa/mui-italia';
 import ArrowForward from '@mui/icons-material/ArrowForward';
 
 type Props = {
@@ -21,12 +20,30 @@ export default function DigitalNotificationCard({ cardTitle, urlLogo, btnAction 
       <Grid container p={2} pb={2}>
         <Grid item xs={12} display="flex" alignItems="flex-start">
           <Box display="flex" flexDirection="column" justifyContent="center" mr={2}>
-            <ProductAvatar
-              logoUrl={urlLogo}
-              size={'default'}
-              logoBgColor={'#0B3EE3'}
-              logoAltText={``}
-            />
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                position: 'relative',
+                width: '64px',
+                height: '64px',
+                padding: 1,
+                backgroundColor: '#0B3EE3',
+                boxSizing: 'border-box',
+                borderRadius: theme.spacing(1),
+              }}
+            >
+              <img
+                src={urlLogo}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'contain',
+                  objectPosition: 'center',
+                }}
+              />
+            </Box>
           </Box>
           <Box display="flex" flexDirection="row" justifyContent="center">
             {cardTitle && (
