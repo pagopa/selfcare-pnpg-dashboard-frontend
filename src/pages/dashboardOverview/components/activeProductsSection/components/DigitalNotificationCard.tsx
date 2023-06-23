@@ -23,7 +23,7 @@ export default function DigitalNotificationCard({ cardTitle, urlLogo, btnAction 
           <Box display="flex" flexDirection="column" justifyContent="center" mr={2}>
             <ProductAvatar
               logoUrl={urlLogo}
-              size={'default'}
+              size={'small'}
               logoBgColor={'#0B3EE3'}
               logoAltText={``}
             />

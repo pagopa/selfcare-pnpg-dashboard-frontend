@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 import { Party } from '../../model/Party';
 import { partiesSelectors } from '../../redux/slices/partiesSlice';
 import { useAppSelector } from '../../redux/hooks';
-import SendIcon from '../../assets/send.svg';
 import { useTokenExchange } from '../../hooks/useTokenExchange';
 import { useIsMobile } from '../../hooks/useIsMobile';
 import WelcomeDashboard from './components/welcomeDashboard/WelcomeDashboard';
@@ -72,7 +71,7 @@ const DashboardOverview = () => {
                         ? t('overview.notificationAreaProduct.card.title')
                         : p.title
                     }
-                    urlLogo={p.id === 'prod-pn-pg' ? SendIcon : p.logo}
+                    urlLogo={p.imageUrl}
                     btnAction={() =>
                       selectedParty ? invokeProductBo(p, selectedParty) : undefined
                     }
