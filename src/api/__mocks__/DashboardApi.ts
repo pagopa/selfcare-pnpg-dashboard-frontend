@@ -51,19 +51,6 @@ export const mockedInstitutionsResource: Array<PnPGInstitutionResource> = [
     origin: 'ADE',
     institutionType: 'Azienda privata',
   },
-  {
-    userRole: 'ADMIN',
-    name: 'mockedBusiness4',
-    status: 'ACTIVE',
-    id: '5b971318-3df7-11c1-67c8-1111e6707dgt',
-    fiscalCode: '05923570510',
-    mailAddress: 'mockemail4@mocktest.com',
-    category: '',
-    externalId: '05923570510',
-    originId: 'originId1',
-    origin: 'ADE',
-    institutionType: 'Azienda privata',
-  },
 ];
 
 export const mockedInstitutionsResource2Party =
