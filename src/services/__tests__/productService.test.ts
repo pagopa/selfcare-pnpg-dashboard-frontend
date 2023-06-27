@@ -1,20 +1,22 @@
-import { mockedProductResources } from '../../api/__mocks__/DashboardPnpgApiClient';
+import { mockedProductResources } from '../../api/__mocks__/DashboardApi';
 import { fetchProducts, fetchProductRoles } from '../productService';
+import { productResource2Product } from '../../model/Product';
 import { mockedPartyProducts } from '../__mocks__/productService';
+import { DashboardApi } from '../../api/DashboardApi';
 
-jest.mock('../productService');
+jest.mock('../../api/DashboardApi');
 
 beforeEach(() => {
-  jest.spyOn(require('../productService'), 'fetchProducts');
-  jest.spyOn(require('../productService'), 'fetchProductRoles');
+  jest.spyOn(DashboardApi, 'getProducts');
+  jest.spyOn(DashboardApi, 'getProductRoles');
 });
 
 test('Test fetchProducts', async () => {
   const products = await fetchProducts('5b321318-3df7-48c1-67c8-1111e6707c3d');
 
-  expect(products).toMatchObject(mockedProductResources[0]);
+  expect(products).toMatchObject(mockedProductResources.map(productResource2Product));
 
-  expect(fetchProducts).toBeCalledTimes(1);
+  expect(DashboardApi.getProducts).toBeCalledTimes(1);
 });
 
 test('Test fetchProductRoles', async () => {
@@ -22,8 +24,8 @@ test('Test fetchProductRoles', async () => {
 
   expect(productRoles).toStrictEqual([
     {
-      productId: 'prod-pn-pg',
-      partyRole: 'MANAGER',
+      productId: mockedPartyProducts[0].id,
+      partyRole: 'SUB_DELEGATE',
       selcRole: 'ADMIN',
       multiroleAllowed: false,
       productRole: 'pg-admin',
@@ -31,15 +33,15 @@ test('Test fetchProductRoles', async () => {
       description: 'Stipula il contratto e identifica gli amministratori',
     },
     {
-      productId: 'prod-pn-pg',
+      productId: mockedPartyProducts[0].id,
       partyRole: 'OPERATOR',
       selcRole: 'LIMITED',
       multiroleAllowed: false,
       productRole: 'pg-operator',
-      title: 'Gestore Notifiche',
+      title: 'Tecnico',
       description: "Gestisce l'integrazione tecnologica e/o l'operatività dei servizi",
     },
   ]);
 
-  expect(fetchProductRoles).toBeCalledWith(mockedPartyProducts[0]);
+  expect(DashboardApi.getProductRoles).toBeCalledWith(mockedPartyProducts[0].id);
 });

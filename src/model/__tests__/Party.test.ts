@@ -1,16 +1,15 @@
 import { PnPGInstitutionResource } from '../../api/generated/b4f-dashboard-pnpg/PnPGInstitutionResource';
-import { InstitutionTypeEnum } from '../../api/generated/b4f-dashboard-pnpg/InstitutionResource';
-import { institutionPnPGResource2PartyPnpg, PartyPnpg } from '../PartyPnpg';
+import { institutionResource2Party, Party } from '../Party';
 
 test('Test Party', () => {
-  const party: PartyPnpg = {
+  const party: Party = {
     externalId: '44444444444',
     fiscalCode: '44444444444',
     geographicTaxonomies: [{ code: '', desc: '' }],
-    id: '44444444444',
+    partyId: '44444444444',
     institutionType: 'GSP',
     mailAddress: undefined,
-    name: 'BusinessName',
+    description: 'BusinessName',
     recipientCode: 'MDSSFDF',
     status: 'TestStatus1',
     address: 'LegalAddressTest2',
@@ -26,10 +25,10 @@ test('Test Party', () => {
     externalId: '44444444444',
     fiscalCode: '44444444444',
     geographicTaxonomies: [{ code: '', desc: '' }],
-    id: '44444444444',
+    partyId: '44444444444',
     institutionType: 'GSP',
     mailAddress: undefined,
-    name: 'BusinessName',
+    description: 'BusinessName',
     recipientCode: 'MDSSFDF',
     status: 'TestStatus1',
     address: 'LegalAddressTest2',
@@ -49,7 +48,6 @@ test('Test institutionResource2Party', () => {
     geographicTaxonomies: [{ code: '', desc: '' }],
     institutionType: 'GSP',
     id: '44444444444',
-    mailAddress: undefined,
     name: 'BusinessName',
     recipientCode: 'MDSSFDF',
     status: 'TestStatus1',
@@ -57,18 +55,18 @@ test('Test institutionResource2Party', () => {
     category: 'categoryTest2',
     origin: 'originTest2',
     originId: 'originIdTest2',
+    mailAddress: undefined,
     userRole: undefined,
     zipCode: undefined,
   };
 
-  const party = institutionPnPGResource2PartyPnpg(institutionResource);
+  const party = institutionResource2Party(institutionResource);
   expect(party).toStrictEqual({
     externalId: '44444444444',
     fiscalCode: '44444444444',
     geographicTaxonomies: [{ code: '', desc: '' }],
     institutionType: 'GSP',
     partyId: '44444444444',
-    digitalAddress: undefined,
     description: 'BusinessName',
     recipientCode: 'MDSSFDF',
     status: 'TestStatus1',
@@ -77,6 +75,7 @@ test('Test institutionResource2Party', () => {
     origin: 'originTest2',
     originId: 'originIdTest2',
     urlLogo: 'http://checkout.selfcare/institutions/44444444444/logo.png',
+    mailAddress: undefined,
     userRole: undefined,
     zipCode: undefined,
   });

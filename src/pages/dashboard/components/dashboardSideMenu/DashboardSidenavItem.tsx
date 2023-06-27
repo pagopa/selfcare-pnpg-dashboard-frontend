@@ -16,7 +16,7 @@ export default function DashboardSidenavItem({ handleClick, title, isSelected, i
         onClick={handleClick}
         sx={{
           height: '100%',
-          maxWidth: 360,
+          width: '270px',
           backgroundColor: 'background.paper',
         }}
       >

@@ -1,13 +1,14 @@
-import { Grid, Box, useTheme } from '@mui/material';
-import { useMemo } from 'react';
+import { Grid, Box, useTheme, Drawer, Button } from '@mui/material';
+import { useMemo, useState } from 'react';
 import { Route, Switch, useHistory } from 'react-router';
 import { useStore } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import DehazeIcon from '@mui/icons-material/Dehaze';
 import withSelectedParty from '../../decorators/withSelectedParty';
 import withProductRolesMap from '../../decorators/withProductsRolesMap';
 import withSelectedProduct from '../../decorators/withSelectedPartyProduct';
 import withSelectedProductRoles from '../../decorators/withSelectedPartyProductAndRoles';
-import { PartyPnpg } from '../../model/PartyPnpg';
+import { Party } from '../../model/Party';
 import { buildProductsMap, Product, ProductsMap } from '../../model/Product';
 import { useAppSelector } from '../../redux/hooks';
 import { partiesSelectors } from '../../redux/slices/partiesSlice';
@@ -15,10 +16,11 @@ import { DASHBOARD_ROUTES, RouteConfig, RoutesObject } from '../../routes';
 import { ENV } from '../../utils/env';
 import RemoteRoutingUsers from '../../microcomponents/users/RemoteRoutingUsers';
 import RemoteRoutingGroups from '../../microcomponents/groups/RemoteRoutingGroups';
+import { useIsMobile } from '../../hooks/useIsMobile';
 import DashboardSideMenu from './components/dashboardSideMenu/DashboardSideMenu';
 
 export type DashboardPageProps = {
-  party: PartyPnpg;
+  party: Party;
   products: Array<Product>;
   activeProducts: Array<Product>;
   productsMap: ProductsMap;
@@ -46,7 +48,7 @@ const reduceDecorators = (
   );
 
 export const buildRoutes = (
-  party: PartyPnpg,
+  party: Party,
   products: Array<Product>,
   activeProducts: Array<Product>,
   productsMap: ProductsMap,
@@ -76,13 +78,17 @@ export const buildRoutes = (
     );
   });
 
+// eslint-disable-next-line sonarjs/cognitive-complexity
 const Dashboard = () => {
   const history = useHistory();
   const party = useAppSelector(partiesSelectors.selectPartySelected);
   const products = useAppSelector(partiesSelectors.selectPartySelectedProducts);
   const store = useStore();
   const theme = useTheme();
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isMobile = useIsMobile('lg');
+
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   const activeProducts: Array<Product> =
     useMemo(() => products?.filter((p) => p.productOnBoardingStatus === 'ACTIVE'), [products]) ??
@@ -95,12 +101,56 @@ const Dashboard = () => {
 
   return party && products ? (
     <Grid container item xs={12} sx={{ backgroundColor: 'background.paper' }}>
-      <Grid component="nav" item xs={2}>
-        <Box>
-          <DashboardSideMenu party={party} />
-        </Box>
-      </Grid>
-      <Grid item component="main" xs={10} sx={{ backgroundColor: '#F5F6F7' }} display="flex" pb={8}>
+      {isMobile ? (
+        <>
+          <Button
+            fullWidth
+            disableRipple
+            sx={{
+              height: '59px',
+              justifyContent: 'left',
+              boxShadow:
+                'rgba(0, 43, 85, 0.1) 0px 2px 4px -1px, rgba(0, 43, 85, 0.05) 0px 4px 5px !important',
+            }}
+            onClick={() => setDrawerOpen(true)}
+          >
+            <DehazeIcon sx={{ marginRight: 2 }} />
+            {window.location.pathname.includes('users')
+              ? t('overview.sideMenu.institutionManagement.referents.title')
+              : window.location.pathname.includes('groups')
+              ? t('overview.sideMenu.institutionManagement.groups.title')
+              : t('overview.sideMenu.institutionManagement.overview.title')}
+          </Button>
+          <Grid>
+            <Drawer
+              open={drawerOpen}
+              PaperProps={{
+                sx: { width: '270px' },
+              }}
+              onClose={() => setDrawerOpen(false)}
+            >
+              <Grid item xs={2} component="nav" display="inline-grid">
+                <DashboardSideMenu party={party} setDrawerOpen={setDrawerOpen} />
+              </Grid>
+            </Drawer>
+          </Grid>
+        </>
+      ) : (
+        <Grid component="nav" item xs={2}>
+          <Box>
+            <DashboardSideMenu party={party} setDrawerOpen={setDrawerOpen} />
+          </Box>
+        </Grid>
+      )}
+      <Grid
+        item
+        component="main"
+        xs={12}
+        lg={10}
+        sx={{ backgroundColor: '#F5F6F7' }}
+        display="flex"
+        pb={8}
+      >
         <Switch>
           <Route path={ENV.ROUTES.USERS} exact={false}>
             <RemoteRoutingUsers

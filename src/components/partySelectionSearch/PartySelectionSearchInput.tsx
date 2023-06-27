@@ -66,6 +66,7 @@ export default function PartySelectionSearchInput({
               disableRipple={true}
               onClick={clearField}
               aria-label="removeSelectionIcon"
+              id="remove"
             >
               <ClearOutlinedIcon sx={{ color: iconColor }} />
             </CustomIconButton>

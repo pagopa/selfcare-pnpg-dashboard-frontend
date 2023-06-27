@@ -1,4 +1,4 @@
-import { UserRole, PartyRole } from './PartyPnpg';
+import { UserRole, PartyRole } from './Party';
 
 export type ProductRole = {
   productId: string;

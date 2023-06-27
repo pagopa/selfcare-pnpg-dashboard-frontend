@@ -1,11 +1,11 @@
-import { Grid, Box } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import { DropEvent, FileRejection, useDropzone } from 'react-dropzone';
 import { useState, useEffect } from 'react';
 import useErrorDispatcher from '@pagopa/selfcare-common-frontend/hooks/useErrorDispatcher';
 import { trackEvent } from '@pagopa/selfcare-common-frontend/services/analyticsService';
 import { uniqueId } from 'lodash';
 import { TFunction, useTranslation } from 'react-i18next';
-import { DashboardPnpgApi } from '../../../../../../api/DashboardPnpgApiClient';
+import { DashboardApi } from '../../../../../../api/DashboardApi';
 import { useAppDispatch, useAppSelector } from '../../../../../../redux/hooks';
 import { partiesActions, partiesSelectors } from '../../../../../../redux/slices/partiesSlice';
 import { PartyDescription } from './components/PartyDescription';
@@ -38,8 +38,8 @@ export function PartyLogoUploader({ partyId }: Props) {
     }
   }, [urlLogo, partyId]);
 
-  const maxLength = 400;
-  const minLegth = 300;
+  const maxAllowedPx = 300;
+  const minAllowedPx = 120;
 
   const onFileRejected = (files: Array<FileRejection>) => {
     addError({
@@ -60,20 +60,20 @@ export function PartyLogoUploader({ partyId }: Props) {
       setUploadedFiles(files);
       setLabelLink(files[0].name);
       const requestId = uniqueId();
-      trackEvent('DASHBOARD_PARTY_CHANGE_LOGO', { party_id: partyId, request_id: requestId });
+      trackEvent('DASHBOARD_BUSINESS_CHANGE_LOGO', { party_id: partyId, request_id: requestId });
 
-      DashboardPnpgApi.saveInstitutionLogo(partyId, files[0])
+      DashboardApi.saveInstitutionLogo(partyId, files[0])
         .then(() => {
           setUrlLogo(urlLogo);
           setLoading(false);
           setLabelLink(t('overview.businessLogo.modify'));
-          trackEvent('DASHBOARD_PARTY_CHANGE_LOGO_SUCCESS', {
+          trackEvent('DASHBOARD_BUSINESS_CHANGE_LOGO_SUCCESS', {
             party_id: partyId,
             request_id: requestId,
           });
         })
         .catch((reason) => {
-          trackEvent('DASHBOARD_PARTY_CHANGE_LOGO_FAILURE', {
+          trackEvent('DASHBOARD_BUSINESS_CHANGE_LOGO_FAILURE', {
             party_id: partyId,
             request_id: requestId,
           });
@@ -127,9 +127,10 @@ export function PartyLogoUploader({ partyId }: Props) {
     },
     validator: (file) => {
       if (
-        (file as any).height > maxLength ||
-        (file as any).height < minLegth ||
-        (file as any).height !== (file as any).width
+        (file as any).height > maxAllowedPx ||
+        (file as any).weight > maxAllowedPx ||
+        (file as any).height < minAllowedPx ||
+        (file as any).height !== (file as any).weight
       ) {
         return {
           code: 'height-width',
@@ -141,12 +142,13 @@ export function PartyLogoUploader({ partyId }: Props) {
   });
 
   return (
-    <Grid container direction="row">
+    <Grid container xs={6}>
       <Box
         {...getRootProps({ className: 'dropzone' })}
         display="flex"
         justifyItems={'center'}
         alignItems={'center'}
+        data-testid="dropzone"
       >
         <>
           <Box>

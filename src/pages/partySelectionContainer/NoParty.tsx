@@ -2,14 +2,17 @@ import { useEffect } from 'react';
 import { Grid, Button, Typography } from '@mui/material';
 import { trackEvent } from '@pagopa/selfcare-common-frontend/services/analyticsService';
 import { useTranslation, Trans } from 'react-i18next';
+import { uniqueId } from 'lodash';
 import { ReactComponent as NoBusiness } from '../../assets/no-business.svg';
 import { ENV } from '../../utils/env';
 
 export default function NoParty() {
   const { t } = useTranslation();
 
+  const requestId = uniqueId();
+
   useEffect(() => {
-    trackEvent('DASHBOARD_ASSOCIATION_FAILURE', { event_name: 'DASHBOARD_ASSOCIATION_FAILURE' });
+    trackEvent('DASHBOARD_ASSOCIATION_FAILURE', { requestId });
   }, []);
 
   return (
@@ -29,8 +32,8 @@ export default function NoParty() {
           </Grid>
           <Typography variant="h3" component="h2">
             <Trans i18nKey="businessSelection.noBusinessFound.title">
-              L’impresa non è ancora <br />
-              registrata
+              Per leggere le notifiche devi <br />
+              prima registrare la tua impresa
             </Trans>
           </Typography>
         </Grid>

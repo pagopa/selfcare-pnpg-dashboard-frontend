@@ -1,4 +1,9 @@
 import {
+  PartyRoleEnum,
+  ProductRoleMappingsResource,
+  SelcRoleEnum,
+} from '../../api/generated/b4f-dashboard-pnpg/ProductRoleMappingsResource';
+import {
   ProductOnBoardingStatusEnum,
   StatusEnum,
 } from '../../api/generated/b4f-dashboard-pnpg/SubProductResource';
@@ -8,8 +13,8 @@ import { ProductRole } from '../../model/ProductRole';
 export const mockedPartyProduct: Product = {
   logo: 'https://selcdcheckoutsa.z6.web.core.windows.net/resources/products/prod-pn/logo.svg',
   id: 'prod-pn-pg',
-  title: 'Piattaforma Notifiche Persone Giuridiche',
-  description: 'Piattaforma Notifiche Persone Giuridiche',
+  title: 'SEND',
+  description: 'Descrizione SEND',
   authorized: true,
   productOnBoardingStatus: ProductOnBoardingStatusEnum.ACTIVE,
   status: StatusEnum.ACTIVE,
@@ -26,27 +31,67 @@ export const mockedPartyProduct: Product = {
 export const mockedPartyProducts: Array<Product> = [
   {
     logo: 'https://selcdcheckoutsa.z6.web.core.windows.net/resources/products/prod-pn/logo.svg',
+    title: 'SEND',
+    description: 'Descrizione SEND',
     id: 'prod-pn-pg',
-    title: 'Piattaforma Notifiche Persone Giuridiche',
-    description: 'Piattaforma Notifiche Persone Giuridiche',
     authorized: true,
-    productOnBoardingStatus: ProductOnBoardingStatusEnum.ACTIVE,
     status: StatusEnum.ACTIVE,
+    productOnBoardingStatus: ProductOnBoardingStatusEnum.ACTIVE,
     urlBO: 'http://notifiche/bo?token=<IdentityToken>',
-    activationDateTime: new Date(2021, 1, 2),
     urlPublic: 'http://notifiche/public',
     imageUrl:
       'https://selcdcheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg',
     subProducts: [],
-    logoBgColor: 'pagoPA.main',
-    userRole: 'ADMIN',
+    logoBgColor: undefined,
+    tag: undefined,
+    userRole: undefined,
+    activationDateTime: undefined,
+    backOfficeEnvironmentConfigurations: undefined,
+  },
+  {
+    logo: 'https://selcdcheckoutsa.z6.web.core.windows.net/resources/products/prod-pn/logo.svg',
+    title: 'SEND ambiente sviluppo',
+    description: 'SEND ambiente sviluppo',
+    id: 'prod-pn-pg-svil',
+    authorized: true,
+    status: StatusEnum.ACTIVE,
+    productOnBoardingStatus: ProductOnBoardingStatusEnum.ACTIVE,
+    urlBO: 'http://notifiche/bo?token=<IdentityToken>',
+    urlPublic: 'http://notifiche/public',
+    imageUrl:
+      'https://selcdcheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg',
+    subProducts: [],
+    logoBgColor: undefined,
+    tag: undefined,
+    userRole: undefined,
+    activationDateTime: undefined,
+    backOfficeEnvironmentConfigurations: undefined,
+  },
+  {
+    logo: 'https://selcdcheckoutsa.z6.web.core.windows.net/resources/products/prod-pn/logo.svg',
+    title: 'SEND ambiente collaudo',
+    description: 'SEND ambiente collaudo',
+    id: 'prod-pn-pg-coll',
+    authorized: true,
+    status: StatusEnum.ACTIVE,
+    productOnBoardingStatus: ProductOnBoardingStatusEnum.ACTIVE,
+    urlBO: 'http://notifiche/bo?token=<IdentityToken>',
+    urlPublic: 'http://notifiche/public',
+    imageUrl:
+      'https://selcdcheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg',
+    subProducts: [],
+    logoBgColor: undefined,
+    tag: undefined,
+    userRole: undefined,
+    activationDateTime: undefined,
+    backOfficeEnvironmentConfigurations: undefined,
   },
 ];
 
 export const mockedProductRoles: Array<ProductRole> = [
   {
     productId: 'prod-pn-pg',
-    partyRole: 'MANAGER',
+    partyRole: 'SUB_DELEGATE',
     selcRole: 'ADMIN',
     multiroleAllowed: false,
     productRole: 'pg-admin',
@@ -59,8 +104,35 @@ export const mockedProductRoles: Array<ProductRole> = [
     selcRole: 'LIMITED',
     multiroleAllowed: false,
     productRole: 'pg-operator',
-    title: 'Gestore Notifiche',
+    title: 'Tecnico',
     description: "Gestisce l'integrazione tecnologica e/o l'operatività dei servizi",
+  },
+];
+
+export const mockedMappedProductRoles: Array<ProductRoleMappingsResource> = [
+  {
+    partyRole: PartyRoleEnum.MANAGER,
+    selcRole: SelcRoleEnum.ADMIN,
+    multiroleAllowed: false,
+    productRoles: [
+      {
+        code: 'pg-admin',
+        description: 'Stipula il contratto e identifica gli amministratori',
+        label: 'Amministratore',
+      },
+    ],
+  },
+  {
+    partyRole: PartyRoleEnum.OPERATOR,
+    selcRole: SelcRoleEnum.LIMITED,
+    multiroleAllowed: false,
+    productRoles: [
+      {
+        code: 'pg-operator',
+        description: "Gestisce l'integrazione tecnologica e/o l'operatività dei servizi",
+        label: 'Tecnico',
+      },
+    ],
   },
 ];
 

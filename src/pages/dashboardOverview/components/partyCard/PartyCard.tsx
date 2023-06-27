@@ -1,9 +1,9 @@
 import { Card } from '@mui/material';
-import { PartyPnpg } from '../../../../model/PartyPnpg';
+import { Party } from '../../../../model/Party';
 import PartyDetail from './components/PartyDetail';
 
 type Props = {
-  party?: PartyPnpg;
+  party?: Party;
 };
 
 export default function PartyCard({ party }: Props) {
@@ -11,7 +11,6 @@ export default function PartyCard({ party }: Props) {
     <Card
       variant="outlined"
       sx={{
-        width: '100%',
         py: 3,
         px: 1,
         backgroundColor: '#EEEEEE',

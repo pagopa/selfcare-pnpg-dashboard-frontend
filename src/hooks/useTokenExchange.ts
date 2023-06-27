@@ -4,7 +4,7 @@ import { trackEvent } from '@pagopa/selfcare-common-frontend/services/analyticsS
 import { LOADING_TASK_TOKEN_EXCHANGE } from '../utils/constants';
 import { Product } from '../model/Product';
 import { retrieveBackOfficeUrl } from '../services/tokenExchangeService';
-import { PartyPnpg } from '../model/PartyPnpg';
+import { Party } from '../model/Party';
 
 const hostnameRegexp = /^(?:https?:\/\/)([-.a-zA-Z0-9_]+)/;
 
@@ -12,17 +12,8 @@ export const useTokenExchange = () => {
   const addError = useErrorDispatcher();
   const setLoading = useLoading(LOADING_TASK_TOKEN_EXCHANGE);
 
-  const invokeProductBo = async (
-    product: Product,
-    selectedParty: PartyPnpg,
-    selectedEnvironment?: string
-  ): Promise<void> => {
-    const selectedEnvironmentUrl = product.backOfficeEnvironmentConfigurations?.find(
-      (p) => p.environment === selectedEnvironment
-    )?.url;
-    const result = selectedEnvironmentUrl
-      ? validateUrlBO(selectedEnvironmentUrl)
-      : validateUrlBO(product?.urlBO);
+  const invokeProductBo = async (product: Product, selectedParty: Party): Promise<void> => {
+    const result = validateUrlBO(product?.urlBO);
     if (result instanceof Error) {
       addError({
         id: `ValidationUrlError-${product?.id}`,
@@ -34,56 +25,32 @@ export const useTokenExchange = () => {
       return;
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    selectedEnvironment
-      ? retrieveBackOfficeUrl(selectedParty, product, selectedEnvironment)
-          .then((url) => {
-            setLoading(true);
-            trackEvent(
-              'DASHBOARD_OPEN_PRODUCT',
-              {
-                party_id: selectedParty.partyId,
-                product_id: product.id,
-                product_role: product.userRole,
-                target: selectedEnvironment,
-              },
-              () => window.location.assign(url)
-            );
-          })
-          .catch((error) =>
-            addError({
-              id: `TokenExchangeError-${product.id}`,
-              blocking: false,
-              error,
-              techDescription: `Something gone wrong retrieving token exchange of test environment for product ${product.id}`,
-              toNotify: true,
-            })
-          )
-          .finally(() => setLoading(false))
-      : retrieveBackOfficeUrl(selectedParty, product)
-          .then((url) => {
-            setLoading(true);
-            trackEvent(
-              'DASHBOARD_OPEN_PRODUCT',
-              {
-                party_id: selectedParty.partyId,
-                product_id: product.id,
-                product_role: product.userRole,
-                target: 'prod',
-              },
-              () => window.location.assign(url)
-            );
-          })
-          .catch((error) =>
-            addError({
-              id: `TokenExchangeError-${product.id}`,
-              blocking: false,
-              error,
-              techDescription: `Something gone wrong retrieving token exchange for product ${product.id}`,
-              toNotify: true,
-            })
-          )
-          .finally(() => setLoading(false));
+    retrieveBackOfficeUrl(selectedParty, product)
+      .then((url) => {
+        setLoading(true);
+        trackEvent(
+          'DASHBOARD_OPEN_PRODUCT',
+          {
+            party_id: selectedParty.partyId,
+            product_id: product.id,
+            product_role: product.userRole,
+          },
+          () => window.location.assign(url)
+        );
+      })
+      .catch((error) =>
+        addError({
+          id: `TokenExchangeError-${product.id}`,
+          blocking: false,
+          error,
+          displayableTitle: 'Si è verificato un errore',
+          displayableDescription:
+            'Verifica la connessione e prova ad aggiornare la pagina. Se l’errore si ripete, riprova più tardi o contattaci.',
+          techDescription: `Something gone wrong retrieving token exchange for product ${product.id}`,
+          toNotify: true,
+        })
+      )
+      .finally(() => setLoading(false));
   };
   return { invokeProductBo };
 };

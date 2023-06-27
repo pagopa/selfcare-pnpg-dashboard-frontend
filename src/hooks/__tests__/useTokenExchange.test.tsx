@@ -1,12 +1,12 @@
 import { render, waitFor } from '@testing-library/react';
 import { useEffect } from 'react';
 import { Provider } from 'react-redux';
-import { PartyPnpg } from '../../model/PartyPnpg';
+import { Party } from '../../model/Party';
 import { Product } from '../../model/Product';
 import { createStore } from '../../redux/store';
 import { useTokenExchange, validateUrlBO } from '../useTokenExchange';
 import { mockedPartyProduct } from '../../services/__mocks__/productService';
-import { mockedPnpgParties } from '../../services/__mocks__/partyService';
+import { mockedInstitutions } from '../../services/__mocks__/partyService';
 
 const oldWindowLocation = global.window.location;
 const mockedLocation = {
@@ -54,7 +54,7 @@ test('validateUrlBO', () => {
 
 describe('useTokenExchange', () => {
   let expectedProduct: Product;
-  const expectedParty: PartyPnpg = mockedPnpgParties[0];
+  const expectedParty: Party = mockedInstitutions[0];
 
   const renderApp = (urlBO: string, injectedStore?: ReturnType<typeof createStore>) => {
     const store = injectedStore ? injectedStore : createStore();

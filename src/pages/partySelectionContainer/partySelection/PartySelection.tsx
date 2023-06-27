@@ -7,19 +7,19 @@ import { useTranslation, Trans } from 'react-i18next';
 import ROUTES from '../../../routes';
 import { useAppDispatch } from '../../../redux/hooks';
 import { partiesActions } from '../../../redux/slices/partiesSlice';
-import { PartyPnpg } from '../../../model/PartyPnpg';
+import { Party } from '../../../model/Party';
 import PartySelectionSearch from '../../../components/partySelectionSearch/PartySelectionSearch';
 import { ENV } from '../../../utils/env';
 
 type Props = {
-  parties: Array<PartyPnpg>;
+  parties: Array<Party>;
 };
 
 export default function PartySelection({ parties }: Props) {
   const { t } = useTranslation();
   const bodyTitle = t('businessSelection.title');
   const theme = useTheme();
-  const [selectedParty, setSelectedParty] = React.useState<PartyPnpg | null>(
+  const [selectedParty, setSelectedParty] = React.useState<Party | null>(
     parties.length === 1 ? parties[0] : null
   );
   const [disableBtn, setBtnDisable] = React.useState(true);
@@ -80,7 +80,7 @@ export default function PartySelection({ parties }: Props) {
               label={t('businessSelection.search')}
               parties={parties}
               selectedParty={selectedParty}
-              onPartySelectionChange={(selectedParty: PartyPnpg | null) => {
+              onPartySelectionChange={(selectedParty: Party | null) => {
                 setSelectedParty(selectedParty);
               }}
             />
@@ -93,7 +93,7 @@ export default function PartySelection({ parties }: Props) {
             variant="contained"
             disabled={disableBtn}
             onClick={() => {
-              trackEvent('DASHBOARD_PARTY_SELECTION', { party_id: selectedParty?.partyId });
+              trackEvent('DASHBOARD_BUSINESS_SELECTION', { party_id: selectedParty?.partyId });
               history.push(
                 resolvePathVariables(ROUTES.PARTY_DASHBOARD.path, {
                   partyId: selectedParty?.partyId ?? '',
@@ -121,7 +121,7 @@ export default function PartySelection({ parties }: Props) {
             color={theme.palette.text.primary}
           >
             <Trans i18nKey="businessSelection.onboardAnotherBusiness">
-              {'Sei un Legale Rappresentante e non trovi la tua impresa? '}
+              {'Sei un Legale Rappresentante? '}
               <Link
                 onClick={() => window.location.assign(ENV.URL_FE.ONBOARDING)}
                 sx={{
@@ -130,7 +130,7 @@ export default function PartySelection({ parties }: Props) {
                   color: theme.palette.primary.main,
                 }}
               >
-                {'Registrane una nuova'}
+                {'Registra una nuova impresa'}
               </Link>
             </Trans>
           </Typography>

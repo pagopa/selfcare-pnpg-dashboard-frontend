@@ -3,11 +3,12 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import TitleBox from '@pagopa/selfcare-common-frontend/components/TitleBox';
 import { useTranslation } from 'react-i18next';
-import { PartyPnpg } from '../../model/PartyPnpg';
+import { theme } from '@pagopa/mui-italia';
+import { Party } from '../../model/Party';
 import { partiesSelectors } from '../../redux/slices/partiesSlice';
 import { useAppSelector } from '../../redux/hooks';
-import SendIcon from '../../assets/send.svg';
 import { useTokenExchange } from '../../hooks/useTokenExchange';
+import { useIsMobile } from '../../hooks/useIsMobile';
 import WelcomeDashboard from './components/welcomeDashboard/WelcomeDashboard';
 import PartyCard from './components/partyCard/PartyCard';
 import { PartyLogoUploader } from './components/partyCard/components/partyLogoUploader/PartyLogoUploader';
@@ -21,29 +22,38 @@ const DashboardOverview = () => {
   const { t } = useTranslation();
   const { partyId } = useParams<UrlParams>();
   const { invokeProductBo } = useTokenExchange();
+  const isMobile = useIsMobile('md');
   const parties = useAppSelector(partiesSelectors.selectPartiesList);
   const products = useAppSelector(partiesSelectors.selectPartySelectedProducts);
 
-  const [selectedParty, setSelectedParty] = useState<PartyPnpg>();
+  const [selectedParty, setSelectedParty] = useState<Party>();
 
   useEffect(() => {
     const chosenParty = parties?.find((p) => p.externalId === partyId || p.partyId === partyId);
     setSelectedParty(chosenParty);
   }, [partyId]);
 
-  const prodPnpg = products?.find((p) => p.id === 'prod-pn-pg');
+  const isAdmin = selectedParty && selectedParty.userRole === 'ADMIN';
 
   return (
-    <Box p={3} sx={{ width: '100%' }}>
+    <Grid p={3} xs={12}>
       <WelcomeDashboard businessName={selectedParty?.description} />
-      <Grid container direction="row" justifyContent={'center'} alignItems="center" mb={2}>
-        {selectedParty && (
-          <Grid item xs={6}>
-            <PartyLogoUploader partyId={selectedParty.partyId} />
+      <Grid container direction="row" alignItems="center" mb={2}>
+        <Grid
+          item
+          sx={{
+            display: 'flex',
+            width: 'max-content',
+            flexDirection: 'row',
+            [theme.breakpoints.down('md')]: {
+              flexDirection: 'column',
+            },
+          }}
+        >
+          {isAdmin && <PartyLogoUploader partyId={selectedParty.partyId} />}
+          <Grid item xs={12} md={isAdmin ? 6 : 8} mt={isAdmin && isMobile ? 4 : 0}>
+            <PartyCard party={selectedParty} />
           </Grid>
-        )}
-        <Grid item xs={6}>
-          <PartyCard party={selectedParty} />
         </Grid>
       </Grid>
       <Grid item container ml={1} mt={5}>
@@ -53,17 +63,28 @@ const DashboardOverview = () => {
           variantTitle="h4"
           titleFontSize="28px"
         />
-        <Grid container mb={44}>
-          <DigitalNotificationCard
-            cardTitle={t('overview.notificationAreaProduct.card.title')}
-            urlLogo={SendIcon}
-            btnAction={() =>
-              prodPnpg && selectedParty ? invokeProductBo(prodPnpg, selectedParty) : undefined
-            }
-          />
+        <Grid container spacing={3} mb={44}>
+          {products &&
+            products
+              .filter((p) => p.status === 'ACTIVE' && p.productOnBoardingStatus === 'ACTIVE')
+              .map((p) => (
+                <Box key={p.id} marginTop={3} marginLeft={3}>
+                  <DigitalNotificationCard
+                    cardTitle={
+                      p.id === 'prod-pn-pg'
+                        ? t('overview.notificationAreaProduct.card.title')
+                        : p.title
+                    }
+                    urlLogo={p.logo}
+                    btnAction={() =>
+                      selectedParty ? invokeProductBo(p, selectedParty) : undefined
+                    }
+                  />
+                </Box>
+              ))}
         </Grid>
       </Grid>
-    </Box>
+    </Grid>
   );
 };
 

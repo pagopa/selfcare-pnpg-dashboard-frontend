@@ -8,14 +8,15 @@ import PeopleAlt from '@mui/icons-material/PeopleAlt';
 import SupervisedUserCircle from '@mui/icons-material/SupervisedUserCircle';
 import { DASHBOARD_ROUTES } from '../../../../routes';
 import { ENV } from '../../../../utils/env';
-import { PartyPnpg } from '../../../../model/PartyPnpg';
+import { Party } from '../../../../model/Party';
 import DashboardSidenavItem from './DashboardSidenavItem';
 
 type Props = {
-  party: PartyPnpg;
+  party: Party;
+  setDrawerOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export default function DashboardSideMenu({ party }: Props) {
+export default function DashboardSideMenu({ party, setDrawerOpen }: Props) {
   const { t } = useTranslation();
   const history = useHistory();
   const onExit = useUnloadEventOnExit();
@@ -34,34 +35,49 @@ export default function DashboardSideMenu({ party }: Props) {
     partyId: party.partyId,
   });
 
-  const isOVerviewSelected = window.location.pathname === overviewPath;
+  const isOverviewSelected = window.location.pathname === overviewPath;
   const isRoleSelected = window.location.pathname.startsWith(usersPath);
   const isGroupSelected = window.location.pathname.startsWith(groupsPath);
 
+  const canSeeSection = party.userRole === 'ADMIN';
+
   return (
-    <Grid container item mt={1} width="100%">
+    <Grid container item width="100%">
       <Grid item xs={12}>
-        <List sx={{ width: '100%' }}>
+        <List>
           <DashboardSidenavItem
             title={t('overview.sideMenu.institutionManagement.overview.title')}
             handleClick={() =>
-              onExit(() => history.push(party.partyId ? overviewPath : overviewRoute))
+              onExit(() => {
+                history.push(party.partyId ? overviewPath : overviewRoute);
+                setDrawerOpen(false);
+              })
             }
-            isSelected={isOVerviewSelected}
+            isSelected={isOverviewSelected}
             icon={DashboardCustomize}
           />
-          <DashboardSidenavItem
-            title={t('overview.sideMenu.institutionManagement.referents.title')}
-            handleClick={() => onExit(() => history.push(party.partyId ? usersPath : usersRoute))}
-            isSelected={isRoleSelected}
-            icon={PeopleAlt}
-          />
-          <DashboardSidenavItem
-            title={t('overview.sideMenu.institutionManagement.groups.title')}
-            handleClick={() => onExit(() => history.push(party.partyId ? groupsPath : groupsRoute))}
-            isSelected={isGroupSelected}
-            icon={SupervisedUserCircle}
-          />
+          {canSeeSection && (
+            <DashboardSidenavItem
+              title={t('overview.sideMenu.institutionManagement.referents.title')}
+              handleClick={() => {
+                onExit(() => history.push(party.partyId ? usersPath : usersRoute));
+                setDrawerOpen(false);
+              }}
+              isSelected={isRoleSelected}
+              icon={PeopleAlt}
+            />
+          )}
+          {canSeeSection && (
+            <DashboardSidenavItem
+              title={t('overview.sideMenu.institutionManagement.groups.title')}
+              handleClick={() => {
+                onExit(() => history.push(party.partyId ? groupsPath : groupsRoute));
+                setDrawerOpen(false);
+              }}
+              isSelected={isGroupSelected}
+              icon={SupervisedUserCircle}
+            />
+          )}
         </List>
       </Grid>
     </Grid>

@@ -33,12 +33,12 @@ test('Test routing', async () => {
   const store = createStore();
   const history = createMemoryHistory();
 
-  history.push('/dashboard/00000000000');
-  expect(history.location.pathname).toBe('/dashboard/00000000000');
+  history.push('/dashboard/5b321318-3df7-48c1-67c8-1111e6707c3d');
+  expect(history.location.pathname).toBe('/dashboard/5b321318-3df7-48c1-67c8-1111e6707c3d');
 
-  history.push('/dashboard/00000000000/users');
-  expect(history.location.pathname).toBe('/dashboard/00000000000/users');
+  history.push('/dashboard/5b321318-3df7-48c1-67c8-1111e6707c3d/users');
+  expect(history.location.pathname).toBe('/dashboard/5b321318-3df7-48c1-67c8-1111e6707c3d/users');
 
-  history.push('/dashboard/00000000000/groups');
-  expect(history.location.pathname).toBe('/dashboard/00000000000/groups');
+  history.push('/dashboard/5b321318-3df7-48c1-67c8-1111e6707c3d/groups');
+  expect(history.location.pathname).toBe('/dashboard/5b321318-3df7-48c1-67c8-1111e6707c3d/groups');
 });
