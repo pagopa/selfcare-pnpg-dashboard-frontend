@@ -1954,10 +1954,10 @@
     fp-ts "^2.12.3"
     io-ts "^2.2.18"
 
-"@pagopa/mui-italia@^0.9.4":
-  version "0.9.7"
-  resolved "https://registry.yarnpkg.com/@pagopa/mui-italia/-/mui-italia-0.9.7.tgz#ca9248dea90ae7b2411f04f2727722561089493d"
-  integrity sha512-dUl7zDO1qnRnOz1gfVrpLS4dyjZcTvwcW6ZriieGkUU5Weo2F5CwjfmUafgLuJCcJiSSt9/3Yl97hMn7yU4v7w==
+"@pagopa/mui-italia@^0.9.8":
+  version "0.9.8"
+  resolved "https://registry.yarnpkg.com/@pagopa/mui-italia/-/mui-italia-0.9.8.tgz#37dcac064985dd1b8f2caae090e95cceb70c86a3"
+  integrity sha512-Ktmf0GqdldOTCbFhZ9elnNMCRFswxiXNWDc4wCpbzvgvY3pOhdVBkaq4LUjqCFXYO209RZ8Sv5mCGImO+gulgg==
   dependencies:
     "@fontsource/dm-mono" "^4.5.10"
     "@fontsource/titillium-web" "^4.5.9"
