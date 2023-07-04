@@ -154,7 +154,7 @@ export default function PartyDetail({ party }: Props) {
               },
             }}
           >
-            <Typography sx={{ ...infoStyles, maxWidth: '100% !important' }} className="ShowDots">
+            <Typography sx={{ ...infoStyles, maxWidth: '100% !important', whiteSpace: 'pre-wrap' }}>
               {business?.description}
             </Typography>
             {party?.origin === 'ADE' && party.userRole === 'ADMIN' && (
@@ -205,7 +205,7 @@ export default function PartyDetail({ party }: Props) {
               },
             }}
           >
-            <Typography sx={{ ...infoStyles, maxWidth: '100% !important' }} className="ShowDots">
+            <Typography sx={{ ...infoStyles, maxWidth: '100% !important', whiteSpace: 'pre-wrap' }}>
               {business?.mailAddress}
             </Typography>
             {party?.userRole === 'ADMIN' && (
