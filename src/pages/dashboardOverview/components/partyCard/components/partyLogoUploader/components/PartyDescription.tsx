@@ -54,31 +54,29 @@ export function PartyDescription({ labelLink, open, loading }: Props) {
           </Tooltip>
         )}
       </Box>
-      <Box>
-        <Typography
-          mt={1}
-          sx={{
-            fontSize: '12px',
-            fontWeight: 'fontWeightRegular',
-            color: 'text.secondary',
-            whiteSpace: 'nowrap',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-          }}
-        >
-          {isLogoNotPresent ? (
-            <Trans i18nKey="overview.businessLogo.info">
-              Inserisci solo il logo della tua impresa
-              <br />
-              Sarai responsabile dell’inserimento di immagini diverse da quella indicata.
-            </Trans>
-          ) : (
-            <Trans i18nKey={t('overview.businessLogo.size')}>
-              Dimensione esatta 300 x <br /> 300px - Formato .png
-            </Trans>
-          )}
-        </Typography>
-      </Box>
+      <Typography
+        mt={1}
+        sx={{
+          fontSize: '12px',
+          fontWeight: 'fontWeightRegular',
+          color: 'text.secondary',
+          whiteSpace: 'pre-wrap',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+        }}
+      >
+        {isLogoNotPresent ? (
+          <Trans i18nKey="overview.businessLogo.info">
+            Inserisci solo il logo della tua impresa
+            <br />
+            Sarai responsabile dell’inserimento di immagini diverse da quella indicata.
+          </Trans>
+        ) : (
+          <Trans i18nKey={t('overview.businessLogo.size')}>
+            Dimensione esatta 300 x <br /> 300px - Formato .png
+          </Trans>
+        )}
+      </Typography>
     </Stack>
   );
 }

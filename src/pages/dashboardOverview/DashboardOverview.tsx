@@ -43,15 +43,16 @@ const DashboardOverview = () => {
           item
           sx={{
             display: 'flex',
-            width: 'max-content',
+            width: 'auto',
             flexDirection: 'row',
             [theme.breakpoints.down('md')]: {
               flexDirection: 'column',
+              width: '100%',
             },
           }}
         >
           {isAdmin && <PartyLogoUploader partyId={selectedParty.partyId} />}
-          <Grid item xs={12} md={isAdmin ? 6 : 8} mt={isAdmin && isMobile ? 4 : 0}>
+          <Grid item xs={12} md={8} mt={isAdmin && isMobile ? 4 : 0}>
             <PartyCard party={selectedParty} />
           </Grid>
         </Grid>
