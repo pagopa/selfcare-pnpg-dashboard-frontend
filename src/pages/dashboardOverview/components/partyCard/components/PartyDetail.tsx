@@ -10,7 +10,7 @@ import { updateBusinessData } from '../../../../../services/partyService';
 import { partiesActions, partiesSelectors } from '../../../../../redux/slices/partiesSlice';
 import { useAppDispatch, useAppSelector } from '../../../../../redux/hooks';
 
-const emailRegexp = new RegExp('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$');
+const emailRegexp = new RegExp('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,5}$');
 
 type Props = {
   party?: Party;
