@@ -1,4 +1,4 @@
-// import { storageTokenOps } from '@pagopa/selfcare-common-frontend/utils/storage';
+import { storageTokenOps } from '@pagopa/selfcare-common-frontend/utils/storage';
 import { appStateActions } from '@pagopa/selfcare-common-frontend/redux/slices/appStateSlice';
 import { buildFetchApi, extractResponse } from '@pagopa/selfcare-common-frontend/utils/api-utils';
 import i18n from '@pagopa/selfcare-common-frontend/locale/locale-utils';
@@ -12,9 +12,7 @@ import { InstitutionBaseResource } from './generated/b4f-dashboard-pnpg/Institut
 
 const withBearerAndInstitutionId: WithDefaultsT<'bearerAuth'> =
   (wrappedOperation) => (params: any) => {
-    const token =
-      'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Imp3dF82ZDplNTphNDo4NToyYjplMDpjYjplYToyZDo5Yzo1MjoxMjpmZTphNTpmMjo2MCJ9.eyJlbWFpbCI6ImZ1cmlvdml0YWxlQG1hcnRpbm8uaXQiLCJmYW1pbHlfbmFtZSI6IlNhcnRvcmkiLCJmaXNjYWxfbnVtYmVyIjoiU1JUTkxNMDlUMDZHNjM1UyIsIm5hbWUiOiJBbnNlbG1vIiwiZnJvbV9hYSI6ZmFsc2UsInVpZCI6IjUwOTZlNGM2LTI1YTEtNDVkNS05YmRmLTJmYjk3NGE3YzFjOCIsImxldmVsIjoiTDIiLCJpYXQiOjE2OTM5ODAzMDksImV4cCI6MTY5NDAxMjcwOSwiYXVkIjoiYXBpLmRldi5zZWxmY2FyZS5wYWdvcGEuaXQiLCJpc3MiOiJTUElEIiwianRpIjoiX2Q0ODM3YjU2MzI2MzQwNjkwNzAyIn0.g6L90CXyONScwayQrk36ToLXyF0v4M4IS88tCdiie_DWdXCWiEGuC4G2h620mw1I4i06mKDvyG2qbcpDwSRl9tY1zRDAshjmBlSFp8ebRmbwtjFhemgX8rD0VtE4RtzbZoXKkC9RQbURkPOmyyLopFYxu4uGv8_OiOQA0dj09aXotO4fb2PJ0f08E_XEc0SR-JIBF8fdUYeDdjaTjAm7PtWVIn6qaeEtwhQemKi-gwnph0FdlztrlGSJLN8ukPVOpgS_HvupKeKVmNYrcTOSMeg35dhMn-_Pclsze6FOgcZHtrjrC9NCp27gfFkVKEkTvflWi2bjtmkzY35--_BKSg';
-    // const token = storageTokenOps.read();
+    const token = storageTokenOps.read();
     return wrappedOperation({
       ...params,
       bearerAuth: `Bearer ${token}`,
