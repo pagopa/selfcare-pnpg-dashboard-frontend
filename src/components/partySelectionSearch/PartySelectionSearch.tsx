@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
 import { Grid, Typography, Box, useTheme } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { Party } from '../../model/Party';
+import { BaseParty } from '../../model/Party';
 import PartySelectionSearchInput from './PartySelectionSearchInput';
 import PartyItemContainer from './PartyItemContainer';
 import PartyAccountItemSelection from './PartyAccountItemSelection';
 
 type Props = {
-  parties: Array<Party>;
-  selectedParty: Party | null;
-  onPartySelectionChange: (selectedParty: Party | null) => void;
+  parties: Array<BaseParty>;
+  selectedParty: BaseParty | null;
+  onPartySelectionChange: (selectedParty: BaseParty | null) => void;
   label?: string;
   iconColor?: string;
   iconMarginRight?: string;
   partyTitle?: string;
 };
 
-const verifyPartyFilter = (party: Party, filter: string) =>
+const verifyPartyFilter = (party: BaseParty, filter: string) =>
   party.description && party.description.toUpperCase().indexOf(filter.toUpperCase()) >= 0;
 const CustomBox = styled(Box)({
   '&::-webkit-scrollbar': {
@@ -43,7 +43,7 @@ export default function PartySelectionSearch({
   partyTitle,
 }: Props) {
   const [input, setInput] = useState('');
-  const [filteredParties, setFilteredParties] = useState<Array<Party>>(parties);
+  const [filteredParties, setFilteredParties] = useState<Array<BaseParty>>(parties);
 
   const theme = useTheme();
 
@@ -61,7 +61,7 @@ export default function PartySelectionSearch({
 
   const handleListItemClick = (
     _event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    party: Party
+    party: BaseParty
   ) => {
     onPartySelectionChange(party);
   };

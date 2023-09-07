@@ -27,7 +27,10 @@ export const useSelectedParty = (): {
   const fetchParty = (partyId: string): Promise<Party | null> =>
     fetchPartyDetails(partyId, parties).then((party) => {
       if (party) {
-        if (party.status !== 'ACTIVE') {
+        const selectedParty = parties?.find(
+          (p) => p.partyId === partyId || p.externalId === partyId
+        );
+        if (selectedParty && selectedParty.status !== 'ACTIVE') {
           throw new Error(`INVALID_PARTY_STATE_${party.status}`);
         }
         if (partyId === party.externalId) {
@@ -36,7 +39,12 @@ export const useSelectedParty = (): {
           });
           history.pushState(null, 'null', resolvedUrlWithPartyId);
         }
-        setParty(party);
+        const partyWithUserRoleAndStatus = {
+          ...party,
+          status: selectedParty?.status,
+          userRole: selectedParty?.userRole,
+        };
+        setParty(partyWithUserRoleAndStatus);
         return party;
       } else {
         throw new Error(`Cannot find partyId ${partyId}`);
@@ -51,7 +59,11 @@ export const useSelectedParty = (): {
         dispatch(
           partiesActions.setPartySelectedProductsRolesMap(
             products
-              .filter((p) => p.productOnBoardingStatus === 'ACTIVE')
+              .filter((p) =>
+                selectedParty?.products.map(
+                  (us) => us.productId === p.id && us.productOnBoardingStatus === 'ACTIVE'
+                )
+              )
               .reduce((acc, p) => {
                 const rolesMap = productsRolesMap[p.id];
                 if (rolesMap) {

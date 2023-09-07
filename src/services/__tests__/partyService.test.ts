@@ -1,10 +1,8 @@
 import { fetchParties, fetchPartyDetails, updateBusinessData } from '../partyService';
 import { institutionResource2Party, Party } from '../../model/Party';
 import { DashboardApi } from '../../api/DashboardApi';
-import {
-  mockedInstitutionsResource,
-  mockedInstitutionsResource2Party,
-} from '../../api/__mocks__/DashboardApi';
+import { mockedInstitutionResources } from '../../api/__mocks__/DashboardApi';
+import { mockedBaseInstitutions } from '../__mocks__/partyService';
 
 jest.mock('../../api/DashboardApi');
 
@@ -21,7 +19,7 @@ beforeEach(() => {
 test('Test fetchParties', async () => {
   const parties = await fetchParties();
 
-  expect(parties).toMatchObject(mockedInstitutionsResource.map(institutionResource2Party));
+  expect(parties).toMatchObject(mockedInstitutionResources.map(institutionResource2Party));
 
   parties.forEach((p) =>
     expect(p.urlLogo).toBe(`http://checkout.selfcare/institutions/${p.partyId}/logo.png`)
@@ -34,7 +32,7 @@ describe('Test fetchPartyDetails', () => {
   const expectedPartyId: string = '5b321318-3df7-48c1-67c8-1111e6707c3d';
 
   const checkSelectedParty = (party: Party) => {
-    expect(party).toMatchObject(institutionResource2Party(mockedInstitutionsResource[0]));
+    expect(party).toMatchObject(institutionResource2Party(mockedInstitutionResources[0]));
 
     expect(party.urlLogo).toBe(`http://checkout.selfcare/institutions/${expectedPartyId}/logo.png`);
   };
@@ -47,8 +45,7 @@ describe('Test fetchPartyDetails', () => {
   };
 
   test('Test no parties as cache', async () => {
-    const party = await fetchPartyDetails(expectedPartyId, mockedInstitutionsResource2Party);
-    console.log('party: ', party);
+    const party = await fetchPartyDetails(expectedPartyId, mockedBaseInstitutions);
     if (party) {
       checkSelectedParty(party);
     }
@@ -57,7 +54,7 @@ describe('Test fetchPartyDetails', () => {
   });
 
   test('Test parties as cache', async () => {
-    const parties = mockedInstitutionsResource.map(institutionResource2Party);
+    const parties = mockedInstitutionResources.map(institutionResource2Party);
     const party = await fetchPartyDetails(expectedPartyId, parties);
     if (party) {
       checkSelectedParty(party);
@@ -73,7 +70,7 @@ describe('Test fetchPartyDetails', () => {
   });
 
   test('Test updateBusinessData api: update the email', async () => {
-    const institutionId = mockedInstitutionsResource.map(institutionResource2Party)[1].partyId;
+    const institutionId = mockedInstitutionResources.map(institutionResource2Party)[1].partyId;
     const newEmail = 'mockemail@mocktest.com';
 
     const businessUpdatedSuccessfully = await updateBusinessData(institutionId, newEmail);
@@ -83,7 +80,7 @@ describe('Test fetchPartyDetails', () => {
   });
 
   test('Test updateBusinessData api: update the businessName', async () => {
-    const institutionId = mockedInstitutionsResource.map(institutionResource2Party)[3].partyId;
+    const institutionId = mockedInstitutionResources.map(institutionResource2Party)[3].partyId;
     const newEmail = 'mockemail@mocktest.com';
 
     const businessUpdatedSuccessfully = await updateBusinessData(institutionId, newEmail);

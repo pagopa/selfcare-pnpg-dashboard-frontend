@@ -91,8 +91,18 @@ const Dashboard = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const activeProducts: Array<Product> =
-    useMemo(() => products?.filter((p) => p.productOnBoardingStatus === 'ACTIVE'), [products]) ??
-    [];
+    useMemo(
+      () =>
+        products?.filter((p) =>
+          party?.products.some(
+            (ap) =>
+              ap.productId === p.id &&
+              ap.productOnBoardingStatus === 'ACTIVE' &&
+              ap.authorized === true
+          )
+        ),
+      [products, party]
+    ) ?? [];
 
   const productsMap: ProductsMap =
     useMemo(() => buildProductsMap(products ?? []), [products]) ?? [];

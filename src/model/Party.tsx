@@ -1,5 +1,7 @@
 import { GeographicTaxonomyResource } from '../api/generated/b4f-dashboard-pnpg/GeographicTaxonomyResource';
-import { PnPGInstitutionResource } from '../api/generated/b4f-dashboard-pnpg/PnPGInstitutionResource';
+import { InstitutionBaseResource } from '../api/generated/b4f-dashboard-pnpg/InstitutionBaseResource';
+import { InstitutionResource } from '../api/generated/b4f-dashboard-pnpg/InstitutionResource';
+import { OnboardedProductResource } from '../api/generated/b4f-dashboard-pnpg/OnboardedProductResource';
 import { ENV } from '../utils/env';
 
 export type UserRole = 'ADMIN' | 'LIMITED';
@@ -11,55 +13,88 @@ export type GeographicTaxonomy = {
   desc: string;
 };
 
-export type Business = { businessName: string; businessTaxId: string };
-
-export type Institutions = {
-  businesses: Array<Business>;
-  legalTaxId: string;
-  requestDateTime: string;
-};
-
 export type Party = {
-  externalId: string;
   partyId: string;
-  fiscalCode: string;
-  status: string;
-  description?: string;
-  urlLogo?: string;
-  address?: string;
-  category?: string;
-  geographicTaxonomies?: Array<GeographicTaxonomyResource>;
-  institutionType?: string;
-  mailAddress?: string;
-  origin?: string;
+  products: Array<OnboardedProductResource>;
+  externalId?: string;
   originId?: string;
-  recipientCode?: string;
-  userRole?: UserRole;
+  origin?: string;
+  description: string;
+  digitalAddress?: string;
+  category?: string;
+  urlLogo?: string;
+  fiscalCode?: string;
+  registeredOffice?: string;
   zipCode?: string;
+  typology?: string;
+  institutionType?: string;
+  recipientCode?: string;
+  geographicTaxonomies?: Array<GeographicTaxonomyResource>;
+  vatNumberGroup?: boolean;
+  supportEmail?: string;
+  vatNumber?: string;
+  subunitCode?: string;
+  subunitType?: string;
+  aooParentCode?: string;
+  parentDescription?: string;
+  userRole?: UserRole;
+  status?: UserStatus;
 };
 
-const buildUrlLogo = (partyId: string) =>
+export type BaseParty = {
+  partyId: string;
+  externalId?: string;
+  description?: string;
+  status?: UserStatus;
+  userRole?: UserRole;
+  urlLogo?: string;
+  parentDescription?: string;
+};
+
+const buildUrlLog = (partyId: string) =>
   `${ENV.URL_INSTITUTION_LOGO.PREFIX}${partyId}${ENV.URL_INSTITUTION_LOGO.SUFFIX}`;
 
-export const institutionResource2Party = (institutionResource: PnPGInstitutionResource): Party => {
-  const urlLogo = institutionResource.id && buildUrlLogo(institutionResource.id);
+export const institutionResource2Party = (institutionResource: InstitutionResource): Party => {
+  const urlLogo = institutionResource.id && buildUrlLog(institutionResource.id);
   return {
-    address: institutionResource.address,
-    externalId: institutionResource.externalId,
-    fiscalCode: institutionResource.fiscalCode,
-    partyId: institutionResource.id,
-    description: institutionResource.name,
-    status: institutionResource.status,
-    urlLogo,
+    partyId: institutionResource.id ?? '',
+    externalId: institutionResource.externalId ?? '',
+    originId: institutionResource?.originId,
+    origin: institutionResource?.origin,
+    description: institutionResource.name ?? '',
+    digitalAddress: institutionResource.mailAddress,
     category: institutionResource.category,
+    urlLogo,
+    fiscalCode: institutionResource.fiscalCode,
+    registeredOffice: institutionResource.address ?? '',
+    zipCode: institutionResource.zipCode ?? '',
+    typology: 'TODO', // it will represent the taxonomy of the party
+    institutionType: institutionResource.institutionType,
+    recipientCode: institutionResource.recipientCode,
     geographicTaxonomies:
       institutionResource.geographicTaxonomies as Array<GeographicTaxonomyResource>,
-    institutionType: institutionResource.institutionType,
-    mailAddress: institutionResource.mailAddress,
-    origin: institutionResource.origin,
-    originId: institutionResource.originId,
-    recipientCode: institutionResource.recipientCode,
+    vatNumberGroup: institutionResource.vatNumberGroup,
+    supportEmail: institutionResource.supportContact?.supportEmail,
+    vatNumber: institutionResource.vatNumber,
+    subunitCode: institutionResource.subunitCode,
+    subunitType: institutionResource.subunitType,
+    aooParentCode: institutionResource.aooParentCode,
+    parentDescription: institutionResource.parentDescription,
+    products: institutionResource.products as Array<OnboardedProductResource>,
+  };
+};
+
+export const institutionBaseResource2BaseParty = (
+  institutionResource: InstitutionBaseResource
+): BaseParty => {
+  const urlLogo = institutionResource.id && buildUrlLog(institutionResource.id);
+  return {
+    partyId: institutionResource.id ?? '',
+    externalId: 'ccc', // TODO FIXME
+    description: institutionResource.name ?? '',
+    status: institutionResource.status as UserStatus,
     userRole: institutionResource.userRole as UserRole,
-    zipCode: institutionResource.zipCode,
+    parentDescription: institutionResource.parentDescription,
+    urlLogo,
   };
 };
