@@ -27,17 +27,8 @@ export default function PartySelection({ parties }: Props) {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    // eslint-disable-next-line functional/immutable-data
-    const partyId = window.location.pathname.split('/').pop();
-    const selectedPartyFromOnboarding = parties.find(
-      (p) => p.partyId === partyId || p.externalId === partyId
-    );
-    if (partyId && selectedPartyFromOnboarding) {
-      setSelectedParty(selectedPartyFromOnboarding);
-    } else {
-      dispatch(partiesActions.setPartySelected(undefined));
-      dispatch(partiesActions.setPartySelectedProducts(undefined));
-    }
+    dispatch(partiesActions.setPartySelected(undefined));
+    dispatch(partiesActions.setPartySelectedProducts(undefined));
   }, []);
 
   useEffect(() => {

@@ -23,7 +23,7 @@ export const useSelectedParty = (): {
   const productsRolesMap = useAppSelector(partiesSelectors.selectPartySelectedProductsRolesMap);
 
   const fetchParty = (partyId: string): Promise<Party | null> =>
-    fetchPartyDetails(partyId, parties).then((party) => {
+    fetchPartyDetails(partyId).then((party) => {
       if (party) {
         const selectedParty = parties?.find((p) => p.partyId === partyId);
         if (selectedParty && selectedParty.status !== 'ACTIVE') {
@@ -41,9 +41,7 @@ export const useSelectedParty = (): {
       }
     });
   const fetchProductLists = (partyId: string) =>
-    fetchProducts(
-      parties?.find((p) => p.partyId === partyId || p.externalId === partyId)?.partyId ?? partyId
-    ).then((products) => {
+    fetchProducts(partyId).then((products) => {
       if (products) {
         setPartyProducts(products);
         dispatch(
