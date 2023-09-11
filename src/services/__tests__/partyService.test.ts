@@ -1,8 +1,11 @@
 import { fetchParties, fetchPartyDetails, updateBusinessData } from '../partyService';
-import { institutionResource2Party, Party } from '../../model/Party';
+import {
+  institutionBaseResource2BaseParty,
+  institutionResource2Party,
+  Party,
+} from '../../model/Party';
 import { DashboardApi } from '../../api/DashboardApi';
 import { mockedInstitutionResources } from '../../api/__mocks__/DashboardApi';
-import { mockedBaseInstitutions } from '../__mocks__/partyService';
 
 jest.mock('../../api/DashboardApi');
 
@@ -19,7 +22,7 @@ beforeEach(() => {
 test('Test fetchParties', async () => {
   const parties = await fetchParties();
 
-  expect(parties).toMatchObject(mockedInstitutionResources.map(institutionResource2Party));
+  expect(parties).toMatchObject(mockedInstitutionResources.map(institutionBaseResource2BaseParty));
 
   parties.forEach((p) =>
     expect(p.urlLogo).toBe(`http://checkout.selfcare/institutions/${p.partyId}/logo.png`)
@@ -45,7 +48,7 @@ describe('Test fetchPartyDetails', () => {
   };
 
   test('Test no parties as cache', async () => {
-    const party = await fetchPartyDetails(expectedPartyId, mockedBaseInstitutions);
+    const party = await fetchPartyDetails(expectedPartyId);
     if (party) {
       checkSelectedParty(party);
     }
@@ -55,7 +58,7 @@ describe('Test fetchPartyDetails', () => {
 
   test('Test parties as cache', async () => {
     const parties = mockedInstitutionResources.map(institutionResource2Party);
-    const party = await fetchPartyDetails(expectedPartyId, parties);
+    const party = await fetchPartyDetails(expectedPartyId);
     if (party) {
       checkSelectedParty(party);
     }
@@ -63,7 +66,7 @@ describe('Test fetchPartyDetails', () => {
     checkDashboardInvocation(1);
 
     const partialParties = parties.filter((p) => p.partyId === expectedPartyId);
-    const party2 = await fetchPartyDetails(expectedPartyId, partialParties);
+    const party2 = await fetchPartyDetails(expectedPartyId);
     expect(party2).toStrictEqual(party);
 
     checkDashboardInvocation(2);
