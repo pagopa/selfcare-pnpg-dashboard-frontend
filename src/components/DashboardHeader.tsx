@@ -35,9 +35,14 @@ const DashboardHeader = ({ onExit, loggedUser, parties }: Props) => {
   const actualActiveProducts = useRef<Array<Product>>([]);
   const actualSelectedParty = useRef<Party>();
 
+  const onboardedPartyProducts = party?.products?.filter(
+    (pp) => pp.productOnBoardingStatus === 'ACTIVE' && pp.authorized
+  );
+
   const activeProducts: Array<Product> = useMemo(
-    () => products?.filter((p) => p.productOnBoardingStatus === 'ACTIVE' && p.authorized) ?? [],
-    [products]
+    () =>
+      products?.filter((p) => onboardedPartyProducts?.some((op) => op.productId === p.id)) ?? [],
+    [onboardedPartyProducts]
   );
 
   // eslint-disable-next-line functional/immutable-data
@@ -53,8 +58,8 @@ const DashboardHeader = ({ onExit, loggedUser, parties }: Props) => {
         addSelfcareProduct={false}
         selectedPartyId={selectedParty?.partyId}
         productsList={
-          products
-            ?.filter((p) => p.status === 'ACTIVE' && p.productOnBoardingStatus === 'ACTIVE')
+          activeProducts
+            ?.filter((p) => p.status === 'ACTIVE')
             ?.map((p) => ({
               id: p.id,
               title: p.id === 'prod-pn-pg' ? t('productsList.digitalNotifications') : p.title,

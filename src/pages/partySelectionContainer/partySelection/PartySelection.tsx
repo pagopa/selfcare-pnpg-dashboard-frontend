@@ -7,19 +7,19 @@ import { useTranslation, Trans } from 'react-i18next';
 import ROUTES from '../../../routes';
 import { useAppDispatch } from '../../../redux/hooks';
 import { partiesActions } from '../../../redux/slices/partiesSlice';
-import { Party } from '../../../model/Party';
+import { BaseParty } from '../../../model/Party';
 import PartySelectionSearch from '../../../components/partySelectionSearch/PartySelectionSearch';
 import { ENV } from '../../../utils/env';
 
 type Props = {
-  parties: Array<Party>;
+  parties: Array<BaseParty>;
 };
 
 export default function PartySelection({ parties }: Props) {
   const { t } = useTranslation();
   const bodyTitle = t('businessSelection.title');
   const theme = useTheme();
-  const [selectedParty, setSelectedParty] = React.useState<Party | null>(
+  const [selectedParty, setSelectedParty] = React.useState<BaseParty | null>(
     parties.length === 1 ? parties[0] : null
   );
   const [disableBtn, setBtnDisable] = React.useState(true);
@@ -27,15 +27,8 @@ export default function PartySelection({ parties }: Props) {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    // eslint-disable-next-line functional/immutable-data
-    const partyId = window.location.pathname.split('/').pop();
-    const selectedPartyFromOnboarding = parties.find((p) => p.partyId === partyId);
-    if (partyId && selectedPartyFromOnboarding) {
-      setSelectedParty(selectedPartyFromOnboarding);
-    } else {
-      dispatch(partiesActions.setPartySelected(undefined));
-      dispatch(partiesActions.setPartySelectedProducts(undefined));
-    }
+    dispatch(partiesActions.setPartySelected(undefined));
+    dispatch(partiesActions.setPartySelectedProducts(undefined));
   }, []);
 
   useEffect(() => {
@@ -99,7 +92,7 @@ export default function PartySelection({ parties }: Props) {
               label={t('businessSelection.search')}
               parties={parties}
               selectedParty={selectedParty}
-              onPartySelectionChange={(selectedParty: Party | null) => {
+              onPartySelectionChange={(selectedParty: BaseParty | null) => {
                 setSelectedParty(selectedParty);
               }}
             />

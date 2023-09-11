@@ -3,10 +3,7 @@ import {
   ProductRoleMappingsResource,
   SelcRoleEnum,
 } from '../../api/generated/b4f-dashboard-pnpg/ProductRoleMappingsResource';
-import {
-  ProductOnBoardingStatusEnum,
-  StatusEnum,
-} from '../../api/generated/b4f-dashboard-pnpg/SubProductResource';
+import { StatusEnum } from '../../api/generated/b4f-dashboard-pnpg/SubProductResource';
 import { Product } from '../../model/Product';
 import { ProductRole } from '../../model/ProductRole';
 
@@ -15,8 +12,6 @@ export const mockedPartyProduct: Product = {
   id: 'prod-pn-pg',
   title: 'SEND',
   description: 'Descrizione SEND',
-  authorized: true,
-  productOnBoardingStatus: ProductOnBoardingStatusEnum.ACTIVE,
   status: StatusEnum.ACTIVE,
   urlBO: 'http://notifiche/bo?token=<IdentityToken>',
   activationDateTime: new Date(2021, 1, 2),
@@ -25,7 +20,7 @@ export const mockedPartyProduct: Product = {
     'https://selcdcheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg',
   subProducts: [],
   logoBgColor: 'pagoPA.main',
-  userRole: 'ADMIN',
+  delegable: false,
 };
 
 export const mockedPartyProducts: Array<Product> = [
@@ -34,9 +29,7 @@ export const mockedPartyProducts: Array<Product> = [
     title: 'SEND',
     description: 'Descrizione SEND',
     id: 'prod-pn-pg',
-    authorized: true,
     status: StatusEnum.ACTIVE,
-    productOnBoardingStatus: ProductOnBoardingStatusEnum.ACTIVE,
     urlBO: 'http://notifiche/bo?token=<IdentityToken>',
     urlPublic: 'http://notifiche/public',
     imageUrl:
@@ -44,18 +37,16 @@ export const mockedPartyProducts: Array<Product> = [
     subProducts: [],
     logoBgColor: undefined,
     tag: undefined,
-    userRole: undefined,
     activationDateTime: undefined,
     backOfficeEnvironmentConfigurations: undefined,
+    delegable: false,
   },
   {
     logo: 'https://selcdcheckoutsa.z6.web.core.windows.net/resources/products/prod-pn/logo.svg',
     title: 'SEND ambiente sviluppo',
     description: 'SEND ambiente sviluppo',
     id: 'prod-pn-pg-svil',
-    authorized: true,
     status: StatusEnum.ACTIVE,
-    productOnBoardingStatus: ProductOnBoardingStatusEnum.ACTIVE,
     urlBO: 'http://notifiche/bo?token=<IdentityToken>',
     urlPublic: 'http://notifiche/public',
     imageUrl:
@@ -63,18 +54,16 @@ export const mockedPartyProducts: Array<Product> = [
     subProducts: [],
     logoBgColor: undefined,
     tag: undefined,
-    userRole: undefined,
     activationDateTime: undefined,
     backOfficeEnvironmentConfigurations: undefined,
+    delegable: false,
   },
   {
     logo: 'https://selcdcheckoutsa.z6.web.core.windows.net/resources/products/prod-pn/logo.svg',
     title: 'SEND ambiente collaudo',
     description: 'SEND ambiente collaudo',
     id: 'prod-pn-pg-coll',
-    authorized: true,
     status: StatusEnum.ACTIVE,
-    productOnBoardingStatus: ProductOnBoardingStatusEnum.ACTIVE,
     urlBO: 'http://notifiche/bo?token=<IdentityToken>',
     urlPublic: 'http://notifiche/public',
     imageUrl:
@@ -82,9 +71,9 @@ export const mockedPartyProducts: Array<Product> = [
     subProducts: [],
     logoBgColor: undefined,
     tag: undefined,
-    userRole: undefined,
     activationDateTime: undefined,
     backOfficeEnvironmentConfigurations: undefined,
+    delegable: false,
   },
 ];
 

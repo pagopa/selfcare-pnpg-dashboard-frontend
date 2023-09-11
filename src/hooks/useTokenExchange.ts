@@ -33,7 +33,7 @@ export const useTokenExchange = () => {
           {
             party_id: selectedParty.partyId,
             product_id: product.id,
-            product_role: product.userRole,
+            product_role: selectedParty.userRole,
           },
           () => window.location.assign(url)
         );

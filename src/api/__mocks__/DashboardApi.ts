@@ -1,73 +1,114 @@
-import { institutionResource2Party } from '../../model/Party';
-import { PnPGInstitutionResource } from '../generated/b4f-dashboard-pnpg/PnPGInstitutionResource';
+import { InstitutionBaseResource } from '../generated/b4f-dashboard-pnpg/InstitutionBaseResource';
+import {
+  InstitutionResource,
+  InstitutionTypeEnum,
+} from '../generated/b4f-dashboard-pnpg/InstitutionResource';
+import { ProductOnBoardingStatusEnum } from '../generated/b4f-dashboard-pnpg/OnboardedProductResource';
 import {
   PartyRoleEnum,
   ProductRoleMappingsResource,
   SelcRoleEnum,
 } from '../generated/b4f-dashboard-pnpg/ProductRoleMappingsResource';
-import {
-  ProductOnBoardingStatusEnum,
-  ProductsResource,
-  StatusEnum,
-} from '../generated/b4f-dashboard-pnpg/ProductsResource';
+import { ProductsResource, StatusEnum } from '../generated/b4f-dashboard-pnpg/ProductsResource';
 
-export const mockedInstitutionsResource: Array<PnPGInstitutionResource> = [
+export const mockedInstitutionResources: Array<InstitutionResource> = [
   {
-    userRole: 'LIMITED',
-    name: 'mockedBusiness1',
-    status: 'ACTIVE',
     id: '5b321318-3df7-48c1-67c8-1111e6707c3d',
+    name: 'mockedBusiness1',
     fiscalCode: '01113570210',
-    mailAddress: 'mockemail1@mocktest.com',
     category: '',
     externalId: '01113570210',
     originId: 'originId1',
     origin: 'INFOCAMERE',
-    institutionType: 'Azienda privata',
+    institutionType: 'PG' as InstitutionTypeEnum,
+    mailAddress: 'emailmock1@testmock.com',
+    products: [
+      {
+        productId: 'prod-pn-pg',
+        authorized: true,
+        userRole: 'ADMIN',
+        productOnBoardingStatus: 'ACTIVE' as ProductOnBoardingStatusEnum,
+        billing: {
+          publicServices: false,
+          recipientCode: 'CC2345',
+          vatNumber: '01113570210',
+        },
+      },
+    ],
   },
   {
-    userRole: 'ADMIN',
-    name: 'mockedBusiness2',
-    status: 'ACTIVE',
     id: '5b123318-7ff7-48c1-67c8-1111e6707c3d',
+    name: 'mockedBusiness2',
     fiscalCode: '03343570210',
-    mailAddress: 'mockemail2@mocktest.com',
     category: '',
     externalId: '03343570210',
     originId: 'originId1',
     origin: 'INFOCAMERE',
-    institutionType: 'Azienda privata',
+    institutionType: 'PG' as InstitutionTypeEnum,
+    mailAddress: 'emailmock2@testmock.com',
+    products: [
+      {
+        productId: 'prod-pn-pg',
+        authorized: true,
+        userRole: 'ADMIN',
+        productOnBoardingStatus: 'ACTIVE' as ProductOnBoardingStatusEnum,
+        billing: {
+          publicServices: false,
+          recipientCode: 'CC236D',
+          vatNumber: '03343570210',
+        },
+      },
+    ],
   },
   {
-    userRole: 'LIMITED',
-    name: 'mockedBusiness3',
-    status: 'ACTIVE',
     id: '5b971318-3df7-11c1-67c8-1111e6707c3d',
+    name: 'mockedBusiness3',
     fiscalCode: '05923570210',
-    mailAddress: 'mockemail3@mocktest.com',
     category: '',
     externalId: '05923570210',
     originId: 'originId1',
     origin: 'ADE',
-    institutionType: 'Azienda privata',
+    institutionType: 'PG' as InstitutionTypeEnum,
+    mailAddress: 'emailmock3@testmock.com',
+    products: [
+      {
+        productId: 'prod-pn-pg',
+        authorized: true,
+        userRole: 'ADMIN',
+        productOnBoardingStatus: 'ACTIVE' as ProductOnBoardingStatusEnum,
+        billing: {
+          publicServices: false,
+          recipientCode: 'CC293D',
+          vatNumber: '05923570210',
+        },
+      },
+    ],
   },
   {
-    userRole: 'ADMIN',
-    name: 'mockedBusiness4',
-    status: 'ACTIVE',
     id: '5b971318-3df7-11c1-67c8-1111e6707dgt',
+    name: 'mockedBusiness4',
     fiscalCode: '05923570510',
-    mailAddress: 'mockemail4@mocktest.com',
     category: '',
     externalId: '05923570510',
     originId: 'originId1',
     origin: 'ADE',
-    institutionType: 'Azienda privata',
+    institutionType: 'PG' as InstitutionTypeEnum,
+    mailAddress: 'emailmock4@testmock.com',
+    products: [
+      {
+        productId: 'prod-pn-pg',
+        authorized: true,
+        userRole: 'ADMIN',
+        productOnBoardingStatus: 'ACTIVE' as ProductOnBoardingStatusEnum,
+        billing: {
+          publicServices: false,
+          recipientCode: 'CC133D',
+          vatNumber: '05923570510',
+        },
+      },
+    ],
   },
 ];
-
-export const mockedInstitutionsResource2Party =
-  mockedInstitutionsResource.map(institutionResource2Party);
 
 export const mockedProductResources: Array<ProductsResource> = [
   {
@@ -75,9 +116,7 @@ export const mockedProductResources: Array<ProductsResource> = [
     title: 'SEND',
     description: 'Descrizione SEND',
     id: 'prod-pn-pg',
-    authorized: true,
     status: StatusEnum.ACTIVE,
-    productOnBoardingStatus: ProductOnBoardingStatusEnum.ACTIVE,
     urlBO: 'http://notifiche/bo?token=<IdentityToken>',
     urlPublic: 'http://notifiche/public',
     imageUrl:
@@ -88,9 +127,7 @@ export const mockedProductResources: Array<ProductsResource> = [
     title: 'SEND ambiente sviluppo',
     description: 'SEND ambiente sviluppo',
     id: 'prod-pn-pg-svil',
-    authorized: true,
     status: StatusEnum.ACTIVE,
-    productOnBoardingStatus: ProductOnBoardingStatusEnum.ACTIVE,
     urlBO: 'http://notifiche/bo?token=<IdentityToken>',
     urlPublic: 'http://notifiche/public',
     imageUrl:
@@ -101,9 +138,7 @@ export const mockedProductResources: Array<ProductsResource> = [
     title: 'SEND ambiente collaudo',
     description: 'SEND ambiente collaudo',
     id: 'prod-pn-pg-coll',
-    authorized: true,
     status: StatusEnum.ACTIVE,
-    productOnBoardingStatus: ProductOnBoardingStatusEnum.ACTIVE,
     urlBO: 'http://notifiche/bo?token=<IdentityToken>',
     urlPublic: 'http://notifiche/public',
     imageUrl:
@@ -139,11 +174,11 @@ export const mockedProductRoles: Array<ProductRoleMappingsResource> = [
 ];
 
 export const DashboardApi = {
-  getInstitutions: async (): Promise<Array<PnPGInstitutionResource>> =>
-    new Promise((resolve) => resolve(mockedInstitutionsResource)),
+  getInstitutions: async (): Promise<Array<InstitutionBaseResource>> =>
+    new Promise((resolve) => resolve(mockedInstitutionResources)),
 
-  getInstitution: async (_partyId: string): Promise<PnPGInstitutionResource> =>
-    new Promise((resolve) => resolve(mockedInstitutionsResource[0])),
+  getInstitution: async (_partyId: string): Promise<InstitutionResource> =>
+    new Promise((resolve) => resolve(mockedInstitutionResources[0])),
 
   updateBusinessData: async (
     _institutionId: string,
