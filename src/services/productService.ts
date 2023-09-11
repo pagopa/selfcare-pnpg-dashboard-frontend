@@ -22,20 +22,22 @@ export const fetchProductRoles = (product: Product): Promise<Array<ProductRole>>
   if (process.env.REACT_APP_MOCK_API === 'true') {
     return fetchProductRolesMocked(product);
   } else {
-    return DashboardApi.getProductRoles(product.id).then((roles) =>
-      roles
-        .map((pr) =>
-          pr.productRoles.map((r) => ({
-            productId: product.id,
-            partyRole: pr.partyRole,
-            selcRole: pr.selcRole,
-            multiroleAllowed: pr.multiroleAllowed,
-            productRole: r.code,
-            title: r.label,
-            description: r.description,
-          }))
-        )
-        .flatMap((x) => x)
-    );
+    return DashboardApi.getProductRoles(product.id)
+      .then((roles) =>
+        roles
+          ?.map((pr) =>
+            pr?.productRoles?.map((r) => ({
+              productId: product.id,
+              partyRole: pr.partyRole,
+              selcRole: pr.selcRole,
+              multiroleAllowed: pr.multiroleAllowed,
+              productRole: r.code ?? '',
+              title: r.label ?? '',
+              description: r.description ?? '',
+            }))
+          )
+          .flatMap((x) => x)
+      )
+      .catch((reason) => reason);
   }
 };

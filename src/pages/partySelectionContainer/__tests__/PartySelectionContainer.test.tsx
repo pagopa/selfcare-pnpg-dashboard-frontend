@@ -5,23 +5,23 @@ import { createMemoryHistory } from 'history';
 import { Router } from 'react-router';
 import PartySelectionContainer from '../PartySelectionContainer';
 import { partiesActions } from '../../../redux/slices/partiesSlice';
-import { mockedInstitutionsResource2Party } from '../../../api/__mocks__/DashboardApi';
-import { Party } from '../../../model/Party';
+import { mockedInstitutionResources } from '../../../api/__mocks__/DashboardApi';
+import { BaseParty, Party } from '../../../model/Party';
 import './../../../locale';
+import { ProductOnBoardingStatusEnum } from '../../../api/generated/b4f-dashboard-pnpg/OnboardedProductResource';
+import {
+  InstitutionResource,
+  InstitutionTypeEnum,
+} from '../../../api/generated/b4f-dashboard-pnpg/InstitutionResource';
+import { mockedBaseInstitutions } from '../../../services/__mocks__/partyService';
 
-const mockedParty: Array<Party> = [
+const mockedParty: Array<BaseParty> = [
   {
-    userRole: 'LIMITED',
+    partyId: '5b321318-3df7-48c1-67c8-1111e6707c3d',
+    externalId: '01113570210',
     description: 'mockedBusiness1',
     status: 'ACTIVE',
-    partyId: '5b321318-3df7-48c1-67c8-1111e6707c3d',
-    fiscalCode: '01113570210',
-    mailAddress: 'mockemail1@mocktest.com',
-    category: '',
-    externalId: '01113570210',
-    originId: 'originId1',
-    origin: 'INFOCAMERE',
-    institutionType: 'Azienda privata',
+    userRole: 'ADMIN',
   },
 ];
 
@@ -35,7 +35,7 @@ const renderComponent = (
 
   switch (howManyParties) {
     case 'moreThanOne':
-      store.dispatch(partiesActions.setPartiesList(mockedInstitutionsResource2Party));
+      store.dispatch(partiesActions.setPartiesList(mockedBaseInstitutions));
       break;
     case 'one':
       store.dispatch(partiesActions.setPartiesList(mockedParty));
@@ -102,7 +102,7 @@ test('Test with more than a party, PartySelection component rendered, full searc
 });
 
 test('Test with one party, PartySelection component is rendered, the party is auto-selected and join button is enabled', async () => {
-  renderComponent('one');
+  await renderComponent('one');
 
   await waitFor(() => screen.getByText('Seleziona la tua impresa'));
 

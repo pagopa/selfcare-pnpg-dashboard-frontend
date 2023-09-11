@@ -8,6 +8,7 @@ import { InstitutionResource } from './generated/b4f-dashboard-pnpg/InstitutionR
 import { createClient, WithDefaultsT } from './generated/b4f-dashboard-pnpg/client';
 import { ProductsResource } from './generated/b4f-dashboard-pnpg/ProductsResource';
 import { ProductRoleMappingsResource } from './generated/b4f-dashboard-pnpg/ProductRoleMappingsResource';
+import { InstitutionBaseResource } from './generated/b4f-dashboard-pnpg/InstitutionBaseResource';
 
 const withBearerAndInstitutionId: WithDefaultsT<'bearerAuth'> =
   (wrappedOperation) => (params: any) => {
@@ -39,7 +40,7 @@ const onRedirectToLogin = () =>
   );
 
 export const DashboardApi = {
-  getInstitutions: async (): Promise<Array<InstitutionResource>> => {
+  getInstitutions: async (): Promise<Array<InstitutionBaseResource>> => {
     const result = await apiClient.getInstitutionsUsingGET({});
     return extractResponse(result, 200, onRedirectToLogin);
   },

@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
-import { Party } from '../../model/Party';
+import { BaseParty, Party } from '../../model/Party';
 import { Product } from '../../model/Product';
 import { ProductRolesLists, ProductsRolesMap } from '../../model/ProductRole';
 
 interface PartiesState {
-  list?: Array<Party>;
+  list?: Array<BaseParty>;
   selected?: Party;
   selectedPartyLogoUrl?: string;
   selectedProducts?: Array<Product>;
@@ -19,7 +19,7 @@ export const partiesSlice = createSlice({
   name: 'parties',
   initialState,
   reducers: {
-    setPartiesList: (state, action: PayloadAction<Array<Party>>) => {
+    setPartiesList: (state, action: PayloadAction<Array<BaseParty>>) => {
       state.list = action.payload;
     },
     setPartySelected: (state, action: PayloadAction<Party | undefined>) => {
@@ -53,7 +53,7 @@ export const partiesActions = partiesSlice.actions;
 export const partiesReducer = partiesSlice.reducer;
 
 export const partiesSelectors = {
-  selectPartiesList: (state: RootState): Array<Party> | undefined => state.parties.list,
+  selectPartiesList: (state: RootState): Array<BaseParty> | undefined => state.parties.list,
   selectPartySelected: (state: RootState): Party | undefined => state.parties.selected,
   selectPartySelectedLogo: (state: RootState): string | undefined =>
     state.parties.selectedPartyLogoUrl,
