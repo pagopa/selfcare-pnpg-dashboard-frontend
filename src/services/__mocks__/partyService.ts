@@ -4,28 +4,24 @@ import { BaseParty, Party } from '../../model/Party';
 export const mockedBaseInstitutions: Array<BaseParty> = [
   {
     partyId: '5b321318-3df7-48c1-67c8-1111e6707c3d',
-    externalId: '01113570210',
     description: 'mockedBusiness1',
     status: 'ACTIVE',
     userRole: 'ADMIN',
   },
   {
     partyId: '5b123318-7ff7-48c1-67c8-1111e6707c3d',
-    externalId: '03343570210',
     description: 'mockedBusiness2',
     status: 'ACTIVE',
     userRole: 'LIMITED',
   },
   {
     partyId: '5b971318-3df7-11c1-67c8-1111e6707c3d',
-    externalId: '05923570210',
     description: 'mockedBusiness3',
     status: 'ACTIVE',
     userRole: 'ADMIN',
   },
   {
     partyId: '5b971318-3df7-11c1-67c8-1111e6707dgt',
-    externalId: '05923570510',
     description: 'mockedBusiness4',
     status: 'ACTIVE',
     userRole: 'LIMITED',

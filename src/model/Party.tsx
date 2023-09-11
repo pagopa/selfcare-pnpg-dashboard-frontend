@@ -43,7 +43,6 @@ export type Party = {
 
 export type BaseParty = {
   partyId: string;
-  externalId?: string;
   description?: string;
   status?: UserStatus;
   userRole?: UserRole;
@@ -90,7 +89,6 @@ export const institutionBaseResource2BaseParty = (
   const urlLogo = institutionResource.id && buildUrlLog(institutionResource.id);
   return {
     partyId: institutionResource.id ?? '',
-    externalId: 'ccc', // TODO FIXME
     description: institutionResource.name ?? '',
     status: institutionResource.status as UserStatus,
     userRole: institutionResource.userRole as UserRole,
