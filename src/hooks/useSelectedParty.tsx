@@ -1,5 +1,4 @@
 import useLoading from '@pagopa/selfcare-common-frontend/hooks/useLoading';
-import { resolvePathVariables } from '@pagopa/selfcare-common-frontend/utils/routes-utils';
 import { Party } from '../model/Party';
 import { Product } from '../model/Product';
 import { ProductsRolesMap } from '../model/ProductRole';
@@ -8,7 +7,6 @@ import { partiesActions, partiesSelectors } from '../redux/slices/partiesSlice';
 import { fetchPartyDetails } from '../services/partyService';
 import { fetchProducts } from '../services/productService';
 import { LOADING_TASK_SEARCH_PARTY, LOADING_TASK_SEARCH_PRODUCTS } from '../utils/constants';
-import { ENV } from '../utils/env';
 
 export const useSelectedParty = (): {
   fetchSelectedParty: (partyId: string) => Promise<[Party | null, Array<Product> | null]>;
@@ -25,33 +23,35 @@ export const useSelectedParty = (): {
   const productsRolesMap = useAppSelector(partiesSelectors.selectPartySelectedProductsRolesMap);
 
   const fetchParty = (partyId: string): Promise<Party | null> =>
-    fetchPartyDetails(partyId, parties).then((party) => {
+    fetchPartyDetails(partyId).then((party) => {
       if (party) {
-        if (party.status !== 'ACTIVE') {
+        const selectedParty = parties?.find((p) => p.partyId === partyId);
+        if (selectedParty && selectedParty.status !== 'ACTIVE') {
           throw new Error(`INVALID_PARTY_STATE_${party.status}`);
         }
-        if (partyId === party.externalId) {
-          const resolvedUrlWithPartyId = resolvePathVariables(ENV.ROUTES.OVERVIEW, {
-            partyId: party?.partyId ?? '',
-          });
-          history.pushState(null, 'null', resolvedUrlWithPartyId);
-        }
-        setParty(party);
+        const partyWithUserRoleAndStatus = {
+          ...party,
+          status: selectedParty?.status,
+          userRole: selectedParty?.userRole,
+        };
+        setParty(partyWithUserRoleAndStatus);
         return party;
       } else {
         throw new Error(`Cannot find partyId ${partyId}`);
       }
     });
   const fetchProductLists = (partyId: string) =>
-    fetchProducts(
-      parties?.find((p) => p.partyId === partyId || p.externalId === partyId)?.partyId ?? partyId
-    ).then((products) => {
+    fetchProducts(partyId).then((products) => {
       if (products) {
         setPartyProducts(products);
         dispatch(
           partiesActions.setPartySelectedProductsRolesMap(
             products
-              .filter((p) => p.productOnBoardingStatus === 'ACTIVE')
+              .filter((p) =>
+                selectedParty?.products.map(
+                  (us) => us.productId === p.id && us.productOnBoardingStatus === 'ACTIVE'
+                )
+              )
               .reduce((acc, p) => {
                 const rolesMap = productsRolesMap[p.id];
                 if (rolesMap) {

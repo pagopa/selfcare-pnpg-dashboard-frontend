@@ -1,43 +1,32 @@
 import { Grid, Box } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import TitleBox from '@pagopa/selfcare-common-frontend/components/TitleBox';
 import { useTranslation } from 'react-i18next';
 import { theme } from '@pagopa/mui-italia';
-import { Party } from '../../model/Party';
 import { partiesSelectors } from '../../redux/slices/partiesSlice';
 import { useAppSelector } from '../../redux/hooks';
 import { useTokenExchange } from '../../hooks/useTokenExchange';
 import { useIsMobile } from '../../hooks/useIsMobile';
+import { Party } from '../../model/Party';
 import WelcomeDashboard from './components/welcomeDashboard/WelcomeDashboard';
 import PartyCard from './components/partyCard/PartyCard';
 import { PartyLogoUploader } from './components/partyCard/components/partyLogoUploader/PartyLogoUploader';
 import DigitalNotificationCard from './components/activeProductsSection/components/DigitalNotificationCard';
 
-type UrlParams = {
-  partyId: string;
+type Props = {
+  party: Party;
 };
 
-const DashboardOverview = () => {
+const DashboardOverview = ({ party }: Props) => {
   const { t } = useTranslation();
-  const { partyId } = useParams<UrlParams>();
   const { invokeProductBo } = useTokenExchange();
   const isMobile = useIsMobile('md');
-  const parties = useAppSelector(partiesSelectors.selectPartiesList);
   const products = useAppSelector(partiesSelectors.selectPartySelectedProducts);
 
-  const [selectedParty, setSelectedParty] = useState<Party>();
-
-  useEffect(() => {
-    const chosenParty = parties?.find((p) => p.externalId === partyId || p.partyId === partyId);
-    setSelectedParty(chosenParty);
-  }, [partyId]);
-
-  const isAdmin = selectedParty && selectedParty.userRole === 'ADMIN';
+  const isAdmin = party && party.userRole === 'ADMIN';
 
   return (
     <Grid p={3} xs={12}>
-      <WelcomeDashboard businessName={selectedParty?.description} />
+      <WelcomeDashboard businessName={party?.description} />
       <Grid container direction="row" alignItems="center" mb={2}>
         <Grid
           item
@@ -51,9 +40,9 @@ const DashboardOverview = () => {
             },
           }}
         >
-          {isAdmin && <PartyLogoUploader partyId={selectedParty.partyId} />}
+          {isAdmin && <PartyLogoUploader partyId={party.partyId} />}
           <Grid item xs={12} md={8} mt={isAdmin && isMobile ? 4 : 0}>
-            <PartyCard party={selectedParty} />
+            <PartyCard party={party} />
           </Grid>
         </Grid>
       </Grid>
@@ -67,7 +56,13 @@ const DashboardOverview = () => {
         <Grid container spacing={3} mb={44}>
           {products &&
             products
-              .filter((p) => p.status === 'ACTIVE' && p.productOnBoardingStatus === 'ACTIVE')
+              .filter(
+                (p) =>
+                  p.status === 'ACTIVE' &&
+                  party?.products?.some(
+                    (pp) => pp.productId === p.id && pp.productOnBoardingStatus === 'ACTIVE'
+                  )
+              )
               .map((p) => (
                 <Box key={p.id} marginTop={3} marginLeft={3}>
                   <DigitalNotificationCard
@@ -77,9 +72,7 @@ const DashboardOverview = () => {
                         : p.title
                     }
                     urlLogo={p.logo}
-                    btnAction={() =>
-                      selectedParty ? invokeProductBo(p, selectedParty) : undefined
-                    }
+                    btnAction={() => (party ? invokeProductBo(p, party) : undefined)}
                   />
                 </Box>
               ))}

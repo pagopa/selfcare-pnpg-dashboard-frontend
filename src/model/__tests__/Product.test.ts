@@ -2,7 +2,6 @@ import {
   ProductsResource,
   StatusEnum,
 } from '../../api/generated/b4f-dashboard-pnpg/ProductsResource';
-import { ProductOnBoardingStatusEnum } from '../../api/generated/b4f-dashboard-pnpg/SubProductResource';
 import { productResource2Product } from '../Product';
 
 test('Test institutionInfo2Party', () => {
@@ -13,14 +12,13 @@ test('Test institutionInfo2Party', () => {
     id: 'prod-pn-pg',
     title: 'SEND',
     description: 'Descrizione SEND',
-    authorized: false,
-    productOnBoardingStatus: ProductOnBoardingStatusEnum.ACTIVE,
     status: StatusEnum.ACTIVE,
     urlBO: 'http://notifiche/bo?token=<IdentityToken>',
     urlPublic: 'http://notifiche/public',
     imageUrl:
       'https://selcdcheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg',
     logoBgColor: 'pagoPA.main',
+    delegable: false,
   };
 
   const product = productResource2Product(productResource);
@@ -29,8 +27,6 @@ test('Test institutionInfo2Party', () => {
     id: 'prod-pn-pg',
     title: 'SEND',
     description: 'Descrizione SEND',
-    authorized: false,
-    productOnBoardingStatus: ProductOnBoardingStatusEnum.ACTIVE,
     status: StatusEnum.ACTIVE,
     activationDateTime: undefined,
     backOfficeEnvironmentConfigurations: undefined,
@@ -39,8 +35,8 @@ test('Test institutionInfo2Party', () => {
     imageUrl:
       'https://selcdcheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg',
     logoBgColor: 'pagoPA.main',
-    subProducts: [],
+    delegable: false,
+    subProducts: undefined,
     tag: undefined,
-    userRole: undefined,
   });
 });

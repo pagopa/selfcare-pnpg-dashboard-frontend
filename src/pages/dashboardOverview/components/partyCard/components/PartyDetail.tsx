@@ -10,7 +10,7 @@ import { updateBusinessData } from '../../../../../services/partyService';
 import { partiesActions, partiesSelectors } from '../../../../../redux/slices/partiesSlice';
 import { useAppDispatch, useAppSelector } from '../../../../../redux/hooks';
 
-const emailRegexp = new RegExp('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$');
+const emailRegexp = new RegExp('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,5}$');
 
 type Props = {
   party?: Party;
@@ -42,7 +42,7 @@ export default function PartyDetail({ party }: Props) {
   const handleInputChange = (e: any, isBusinessEmail: boolean) => {
     const input = e.target.value;
     if (isBusinessEmail) {
-      if (input === business?.mailAddress) {
+      if (input === business?.digitalAddress) {
         setIsBusinessEmailEqualToSavedValue(true);
       } else {
         setInsertedBusinessEmail(input);
@@ -68,9 +68,9 @@ export default function PartyDetail({ party }: Props) {
       )
         .then(() => {
           if (businessEmail) {
-            setBusinessData({ ...party, mailAddress: businessEmail });
+            setBusinessData({ ...party, digitalAddress: businessEmail });
           } else {
-            setBusinessData({ ...party, description: businessName });
+            setBusinessData({ ...party, description: businessName ?? '' });
           }
           addNotify({
             component: 'Toast',
@@ -206,7 +206,7 @@ export default function PartyDetail({ party }: Props) {
             }}
           >
             <Typography sx={{ ...infoStyles, maxWidth: '100% !important', whiteSpace: 'pre-wrap' }}>
-              {business?.mailAddress}
+              {business?.digitalAddress}
             </Typography>
             {party?.userRole === 'ADMIN' && (
               <ButtonNaked

@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import RemoteRoutingUsers from '../users/RemoteRoutingUsers';
 import {
-  mockedInstitutionsResource,
+  mockedInstitutionResources,
   mockedProductResources,
 } from '../../api/__mocks__/DashboardApi';
 import { Product } from '../../model/Product';
@@ -17,7 +17,7 @@ test('renders the RemoteRoutingUsers and navigate its path', async () => {
   await render(
     <Router history={history}>
       <RemoteRoutingUsers
-        party={mockedInstitutionsResource[0] as unknown as Party}
+        party={mockedInstitutionResources[0] as unknown as Party}
         activeProducts={mockedProductResources as Array<Product>}
       />
     </Router>
@@ -33,7 +33,7 @@ test('renders the RemoteRoutingGroups and navigate its path', async () => {
   await render(
     <Router history={history}>
       <RemoteRoutingGroups
-        party={mockedInstitutionsResource[0] as unknown as Party}
+        party={mockedInstitutionResources[0] as unknown as Party}
         activeProducts={mockedProductResources as Array<Product>}
       />
     </Router>
@@ -49,7 +49,7 @@ test('renders the RemoteRoutingGroups and navigate its path', async () => {
   await render(
     <Router history={history}>
       <RemoteRoutingProductUsers
-        party={mockedInstitutionsResource[0] as unknown as Party}
+        party={mockedInstitutionResources[0] as unknown as Party}
         activeProducts={mockedProductResources as Array<Product>}
       />
     </Router>
