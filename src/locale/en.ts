@@ -11,21 +11,21 @@ export default {
     subTitle:
       "If you read notifications from multiple companies, you'll be able to change your choice after logging in.",
     onboardAnotherBusiness: 'Are you a Legal Representative? <1>Register a new company</1>',
-    search: 'Search for a company',
-    signIn: 'Login',
+    search: 'Search company',
+    signIn: 'Log in',
     noBusinessFound: {
-      title: 'The company is not yet <1/>registered',
+      title: 'To read notifications, you must <1/>first register your company ',
       description: 'Registration can only be made by a Legal <1/>Representative.',
-      registerBusiness: 'Register a company',
+      registerBusiness: 'Start',
     },
   },
   productsList: {
-    yourBusiness: 'Your business',
-    digitalNotifications: 'Digital notifications',
+    yourBusiness: 'YOUR COMPANY',
+    digitalNotifications: 'SEND – Digital Notifications Service',
   },
   overview: {
     title: 'Overview',
-    subTitle: 'View the data summary and read notifications from {{ businessName }}.',
+    subTitle: 'View your data summary and read notifications from {{ businessName }}.',
     sideMenu: {
       institutionManagement: {
         title: 'Organisation Management',
@@ -48,35 +48,35 @@ export default {
     },
     businessLogo: {
       upload: 'Upload company logo',
-      modify: 'Edit company logo',
+      modify: 'Edit',
       uploadError: {
         title: 'Upload failed',
         description:
-          'The upload of the logo was not successful. Check that the format and size are correct and upload it again',
+          'The logo upload was unsuccessful. Check that the format and size are correct and upload it again.',
       },
       modifyError: {
         title: 'Upload failed',
         description: 'Sorry, something went wrong. Please try again later',
       },
-      size: 'Maximum size 300 x <1/> 300px – .png format',
-      info: 'Enter only your company logo. <1/> You will be responsible for inserting images other than the one indicated.',
+      size: 'Exact size 300 x <1/> 300px – .png format',
+      info: 'Please only enter your company logo. <1/> You will be responsible for inserting images other than the one indicated. ',
     },
     partyDetail: {
       businessName: 'Company name',
       fiscalCode: 'Tax Code',
-      mailAddress: 'Institutional email',
+      mailAddress: 'Primary certified email address',
       editBusinessName: 'Edit',
       editBusinessNameModal: {
-        title: 'Change the company name',
-        subTitle: 'If the company name is not correct, edit it here.',
+        title: 'Change company name',
+        subTitle: 'If the company name is incorrect, change it here.',
         textFieldLabel: 'Company name',
-        invalidBusinessName: 'Enter a company name',
-        notEqualBusinessName: 'Enter a different company name',
+        invalidBusinessName: 'Please enter a company name',
+        notEqualBusinessName: 'Please enter a different company name',
         disclaimer: 'You will be responsible for entering data other than those indicated.',
         cancel: 'Cancel',
         confirm: 'Confirm',
         success: {
-          description: 'Company name changed correctly',
+          description: 'Company name changed successfully',
         },
         error: {
           description: 'An error occurred while entering. Please try again.',
@@ -84,16 +84,16 @@ export default {
       },
       editBusinessEmail: 'Edit',
       editBusinessEmailModal: {
-        title: 'Edit institutional email address',
-        subTitle: 'If the email address is not correct, edit it here.',
-        textFieldLabel: 'Institutional email',
-        invalidEmail: 'The email you entered is incorrect',
-        notEqualBusinessEmail: 'Enter a different institutional email',
+        title: 'Change primary certified email address',
+        subTitle: 'If the certified email address is incorrect, please edit it here.',
+        textFieldLabel: 'Certified email address',
+        invalidEmail: 'The certified email address entered is incorrect',
+        notEqualBusinessEmail: 'Please enter a different certified email address',
         disclaimer: 'You will be responsible for entering data other than those indicated.',
         cancel: 'Cancel',
         confirm: 'Confirm',
         success: {
-          description: 'Institutional email changed correctly',
+          description: 'Certified email address changed',
         },
         error: {
           description: 'An error occurred while entering. Please try again.',
