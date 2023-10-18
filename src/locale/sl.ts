@@ -21,7 +21,6 @@ export default {
   },
   productsList: {
     yourBusiness: 'Vaše podjetje',
-    digitalNotifications: 'SEND - Storitev digitalnega obveščanja',
   },
   overview: {
     title: 'Pregled',

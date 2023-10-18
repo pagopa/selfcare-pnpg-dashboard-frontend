@@ -5,12 +5,11 @@ import EditIcon from '@mui/icons-material/Edit';
 import { SessionModal, useErrorDispatcher, useUserNotify } from '@pagopa/selfcare-common-frontend';
 import { useState } from 'react';
 import { InfoOutlined } from '@mui/icons-material';
+import { emailRegexp } from '@pagopa/selfcare-common-frontend/utils/constants';
 import { Party } from '../../../../../model/Party';
 import { updateBusinessData } from '../../../../../services/partyService';
 import { partiesActions, partiesSelectors } from '../../../../../redux/slices/partiesSlice';
 import { useAppDispatch, useAppSelector } from '../../../../../redux/hooks';
-
-const emailRegexp = new RegExp('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,5}$');
 
 type Props = {
   party?: Party;
