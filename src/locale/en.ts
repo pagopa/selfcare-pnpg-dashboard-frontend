@@ -20,8 +20,7 @@ export default {
     },
   },
   productsList: {
-    yourBusiness: 'YOUR COMPANY',
-    digitalNotifications: 'SEND – Digital Notifications Service',
+    yourBusiness: 'Your company',
   },
   overview: {
     title: 'Overview',
