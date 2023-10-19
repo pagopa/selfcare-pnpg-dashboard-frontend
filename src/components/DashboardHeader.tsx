@@ -62,7 +62,7 @@ const DashboardHeader = ({ onExit, loggedUser, parties }: Props) => {
             ?.filter((p) => p.status === 'ACTIVE')
             ?.map((p) => ({
               id: p.id,
-              title: p.id === 'prod-pn-pg' ? t('productsList.digitalNotifications') : p.title,
+              title: p.id === 'prod-pn-pg' ? 'SEND - Servizio Notifiche Digitali' : p.title,
               linkType: 'external',
               productUrl: p.urlPublic,
             }))

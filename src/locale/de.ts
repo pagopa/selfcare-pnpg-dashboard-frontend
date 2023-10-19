@@ -23,7 +23,6 @@ export default {
   },
   productsList: {
     yourBusiness: 'Dein Unternehmen',
-    digitalNotifications: 'SEND - Dienst für digitale Bescheide',
   },
   overview: {
     title: 'Übersicht',

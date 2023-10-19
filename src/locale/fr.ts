@@ -22,7 +22,6 @@ export default {
   },
   productsList: {
     yourBusiness: 'Votre entreprise',
-    digitalNotifications: 'SEND - Service de Notifications Numériques',
   },
   overview: {
     title: 'Aperçu',
