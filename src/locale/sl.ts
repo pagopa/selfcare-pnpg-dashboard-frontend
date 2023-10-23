@@ -21,6 +21,7 @@ export default {
   },
   productsList: {
     yourBusiness: 'Vaše podjetje',
+    digitalNotifications: 'SEND - Storitev digitalnega obveščanja',
   },
   overview: {
     title: 'Pregled',
@@ -63,7 +64,7 @@ export default {
     partyDetail: {
       businessName: 'Ime podjetja',
       fiscalCode: 'Davčna številka',
-      mailAddress: 'Primarni potrjeni e-poštni naslov',
+      mailAddress: 'Primarni PEC',
       editBusinessName: 'Spremeni',
       editBusinessNameModal: {
         title: 'Spremenite ime podjetja',
@@ -83,16 +84,16 @@ export default {
       },
       editBusinessEmail: 'Spremeni',
       editBusinessEmailModal: {
-        title: 'Sprememba primarnega potrjenega e-poštnega naslova',
-        subTitle: 'Če je potrjen e-poštni naslov napačen, ga spremenite tukaj.',
-        textFieldLabel: 'Potrjen e-poštni naslov',
-        invalidEmail: 'Vneseni potrjeni e-poštni naslov ni pravilen',
-        notEqualBusinessEmail: 'Vnesite drugi potrjeni e-poštni naslov',
+        title: 'Sprememba primarnega PEC',
+        subTitle: 'Če je PEC napačen, ga spremenite tukaj.',
+        textFieldLabel: 'PEC',
+        invalidEmail: 'Vneseni PEC ni pravilen',
+        notEqualBusinessEmail: 'Vnesite drugi PEC',
         disclaimer: 'Odgovorni boste za vnos podatkov, ki niso navedeni.',
         cancel: 'Prekliči',
         confirm: 'Potrdi',
         success: {
-          description: 'Potrjeni e-poštni naslov je spremenjen',
+          description: 'PEC je spremenjen',
         },
         error: {
           description: 'Pri vnosu je prišlo do napake. Poskusite znova.',
