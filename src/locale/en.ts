@@ -63,7 +63,7 @@ export default {
     partyDetail: {
       businessName: 'Company name',
       fiscalCode: 'Tax Code',
-      mailAddress: 'Primary certified email address',
+      mailAddress: 'Primary PEC',
       editBusinessName: 'Edit',
       editBusinessNameModal: {
         title: 'Change company name',
@@ -83,16 +83,16 @@ export default {
       },
       editBusinessEmail: 'Edit',
       editBusinessEmailModal: {
-        title: 'Change primary certified email address',
-        subTitle: 'If the certified email address is incorrect, please edit it here.',
-        textFieldLabel: 'Certified email address',
-        invalidEmail: 'The certified email address entered is incorrect',
-        notEqualBusinessEmail: 'Please enter a different certified email address',
+        title: 'Change primary PEC',
+        subTitle: 'If the PEC is incorrect, please edit it here.',
+        textFieldLabel: 'PEC',
+        invalidEmail: 'The PEC entered is incorrect',
+        notEqualBusinessEmail: 'Please enter a different PEC',
         disclaimer: 'You will be responsible for entering data other than those indicated.',
         cancel: 'Cancel',
         confirm: 'Confirm',
         success: {
-          description: 'Certified email address changed',
+          description: 'PEC changed',
         },
         error: {
           description: 'An error occurred while entering. Please try again.',
