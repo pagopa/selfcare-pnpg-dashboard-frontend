@@ -2,33 +2,30 @@ export default {
   session: {
     expired: {
       title: 'Session expirée',
-      message: 'Vous allez être redirigé(e) vers la page de connexion...',
+      message: 'Vous allez être redirigé vers la page de connexion...',
     },
   },
-  unmanageableBusiness: 'L’entreprise sélectionnée ne peut pas être traitée',
+  unmanageableBusiness: 'L’entreprise sélectionnée n’est pas gérable',
   businessSelection: {
-    title: 'Sélectionner votre entreprise',
+    title: 'Sélectionnez votre entreprise',
     subTitle:
-      'Si vous lisez les notifications de plusieurs entreprises, vous pouvez modifier votre choix après vous être connecté(e).',
+      'Si vous lisez les notifications de plusieurs entreprises, vous pourrez modifier votre choix après vous être connecté.',
     onboardAnotherBusiness:
-      'Êtes-vous un(e) représentant(e) légal(e) ? <1>Enregistrer une nouvelle entreprise</1>',
-    search: 'Rechercher une entreprise',
+      'Êtes-vous un représentant légal ? <1>Enregistrer une nouvelle entreprise</1>',
+    search: 'Recherchez une entreprise',
     signIn: 'Se connecter',
     noBusinessFound: {
-      title: 'L’entreprise n’est pas encore <1/>enregistrée ',
-      description:
-        'L’enregistrement ne peut être effectué que par un(e) représentant(e) légal(e) <1/>.',
-      registerBusiness: 'Enregistrer une entreprise',
+      title: 'Pour lire les notifications, vous devez <1/> d’abord enregistrer votre entreprise ',
+      description: 'L’enregistrement ne peut être effectué que par un représentant légal <1/>.',
+      registerBusiness: 'Commencer',
     },
   },
   productsList: {
     yourBusiness: 'Votre entreprise',
-    digitalNotifications: 'Notifications numériques',
   },
   overview: {
     title: 'Aperçu',
-    subTitle:
-      'Consulter un résumé des informations et lire les notifications de {{ businessName }}.',
+    subTitle: 'Visualisez le résumé des données et lisez les notifications de {{ businessName }}.',
     sideMenu: {
       institutionManagement: {
         title: 'Gestion organisme',
@@ -50,58 +47,56 @@ export default {
       },
     },
     businessLogo: {
-      upload: "Télécharger le logo de l'entreprise",
-      modify: "Modifier le logo de l'entreprise",
+      upload: 'Charger le logo de l’entreprise',
+      modify: 'Modifier',
       uploadError: {
-        title: 'Le chargement a échoué',
+        title: 'Impossible de charger',
         description:
-          'Le chargement du logo a échoué. Vérifier que le format et la taille sont corrects et procéder à nouveau au téléchargement',
+          'Le chargement du logo n’a pas réussi. Vérifiez que le format et la taille sont corrects et rechargez-le.',
       },
       modifyError: {
-        title: 'Le chargement a échoué',
-        description: "Désolé, une erreur s'est produite. Réessayer plus tard",
+        title: 'Impossible de charger',
+        description: 'Désolé, quelque chose s’est mal passé. Réessayer plus tard',
       },
-      size: 'Taille maximum 300 x <1/> 300px - Format .png',
-      info: "Insérer uniquement le logo de votre entreprise. <1/> Vous serez responsable de l'insertion d'images autres que celles indiquées. ",
+      size: 'Taille exacte 300 x <1/> 300px - Format .png',
+      info: 'Saisissez simplement le logo de votre entreprise. <1/> Vous serez responsable de l’insertion d’images autres que celles indiquées. ',
     },
     partyDetail: {
       businessName: 'Raison sociale',
-      fiscalCode: "Code d'identification fiscale",
-      mailAddress: 'E-mail institutionnel',
+      fiscalCode: 'Numéro fiscal',
+      mailAddress: 'Adresse PEC primaire',
       editBusinessName: 'Modifier',
       editBusinessNameModal: {
         title: 'Modifier la raison sociale',
-        subTitle: 'Si la raison sociale est incorrecte, vous pouvez la modifier ici.',
+        subTitle: 'Si la raison sociale n’est pas correcte, modifiez-la ici.',
         textFieldLabel: 'Raison sociale',
-        invalidBusinessName: 'Saisir une raison sociale',
-        notEqualBusinessName: 'Saisir une raison sociale différente',
-        disclaimer:
-          "Vous serez responsable de l'insertion d'informations autres que celles demandées.",
+        invalidBusinessName: 'Entrer le nom de l’entreprise',
+        notEqualBusinessName: 'Entrer le nom de l’entreprise',
+        disclaimer: 'Vous serez responsable de la saisie de données autres que celles indiquées.',
         cancel: 'Annuler',
         confirm: 'Confirmer',
         success: {
-          description: 'Raison sociale correctement modifiée',
+          description: 'Raison sociale modifiée correctement',
         },
         error: {
-          description: "Une erreur s'est produite lors de la saisie. Réessayer.",
+          description: 'Une erreur s’est produite lors de la saisie. Réessayer.',
         },
       },
       editBusinessEmail: 'Modifier',
       editBusinessEmailModal: {
-        title: 'Modifier l’adresse e-mail institutionnelle',
-        subTitle: 'Si l’adresse e-mail est incorrecte, vous pouvez la modifier ici.',
-        textFieldLabel: 'E-mail institutionnel',
-        invalidEmail: "L'adresse e-mail saisie est incorrecte",
-        notEqualBusinessEmail: 'Saisir une adresse e-mail institutionnelle différente',
-        disclaimer:
-          "Vous serez responsable de l'insertion d'informations autres que celles demandées.",
+        title: 'Modifier l’adresse PEC primaire',
+        subTitle: 'Si l’adresse PEC est incorrecte, modifiez-la ici.',
+        textFieldLabel: 'Adresse courriel certifié',
+        invalidEmail: 'L’adresse PEC saisie n’est pas correcte',
+        notEqualBusinessEmail: 'Saisir une adresse PEC différente',
+        disclaimer: 'Vous serez responsable de la saisie de données autres que celles indiquées.',
         cancel: 'Annuler',
         confirm: 'Confirmer',
         success: {
-          description: 'E-mail institutionnel correctement modifié',
+          description: 'Adresse PEC modifiée',
         },
         error: {
-          description: "Une erreur s'est produite lors de la saisie. Réessayer.",
+          description: 'Une erreur s’est produite lors de la saisie. Réessayer.',
         },
       },
     },

@@ -2,32 +2,33 @@ export default {
   session: {
     expired: {
       title: 'Seja je potekla',
-      message: 'Preusmerjeni boste na stran za prijavo...',
+      message: 'Preusmerjeni boste na stran za prijavo ...',
     },
   },
   unmanageableBusiness: 'Izbranega podjetja ni mogoče upravljati',
   businessSelection: {
     title: 'Izberite svoje podjetje',
-    subTitle: 'Če berete obvestila več podjetij, boste lahko po prijavi spremenili svojo izbiro.',
-    onboardAnotherBusiness: 'Ste zakoniti zastopnik? <1>Registrirajte novo podjetje</1>',
+    subTitle:
+      'Če ste prebrali obvestila več podjetij, boste lahko po prijavi spremenili svojo izbiro.',
+    onboardAnotherBusiness: 'Ali ste zakoniti zastopnik? <1>Registracija novega podjetja</1>',
     search: 'Iskanje podjetja',
-    signIn: 'Dostopaj',
+    signIn: 'Prijava',
     noBusinessFound: {
-      title: 'Podjetje še ni <1/>registrano ',
-      description: 'Registracijo lahko opravi samo zakoniti <1/>zastopnik.',
-      registerBusiness: 'Registrirajte podjetje',
+      title: 'Če želite prebrati obvestila, morate <1/>najprej registrirati svoje podjetje ',
+      description: 'Registracijo lahko opravi samo pravni <1/>zastopnik.',
+      registerBusiness: 'Začetek',
     },
   },
   productsList: {
     yourBusiness: 'Vaše podjetje',
-    digitalNotifications: 'Digitalna obvestila',
+    digitalNotifications: 'SEND - Storitev digitalnega obveščanja',
   },
   overview: {
     title: 'Pregled',
     subTitle: 'Oglejte si povzetek podatkov in preberite obvestila {{ businessName }}.',
     sideMenu: {
       institutionManagement: {
-        title: 'Upravljanje subjekta',
+        title: 'Upravljanje organizacije',
         overview: {
           title: 'Pregled',
         },
@@ -47,27 +48,27 @@ export default {
     },
     businessLogo: {
       upload: 'Naložite logotip podjetja',
-      modify: 'Uredite logotip podjetja',
+      modify: 'Spremeni',
       uploadError: {
         title: 'Nalaganje ni uspelo',
         description:
-          'Nalaganje logotipa ni uspelo. Preverite, ali sta oblika in velikost pravilni, in ga znova naložite',
+          'Nalaganje logotipa ni uspelo. Preverite, ali sta format in velikost pravilna, in ga naložite znova.',
       },
       modifyError: {
         title: 'Nalaganje ni uspelo',
-        description: 'Žal, nekaj je šlo narobe. Poskusite znova kasneje',
+        description: 'Žal, nekaj je šlo narobe. Poskusite znova pozneje',
       },
-      size: 'Največja velikost 300 x <1/> 300px - format .png',
+      size: 'Natančna velikost 300 x <1/> 300px - format .png',
       info: 'Vnesite samo logotip vašega podjetja. <1/> Odgovorni boste za vstavljanje slik, ki niso navedene. ',
     },
     partyDetail: {
       businessName: 'Ime podjetja',
       fiscalCode: 'Davčna številka',
-      mailAddress: 'Institucionalna elektronska pošta',
-      editBusinessName: 'Uredi',
+      mailAddress: 'Primarni PEC',
+      editBusinessName: 'Spremeni',
       editBusinessNameModal: {
-        title: 'Spremeni ime podjetja',
-        subTitle: 'Če je ime podjetja napačno, ga uredite tukaj.',
+        title: 'Spremenite ime podjetja',
+        subTitle: 'Če ime podjetja ni pravilno, ga spremenite tukaj.',
         textFieldLabel: 'Ime podjetja',
         invalidBusinessName: 'Vnesite ime podjetja',
         notEqualBusinessName: 'Vnesite drugo ime podjetja',
@@ -81,18 +82,18 @@ export default {
           description: 'Pri vnosu je prišlo do napake. Poskusite znova.',
         },
       },
-      editBusinessEmail: 'Uredi',
+      editBusinessEmail: 'Spremeni',
       editBusinessEmailModal: {
-        title: 'Uredi institucionalni e-poštni naslov',
-        subTitle: 'Če je e-poštni naslov napačen, ga uredite tukaj.',
-        textFieldLabel: 'Institucionalna elektronska pošta',
-        invalidEmail: 'Vneseni e-poštni naslov ni veljaven',
-        notEqualBusinessEmail: 'Vnesite drug institucionalni e-poštni naslov',
+        title: 'Sprememba primarnega PEC',
+        subTitle: 'Če je PEC napačen, ga spremenite tukaj.',
+        textFieldLabel: 'PEC',
+        invalidEmail: 'Vneseni PEC ni pravilen',
+        notEqualBusinessEmail: 'Vnesite drugi PEC',
         disclaimer: 'Odgovorni boste za vnos podatkov, ki niso navedeni.',
         cancel: 'Prekliči',
         confirm: 'Potrdi',
         success: {
-          description: 'Institucionalna e-pošta je bila uspešno spremenjena',
+          description: 'PEC je spremenjen',
         },
         error: {
           description: 'Pri vnosu je prišlo do napake. Poskusite znova.',
