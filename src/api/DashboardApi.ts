@@ -50,8 +50,8 @@ export const DashboardApi = {
     return extractResponse(result, 200, onRedirectToLogin);
   },
 
-  getProducts: async (institutionId: string): Promise<Array<ProductsResource>> => {
-    const result = await apiClient.getInstitutionProductsUsingGET({ institutionId });
+  getProducts: async (): Promise<Array<ProductsResource>> => {
+    const result = await apiClient.getProductstreeUsingGET();
     return extractResponse(result, 200, onRedirectToLogin);
   },
 
