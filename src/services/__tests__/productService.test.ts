@@ -12,7 +12,7 @@ beforeEach(() => {
 });
 
 test('Test fetchProducts', async () => {
-  const products = await fetchProducts('5b321318-3df7-48c1-67c8-1111e6707c3d');
+  const products = await fetchProducts();
 
   expect(products).toMatchObject(mockedProductResources.map(productResource2Product));
 

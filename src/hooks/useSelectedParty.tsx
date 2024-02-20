@@ -40,8 +40,8 @@ export const useSelectedParty = (): {
         throw new Error(`Cannot find partyId ${partyId}`);
       }
     });
-  const fetchProductLists = (partyId: string) =>
-    fetchProducts(partyId).then((products) => {
+  const fetchProductLists = () =>
+    fetchProducts().then((products) => {
       if (products) {
         setPartyProducts(products);
         dispatch(
@@ -64,7 +64,7 @@ export const useSelectedParty = (): {
         );
         return products;
       } else {
-        throw new Error(`Cannot find products of partyId ${partyId}`);
+        throw new Error(`Cannot find products`);
       }
     });
 
@@ -81,9 +81,9 @@ export const useSelectedParty = (): {
         setLoadingDetails(false)
       );
 
-      const partyProductsPromise: Promise<Array<Product> | null> = fetchProductLists(
-        partyId
-      ).finally(() => setLoadingProducts(false));
+      const partyProductsPromise: Promise<Array<Product> | null> = fetchProductLists().finally(() =>
+        setLoadingProducts(false)
+      );
 
       return Promise.all([partyDetailPromise, partyProductsPromise]).catch((e) => {
         setParty(undefined);
