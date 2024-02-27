@@ -62,7 +62,7 @@ export default {
     },
     partyDetail: {
       businessName: 'Company name',
-      fiscalCode: 'Tax Code',
+      fiscalCode: 'Fiscal Code',
       mailAddress: 'Primary PEC',
       editBusinessName: 'Edit',
       editBusinessNameModal: {
