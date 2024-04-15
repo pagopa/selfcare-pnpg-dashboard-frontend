@@ -2268,9 +2268,9 @@
     "/v2/products/{productId}/back-office" : {
       "get" : {
         "tags" : [ "products" ],
-        "summary" : "retrieveProductBackoffice",
+        "summary" : "Service to trigger token exchange and redirect to product's back office URL",
         "description" : "Service to trigger token exchange and redirect to product's back office URL",
-        "operationId" : "retrieveProductBackofficeUsingGET_1",
+        "operationId" : "v2RetrieveProductBackofficeUsingGET",
         "parameters" : [ {
           "name" : "productId",
           "in" : "path",
@@ -2909,9 +2909,9 @@
     "/v2/token/exchange" : {
       "get" : {
         "tags" : [ "token" ],
-        "summary" : "exchange",
+        "summary" : "Service create an 'Identity Token' based on a Self Care session token",
         "description" : "Service create an 'Identity Token' based on a Self Care session token",
-        "operationId" : "exchangeUsingGET_1",
+        "operationId" : "v2Exchange",
         "parameters" : [ {
           "name" : "institutionId",
           "in" : "query",
@@ -4830,6 +4830,16 @@
           "description" : "productId",
           "required" : false,
           "style" : "form",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "productRoles",
+          "in" : "query",
+          "description" : "productRoles",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
           "schema" : {
             "type" : "string"
           }
