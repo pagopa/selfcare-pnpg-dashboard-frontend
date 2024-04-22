@@ -105,7 +105,7 @@ export const DashboardApi = {
     institutionId: string,
     environment?: string
   ): Promise<string> => {
-    const result = await apiClient.retrieveProductBackofficeUsingGET_1({
+    const result = await apiClient.v2RetrieveProductBackofficeUsingGET({
       productId,
       institutionId,
       environment,
