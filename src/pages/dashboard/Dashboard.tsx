@@ -103,7 +103,6 @@ const Dashboard = () => {
         ),
       [products, party]
     ) ?? [];
-
   const productsMap: ProductsMap =
     useMemo(() => buildProductsMap(products ?? []), [products]) ?? [];
 
