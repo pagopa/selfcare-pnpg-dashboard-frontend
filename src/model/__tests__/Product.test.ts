@@ -28,7 +28,6 @@ test('Test institutionInfo2Party', () => {
     title: 'SEND',
     description: 'Descrizione SEND',
     status: StatusEnum.ACTIVE,
-    activationDateTime: undefined,
     backOfficeEnvironmentConfigurations: undefined,
     urlBO: 'http://notifiche/bo?token=<IdentityToken>',
     urlPublic: 'http://notifiche/public',
