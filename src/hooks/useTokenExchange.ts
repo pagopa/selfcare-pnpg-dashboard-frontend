@@ -1,10 +1,11 @@
-import useLoading from '@pagopa/selfcare-common-frontend/hooks/useLoading';
 import useErrorDispatcher from '@pagopa/selfcare-common-frontend/hooks/useErrorDispatcher';
+import useLoading from '@pagopa/selfcare-common-frontend/hooks/useLoading';
+import i18n from '@pagopa/selfcare-common-frontend/locale/locale-utils';
 import { trackEvent } from '@pagopa/selfcare-common-frontend/services/analyticsService';
-import { LOADING_TASK_TOKEN_EXCHANGE } from '../utils/constants';
+import { Party } from '../model/Party';
 import { Product } from '../model/Product';
 import { retrieveBackOfficeUrl } from '../services/tokenExchangeService';
-import { Party } from '../model/Party';
+import { LOADING_TASK_TOKEN_EXCHANGE } from '../utils/constants';
 
 const hostnameRegexp = /^(?:https?:\/\/)([-.a-zA-Z0-9_]+)/;
 
@@ -25,7 +26,9 @@ export const useTokenExchange = () => {
       return;
     }
 
-    retrieveBackOfficeUrl(selectedParty, product)
+    const lang = i18n.language;
+
+    retrieveBackOfficeUrl(selectedParty, product, undefined, lang)
       .then((url) => {
         setLoading(true);
         trackEvent(
