@@ -5,7 +5,6 @@ import {
 } from '../generated/b4f-dashboard-pnpg/InstitutionResource';
 import { ProductOnBoardingStatusEnum } from '../generated/b4f-dashboard-pnpg/OnboardedProductResource';
 import {
-  PartyRoleEnum,
   ProductRoleMappingsResource,
   SelcRoleEnum,
 } from '../generated/b4f-dashboard-pnpg/ProductRoleMappingsResource';
@@ -148,7 +147,7 @@ export const mockedProductResources: Array<ProductsResource> = [
 
 export const mockedProductRoles: Array<ProductRoleMappingsResource> = [
   {
-    partyRole: PartyRoleEnum.SUB_DELEGATE,
+    partyRole: 'SUB_DELEGATE',
     selcRole: SelcRoleEnum.ADMIN,
     multiroleAllowed: false,
     productRoles: [
@@ -160,7 +159,7 @@ export const mockedProductRoles: Array<ProductRoleMappingsResource> = [
     ],
   },
   {
-    partyRole: PartyRoleEnum.OPERATOR,
+    partyRole: 'OPERATOR',
     selcRole: SelcRoleEnum.LIMITED,
     multiroleAllowed: false,
     productRoles: [

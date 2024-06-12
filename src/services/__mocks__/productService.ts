@@ -1,5 +1,4 @@
 import {
-  PartyRoleEnum,
   ProductRoleMappingsResource,
   SelcRoleEnum,
 } from '../../api/generated/b4f-dashboard-pnpg/ProductRoleMappingsResource';
@@ -100,7 +99,7 @@ export const mockedProductRoles: Array<ProductRole> = [
 
 export const mockedMappedProductRoles: Array<ProductRoleMappingsResource> = [
   {
-    partyRole: PartyRoleEnum.MANAGER,
+    partyRole: 'MANAGER',
     selcRole: SelcRoleEnum.ADMIN,
     multiroleAllowed: false,
     productRoles: [
@@ -112,7 +111,7 @@ export const mockedMappedProductRoles: Array<ProductRoleMappingsResource> = [
     ],
   },
   {
-    partyRole: PartyRoleEnum.OPERATOR,
+    partyRole: 'OPERATOR',
     selcRole: SelcRoleEnum.LIMITED,
     multiroleAllowed: false,
     productRoles: [
