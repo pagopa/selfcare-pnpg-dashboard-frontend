@@ -1,16 +1,17 @@
-import { Grid, Box } from '@mui/material';
-import TitleBox from '@pagopa/selfcare-common-frontend/components/TitleBox';
-import { useTranslation } from 'react-i18next';
+import { Box, Grid } from '@mui/material';
 import { theme } from '@pagopa/mui-italia';
-import { partiesSelectors } from '../../redux/slices/partiesSlice';
-import { useAppSelector } from '../../redux/hooks';
-import { useTokenExchange } from '../../hooks/useTokenExchange';
+import TitleBox from '@pagopa/selfcare-common-frontend/components/TitleBox';
+import i18n from '@pagopa/selfcare-common-frontend/locale/locale-utils';
+import { useTranslation } from 'react-i18next';
 import { useIsMobile } from '../../hooks/useIsMobile';
+import { useTokenExchange } from '../../hooks/useTokenExchange';
 import { Party } from '../../model/Party';
-import WelcomeDashboard from './components/welcomeDashboard/WelcomeDashboard';
+import { useAppSelector } from '../../redux/hooks';
+import { partiesSelectors } from '../../redux/slices/partiesSlice';
+import DigitalNotificationCard from './components/activeProductsSection/components/DigitalNotificationCard';
 import PartyCard from './components/partyCard/PartyCard';
 import { PartyLogoUploader } from './components/partyCard/components/partyLogoUploader/PartyLogoUploader';
-import DigitalNotificationCard from './components/activeProductsSection/components/DigitalNotificationCard';
+import WelcomeDashboard from './components/welcomeDashboard/WelcomeDashboard';
 
 type Props = {
   party: Party;
@@ -21,6 +22,7 @@ const DashboardOverview = ({ party }: Props) => {
   const { invokeProductBo } = useTokenExchange();
   const isMobile = useIsMobile('md');
   const products = useAppSelector(partiesSelectors.selectPartySelectedProducts);
+  const lang = i18n.language;
 
   const isAdmin = party && party.userRole === 'ADMIN';
 
@@ -72,7 +74,7 @@ const DashboardOverview = ({ party }: Props) => {
                         : p.title
                     }
                     urlLogo={p.logo}
-                    btnAction={() => (party ? invokeProductBo(p, party) : undefined)}
+                    btnAction={() => (party ? invokeProductBo(p, party, lang) : undefined)}
                   />
                 </Box>
               ))}
