@@ -129,9 +129,9 @@ export function PartyLogoUploader({ partyId }: Props) {
     validator: (file) => {
       if (
         (file as any).height > maxAllowedPx ||
-        (file as any).weight > maxAllowedPx ||
+        (file as any).width > maxAllowedPx ||
         (file as any).height < minAllowedPx ||
-        (file as any).height !== (file as any).weight
+        (file as any).height !== (file as any).width
       ) {
         return {
           code: 'height-width',
