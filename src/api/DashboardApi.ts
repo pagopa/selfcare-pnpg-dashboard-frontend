@@ -80,12 +80,14 @@ export const DashboardApi = {
   retrieveProductBackoffice: async (
     productId: string,
     institutionId: string,
-    environment?: string
+    environment?: string,
+    lang?: string
   ): Promise<string> => {
     const result = await apiClient.v2RetrieveProductBackofficeUsingGET({
       productId,
       institutionId,
       environment,
+      lang,
     });
     return extractResponse(result, 200, onRedirectToLogin);
   },

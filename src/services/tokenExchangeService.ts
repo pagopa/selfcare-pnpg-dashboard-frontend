@@ -5,5 +5,7 @@ import { Product } from '../model/Product';
 export const retrieveBackOfficeUrl = (
   selectedParty: Party,
   product: Product,
-  environment?: string
-): Promise<string> => DashboardApi.retrieveProductBackoffice(product.id, selectedParty.partyId, environment);
+  environment?: string,
+  lang?: string
+): Promise<string> =>
+  DashboardApi.retrieveProductBackoffice(product.id, selectedParty.partyId, environment, lang);

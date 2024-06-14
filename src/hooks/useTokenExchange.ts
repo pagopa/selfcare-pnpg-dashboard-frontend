@@ -1,10 +1,10 @@
-import useLoading from '@pagopa/selfcare-common-frontend/hooks/useLoading';
 import useErrorDispatcher from '@pagopa/selfcare-common-frontend/hooks/useErrorDispatcher';
+import useLoading from '@pagopa/selfcare-common-frontend/hooks/useLoading';
 import { trackEvent } from '@pagopa/selfcare-common-frontend/services/analyticsService';
-import { LOADING_TASK_TOKEN_EXCHANGE } from '../utils/constants';
+import { Party } from '../model/Party';
 import { Product } from '../model/Product';
 import { retrieveBackOfficeUrl } from '../services/tokenExchangeService';
-import { Party } from '../model/Party';
+import { LOADING_TASK_TOKEN_EXCHANGE } from '../utils/constants';
 
 const hostnameRegexp = /^(?:https?:\/\/)([-.a-zA-Z0-9_]+)/;
 
@@ -12,7 +12,7 @@ export const useTokenExchange = () => {
   const addError = useErrorDispatcher();
   const setLoading = useLoading(LOADING_TASK_TOKEN_EXCHANGE);
 
-  const invokeProductBo = async (product: Product, selectedParty: Party): Promise<void> => {
+  const invokeProductBo = async (product: Product, selectedParty: Party, lang?: string): Promise<void> => {
     const result = validateUrlBO(product?.urlBO);
     if (result instanceof Error) {
       addError({
@@ -25,7 +25,7 @@ export const useTokenExchange = () => {
       return;
     }
 
-    retrieveBackOfficeUrl(selectedParty, product)
+    retrieveBackOfficeUrl(selectedParty, product, undefined, lang)
       .then((url) => {
         setLoading(true);
         trackEvent(
