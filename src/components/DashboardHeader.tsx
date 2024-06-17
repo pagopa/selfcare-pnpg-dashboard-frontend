@@ -101,7 +101,7 @@ const DashboardHeader = ({ onExit, loggedUser, parties }: Props) => {
             if (selectedProduct && selectedProduct.id !== 'prod-selfcare') {
               void invokeProductBo(
                 selectedProduct as Product,
-                actualSelectedParty.current as Party
+                actualSelectedParty.current as Party,
               );
             }
           });
