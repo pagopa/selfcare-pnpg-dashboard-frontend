@@ -1,7 +1,7 @@
 import { Box, Grid } from '@mui/material';
 import { theme } from '@pagopa/mui-italia';
-import TitleBox from '@pagopa/selfcare-common-frontend/components/TitleBox';
-import i18n from '@pagopa/selfcare-common-frontend/locale/locale-utils';
+import TitleBox from '@pagopa/selfcare-common-frontend/lib/components/TitleBox';
+import i18n from '@pagopa/selfcare-common-frontend/lib/locale/locale-utils';
 import { useTranslation } from 'react-i18next';
 import { useIsMobile } from '../../hooks/useIsMobile';
 import { useTokenExchange } from '../../hooks/useTokenExchange';

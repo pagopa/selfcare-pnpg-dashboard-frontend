@@ -1,8 +1,8 @@
 import { Box, Grid } from '@mui/material';
 import { DropEvent, FileRejection, useDropzone } from 'react-dropzone';
 import { useState, useEffect } from 'react';
-import useErrorDispatcher from '@pagopa/selfcare-common-frontend/hooks/useErrorDispatcher';
-import { trackEvent } from '@pagopa/selfcare-common-frontend/services/analyticsService';
+import useErrorDispatcher from '@pagopa/selfcare-common-frontend/lib/hooks/useErrorDispatcher';
+import { trackEvent } from '@pagopa/selfcare-common-frontend/lib/services/analyticsService';
 import { uniqueId } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { TFunction } from 'i18next';

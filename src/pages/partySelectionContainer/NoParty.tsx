@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Grid, Button, Typography } from '@mui/material';
-import { trackEvent } from '@pagopa/selfcare-common-frontend/services/analyticsService';
+import { trackEvent } from '@pagopa/selfcare-common-frontend/lib/services/analyticsService';
 import { useTranslation, Trans } from 'react-i18next';
 import { uniqueId } from 'lodash';
 import { ReactComponent as NoBusiness } from '../../assets/no-business.svg';
