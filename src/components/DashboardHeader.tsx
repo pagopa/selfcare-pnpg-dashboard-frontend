@@ -1,20 +1,21 @@
-import { PartySwitchItem } from '@pagopa/mui-italia/dist/components/PartySwitch';
-import { Header } from '@pagopa/selfcare-common-frontend';
-import { User } from '@pagopa/selfcare-common-frontend/model/User';
-import { trackEvent } from '@pagopa/selfcare-common-frontend/services/analyticsService';
-import { resolvePathVariables } from '@pagopa/selfcare-common-frontend/utils/routes-utils';
-import { useMemo, useRef, useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import { ProductSwitchItem } from '@pagopa/mui-italia';
-import { pnpgRoleLabels } from '@pagopa/selfcare-common-frontend/utils/constants';
+import { PartySwitchItem } from '@pagopa/mui-italia/dist/components/PartySwitch';
+import { Header } from '@pagopa/selfcare-common-frontend/lib';
+import i18n from '@pagopa/selfcare-common-frontend/lib/locale/locale-utils';
+import { User } from '@pagopa/selfcare-common-frontend/lib/model/User';
+import { trackEvent } from '@pagopa/selfcare-common-frontend/lib/services/analyticsService';
+import { pnpgRoleLabels } from '@pagopa/selfcare-common-frontend/lib/utils/constants';
+import { resolvePathVariables } from '@pagopa/selfcare-common-frontend/lib/utils/routes-utils';
+import { useMemo, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useHistory } from 'react-router-dom';
 import withParties, { WithPartiesProps } from '../decorators/withParties';
 import { useTokenExchange } from '../hooks/useTokenExchange';
+import { Party } from '../model/Party';
 import { Product } from '../model/Product';
 import { useAppSelector } from '../redux/hooks';
 import { partiesSelectors } from '../redux/slices/partiesSlice';
 import ROUTES, { DASHBOARD_ROUTES } from '../routes';
-import { Party } from '../model/Party';
 import { ENV } from './../utils/env';
 
 type Props = WithPartiesProps & {
@@ -34,6 +35,7 @@ const DashboardHeader = ({ onExit, loggedUser, parties }: Props) => {
   const [_productSelected, setProductSelected] = useState<Product>();
   const actualActiveProducts = useRef<Array<Product>>([]);
   const actualSelectedParty = useRef<Party>();
+  const lang = i18n.language;
 
   const onboardedPartyProducts = party?.products?.filter(
     (pp) => pp.productOnBoardingStatus === 'ACTIVE' && pp.authorized
@@ -102,6 +104,7 @@ const DashboardHeader = ({ onExit, loggedUser, parties }: Props) => {
               void invokeProductBo(
                 selectedProduct as Product,
                 actualSelectedParty.current as Party,
+                lang
               );
             }
           });
