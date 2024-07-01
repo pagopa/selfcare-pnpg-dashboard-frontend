@@ -1,7 +1,7 @@
 import { List, Grid } from '@mui/material';
 import { useHistory } from 'react-router';
-import { resolvePathVariables } from '@pagopa/selfcare-common-frontend/utils/routes-utils';
-import { useUnloadEventOnExit } from '@pagopa/selfcare-common-frontend/hooks/useUnloadEventInterceptor';
+import { resolvePathVariables } from '@pagopa/selfcare-common-frontend/lib/utils/routes-utils';
+import { useUnloadEventOnExit } from '@pagopa/selfcare-common-frontend/lib/hooks/useUnloadEventInterceptor';
 import { useTranslation } from 'react-i18next';
 import DashboardCustomize from '@mui/icons-material/DashboardCustomize';
 import PeopleAlt from '@mui/icons-material/PeopleAlt';

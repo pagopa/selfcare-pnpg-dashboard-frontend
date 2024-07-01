@@ -3,7 +3,7 @@ import ProductNavigationBar from '../ProductNavigationBar';
 import { Provider } from 'react-redux';
 import { createStore } from '../../redux/store';
 import { Product } from '../../model/Product';
-import { NavigationPath } from '@pagopa/selfcare-common-frontend/components/NavigationBar';
+import { NavigationPath } from '@pagopa/selfcare-common-frontend/lib/components/NavigationBar';
 
 const renderComponent = async (paths: Array<NavigationPath>, selectedProduct?: Product) => {
   render(
