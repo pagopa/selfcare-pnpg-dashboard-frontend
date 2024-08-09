@@ -1,7 +1,7 @@
 import { GeographicTaxonomyResource } from '../api/generated/b4f-dashboard-pnpg/GeographicTaxonomyResource';
 import { InstitutionBaseResource } from '../api/generated/b4f-dashboard-pnpg/InstitutionBaseResource';
 import { InstitutionResource } from '../api/generated/b4f-dashboard-pnpg/InstitutionResource';
-import { OnboardedProductResource } from '../api/generated/b4f-dashboard-pnpg/OnboardedProductResource';
+import { ProductOnBoardingStatusEnum } from '../api/generated/b4f-dashboard-pnpg/OnboardedProductResource';
 import { ENV } from '../utils/env';
 
 export type UserRole = 'ADMIN' | 'LIMITED';
@@ -13,9 +13,22 @@ export type GeographicTaxonomy = {
   desc: string;
 };
 
+type OnboardedProduct = {
+  authorized?: boolean;
+  billing?: {
+      publicServices?: boolean;
+      recipientCode?: string;
+      vatNumber?: string;
+  };
+  productId?: string;
+  productOnBoardingStatus?: ProductOnBoardingStatusEnum;
+  userProductActions?: Array<string>;
+  userRole?: string;
+};
+
 export type Party = {
   partyId: string;
-  products: Array<OnboardedProductResource>;
+  products: Array<OnboardedProduct>;
   externalId?: string;
   originId?: string;
   origin?: string;
@@ -79,7 +92,7 @@ export const institutionResource2Party = (institutionResource: InstitutionResour
     subunitType: institutionResource.subunitType,
     aooParentCode: institutionResource.aooParentCode,
     parentDescription: institutionResource.parentDescription,
-    products: institutionResource.products as Array<OnboardedProductResource>,
+    products: institutionResource.products as Array<OnboardedProduct>,
   };
 };
 

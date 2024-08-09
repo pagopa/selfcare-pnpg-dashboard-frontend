@@ -1,7 +1,9 @@
 import { Box, Grid } from '@mui/material';
 import { theme } from '@pagopa/mui-italia';
+import { usePermissions } from '@pagopa/selfcare-common-frontend/lib';
 import TitleBox from '@pagopa/selfcare-common-frontend/lib/components/TitleBox';
 import i18n from '@pagopa/selfcare-common-frontend/lib/locale/locale-utils';
+import { Actions } from '@pagopa/selfcare-common-frontend/lib/utils/constants';
 import { useTranslation } from 'react-i18next';
 import { useIsMobile } from '../../hooks/useIsMobile';
 import { useTokenExchange } from '../../hooks/useTokenExchange';
@@ -22,9 +24,10 @@ const DashboardOverview = ({ party }: Props) => {
   const { invokeProductBo } = useTokenExchange();
   const isMobile = useIsMobile('md');
   const products = useAppSelector(partiesSelectors.selectPartySelectedProducts);
+  const { getAllProductsWithPermission } = usePermissions();
   const lang = i18n.language;
 
-  const isAdmin = party && party.userRole === 'ADMIN';
+  const canUploadLogo = getAllProductsWithPermission(Actions.UploadLogo).length > 0;
 
   return (
     <Grid p={3} xs={12}>
@@ -42,8 +45,8 @@ const DashboardOverview = ({ party }: Props) => {
             },
           }}
         >
-          {isAdmin && <PartyLogoUploader partyId={party.partyId} />}
-          <Grid item xs={12} md={8} mt={isAdmin && isMobile ? 4 : 0}>
+          {canUploadLogo && <PartyLogoUploader partyId={party.partyId} />}
+          <Grid item xs={12} md={8} mt={canUploadLogo && isMobile ? 4 : 0}>
             <PartyCard party={party} />
           </Grid>
         </Grid>

@@ -1,15 +1,20 @@
+import { InfoOutlined } from '@mui/icons-material';
+import EditIcon from '@mui/icons-material/Edit';
 import { Box, Grid, TextField, Typography } from '@mui/material';
 import { ButtonNaked, theme } from '@pagopa/mui-italia';
-import { useTranslation } from 'react-i18next';
-import EditIcon from '@mui/icons-material/Edit';
-import { SessionModal, useErrorDispatcher, useUserNotify } from '@pagopa/selfcare-common-frontend/lib';
+import {
+  SessionModal,
+  useErrorDispatcher,
+  usePermissions,
+  useUserNotify,
+} from '@pagopa/selfcare-common-frontend/lib';
+import { Actions, emailRegexp } from '@pagopa/selfcare-common-frontend/lib/utils/constants';
 import { useState } from 'react';
-import { InfoOutlined } from '@mui/icons-material';
-import { emailRegexp } from '@pagopa/selfcare-common-frontend/lib/utils/constants';
+import { useTranslation } from 'react-i18next';
 import { Party } from '../../../../../model/Party';
-import { updateBusinessData } from '../../../../../services/partyService';
-import { partiesActions, partiesSelectors } from '../../../../../redux/slices/partiesSlice';
 import { useAppDispatch, useAppSelector } from '../../../../../redux/hooks';
+import { partiesActions, partiesSelectors } from '../../../../../redux/slices/partiesSlice';
+import { updateBusinessData } from '../../../../../services/partyService';
 
 type Props = {
   party?: Party;
@@ -22,6 +27,8 @@ export default function PartyDetail({ party }: Props) {
   const addError = useErrorDispatcher();
   const addNotify = useUserNotify();
   const dispatch = useAppDispatch();
+  const { getAllProductsWithPermission } = usePermissions();
+  const canUpdateBusinessData = getAllProductsWithPermission(Actions.UpdateInstitution).length > 0;
 
   const setBusinessData = (businessData?: Party) =>
     dispatch(partiesActions.setPartySelected(businessData));
@@ -156,7 +163,7 @@ export default function PartyDetail({ party }: Props) {
             <Typography sx={{ ...infoStyles, maxWidth: '100% !important', whiteSpace: 'pre-wrap' }}>
               {business?.description}
             </Typography>
-            {party?.origin === 'ADE' && party.userRole === 'ADMIN' && (
+            {party?.origin === 'ADE' && canUpdateBusinessData && (
               <ButtonNaked
                 component="button"
                 onClick={() => setOpenBusinessNameEditModal(true)}
@@ -207,7 +214,7 @@ export default function PartyDetail({ party }: Props) {
             <Typography sx={{ ...infoStyles, maxWidth: '100% !important', whiteSpace: 'pre-wrap' }}>
               {business?.digitalAddress}
             </Typography>
-            {party?.userRole === 'ADMIN' && (
+            {canUpdateBusinessData && (
               <ButtonNaked
                 component="button"
                 onClick={() => setOpenBusinessEmailEditModal(true)}

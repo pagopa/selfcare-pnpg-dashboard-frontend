@@ -1,14 +1,16 @@
-import { List, Grid } from '@mui/material';
-import { useHistory } from 'react-router';
-import { resolvePathVariables } from '@pagopa/selfcare-common-frontend/lib/utils/routes-utils';
-import { useUnloadEventOnExit } from '@pagopa/selfcare-common-frontend/lib/hooks/useUnloadEventInterceptor';
-import { useTranslation } from 'react-i18next';
 import DashboardCustomize from '@mui/icons-material/DashboardCustomize';
 import PeopleAlt from '@mui/icons-material/PeopleAlt';
 import SupervisedUserCircle from '@mui/icons-material/SupervisedUserCircle';
+import { Grid, List } from '@mui/material';
+import { usePermissions } from '@pagopa/selfcare-common-frontend/lib';
+import { useUnloadEventOnExit } from '@pagopa/selfcare-common-frontend/lib/hooks/useUnloadEventInterceptor';
+import { Actions } from '@pagopa/selfcare-common-frontend/lib/utils/constants';
+import { resolvePathVariables } from '@pagopa/selfcare-common-frontend/lib/utils/routes-utils';
+import { useTranslation } from 'react-i18next';
+import { useHistory } from 'react-router';
+import { Party } from '../../../../model/Party';
 import { DASHBOARD_ROUTES } from '../../../../routes';
 import { ENV } from '../../../../utils/env';
-import { Party } from '../../../../model/Party';
 import DashboardSidenavItem from './DashboardSidenavItem';
 
 type Props = {
@@ -20,6 +22,7 @@ export default function DashboardSideMenu({ party, setDrawerOpen }: Props) {
   const { t } = useTranslation();
   const history = useHistory();
   const onExit = useUnloadEventOnExit();
+  const { getAllProductsWithPermission } = usePermissions();
 
   const overviewRoute = DASHBOARD_ROUTES.OVERVIEW.path;
   const usersRoute = ENV.ROUTES.USERS;
@@ -39,7 +42,8 @@ export default function DashboardSideMenu({ party, setDrawerOpen }: Props) {
   const isRoleSelected = window.location.pathname.startsWith(usersPath);
   const isGroupSelected = window.location.pathname.startsWith(groupsPath);
 
-  const canSeeSection = party.userRole === 'ADMIN';
+  const canSeeUsers = getAllProductsWithPermission(Actions.ManageProductUsers).length > 0;
+  const canSeeGroups = getAllProductsWithPermission(Actions.ManageProductGroups).length > 0;
 
   return (
     <Grid container item width="100%">
@@ -56,7 +60,7 @@ export default function DashboardSideMenu({ party, setDrawerOpen }: Props) {
             isSelected={isOverviewSelected}
             icon={DashboardCustomize}
           />
-          {canSeeSection && (
+          {canSeeUsers && (
             <DashboardSidenavItem
               title={t('overview.sideMenu.institutionManagement.referents.title')}
               handleClick={() => {
@@ -67,7 +71,7 @@ export default function DashboardSideMenu({ party, setDrawerOpen }: Props) {
               icon={PeopleAlt}
             />
           )}
-          {canSeeSection && (
+          {canSeeGroups && (
             <DashboardSidenavItem
               title={t('overview.sideMenu.institutionManagement.groups.title')}
               handleClick={() => {

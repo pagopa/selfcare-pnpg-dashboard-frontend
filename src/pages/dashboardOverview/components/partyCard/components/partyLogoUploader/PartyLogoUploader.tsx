@@ -1,3 +1,4 @@
+/* eslint-disable functional/immutable-data */
 import { Box, Grid } from '@mui/material';
 import { DropEvent, FileRejection, useDropzone } from 'react-dropzone';
 import { useState, useEffect } from 'react';
@@ -101,26 +102,29 @@ export function PartyLogoUploader({ partyId }: Props) {
       const files = (event.target as any).files || (event as any).dataTransfer.files;
       const file = files[0];
       if (!file) {
-        return new Promise((resolve) => resolve([]));
+        return Promise.resolve([]);
       }
-      return new Promise((resolve, error) => {
+      return new Promise((resolve, reject) => {
         if (file.type !== 'image/png') {
-          error();
+          reject();
           return;
         }
-        const image = new Image();
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const img = new Image();
+          img.onload = function () {
+            file.width = img.width;
 
-        // eslint-disable-next-line functional/immutable-data
-        image.onload = function () {
-          // eslint-disable-next-line functional/immutable-data
-          file.width = image.width;
-          // eslint-disable-next-line functional/immutable-data
-          file.height = image.height;
-          resolve([file]);
+            file.height = img.height;
+            resolve([file]);
+          };
+
+          img.onerror = reject;
+
+          img.src = e.target?.result as string;
         };
-
-        // eslint-disable-next-line functional/immutable-data
-        image.src = URL.createObjectURL(file);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
       }).catch((_reason) => {
         onFileRejected(files);
         return [];

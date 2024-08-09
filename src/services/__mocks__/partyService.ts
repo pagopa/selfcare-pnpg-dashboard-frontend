@@ -1,3 +1,4 @@
+import { Actions } from '@pagopa/selfcare-common-frontend/lib/utils/constants';
 import { ProductOnBoardingStatusEnum } from '../../api/generated/b4f-dashboard-pnpg/OnboardedProductResource';
 import { BaseParty, Party } from '../../model/Party';
 
@@ -50,6 +51,7 @@ export const mockedInstitutions: Array<Party> = [
           recipientCode: 'CC2345',
           vatNumber: '01113570210',
         },
+        userProductActions: [Actions.UploadLogo, Actions.ManageProductGroups, Actions.ManageProductUsers],
       },
     ],
   },
@@ -74,6 +76,7 @@ export const mockedInstitutions: Array<Party> = [
           recipientCode: 'CC236D',
           vatNumber: '03343570210',
         },
+        userProductActions: [Actions.UploadLogo, Actions.ManageProductGroups, Actions.ManageProductUsers]
       },
     ],
   },
@@ -98,6 +101,7 @@ export const mockedInstitutions: Array<Party> = [
           recipientCode: 'CC293D',
           vatNumber: '05923570210',
         },
+        userProductActions: [Actions.UploadLogo, Actions.ManageProductGroups, Actions.ManageProductUsers]
       },
     ],
   },
@@ -122,6 +126,7 @@ export const mockedInstitutions: Array<Party> = [
           recipientCode: 'CC133D',
           vatNumber: '05923570510',
         },
+        userProductActions: [Actions.UploadLogo, Actions.ManageProductGroups, Actions.ManageProductUsers]
       },
     ],
   },
