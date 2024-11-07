@@ -2,23 +2,21 @@ export default {
   session: {
     expired: {
       title: 'Sitzung abgelaufen',
-      message: 'Du wirst zur Login-Seite weitergeleitet...',
+      message: 'Du wirst zur Anmeldeseite weitergeleitet...',
     },
   },
-  unmanageableBusiness: 'Das ausgewählte Unternehmen ist nicht verwaltbar',
+  unmanageableBusiness: "Das gewählte Unternehmen kann nicht verwaltet werden",
   businessSelection: {
     title: 'Wähle dein Unternehmen',
     subTitle:
-      'Wenn du die Bescheide mehrerer Unternehmen aufrufst, kannst du deine Auswahl nach der Anmeldung ändern.',
-    onboardAnotherBusiness:
-      'Bist du ein gesetzlicher Vertreter? <1>Registriere ein neues Unternehmen</1>',
+      'Se leggi le notifiche di più imprese, potrai modificare la tua scelta dopo avere effettuato l’accesso.',
+    onboardAnotherBusiness: 'Bist du ein Rechtsvertreter? <1>Registriere ein neues Unternehmen</1>',
     search: 'Unternehmen suchen',
     signIn: 'Anmelden',
     noBusinessFound: {
-      title: 'Um die Bescheide lesen zu können, musst du <1/>zuerst dein Unternehmen registrieren ',
-      description:
-        'Die Registrierung darf nur von einem gesetzlichen Vertreter <1/> vorgenommen werden.',
-      registerBusiness: 'Start',
+      title: 'Zum Lesen der Zustellungen musst du <1/>zunächst dein Unternehmen registrieren ',
+      description: 'Die Registrierung kann nur durch einen <1/>Rechtsvertreter erfolgen.',
+      registerBusiness: 'Los',
     },
   },
   productsList: {
@@ -26,10 +24,10 @@ export default {
   },
   overview: {
     title: 'Übersicht',
-    subTitle: 'Anzeige der zusammengefassten Daten und Aufruf der Bescheide von{{ businessName }}.',
+    subTitle: 'Zeige die Datenübersicht an und lies die Zustellungen von {{ businessName}}.',
     sideMenu: {
       institutionManagement: {
-        title: 'Verwaltung der Körperschaft',
+        title: 'Körperschaftsverwaltung',
         overview: {
           title: 'Übersicht',
         },
@@ -42,64 +40,62 @@ export default {
       },
     },
     notificationAreaProduct: {
-      title: 'Digitale Bescheide',
+      title: 'Digitale Zustellungen',
       card: {
-        title: 'Zu den Bescheiden',
+        title: 'Zu den Zustellungen',
       },
     },
     businessLogo: {
-      upload: 'Firmenlogo hochladen',
-      modify: 'Bearbeiten',
+      upload: "Lade das Logo des Unternehmens",
+      modify: 'Ändern',
       uploadError: {
         title: 'Laden fehlgeschlagen',
         description:
-          'Das Laden des Logos ist fehlgeschlagen. Überprüfe, ob das Format und die Größe korrekt sind und lade es erneut hoch.',
+          'Il caricamento del logo non è andato a buon fine. Verifica che il formato e la dimensione siano corretti e caricalo di nuovo.',
       },
       modifyError: {
         title: 'Laden fehlgeschlagen',
-        description: 'Es ist leider ein Fehler aufgetreten. Bitte versuche es später noch einmal',
+        description: 'Leider ist etwas schiefgelaufen. Bitte später erneut versuchen',
       },
-      size: 'Genaue Größe 300 x <1/> 300px - .png-Format',
-      info: 'Gib nur das Logo deines Unternehmens ein. <1/> Du trägst die Verantwortung für das Einfügen von Bildern, die nicht aufgeführt sind. ',
+      size: 'Genaue Größe 300 x <1/> 300px - Format .png',
+      info: 'Füg nur das Logo deines Unternehmens ein. <1/> Du bist für das Einfügen anderer Bilder als der angegebenen verantwortlich. ',
     },
     partyDetail: {
-      businessName: 'Firmenname',
+      businessName: 'Firmenbezeichnung',
       fiscalCode: 'Steuernummer',
       mailAddress: 'Primäre PEC-Adresse',
-      editBusinessName: 'Bearbeiten',
+      editBusinessName: 'Ändern',
       editBusinessNameModal: {
-        title: 'Änderung des Firmennamens',
-        subTitle: 'Wenn der Firmenname nicht korrekt ist, ändere ihn hier.',
-        textFieldLabel: 'Firmenname',
-        invalidBusinessName: 'Bitte gib einen Firmennamen ein',
-        notEqualBusinessName: 'Bitte gib einen anderen Firmennamen ein',
-        disclaimer:
-          'Du trägst die Verantwortung für das Einfügen von Daten, die nicht aufgeführt sind.',
+        title: 'Firmenbezeichnung ändern',
+        subTitle: 'Ist die Firmenbezeichnung nicht korrekt, kannst du sie hier ändern.',
+        textFieldLabel: 'Firmenbezeichnung',
+        invalidBusinessName: 'Eine Firmenbezeichnung eingeben',
+        notEqualBusinessName: 'Eine andere Firmenbezeichnung eingeben',
+        disclaimer: 'Du bist für das Einfügen anderer Daten als der angegebenen verantwortlich.',
         cancel: 'Abbrechen',
         confirm: 'Bestätigen',
         success: {
-          description: 'Firmenname korrekt geändert',
+          description: 'Firmenbezeichnung erfolgreich geändert',
         },
         error: {
-          description: 'Bei der Eingabe ist ein Fehler aufgetreten. Nochmals versuchen.',
+          description: 'Beim Eingeben ist ein Fehler aufgetreten. Erneut versuchen.',
         },
       },
-      editBusinessEmail: 'Bearbeiten',
+      editBusinessEmail: 'Ändern',
       editBusinessEmailModal: {
-        title: 'Primäre PEC-Adresse ändern',
-        subTitle: 'Wenn die PEC-Adresse nicht korrekt ist, ändere sie hier.',
+        title: "Primäre PEC-Adresse ändern",
+        subTitle: 'Ist die PEC-Adresse nicht korrekt, kannst du sie hier ändern.',
         textFieldLabel: 'PEC-Adresse',
-        invalidEmail: 'Die eingegebene PEC-Adresse ist falsch',
-        notEqualBusinessEmail: 'Bitte gib eine andere PEC-Adresse ein',
-        disclaimer:
-          'Du trägst die Verantwortung für das Einfügen von Daten, die nicht aufgeführt sind.',
+        invalidEmail: "Die eingegebene PEC-Adresse ist falsch",
+        notEqualBusinessEmail: 'Eine andere PEC-Adresse eingeben',
+        disclaimer: 'Du bist für das Einfügen anderer Daten als der angegebenen verantwortlich.',
         cancel: 'Abbrechen',
         confirm: 'Bestätigen',
         success: {
           description: 'PEC-Adresse geändert',
         },
         error: {
-          description: 'Bei der Eingabe ist ein Fehler aufgetreten. Nochmals versuchen.',
+          description: 'Beim Eingeben ist ein Fehler aufgetreten. Erneut versuchen.',
         },
       },
     },
