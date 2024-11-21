@@ -31,6 +31,7 @@ export const fetchProductRoles = (product: Product): Promise<Array<ProductRole>>
               partyRole: pr.partyRole,
               selcRole: pr.selcRole,
               multiroleAllowed: pr.multiroleAllowed,
+              phasesAdditionAllowed: pr.phasesAdditionAllowed,
               productRole: r.code ?? '',
               title: r.label ?? '',
               description: r.description ?? '',

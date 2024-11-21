@@ -1,7 +1,6 @@
 import { InstitutionBaseResource } from '../generated/b4f-dashboard-pnpg/InstitutionBaseResource';
 import {
-  InstitutionResource,
-  InstitutionTypeEnum,
+  InstitutionResource
 } from '../generated/b4f-dashboard-pnpg/InstitutionResource';
 import { ProductOnBoardingStatusEnum } from '../generated/b4f-dashboard-pnpg/OnboardedProductResource';
 import {
@@ -19,7 +18,7 @@ export const mockedInstitutionResources: Array<InstitutionResource> = [
     externalId: '01113570210',
     originId: 'originId1',
     origin: 'INFOCAMERE',
-    institutionType: 'PG' as InstitutionTypeEnum,
+    institutionType: 'PG',
     mailAddress: 'emailmock1@testmock.com',
     products: [
       {
@@ -43,7 +42,7 @@ export const mockedInstitutionResources: Array<InstitutionResource> = [
     externalId: '03343570210',
     originId: 'originId1',
     origin: 'INFOCAMERE',
-    institutionType: 'PG' as InstitutionTypeEnum,
+    institutionType: 'PG',
     mailAddress: 'emailmock2@testmock.com',
     products: [
       {
@@ -67,7 +66,7 @@ export const mockedInstitutionResources: Array<InstitutionResource> = [
     externalId: '05923570210',
     originId: 'originId1',
     origin: 'ADE',
-    institutionType: 'PG' as InstitutionTypeEnum,
+    institutionType: 'PG',
     mailAddress: 'emailmock3@testmock.com',
     products: [
       {
@@ -91,7 +90,7 @@ export const mockedInstitutionResources: Array<InstitutionResource> = [
     externalId: '05923570510',
     originId: 'originId1',
     origin: 'ADE',
-    institutionType: 'PG' as InstitutionTypeEnum,
+    institutionType: 'PG',
     mailAddress: 'emailmock4@testmock.com',
     products: [
       {
