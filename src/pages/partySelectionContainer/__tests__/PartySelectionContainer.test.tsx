@@ -10,8 +10,7 @@ import { BaseParty, Party } from '../../../model/Party';
 import './../../../locale';
 import { ProductOnBoardingStatusEnum } from '../../../api/generated/b4f-dashboard-pnpg/OnboardedProductResource';
 import {
-  InstitutionResource,
-  InstitutionTypeEnum,
+  InstitutionResource
 } from '../../../api/generated/b4f-dashboard-pnpg/InstitutionResource';
 import { mockedBaseInstitutions } from '../../../services/__mocks__/partyService';
 
