@@ -1,6 +1,5 @@
 import {
-  InstitutionResource,
-  InstitutionTypeEnum,
+  InstitutionResource
 } from '../../api/generated/b4f-dashboard-pnpg/InstitutionResource';
 import { ProductOnBoardingStatusEnum } from '../../api/generated/b4f-dashboard-pnpg/OnboardedProductResource';
 import { institutionResource2Party, Party } from '../Party';
@@ -70,7 +69,7 @@ test('Test institutionResource2Party', () => {
     externalId: '44444444444',
     fiscalCode: '44444444444',
     geographicTaxonomies: [{ code: '', desc: '' }],
-    institutionType: 'PG' as InstitutionTypeEnum,
+    institutionType: 'PG',
     id: '44444444444',
     name: 'BusinessName',
     recipientCode: 'MDSSFDF',
@@ -107,7 +106,7 @@ test('Test institutionResource2Party', () => {
     externalId: '44444444444',
     fiscalCode: '44444444444',
     geographicTaxonomies: [{ code: '', desc: '' }],
-    institutionType: 'PG' as InstitutionTypeEnum,
+    institutionType: 'PG',
     partyId: '44444444444',
     description: 'BusinessName',
     recipientCode: 'MDSSFDF',
