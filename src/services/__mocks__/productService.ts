@@ -85,6 +85,7 @@ export const mockedProductRoles: Array<ProductRole> = [
     productRole: 'pg-admin',
     title: 'Amministratore',
     description: 'Stipula il contratto e identifica gli amministratori',
+    phasesAdditionAllowed: ["dashboard"]
   },
   {
     productId: 'prod-pn-pg',
@@ -94,6 +95,7 @@ export const mockedProductRoles: Array<ProductRole> = [
     productRole: 'pg-operator',
     title: 'Tecnico',
     description: "Gestisce l'integrazione tecnologica e/o l'operatività dei servizi",
+    phasesAdditionAllowed: ["dashboard"]
   },
 ];
 

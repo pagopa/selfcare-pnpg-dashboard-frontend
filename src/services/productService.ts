@@ -9,7 +9,7 @@ import {
 export const fetchProducts = (): Promise<Array<Product>> => {
   /* istanbul ignore if */
   if (process.env.REACT_APP_MOCK_API === 'true') {
-    return new Promise((resolve) => resolve(mockedPartyProducts));
+    return Promise.resolve(mockedPartyProducts);
   } else {
     return DashboardApi.getProducts().then((productResources) =>
       productResources ? productResources.map(productResource2Product) : []
@@ -31,6 +31,7 @@ export const fetchProductRoles = (product: Product): Promise<Array<ProductRole>>
               partyRole: pr.partyRole,
               selcRole: pr.selcRole,
               multiroleAllowed: pr.multiroleAllowed,
+              phasesAdditionAllowed: pr.phasesAdditionAllowed,
               productRole: r.code ?? '',
               title: r.label ?? '',
               description: r.description ?? '',
