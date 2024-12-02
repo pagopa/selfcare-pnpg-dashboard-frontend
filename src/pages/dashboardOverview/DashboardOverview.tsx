@@ -31,7 +31,7 @@ const DashboardOverview = ({ party }: Props) => {
 
   return (
     <Grid p={3} xs={12}>
-      <WelcomeDashboard businessName={party?.description} />
+      <WelcomeDashboard businessName={party?.description}  party={party}/>
       <Grid container direction="row" alignItems="center" mb={2}>
         <Grid
           item
