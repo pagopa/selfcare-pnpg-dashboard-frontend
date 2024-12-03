@@ -100,4 +100,9 @@ export default {
       },
     },
   },
+  customAlert: {
+    message:
+      'Aggiungi il tuo numero di cellulare di lavoro, o se non disponibile un fisso. Ci permetterà di contattarti in caso di necessità.',
+    button: 'Aggiungi',
+  }
 };

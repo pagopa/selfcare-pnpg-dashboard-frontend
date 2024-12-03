@@ -5,7 +5,6 @@ import { createMemoryHistory } from 'history';
 import { Router } from 'react-router';
 import PartySelectionContainer from '../PartySelectionContainer';
 import { partiesActions } from '../../../redux/slices/partiesSlice';
-import { mockedInstitutionResources } from '../../../api/__mocks__/DashboardApi';
 import { BaseParty, Party } from '../../../model/Party';
 import './../../../locale';
 import { ProductOnBoardingStatusEnum } from '../../../api/generated/b4f-dashboard-pnpg/OnboardedProductResource';
@@ -13,6 +12,11 @@ import {
   InstitutionResource
 } from '../../../api/generated/b4f-dashboard-pnpg/InstitutionResource';
 import { mockedBaseInstitutions } from '../../../services/__mocks__/partyService';
+import i18n from '@pagopa/selfcare-common-frontend/lib/locale/locale-utils';
+
+beforeAll(() => {
+  i18n.changeLanguage('it');
+});
 
 const mockedParty: Array<BaseParty> = [
   {
