@@ -31,7 +31,7 @@ export default function WelcomeDashboard({ businessName, party }: Readonly<Props
         variantSubTitle="body1"
       />
 
-      {party?.userRole === 'ADMIN' && (
+      {ENV.ENABLE_MOBILE_PHONE && party?.userRole === 'ADMIN' && (
         <Grid item xs={12} mb={2}>
           <Alert
             sx={{ mt: 5 }}
