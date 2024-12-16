@@ -4,7 +4,7 @@ import { login } from '../utils/login';
 test('Access into SEND product back office', async ({ page }) => {
   await login(page, 'MrLegaleRappresentante2', 'test');
 
-  await expect(page.getByRole('heading', { name: 'Seleziona la tua impresa' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Le tue imprese su SEND' })).toBeVisible();
   await expect(page.getByText('Se leggi le notifiche di più')).toBeVisible();
   await page
     .locator('div')

@@ -69,7 +69,11 @@ export default function PartySelection({ parties }: Props) {
               },
             }}
           >
-            {t('businessSelection.subTitle')}
+            <Trans i18nKey="businessSelection.subTitle" components={{ 1: <br /> }}>
+              {
+                'Accedi come impresa su SEND. Se leggi le notifiche di più <1 />imprese, potrai modificare la tua scelta anche dopo l’accesso.'
+              }
+            </Trans>
           </Typography>
         </Grid>
       </Grid>
@@ -134,7 +138,7 @@ export default function PartySelection({ parties }: Props) {
           color={theme.palette.text.primary}
         >
           <Trans i18nKey="businessSelection.onboardAnotherBusiness">
-            {'Sei un Legale Rappresentante? '}
+            {'Sei Legale Rappresentante di un’altra impresa? '}
             <Link
               onClick={() => window.location.assign(ENV.URL_FE.ONBOARDING)}
               sx={{
@@ -143,7 +147,7 @@ export default function PartySelection({ parties }: Props) {
                 color: theme.palette.primary.main,
               }}
             >
-              {'Registra una nuova impresa'}
+              {'Aggiungi impresa'}
             </Link>
           </Trans>
         </Typography>
