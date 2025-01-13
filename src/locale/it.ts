@@ -7,10 +7,11 @@ export default {
   },
   unmanageableBusiness: "L'impresa selezionata non è gestibile",
   businessSelection: {
-    title: 'Seleziona la tua impresa',
+    title: 'Le tue imprese su SEND',
     subTitle:
-      'Se leggi le notifiche di più imprese, potrai modificare la tua scelta dopo avere effettuato l’accesso.',
-    onboardAnotherBusiness: 'Sei un Legale Rappresentante? <1>Registra una nuova impresa</1>',
+      'Accedi come impresa su SEND. Se leggi le notifiche di più <1 />imprese, potrai modificare la tua scelta anche dopo l’accesso.',
+    onboardAnotherBusiness:
+      'Sei Legale Rappresentante di un’altra impresa? <1>Aggiungi impresa</1>',
     search: 'Cerca impresa',
     signIn: 'Accedi',
     noBusinessFound: {
@@ -104,5 +105,5 @@ export default {
     message:
       'Aggiungi il tuo numero di cellulare di lavoro, o se non disponibile un fisso. Ci permetterà di contattarti in caso di necessità.',
     button: 'Aggiungi',
-  }
+  },
 };
