@@ -8,9 +8,7 @@ import { partiesActions } from '../../../redux/slices/partiesSlice';
 import { BaseParty, Party } from '../../../model/Party';
 import './../../../locale';
 import { ProductOnBoardingStatusEnum } from '../../../api/generated/b4f-dashboard-pnpg/OnboardedProductResource';
-import {
-  InstitutionResource
-} from '../../../api/generated/b4f-dashboard-pnpg/InstitutionResource';
+import { InstitutionResource } from '../../../api/generated/b4f-dashboard-pnpg/InstitutionResource';
 import { mockedBaseInstitutions } from '../../../services/__mocks__/partyService';
 import i18n from '@pagopa/selfcare-common-frontend/lib/locale/locale-utils';
 
@@ -74,13 +72,13 @@ test('Test with zero party, NoParty component is rendered', async () => {
 test('Test with more than a party, PartySelection component is rendered', async () => {
   renderComponent('moreThanOne');
 
-  await waitFor(() => screen.getByText('Seleziona la tua impresa'));
+  await waitFor(() => screen.getByText('Le tue imprese su SEND'));
 });
 
 test('Test with more than a party, PartySelection component rendered, full search test and button behavior and join with a party', async () => {
   renderComponent('moreThanOne');
 
-  await waitFor(() => screen.getByText('Seleziona la tua impresa'));
+  await waitFor(() => screen.getByText('Le tue imprese su SEND'));
 
   const signInButton = screen.getByText('Accedi');
 
@@ -107,7 +105,7 @@ test('Test with more than a party, PartySelection component rendered, full searc
 test('Test with one party, PartySelection component is rendered, the party is auto-selected and join button is enabled', async () => {
   await renderComponent('one');
 
-  await waitFor(() => screen.getByText('Seleziona la tua impresa'));
+  await waitFor(() => screen.getByText('Le tue imprese su SEND'));
 
   const signInButton = screen.getByText('Accedi');
   expect(signInButton).toBeEnabled();

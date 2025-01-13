@@ -6,7 +6,7 @@ test('After logging in and selecting a business, navigate to the dashboard overv
 }) => {
   await login(page, 'MrLegaleRappresentante2', 'test');
 
-  await expect(page.getByRole('heading', { name: 'Seleziona la tua impresa' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Le tue imprese su SEND' })).toBeVisible();
   await expect(page.getByText('Se leggi le notifiche di più')).toBeVisible();
   await page
     .locator('div')
