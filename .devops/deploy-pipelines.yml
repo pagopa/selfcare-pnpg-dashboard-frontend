@@ -48,7 +48,6 @@ variables:
 
     react_app_enable_assistance: 'true'
     react_app_enable_user_v2: '$(UAT_REACT_APP_ENABLE_USER_V2)'
-    react_app_enable_mobile_phone: '$(UAT_REACT_APP_ENABLE_MOBILE_PHONE)'
 
     react_app_url_storage: '$(UAT_REACT_APP_URL_STORAGE)'
 
@@ -86,7 +85,6 @@ variables:
 
     react_app_enable_assistance: 'true'
     react_app_enable_user_v2: '$(PROD_REACT_APP_ENABLE_USER_V2)'
-    react_app_enable_mobile_phone: '$(PROD_REACT_APP_ENABLE_MOBILE_PHONE)'
 
     react_app_url_storage: '$(PROD_REACT_APP_URL_STORAGE)'
 
@@ -126,7 +124,6 @@ variables:
 
     react_app_enable_assistance: 'true'
     react_app_enable_user_v2: '$(DEV_REACT_APP_ENABLE_USER_V2)'
-    react_app_enable_mobile_phone: '$(DEV_REACT_APP_ENABLE_MOBILE_PHONE)'
 
     react_app_url_storage: '$(DEV_REACT_APP_URL_STORAGE)'
 
