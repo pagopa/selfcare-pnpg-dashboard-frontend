@@ -31,7 +31,7 @@ const DashboardOverview = ({ party }: Props) => {
 
   return (
     <Grid p={3} xs={12}>
-      <WelcomeDashboard businessName={party?.description}  party={party}/>
+      <WelcomeDashboard businessName={party?.description} />
       <Grid container direction="row" alignItems="center" mb={2}>
         <Grid
           item
@@ -59,28 +59,27 @@ const DashboardOverview = ({ party }: Props) => {
           titleFontSize="28px"
         />
         <Grid container spacing={3} mb={44}>
-          {products &&
-            products
-              .filter(
-                (p) =>
-                  p.status === 'ACTIVE' &&
-                  party?.products?.some(
-                    (pp) => pp.productId === p.id && pp.productOnBoardingStatus === 'ACTIVE'
-                  )
-              )
-              .map((p) => (
-                <Box key={p.id} marginTop={3} marginLeft={3}>
-                  <DigitalNotificationCard
-                    cardTitle={
-                      p.id === 'prod-pn-pg'
-                        ? t('overview.notificationAreaProduct.card.title')
-                        : p.title
-                    }
-                    urlLogo={p.logo}
-                    btnAction={() => (party ? invokeProductBo(p, party, lang) : undefined)}
-                  />
-                </Box>
-              ))}
+          {products
+            ?.filter(
+              (p) =>
+                p.status === 'ACTIVE' &&
+                party?.products?.some(
+                  (pp) => pp.productId === p.id && pp.productOnBoardingStatus === 'ACTIVE'
+                )
+            )
+            .map((p) => (
+              <Box key={p.id} marginTop={3} marginLeft={3}>
+                <DigitalNotificationCard
+                  cardTitle={
+                    p.id === 'prod-pn-pg'
+                      ? t('overview.notificationAreaProduct.card.title')
+                      : p.title
+                  }
+                  urlLogo={p.logo}
+                  btnAction={() => (party ? invokeProductBo(p, party, lang) : undefined)}
+                />
+              </Box>
+            ))}
         </Grid>
       </Grid>
     </Grid>
