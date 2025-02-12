@@ -11,7 +11,7 @@ export default {
     subTitle:
       'Accedi come impresa su SEND. Se leggi le notifiche di più <1 />imprese, potrai modificare la tua scelta anche dopo l’accesso.',
     onboardAnotherBusiness:
-      'Sei Legale Rappresentante di un’altra impresa? <1>Aggiungi impresa</1>',
+      'Vuoi accedere con un’altra impresa? <1>Aggiungi impresa</1>',
     search: 'Cerca impresa',
     signIn: 'Accedi',
     noBusinessFound: {
