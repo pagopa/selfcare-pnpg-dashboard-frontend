@@ -1,5 +1,5 @@
-import { Typography, Box, Grid, Card, useTheme, Tooltip, Fab } from '@mui/material';
 import ArrowForward from '@mui/icons-material/ArrowForward';
+import { Box, Card, Grid, IconButton, Tooltip, Typography, useTheme } from '@mui/material';
 
 type Props = {
   cardTitle: React.ReactNode;
@@ -7,7 +7,7 @@ type Props = {
   btnAction?: () => void;
 };
 
-export default function DigitalNotificationCard({ cardTitle, urlLogo, btnAction }: Props) {
+export default function DigitalNotificationCard({ cardTitle, urlLogo, btnAction }: Readonly<Props>) {
   const theme = useTheme();
 
   return (
@@ -71,14 +71,14 @@ export default function DigitalNotificationCard({ cardTitle, urlLogo, btnAction 
             )}
           </Box>
           <Grid item sx={{ paddingTop: 4 }}>
-            <Fab
+            <IconButton
               sx={{ alignSelf: 'end', marginLeft: 2 }}
               size="small"
               color="primary"
               onClick={btnAction}
             >
               <ArrowForward />
-            </Fab>
+            </IconButton>
           </Grid>
         </Grid>
       </Grid>

@@ -11,8 +11,6 @@ type Props = {
   selectedParty: BaseParty | null;
   onPartySelectionChange: (selectedParty: BaseParty | null) => void;
   label?: string;
-  iconColor?: string;
-  iconMarginRight?: string;
   partyTitle?: string;
 };
 
@@ -38,8 +36,6 @@ export default function PartySelectionSearch({
   selectedParty,
   onPartySelectionChange,
   label,
-  iconColor,
-  iconMarginRight,
   partyTitle,
 }: Props) {
   const [input, setInput] = useState('');
@@ -77,11 +73,9 @@ export default function PartySelectionSearch({
               {moreThan3Parties ? (
                 <PartySelectionSearchInput
                   label={label}
-                  iconMarginRight={iconMarginRight}
                   onChange={(e) => onFilterChange(e.target.value)}
                   input={input}
                   clearField={() => onFilterChange('')}
-                  iconColor={iconColor}
                 />
               ) : (
                 parties.length >= 1 && (
