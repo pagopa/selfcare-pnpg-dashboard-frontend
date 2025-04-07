@@ -4,11 +4,6 @@ import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 import InputAdornment from '@mui/material/InputAdornment';
 import React, { ChangeEventHandler } from 'react';
 
-const CustomIconButton = styled(IconButton)({
-  '&:hover': {
-    backgroundColor: 'transparent !important',
-  },
-});
 const CustomTextField = styled(TextField)({
   label: { fontSize: '14px', fontWeight: 'fontWeightMedium', color: '#475A6D', paddingLeft: '8px' },
   input: { cursor: 'pointer' },
@@ -22,17 +17,9 @@ type Props = {
   input: string;
   clearField?: React.MouseEventHandler<HTMLButtonElement> | undefined;
   label?: string;
-  iconColor?: string;
-  iconMarginRight?: string;
 };
 
-export default function PartySelectionSearchInput({
-  onChange,
-  input,
-  clearField,
-  label,
-  iconColor = '#475A6D',
-}: Props) {
+export default function PartySelectionSearchInput({ onChange, input, clearField, label }: Props) {
   const inputRef = React.useRef<HTMLInputElement>();
 
   const focusTextInput = () => {
@@ -55,21 +42,21 @@ export default function PartySelectionSearchInput({
           startAdornment: (
             <InputAdornment position="start">
               {
-                <CustomIconButton disableRipple={true} onClick={focusTextInput}>
-                  <SearchOutlinedIcon sx={{ color: iconColor }} />
-                </CustomIconButton>
+                <IconButton disableRipple={true} onClick={focusTextInput}>
+                  <SearchOutlinedIcon />
+                </IconButton>
               }
             </InputAdornment>
           ),
           endAdornment: (
-            <CustomIconButton
+            <IconButton
               disableRipple={true}
               onClick={clearField}
               aria-label="removeSelectionIcon"
               id="remove"
             >
-              <ClearOutlinedIcon sx={{ color: iconColor }} />
-            </CustomIconButton>
+              <ClearOutlinedIcon />
+            </IconButton>
           ),
         }}
       />
