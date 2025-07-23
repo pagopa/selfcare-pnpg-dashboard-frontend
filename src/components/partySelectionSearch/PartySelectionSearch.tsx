@@ -37,7 +37,7 @@ export default function PartySelectionSearch({
   onPartySelectionChange,
   label,
   partyTitle,
-}: Props) {
+}: Readonly<Props>) {
   const [input, setInput] = useState('');
   const [filteredParties, setFilteredParties] = useState<Array<BaseParty>>(parties);
 
