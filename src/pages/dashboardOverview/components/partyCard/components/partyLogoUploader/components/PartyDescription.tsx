@@ -1,7 +1,7 @@
 import EditIcon from '@mui/icons-material/Edit';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import UploadIcon from '@mui/icons-material/Upload';
-import { Stack, Tooltip, Typography } from '@mui/material';
+import { IconButton, Stack, Tooltip, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { ButtonNaked } from '@pagopa/mui-italia';
 import { MouseEventHandler } from 'react';
@@ -46,10 +46,13 @@ export function PartyDescription({ labelLink, open, loading }: Readonly<Props>) 
             placement="top"
             arrow={true}
           >
-            <InfoOutlinedIcon
-              sx={{ color: 'text.secondary', cursor: 'pointer', ml: 1 }}
-              fontSize="small"
-            />
+            <IconButton
+              size="small"
+              sx={{ color: 'text.secondary', ml: 1, bgcolor: 'transparent !important' }}
+              role="tooltip"
+            >
+              <InfoOutlinedIcon fontSize="small" />
+            </IconButton>
           </Tooltip>
         )}
       </Box>
