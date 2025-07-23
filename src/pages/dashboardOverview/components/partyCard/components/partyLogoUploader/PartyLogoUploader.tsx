@@ -1,12 +1,12 @@
 /* eslint-disable functional/immutable-data */
 import { Box, Grid } from '@mui/material';
-import { DropEvent, FileRejection, useDropzone } from 'react-dropzone';
-import { useState, useEffect } from 'react';
 import useErrorDispatcher from '@pagopa/selfcare-common-frontend/lib/hooks/useErrorDispatcher';
 import { trackEvent } from '@pagopa/selfcare-common-frontend/lib/services/analyticsService';
-import { uniqueId } from 'lodash';
-import { useTranslation } from 'react-i18next';
 import { TFunction } from 'i18next';
+import { uniqueId } from 'lodash';
+import { useEffect, useState } from 'react';
+import { DropEvent, FileRejection, useDropzone } from 'react-dropzone';
+import { useTranslation } from 'react-i18next';
 import { DashboardApi } from '../../../../../../api/DashboardApi';
 import { useAppDispatch, useAppSelector } from '../../../../../../redux/hooks';
 import { partiesActions, partiesSelectors } from '../../../../../../redux/slices/partiesSlice';
@@ -22,7 +22,7 @@ const getLabelLinkText = (t: TFunction<'translation', undefined>) =>
     ? t('overview.businessLogo.upload')
     : t('overview.businessLogo.modify');
 
-export function PartyLogoUploader({ partyId }: Props) {
+export function PartyLogoUploader({ partyId }: Readonly<Props>) {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const urlLogo = useAppSelector(partiesSelectors.selectPartySelectedLogo);
@@ -146,10 +146,15 @@ export function PartyLogoUploader({ partyId }: Props) {
     },
   });
 
+  const rootProps = getRootProps({ className: 'dropzone' });
+  if ('role' in rootProps) {
+    delete (rootProps as { role?: string }).role;
+  }
+
   return (
     <Grid container xs={6}>
       <Box
-        {...getRootProps({ className: 'dropzone' })}
+        {...rootProps}
         display="flex"
         justifyItems={'center'}
         alignItems={'center'}

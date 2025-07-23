@@ -1,11 +1,11 @@
-import { Stack, Tooltip, Typography } from '@mui/material';
-import { useTranslation, Trans } from 'react-i18next';
 import EditIcon from '@mui/icons-material/Edit';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import UploadIcon from '@mui/icons-material/Upload';
+import { Stack, Tooltip, Typography } from '@mui/material';
+import { Box } from '@mui/system';
 import { ButtonNaked } from '@pagopa/mui-italia';
 import { MouseEventHandler } from 'react';
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import { Box } from '@mui/system';
-import UploadIcon from '@mui/icons-material/Upload';
+import { Trans, useTranslation } from 'react-i18next';
 
 type Props = {
   labelLink: string;
@@ -14,7 +14,7 @@ type Props = {
   files: Array<File>;
 };
 
-export function PartyDescription({ labelLink, open, loading }: Props) {
+export function PartyDescription({ labelLink, open, loading }: Readonly<Props>) {
   const { t } = useTranslation();
 
   const isLogoNotPresent = document.querySelector('#businessLogo')?.children[0].tagName === 'svg';
@@ -23,7 +23,6 @@ export function PartyDescription({ labelLink, open, loading }: Props) {
     <Stack>
       <Box display="flex">
         <ButtonNaked
-          component="button"
           onClick={open}
           startIcon={
             !loading && isLogoNotPresent ? (
