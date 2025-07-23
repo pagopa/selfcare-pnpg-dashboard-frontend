@@ -1,7 +1,5 @@
 import { InstitutionBaseResource } from '../generated/b4f-dashboard-pnpg/InstitutionBaseResource';
-import {
-  InstitutionResource
-} from '../generated/b4f-dashboard-pnpg/InstitutionResource';
+import { InstitutionResource } from '../generated/b4f-dashboard-pnpg/InstitutionResource';
 import { ProductOnBoardingStatusEnum } from '../generated/b4f-dashboard-pnpg/OnboardedProductResource';
 import {
   ProductRoleMappingsResource,
@@ -79,6 +77,7 @@ export const mockedInstitutionResources: Array<InstitutionResource> = [
           recipientCode: 'CC293D',
           vatNumber: '05923570210',
         },
+        userProductActions: ['UpdateInstitution'],
       },
     ],
   },

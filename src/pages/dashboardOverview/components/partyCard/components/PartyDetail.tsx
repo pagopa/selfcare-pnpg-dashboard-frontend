@@ -169,7 +169,7 @@ export default function PartyDetail({ party }: Props) {
                 onClick={() => setOpenBusinessNameEditModal(true)}
                 startIcon={<EditIcon />}
                 sx={{
-                  color: 'primary.main',
+                  color: 'primary.dark',
                   marginLeft: 2,
                   [theme.breakpoints.down('md')]: {
                     marginTop: '4px',
