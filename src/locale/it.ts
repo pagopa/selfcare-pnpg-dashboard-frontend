@@ -5,6 +5,9 @@ export default {
       message: 'Stai per essere rediretto alla pagina di login...',
     },
   },
+  accesability: {
+    logoUploadSuccess: "Logo aggiornato con successo",
+  },
   unmanageableBusiness: "L'impresa selezionata non è gestibile",
   businessSelection: {
     title: 'Le tue imprese su SEND',

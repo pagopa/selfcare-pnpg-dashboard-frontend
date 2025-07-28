@@ -25,14 +25,17 @@ const getLabelLinkText = (t: TFunction<'translation', undefined>) =>
 export function PartyLogoUploader({ partyId }: Readonly<Props>) {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
+
+  const [labelLink, setLabelLink] = useState<string>(getLabelLinkText(t));
+  const [successMessage, setSuccessMessage] = useState('');
+  const [uploadedFiles, setUploadedFiles] = useState<Array<File>>([]);
+
   const urlLogo = useAppSelector(partiesSelectors.selectPartySelectedLogo);
   const dispatch = useAppDispatch();
   const setUrlLogo = (urlLogo?: string) =>
     dispatch(partiesActions.setPartySelectedPartyLogo(urlLogo));
 
-  const [labelLink, setLabelLink] = useState<string>(getLabelLinkText(t));
   const addError = useErrorDispatcher();
-  const [uploadedFiles, setUploadedFiles] = useState<Array<File>>([]);
 
   useEffect(() => {
     if (urlLogo && partyId) {
@@ -68,6 +71,7 @@ export function PartyLogoUploader({ partyId }: Readonly<Props>) {
         .then(() => {
           setUrlLogo(urlLogo);
           setLoading(false);
+          setSuccessMessage(t('accesability.logoUploadSuccess'));
           setLabelLink(t('overview.businessLogo.modify'));
           trackEvent('DASHBOARD_BUSINESS_CHANGE_LOGO_SUCCESS', {
             party_id: partyId,
@@ -153,6 +157,20 @@ export function PartyLogoUploader({ partyId }: Readonly<Props>) {
 
   return (
     <Grid container xs={6}>
+      <div
+        aria-live="polite"
+        style={{
+          position: 'absolute',
+          width: 1,
+          height: 1,
+          overflow: 'hidden',
+          clip: 'rect(0 0 0 0)',
+        }}
+        aria-atomic="true"
+      >
+        {successMessage}
+      </div>
+
       <Box
         {...rootProps}
         display="flex"
