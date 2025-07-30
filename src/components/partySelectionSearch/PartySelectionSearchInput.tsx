@@ -1,6 +1,6 @@
-import { Grid, TextField, IconButton, styled } from '@mui/material';
-import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import { Grid, IconButton, styled, TextField } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 import React, { ChangeEventHandler } from 'react';
 
@@ -19,19 +19,15 @@ type Props = {
   label?: string;
 };
 
-export default function PartySelectionSearchInput({ onChange, input, clearField, label }: Props) {
-  const inputRef = React.useRef<HTMLInputElement>();
-
-  const focusTextInput = () => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  };
-
+export default function PartySelectionSearchInput({
+  onChange,
+  input,
+  clearField,
+  label,
+}: Readonly<Props>) {
   return (
     <Grid item display="flex" justifyContent="center" xs={12}>
       <CustomTextField
-        inputRef={inputRef}
         label={label}
         name="partySearchInput"
         sx={{ width: '100%' }}
@@ -41,11 +37,7 @@ export default function PartySelectionSearchInput({ onChange, input, clearField,
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              {
-                <IconButton disableRipple={true} onClick={focusTextInput}>
-                  <SearchOutlinedIcon />
-                </IconButton>
-              }
+              <SearchOutlinedIcon />
             </InputAdornment>
           ),
           endAdornment: (
