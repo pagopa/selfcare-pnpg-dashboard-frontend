@@ -5,6 +5,7 @@ import { ButtonNaked, theme } from '@pagopa/mui-italia';
 import {
   SessionModal,
   useErrorDispatcher,
+  useLoading,
   usePermissions,
   useUserNotify,
 } from '@pagopa/selfcare-common-frontend/lib';
@@ -15,13 +16,14 @@ import { Party } from '../../../../../model/Party';
 import { useAppDispatch, useAppSelector } from '../../../../../redux/hooks';
 import { partiesActions, partiesSelectors } from '../../../../../redux/slices/partiesSlice';
 import { updateBusinessData } from '../../../../../services/partyService';
+import { LOADING_UPDATE_BUSINESS_DATA } from '../../../../../utils/constants';
 
 type Props = {
   party?: Party;
 };
 
 // eslint-disable-next-line complexity, sonarjs/cognitive-complexity
-export default function PartyDetail({ party }: Props) {
+export default function PartyDetail({ party }: Readonly<Props>) {
   const { t } = useTranslation();
 
   const addError = useErrorDispatcher();
@@ -33,8 +35,8 @@ export default function PartyDetail({ party }: Props) {
   const setBusinessData = (businessData?: Party) =>
     dispatch(partiesActions.setPartySelected(businessData));
   const business = useAppSelector(partiesSelectors.selectPartySelected);
+  const setLoading = useLoading(LOADING_UPDATE_BUSINESS_DATA);
 
-  const [_loading, setLoading] = useState<boolean>(false);
   const [openBusinessNameEditModal, setOpenBusinessNameEditModal] = useState<boolean>(false);
   const [openBusinessEmailEditModal, setOpenBusinessEmailEditModal] = useState<boolean>(false);
   const [insertedBusinessName, setInsertedBusinessName] = useState<string>();

@@ -1,5 +1,6 @@
 /* eslint-disable functional/immutable-data */
 import { Box, Grid } from '@mui/material';
+import { useLiveAnnouncerWithRegion } from '@pagopa/selfcare-common-frontend/lib';
 import useErrorDispatcher from '@pagopa/selfcare-common-frontend/lib/hooks/useErrorDispatcher';
 import { trackEvent } from '@pagopa/selfcare-common-frontend/lib/services/analyticsService';
 import { TFunction } from 'i18next';
@@ -27,7 +28,6 @@ export function PartyLogoUploader({ partyId }: Readonly<Props>) {
   const [loading, setLoading] = useState(false);
 
   const [labelLink, setLabelLink] = useState<string>(getLabelLinkText(t));
-  const [successMessage, setSuccessMessage] = useState('');
   const [uploadedFiles, setUploadedFiles] = useState<Array<File>>([]);
 
   const urlLogo = useAppSelector(partiesSelectors.selectPartySelectedLogo);
@@ -36,6 +36,8 @@ export function PartyLogoUploader({ partyId }: Readonly<Props>) {
     dispatch(partiesActions.setPartySelectedPartyLogo(urlLogo));
 
   const addError = useErrorDispatcher();
+
+  const { announce, LiveRegion } = useLiveAnnouncerWithRegion();
 
   useEffect(() => {
     if (urlLogo && partyId) {
@@ -71,7 +73,7 @@ export function PartyLogoUploader({ partyId }: Readonly<Props>) {
         .then(() => {
           setUrlLogo(urlLogo);
           setLoading(false);
-          setSuccessMessage(t('accesability.logoUploadSuccess'));
+          announce(t('accesability.logoUploadSuccess'));
           setLabelLink(t('overview.businessLogo.modify'));
           trackEvent('DASHBOARD_BUSINESS_CHANGE_LOGO_SUCCESS', {
             party_id: partyId,
@@ -157,19 +159,10 @@ export function PartyLogoUploader({ partyId }: Readonly<Props>) {
 
   return (
     <Grid container xs={6}>
-      <div
-        aria-live="polite"
-        style={{
-          position: 'absolute',
-          width: 1,
-          height: 1,
-          overflow: 'hidden',
-          clip: 'rect(0 0 0 0)',
-        }}
-        aria-atomic="true"
-      >
-        {successMessage}
-      </div>
+      {
+        // Live region for accessibility announcements
+        LiveRegion
+      }
 
       <Box
         {...rootProps}
