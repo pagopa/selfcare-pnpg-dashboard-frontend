@@ -51,7 +51,12 @@ export const mockedInstitutions: Array<Party> = [
           recipientCode: 'CC2345',
           vatNumber: '01113570210',
         },
-        userProductActions: [Actions.UploadLogo, Actions.ManageProductGroups, Actions.ManageProductUsers],
+        userProductActions: [
+          Actions.UploadLogo,
+          Actions.ManageProductGroups,
+          Actions.ListProductGroups,
+          Actions.ManageProductUsers,
+        ],
       },
     ],
   },
@@ -76,7 +81,12 @@ export const mockedInstitutions: Array<Party> = [
           recipientCode: 'CC236D',
           vatNumber: '03343570210',
         },
-        userProductActions: [Actions.UploadLogo, Actions.ManageProductGroups, Actions.ManageProductUsers]
+        userProductActions: [
+          Actions.UploadLogo,
+          Actions.ManageProductGroups,
+          Actions.ListProductGroups,
+          Actions.ManageProductUsers,
+        ],
       },
     ],
   },
@@ -101,7 +111,11 @@ export const mockedInstitutions: Array<Party> = [
           recipientCode: 'CC293D',
           vatNumber: '05923570210',
         },
-        userProductActions: [Actions.UploadLogo, Actions.ManageProductGroups, Actions.ManageProductUsers]
+        userProductActions: [
+          Actions.UploadLogo,
+          Actions.ManageProductGroups,
+          Actions.ManageProductUsers,
+        ],
       },
     ],
   },
@@ -126,7 +140,11 @@ export const mockedInstitutions: Array<Party> = [
           recipientCode: 'CC133D',
           vatNumber: '05923570510',
         },
-        userProductActions: [Actions.UploadLogo, Actions.ManageProductGroups, Actions.ManageProductUsers]
+        userProductActions: [
+          Actions.UploadLogo,
+          Actions.ManageProductGroups,
+          Actions.ManageProductUsers,
+        ],
       },
     ],
   },
