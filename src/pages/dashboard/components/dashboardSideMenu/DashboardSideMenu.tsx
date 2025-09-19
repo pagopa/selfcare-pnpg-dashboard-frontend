@@ -42,7 +42,7 @@ export default function DashboardSideMenu({ party, setDrawerOpen }: Props) {
   const isRoleSelected = window.location.pathname.startsWith(usersPath);
   const isGroupSelected = window.location.pathname.startsWith(groupsPath);
 
-  const canSeeUsers = getAllProductsWithPermission(Actions.ManageProductUsers).length > 0;
+  const canSeeUsers = getAllProductsWithPermission(Actions.ListProductUsers).length > 0;
   const canSeeGroups = getAllProductsWithPermission(Actions.ListProductGroups).length > 0;
 
   return (
