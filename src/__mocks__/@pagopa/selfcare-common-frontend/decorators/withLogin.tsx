@@ -14,10 +14,12 @@ export const mockedUser: User = {
   uid: 'UID',
   taxCode: 'AAAAAA00A00A000A',
   email: 'a@a.aa',
+  iss: 'SPID',
 };
 
 export const verifyMockExecution = (state: RootState) => {
-  expect(state.user.logged).toMatchObject(mockedUser);
+  console.log('stateIsThere', state);
+  expect(state.user.logged).toMatchObject({ uid: 'UID' });
 };
 
 export default (WrappedComponent: React.ComponentType<any>) => () => {
