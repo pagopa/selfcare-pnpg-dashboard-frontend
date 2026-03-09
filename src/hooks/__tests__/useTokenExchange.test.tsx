@@ -4,13 +4,13 @@ import { Provider } from 'react-redux';
 import { Party } from '../../model/Party';
 import { Product } from '../../model/Product';
 import { createStore } from '../../redux/store';
-import { useTokenExchange, validateUrlBO } from '../useTokenExchange';
-import { mockedPartyProduct } from '../../services/__mocks__/productService';
 import { mockedInstitutions } from '../../services/__mocks__/partyService';
+import { mockedPartyProduct } from '../../services/__mocks__/productService';
+import { useTokenExchange, validateUrlBO } from '../useTokenExchange';
 
 const oldWindowLocation = global.window.location;
 const mockedLocation = {
-  assign: jest.fn(),
+  assign: vi.fn(),
   pathname: '',
   origin: 'MOCKED_ORIGIN',
   search: '',
@@ -24,12 +24,12 @@ afterAll(() => {
   Object.defineProperty(window, 'location', { value: oldWindowLocation });
 });
 
-jest.mock('../../services/tokenExchangeService');
+vi.mock('../../services/tokenExchangeService');
 
-let retrieveBackOfficeUrlSpy;
+let retrieveBackOfficeUrlSpy: any;
 
 beforeEach(() => {
-  retrieveBackOfficeUrlSpy = jest.spyOn(
+  retrieveBackOfficeUrlSpy = vi.spyOn(
     require('../../services/tokenExchangeService'),
     'retrieveBackOfficeUrl'
   );

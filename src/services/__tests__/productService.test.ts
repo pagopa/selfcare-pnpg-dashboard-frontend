@@ -4,11 +4,11 @@ import { productResource2Product } from '../../model/Product';
 import { mockedPartyProducts } from '../__mocks__/productService';
 import { DashboardApi } from '../../api/DashboardApi';
 
-jest.mock('../../api/DashboardApi');
+vi.mock('../../api/DashboardApi');
 
 beforeEach(() => {
-  jest.spyOn(DashboardApi, 'getProducts');
-  jest.spyOn(DashboardApi, 'getProductRoles');
+  vi.spyOn(DashboardApi, 'getProducts');
+  vi.spyOn(DashboardApi, 'getProductRoles');
 });
 
 test('Test fetchProducts', async () => {

@@ -1,14 +1,11 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { mockedInstitutions } from '../../../../../../../services/__mocks__/partyService';
-import '../../../../../../../locale';
-import { PartyLogoUploader } from '../PartyLogoUploader';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
+import '../../../../../../../locale';
 import { createStore } from '../../../../../../../redux/store';
-import { DashboardApi } from '../../../../../../../api/DashboardApi';
-import { saveInstitutionLogo } from '../../../../../../../services/partyService';
+import { PartyLogoUploader } from '../PartyLogoUploader';
 
-jest.mock('../../../../../../../api/DashboardApi', () => ({
-  saveInstitutionLogo: jest.fn(),
+vi.mock('../../../../../../../api/DashboardApi', () => ({
+  saveInstitutionLogo: vi.fn(),
 }));
 
 test('test onDropAccepted behavior', async () => {

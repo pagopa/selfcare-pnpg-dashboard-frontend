@@ -1,25 +1,34 @@
-import { fetchParties, fetchPartyDetails, updateBusinessData } from '../partyService';
+import { beforeEach, describe, expect, test, vi } from 'vitest';
+import { mockedInstitutionResources } from '../../api/__mocks__/DashboardApi';
 import {
   institutionBaseResource2BaseParty,
   institutionResource2Party,
   Party,
 } from '../../model/Party';
-import { DashboardApi } from '../../api/DashboardApi';
-import { mockedInstitutionResources } from '../../api/__mocks__/DashboardApi';
+import { fetchParties, fetchPartyDetails, updateBusinessData } from '../partyService';
 
-jest.mock('../../api/DashboardApi');
+vi.mock('../../api/DashboardApi');
 
-let dashboardApiGetInstitutionSpy;
-let dashboardApiGetInstitutionsSpy;
-let dashboardApiUpdateBusinessDataSpy;
+let dashboardApiGetInstitutionSpy: ReturnType<typeof vi.spyOn>;
+let dashboardApiGetInstitutionsSpy: ReturnType<typeof vi.spyOn>;
+let dashboardApiUpdateBusinessDataSpy: ReturnType<typeof vi.spyOn>;
 
 beforeEach(() => {
-  dashboardApiGetInstitutionSpy = jest.spyOn(DashboardApi, 'getInstitution');
-  dashboardApiGetInstitutionsSpy = jest.spyOn(DashboardApi, 'getInstitutions');
-  dashboardApiUpdateBusinessDataSpy = jest.spyOn(DashboardApi, 'updateBusinessData');
+  const apiModule = require('../../api/DashboardApi');
+
+  // Spy on DashboardApi methods and mock their return values
+  dashboardApiGetInstitutionSpy = vi
+    .spyOn(apiModule.DashboardApi, 'getInstitution')
+    .mockResolvedValue(mockedInstitutionResources[0]);
+  dashboardApiGetInstitutionsSpy = vi
+    .spyOn(apiModule.DashboardApi, 'getInstitutions')
+    .mockResolvedValue(mockedInstitutionResources);
+  dashboardApiUpdateBusinessDataSpy = vi
+    .spyOn(apiModule.DashboardApi, 'updateBusinessData')
+    .mockResolvedValue(true);
 });
 
-test('Test fetchParties', async () => {
+test('fetchParties returns correct parties with logos', async () => {
   const parties = await fetchParties();
 
   expect(parties).toMatchObject(mockedInstitutionResources.map(institutionBaseResource2BaseParty));
@@ -31,64 +40,55 @@ test('Test fetchParties', async () => {
   expect(dashboardApiGetInstitutionsSpy).toBeCalledTimes(1);
 });
 
-describe('Test fetchPartyDetails', () => {
-  const expectedPartyId: string = '5b321318-3df7-48c1-67c8-1111e6707c3d';
+describe('fetchPartyDetails and updateBusinessData', () => {
+  const expectedPartyId = '5b321318-3df7-48c1-67c8-1111e6707c3d';
 
   const checkSelectedParty = (party: Party) => {
     expect(party).toMatchObject(institutionResource2Party(mockedInstitutionResources[0]));
-
     expect(party.urlLogo).toBe(`http://checkout.selfcare/institutions/${expectedPartyId}/logo.png`);
   };
 
   const checkDashboardInvocation = (expectedCallsNumber: number) => {
-    expect(DashboardApi.getInstitution).toBeCalledTimes(expectedCallsNumber);
+    expect(dashboardApiGetInstitutionSpy).toBeCalledTimes(expectedCallsNumber);
     if (expectedCallsNumber > 0) {
-      expect(DashboardApi.getInstitution).toBeCalledWith(expectedPartyId);
+      expect(dashboardApiGetInstitutionSpy).toBeCalledWith(expectedPartyId);
     }
   };
 
-  test('Test no parties as cache', async () => {
+  test('fetchPartyDetails without cache calls API', async () => {
     const party = await fetchPartyDetails(expectedPartyId);
-    if (party) {
-      checkSelectedParty(party);
-    }
+    if (party) checkSelectedParty(party);
 
     checkDashboardInvocation(1);
   });
 
-  test('Test parties as cache', async () => {
-    const parties = mockedInstitutionResources.map(institutionResource2Party);
+  test('fetchPartyDetails with cache returns same party', async () => {
     const party = await fetchPartyDetails(expectedPartyId);
-    if (party) {
-      checkSelectedParty(party);
-    }
+    if (party) checkSelectedParty(party);
 
     checkDashboardInvocation(1);
 
-    const partialParties = parties.filter((p) => p.partyId === expectedPartyId);
     const party2 = await fetchPartyDetails(expectedPartyId);
     expect(party2).toStrictEqual(party);
 
-    checkDashboardInvocation(2);
+    checkDashboardInvocation(2); // You might want to adjust depending on cache logic
   });
 
-  test('Test updateBusinessData api: update the email', async () => {
+  test('updateBusinessData updates email', async () => {
     const institutionId = mockedInstitutionResources.map(institutionResource2Party)[1].partyId;
     const newEmail = 'mockemail@mocktest.com';
 
-    const businessUpdatedSuccessfully = await updateBusinessData(institutionId, newEmail);
-    expect(businessUpdatedSuccessfully).toBeTruthy();
-
+    const success = await updateBusinessData(institutionId, newEmail);
+    expect(success).toBeTruthy();
     expect(dashboardApiUpdateBusinessDataSpy).toBeCalledTimes(1);
   });
 
-  test('Test updateBusinessData api: update the businessName', async () => {
+  test('updateBusinessData updates businessName', async () => {
     const institutionId = mockedInstitutionResources.map(institutionResource2Party)[3].partyId;
     const newEmail = 'mockemail@mocktest.com';
 
-    const businessUpdatedSuccessfully = await updateBusinessData(institutionId, newEmail);
-    expect(businessUpdatedSuccessfully).toBeTruthy();
-
+    const success = await updateBusinessData(institutionId, newEmail);
+    expect(success).toBeTruthy();
     expect(dashboardApiUpdateBusinessDataSpy).toBeCalledTimes(1);
   });
 });

@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
-import { Grid, Button, Typography } from '@mui/material';
+import { Button, Grid, Typography } from '@mui/material';
 import { trackEvent } from '@pagopa/selfcare-common-frontend/lib/services/analyticsService';
-import { useTranslation, Trans } from 'react-i18next';
 import { uniqueId } from 'lodash';
-import { ReactComponent as NoBusiness } from '../../assets/no-business.svg';
+import { useEffect } from 'react';
+import { Trans, useTranslation } from 'react-i18next';
+import NoBusiness from '../../assets/no-business.svg?react';
 import { ENV } from '../../utils/env';
 
 export default function NoParty() {

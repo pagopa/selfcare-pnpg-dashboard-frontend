@@ -1,9 +1,9 @@
-import { render, screen } from '@testing-library/react';
-import ProductNavigationBar from '../ProductNavigationBar';
-import { Provider } from 'react-redux';
-import { createStore } from '../../redux/store';
-import { Product } from '../../model/Product';
 import { NavigationPath } from '@pagopa/selfcare-common-frontend/lib/components/NavigationBar';
+import { render, screen } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { Product } from '../../model/Product';
+import { createStore } from '../../redux/store';
+import ProductNavigationBar from '../ProductNavigationBar';
 
 const renderComponent = async (paths: Array<NavigationPath>, selectedProduct?: Product) => {
   render(
@@ -20,7 +20,7 @@ test('Test ProductNavigationBar component with selected product', () => {
   renderComponent(paths, selectedProduct);
 
   const pathElements = screen
-    .queryAllByText((content, element) => element.tagName.toLowerCase() === 'p')
+    .queryAllByText((_content, element) => element?.tagName.toLowerCase() === 'p')
     .filter(
       (path) =>
         path.textContent === 'Selected Product' ||
@@ -41,7 +41,7 @@ test('Test ProductNavigationBar component without selected product', () => {
   renderComponent(paths);
 
   const pathElements = screen
-    .queryAllByText((content, element) => element.tagName.toLowerCase() === 'p')
+    .queryAllByText((_content, element) => element?.tagName.toLowerCase() === 'p')
     .filter(
       (path) =>
         path.textContent === 'Selected Product' ||

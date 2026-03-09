@@ -1,25 +1,17 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import { createStore } from '../../../redux/store';
 import { createMemoryHistory } from 'history';
+import { Provider } from 'react-redux';
 import { Router } from 'react-router';
-import PartySelectionContainer from '../PartySelectionContainer';
+import { BaseParty } from '../../../model/Party';
 import { partiesActions } from '../../../redux/slices/partiesSlice';
-import { BaseParty, Party } from '../../../model/Party';
-import './../../../locale';
-import { ProductOnBoardingStatusEnum } from '../../../api/generated/b4f-dashboard-pnpg/OnboardedProductResource';
-import { InstitutionResource } from '../../../api/generated/b4f-dashboard-pnpg/InstitutionResource';
+import { createStore } from '../../../redux/store';
 import { mockedBaseInstitutions } from '../../../services/__mocks__/partyService';
-import i18n from '@pagopa/selfcare-common-frontend/lib/locale/locale-utils';
-
-beforeAll(() => {
-  i18n.changeLanguage('it');
-});
+import PartySelectionContainer from '../PartySelectionContainer';
+import './../../../locale';
 
 const mockedParty: Array<BaseParty> = [
   {
     partyId: '5b321318-3df7-48c1-67c8-1111e6707c3d',
-    externalId: '01113570210',
     description: 'mockedBusiness1',
     status: 'ACTIVE',
     userRole: 'ADMIN',

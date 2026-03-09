@@ -1,26 +1,26 @@
-import { render, screen, waitFor } from '@testing-library/react';
-import App from '../App';
-import { Provider } from 'react-redux';
-import { createStore } from '../redux/store';
-import { verifyMockExecution as verifyLoginMockExecution } from '../__mocks__/@pagopa/selfcare-common-frontend/decorators/withLogin';
-import { verifyMockExecution as verifyPartiesMockExecution } from '../decorators/__mocks__/withParties';
-import { verifyMockExecution as verifySelectedPartyMockExecution } from '../decorators/__mocks__/withSelectedParty';
-import { createMemoryHistory } from 'history';
-import { Router } from 'react-router';
-import { mockedBaseInstitutions } from '../services/__mocks__/partyService';
 import { ThemeProvider } from '@mui/material';
 import { theme } from '@pagopa/mui-italia';
+import { render, waitFor } from '@testing-library/react';
+import { createMemoryHistory } from 'history';
+import { Provider } from 'react-redux';
+import { Router } from 'react-router';
+import { verifyMockExecution as verifyLoginMockExecution } from '../__mocks__/@pagopa/selfcare-common-frontend/decorators/withLogin';
+import App from '../App';
+import { verifyMockExecution as verifyPartiesMockExecution } from '../decorators/__mocks__/withParties';
+import { verifyMockExecution as verifySelectedPartyMockExecution } from '../decorators/__mocks__/withSelectedParty';
+import { createStore } from '../redux/store';
+import { mockedBaseInstitutions } from '../services/__mocks__/partyService';
 
-jest.mock('@pagopa/selfcare-common-frontend/lib/decorators/withLogin');
-jest.mock('../decorators/withParties');
-jest.mock('../decorators/withSelectedParty');
+vi.mock('@pagopa/selfcare-common-frontend/lib/decorators/withLogin');
+vi.mock('../decorators/withParties');
+vi.mock('../decorators/withSelectedParty');
 
 const renderApp = (
   injectedStore?: ReturnType<typeof createStore>,
   injectedHistory?: ReturnType<typeof createMemoryHistory>
 ) => {
-  const store = injectedStore ? injectedStore : createStore();
-  const history = injectedHistory ? injectedHistory : createMemoryHistory();
+  const store = injectedStore ?? createStore();
+  const history = injectedHistory ?? createMemoryHistory();
   render(
     <ThemeProvider theme={theme}>
       <Router history={history}>

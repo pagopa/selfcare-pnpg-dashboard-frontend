@@ -8,7 +8,7 @@ import {
 
 export const fetchProducts = (): Promise<Array<Product>> => {
   /* istanbul ignore if */
-  if (process.env.REACT_APP_MOCK_API === 'true') {
+  if (process.env.VITE_MOCK_API === 'true') {
     return Promise.resolve(mockedPartyProducts);
   } else {
     return DashboardApi.getProducts().then((productResources) =>
@@ -19,7 +19,7 @@ export const fetchProducts = (): Promise<Array<Product>> => {
 
 export const fetchProductRoles = (product: Product): Promise<Array<ProductRole>> => {
   /* istanbul ignore if */
-  if (process.env.REACT_APP_MOCK_API === 'true') {
+  if (process.env.VITE_MOCK_API === 'true') {
     return fetchProductRolesMocked(product);
   } else {
     return DashboardApi.getProductRoles(product.id)

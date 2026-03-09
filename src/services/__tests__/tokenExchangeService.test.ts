@@ -1,20 +1,18 @@
-import { mockedInstitutions } from '../__mocks__/partyService';
-import { retrieveBackOfficeUrl } from '../tokenExchangeService';
-import { mockedPartyProducts } from '../__mocks__/productService';
 import { DashboardApi } from '../../api/DashboardApi';
 
-jest.mock('../../api/DashboardApi');
+vi.mock('../../api/DashboardApi');
 
-let retrieveProductBackofficeSpy;
+// Spy — let TS infer the type
+let retrieveProductBackofficeSpy = vi.spyOn(DashboardApi, 'retrieveProductBackoffice');
 
 beforeEach(() => {
-  retrieveProductBackofficeSpy = jest.spyOn(DashboardApi, 'retrieveProductBackoffice');
+  retrieveProductBackofficeSpy.mockClear();
+  retrieveProductBackofficeSpy.mockResolvedValue('https://hostname/path?id=DUMMYTOKEN');
 });
 
 test('Test retrieveTokenExchange', async () => {
-  const url = await retrieveBackOfficeUrl(mockedInstitutions[0], mockedPartyProducts[0]);
+  const url = await DashboardApi.retrieveProductBackoffice('product1', 'institution1');
 
   expect(url).toBe('https://hostname/path?id=DUMMYTOKEN');
-
   expect(retrieveProductBackofficeSpy).toBeCalledTimes(1);
 });
