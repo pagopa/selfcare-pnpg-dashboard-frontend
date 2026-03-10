@@ -29,12 +29,7 @@ function moduleFederationStubPlugin() {
 }
 
 export default defineConfig({
-  plugins: [
-    react(),
-    svgr(),
-    moduleFederationStubPlugin(),
-    // NOTE: NO federation() plugin, NO tsconfigPaths that might pull vite.config.ts
-  ],
+  plugins: [react(), svgr(), moduleFederationStubPlugin()],
   test: {
     globals: true,
     environment: 'jsdom',
@@ -43,18 +38,23 @@ export default defineConfig({
     restoreMocks: true,
     clearMocks: true,
     isolate: false,
-    testTimeout: 15000,
-    exclude: [
-      '**/node_modules/**',
-      '**/dist/**',
-      'coverage/*',
+    include: ['src/**/__tests__/**/*.test.{ts,tsx}'],
+    exclude: [                        // only non-test exclusions here
+      'node_modules/**',
       'e2e/**',
-      '**/*.spec.ts',
       '**/__mf__temp/**',
     ],
     coverage: {
       provider: 'v8',
-      exclude: ['src/index.js', 'src/reportWebVitals.ts', 'src/api/generated/**', 'e2e/**'],
+      include: ['src/**/*.{ts,tsx}'], // source files to measure
+      exclude: [                      // what to strip from coverage report
+        'src/**/__tests__/**',        // test files
+        'src/**/__mocks__/**',        // mocks
+        'src/index.js',
+        'src/reportWebVitals.ts',
+        'src/api/generated/**',
+        'e2e/**',
+      ],
     },
   },
 });
