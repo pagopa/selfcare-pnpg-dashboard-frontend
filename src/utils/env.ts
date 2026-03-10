@@ -1,13 +1,11 @@
-import * as env from 'env-var';
-
-const PUBLIC_URL_INNER: string | undefined = env.get('PUBLIC_URL').asString() || '/dashboard';
+const PUBLIC_URL_INNER = import.meta.env.PUBLIC_URL || '/dashboard';
 export const ENV = {
-  ENV: env.get('REACT_APP_ENV').required().asString(),
+  ENV: import.meta.env.VITE_ENV,
   PUBLIC_URL: PUBLIC_URL_INNER,
 
   ASSISTANCE: {
-    ENABLE: env.get('REACT_APP_ENABLE_ASSISTANCE').required().asBool(),
-    EMAIL: env.get('REACT_APP_PAGOPA_HELP_EMAIL').required().asString(),
+    ENABLE: import.meta.env.VITE_ENABLE_ASSISTANCE === 'true',
+    EMAIL: import.meta.env.VITE_PAGOPA_HELP_EMAIL,
   },
 
   ROUTES: {
@@ -20,34 +18,31 @@ export const ENV = {
   },
 
   URL_FE: {
-    LOGIN: env.get('REACT_APP_URL_FE_LOGIN').required().asString(),
-    LOGOUT: env.get('REACT_APP_URL_FE_LOGOUT').required().asString(),
-    ONBOARDING: env.get('REACT_APP_URL_FE_ONBOARDING').required().asString(),
-    LANDING: env.get('REACT_APP_URL_FE_LANDING').required().asString(),
-    ASSISTANCE: env.get('REACT_APP_URL_FE_ASSISTANCE').required().asString(),
+    LOGIN: import.meta.env.VITE_URL_FE_LOGIN,
+    LOGOUT: import.meta.env.VITE_URL_FE_LOGOUT,
+    ONBOARDING: import.meta.env.VITE_URL_FE_ONBOARDING,
+    LANDING: import.meta.env.VITE_URL_FE_LANDING,
+    ASSISTANCE: import.meta.env.VITE_URL_FE_ASSISTANCE,
   },
 
   URL_API: {
-    DASHBOARD: env.get('REACT_APP_URL_API_DASHBOARD').required().asString(),
+    DASHBOARD: import.meta.env.VITE_URL_API_DASHBOARD,
   },
 
   API_TIMEOUT_MS: {
-    DASHBOARD: env.get('REACT_APP_API_DASHBOARD_TIMEOUT_MS').required().asInt(),
+    DASHBOARD: parseInt(import.meta.env.VITE_API_DASHBOARD_TIMEOUT_MS || '30000', 10),
   },
 
   URL_INSTITUTION_LOGO: {
-    PREFIX: env.get('REACT_APP_URL_INSTITUTION_LOGO_PREFIX').required().asString(),
-    SUFFIX: env.get('REACT_APP_URL_INSTITUTION_LOGO_SUFFIX').required().asString(),
+    PREFIX: import.meta.env.VITE_URL_INSTITUTION_LOGO_PREFIX,
+    SUFFIX: import.meta.env.VITE_URL_INSTITUTION_LOGO_SUFFIX,
   },
 
   ANALYTCS: {
-    ENABLE: env.get('REACT_APP_ANALYTICS_ENABLE').default('false').asBool(),
-    MOCK: env.get('REACT_APP_ANALYTICS_MOCK').default('false').asBool(),
-    DEBUG: env.get('REACT_APP_ANALYTICS_DEBUG').default('false').asBool(),
-    TOKEN: env.get('REACT_APP_MIXPANEL_TOKEN').required().asString(),
-    API_HOST: env
-      .get('REACT_APP_MIXPANEL_API_HOST')
-      .default('https://api-eu.mixpanel.com')
-      .asString(),
+    ENABLE: import.meta.env.VITE_ANALYTICS_ENABLE === 'true',
+    MOCK: import.meta.env.VITE_ANALYTICS_MOCK === 'true',
+    DEBUG: import.meta.env.VITE_ANALYTICS_DEBUG === 'true',
+    TOKEN: import.meta.env.VITE_MIXPANEL_TOKEN,
+    API_HOST: import.meta.env.VITE_MIXPANEL_API_HOST || 'https://api-eu.mixpanel.com',
   },
 };

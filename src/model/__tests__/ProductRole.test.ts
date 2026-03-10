@@ -1,5 +1,5 @@
 import { mockedProductRoles } from '../../services/__mocks__/productService';
-import { ProductRole, productRoles2ProductRolesList } from '../ProductRole';
+import { productRoles2ProductRolesList } from '../ProductRole';
 
 test('Test productRoles2ProductRolesList', () => {
   const rolesList = productRoles2ProductRolesList(mockedProductRoles);

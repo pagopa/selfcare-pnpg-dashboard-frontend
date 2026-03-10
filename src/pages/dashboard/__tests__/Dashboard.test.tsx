@@ -1,19 +1,23 @@
-import { render, waitFor } from '@testing-library/react';
-import Dashboard from '../Dashboard';
-import { Provider } from 'react-redux';
-import { createStore } from '../../../redux/store';
-import { verifyMockExecution as verifySelectedPartyMockExecution } from '../../../decorators/__mocks__/withSelectedParty';
+import { render } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
+import { Provider } from 'react-redux';
 import { Router } from 'react-router';
+import { verifyMockExecution as verifySelectedPartyMockExecution } from '../../../decorators/__mocks__/withSelectedParty';
+import { createStore } from '../../../redux/store';
+import Dashboard from '../Dashboard';
 
-jest.mock('../../../decorators/withSelectedParty');
+vi.mock('../../../decorators/withSelectedParty');
+
+vi.mock('selfcareUsers/RoutingUsers', () => ({
+  default: () => <div data-testid="mock-routing-users" />,
+}));
 
 const renderDashboard = (
   injectedStore?: ReturnType<typeof createStore>,
   injectedHistory?: ReturnType<typeof createMemoryHistory>
 ) => {
-  const store = injectedStore ? injectedStore : createStore();
-  const history = injectedHistory ? injectedHistory : createMemoryHistory();
+  const store = injectedStore ?? createStore();
+  const history = injectedHistory ?? createMemoryHistory();
   render(
     <Router history={history}>
       <Provider store={store}>
@@ -30,7 +34,6 @@ test('Test rendering', () => {
 });
 
 test('Test routing', async () => {
-  const store = createStore();
   const history = createMemoryHistory();
 
   history.push('/dashboard/5b321318-3df7-48c1-67c8-1111e6707c3d');

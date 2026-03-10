@@ -1,24 +1,21 @@
 import { render, waitFor } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import { createStore, RootState } from '../../redux/store';
-import withSelectedParty from '../withSelectedParty';
-import { verifyFetchPartyDetailsMockExecution } from '../../services/__mocks__/partyService';
-import { verifyFetchPartyProductsMockExecution } from '../../services/__mocks__/productService';
 import { createMemoryHistory } from 'history';
+import { Provider } from 'react-redux';
 import { Route, Router, Switch } from 'react-router';
-import { boolean } from 'fp-ts';
+import { createStore } from '../../redux/store';
+import withSelectedParty from '../withSelectedParty';
 
-jest.mock('../../services/partyService');
-jest.mock('../../services/productService');
+vi.mock('../../services/partyService');
+vi.mock('../../services/productService');
 
 const expectedPartyId: string = '5b321318-3df7-48c1-67c8-1111e6707c3d';
 
-let fetchPartyDetailsSpy: jest.SpyInstance;
-let fetchPartyProductsSpy: jest.SpyInstance;
+const spyOnPartyService = await import('../../services/partyService');
+const spyOnProductService = await import('../../services/productService')
 
 beforeEach(() => {
-  fetchPartyDetailsSpy = jest.spyOn(require('../../services/partyService'), 'fetchPartyDetails');
-  fetchPartyProductsSpy = jest.spyOn(require('../../services/productService'), 'fetchProducts');
+  vi.spyOn(spyOnPartyService, 'fetchPartyDetails');
+ vi.spyOn(spyOnProductService, 'fetchProducts');
 });
 
 const renderApp = async (
@@ -26,8 +23,8 @@ const renderApp = async (
   injectedStore?: ReturnType<typeof createStore>,
   injectedHistory?: ReturnType<typeof createMemoryHistory>
 ) => {
-  const store = injectedStore ? injectedStore : createStore();
-  const history = injectedHistory ? injectedHistory : createMemoryHistory();
+  const store = injectedStore ?? createStore();
+  const history = injectedHistory ?? createMemoryHistory();
 
   if (!injectedHistory) {
     history.push(`/${expectedPartyId}`);
@@ -64,18 +61,3 @@ test('Test party not active', async () => {
   await waitFor(() => expect(store.getState().appState.errors.length).toBe(0));
   expect(store.getState().parties.selected).toBeUndefined();
 });
-
-const checkSelectedParty = (state: RootState) => {
-  const party = state.parties.selected;
-  const partyProducts = state.parties.selectedProducts;
-  verifyFetchPartyDetailsMockExecution(party);
-  verifyFetchPartyProductsMockExecution(partyProducts);
-};
-
-const checkMockInvocation = (expectedCallsNumber: number) => {
-  expect(fetchPartyDetailsSpy).toBeCalledTimes(expectedCallsNumber);
-  expect(fetchPartyDetailsSpy).toBeCalledWith(expectedPartyId, undefined);
-
-  expect(fetchPartyProductsSpy).toBeCalledTimes(expectedCallsNumber);
-  expect(fetchPartyProductsSpy).toBeCalledWith(expectedPartyId);
-};

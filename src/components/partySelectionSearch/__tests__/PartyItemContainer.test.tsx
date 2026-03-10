@@ -2,7 +2,7 @@ import { render, fireEvent } from '@testing-library/react';
 import PartyItemContainer from '../PartyItemContainer';
 
 test('Test onKeyDownCapture behavior in PartyItemContainer component', () => {
-  const actionMock = jest.fn();
+  const actionMock = vi.fn();
 
   const title = 'mockPartyItem Title';
   const subTitle = 'mockPartyItem Subtitle';

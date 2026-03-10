@@ -9,7 +9,7 @@ import { mockedBaseInstitutions, mockedInstitutions } from './__mocks__/partySer
 
 export const fetchParties = (): Promise<Array<BaseParty>> => {
   /* istanbul ignore if */
-  if (process.env.REACT_APP_MOCK_API === 'true') {
+  if (import.meta.env.VITE_MOCK_API === 'true') {
     return new Promise((resolve) => resolve(mockedBaseInstitutions));
   } else {
     return DashboardApi.getInstitutions().then((institutions) =>
@@ -20,7 +20,7 @@ export const fetchParties = (): Promise<Array<BaseParty>> => {
 
 export const fetchPartyDetails = (partyId: string): Promise<Party | null> => {
   /* istanbul ignore if */
-  if (process.env.REACT_APP_MOCK_API === 'true') {
+  if (import.meta.env.VITE_MOCK_API === 'true') {
     const selectedPartyDetail = mockedInstitutions?.find((p) => p.partyId === partyId) ?? null;
     return new Promise((resolve) => resolve(selectedPartyDetail));
   } else {
@@ -36,7 +36,7 @@ export const updateBusinessData = (
   businessName?: string
 ): Promise<boolean> => {
   /* istanbul ignore if */
-  if (process.env.REACT_APP_MOCK_API === 'true') {
+  if (import.meta.env.VITE_MOCK_API === 'true') {
     return new Promise((resolve) => resolve(true));
   } else {
     return DashboardApi.updateBusinessData(institutionId, businessEmail, businessName);
@@ -45,7 +45,7 @@ export const updateBusinessData = (
 
 export const saveInstitutionLogo = (institutionId: string, logo: File): Promise<boolean> => {
   /* istanbul ignore if */
-  if (process.env.REACT_APP_MOCK_API === 'true') {
+  if (import.meta.env.VITE_MOCK_API === 'true') {
     return new Promise((resolve) => resolve(true));
   } else {
     return DashboardApi.saveInstitutionLogo(institutionId, logo);

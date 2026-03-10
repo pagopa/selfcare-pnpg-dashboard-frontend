@@ -6,10 +6,10 @@ import { mockedPartyProducts } from '../../services/__mocks__/productService';
 import { mockedInstitutions } from '../../services/__mocks__/partyService';
 import withProductsRolesMap from '../withProductsRolesMap';
 
-jest.mock('../../services/productService');
+vi.mock('../../services/productService');
 
 const renderApp = (injectedStore?: ReturnType<typeof createStore>) => {
-  const store = injectedStore ? injectedStore : createStore();
+  const store = injectedStore ?? createStore();
   const Component = () => <>RENDERED</>;
   const DecoratedComponent = withProductsRolesMap(Component);
   render(
@@ -20,10 +20,12 @@ const renderApp = (injectedStore?: ReturnType<typeof createStore>) => {
   return store;
 };
 
-let fetchProductRolesSpy: jest.SpyInstance;
+let fetchProductRolesSpy: any;
+
+const productServiceImport = await import ('../../services/productService')
 
 beforeEach(() => {
-  fetchProductRolesSpy = jest.spyOn(require('../../services/productService'), 'fetchProductRoles');
+  fetchProductRolesSpy = vi.spyOn(productServiceImport, 'fetchProductRoles');
 });
 
 test.skip('Test', async () => {
@@ -76,7 +78,7 @@ const checkProductsRolesMapLength = async (
   store: ReturnType<typeof createStore>
 ) => {
   await waitFor(() =>
-    expect(Object.keys(store.getState().parties.selectedProductsRolesMap).length).toBe(
+    expect(Object.keys(store.getState().parties.selectedProductsRolesMap || {}).length).toBe(
       expectedProductCached
     )
   );
