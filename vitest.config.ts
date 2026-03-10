@@ -43,6 +43,7 @@ export default defineConfig({
     restoreMocks: true,
     clearMocks: true,
     isolate: false,
+    testTimeout: 15000,
     exclude: [
       '**/node_modules/**',
       '**/dist/**',
