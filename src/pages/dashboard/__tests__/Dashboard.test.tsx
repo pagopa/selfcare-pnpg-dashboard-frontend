@@ -8,6 +8,10 @@ import Dashboard from '../Dashboard';
 
 vi.mock('../../../decorators/withSelectedParty');
 
+vi.mock('selfcareUsers/RoutingUsers', () => ({
+  default: () => <div data-testid="mock-routing-users" />,
+}));
+
 const renderDashboard = (
   injectedStore?: ReturnType<typeof createStore>,
   injectedHistory?: ReturnType<typeof createMemoryHistory>

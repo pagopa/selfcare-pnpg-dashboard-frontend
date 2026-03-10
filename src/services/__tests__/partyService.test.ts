@@ -12,13 +12,10 @@ vi.mock('../../api/DashboardApi');
 let dashboardApiGetInstitutionSpy: ReturnType<typeof vi.spyOn>;
 let dashboardApiGetInstitutionsSpy: ReturnType<typeof vi.spyOn>;
 let dashboardApiUpdateBusinessDataSpy: ReturnType<typeof vi.spyOn>;
-
+const apiModule = await import('../../api/DashboardApi');
 beforeEach(() => {
-  const apiModule = require('../../api/DashboardApi');
-
   // Spy on DashboardApi methods and mock their return values
-  dashboardApiGetInstitutionSpy = vi
-    .spyOn(apiModule.DashboardApi, 'getInstitution')
+  dashboardApiGetInstitutionSpy = vi.spyOn(apiModule.DashboardApi, 'getInstitution')
     .mockResolvedValue(mockedInstitutionResources[0]);
   dashboardApiGetInstitutionsSpy = vi
     .spyOn(apiModule.DashboardApi, 'getInstitutions')

@@ -28,9 +28,11 @@ vi.mock('../../services/tokenExchangeService');
 
 let retrieveBackOfficeUrlSpy: any;
 
+const tokenServiceImport = await import ('../../services/tokenExchangeService')
+
 beforeEach(() => {
   retrieveBackOfficeUrlSpy = vi.spyOn(
-    require('../../services/tokenExchangeService'),
+    tokenServiceImport,
     'retrieveBackOfficeUrl'
   );
 });

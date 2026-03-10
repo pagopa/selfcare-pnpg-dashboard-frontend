@@ -20,8 +20,10 @@ const renderApp = (injectedStore?: any) => {
 
 let fetchPartiesSpy: ReturnType<typeof vi.spyOn>;
 
+const partyServiceImport = await import ('../../services/partyService')
+
 beforeEach(() => {
-  fetchPartiesSpy = vi.spyOn(require('../../services/partyService'), 'fetchParties');
+  fetchPartiesSpy = vi.spyOn(partyServiceImport, 'fetchParties');
 });
 
 test('Test', async () => {

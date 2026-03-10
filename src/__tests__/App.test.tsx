@@ -4,14 +4,17 @@ import { render, waitFor } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router';
-import { verifyMockExecution as verifyLoginMockExecution } from '../__mocks__/@pagopa/selfcare-common-frontend/decorators/withLogin';
 import App from '../App';
 import { verifyMockExecution as verifyPartiesMockExecution } from '../decorators/__mocks__/withParties';
 import { verifyMockExecution as verifySelectedPartyMockExecution } from '../decorators/__mocks__/withSelectedParty';
+import { verifyMockExecution as verifyLoginMockExecution } from '../__mocks__/@pagopa/selfcare-common-frontend/decorators/withLogin';
 import { createStore } from '../redux/store';
 import { mockedBaseInstitutions } from '../services/__mocks__/partyService';
 
-vi.mock('@pagopa/selfcare-common-frontend/lib/decorators/withLogin');
+vi.mock(
+  '@pagopa/selfcare-common-frontend/lib/decorators/withLogin',
+  () => import('../__mocks__/@pagopa/selfcare-common-frontend/decorators/withLogin')
+);
 vi.mock('../decorators/withParties');
 vi.mock('../decorators/withSelectedParty');
 

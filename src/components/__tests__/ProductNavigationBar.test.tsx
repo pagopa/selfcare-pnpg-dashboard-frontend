@@ -5,13 +5,12 @@ import { Product } from '../../model/Product';
 import { createStore } from '../../redux/store';
 import ProductNavigationBar from '../ProductNavigationBar';
 
-const renderComponent = async (paths: Array<NavigationPath>, selectedProduct?: Product) => {
+const renderComponent = async (paths: Array<NavigationPath>, selectedProduct?: Product) =>
   render(
     <Provider store={createStore()}>
       <ProductNavigationBar selectedProduct={selectedProduct} paths={paths} />
     </Provider>
   );
-};
 
 test('Test ProductNavigationBar component with selected product', () => {
   const selectedProduct = { title: 'Selected Product' } as Product;

@@ -3,9 +3,9 @@ import { useSelectedPartyProduct } from '../useSelectedPartyProduct';
 import { mockedPartyProducts } from '../../services/__mocks__/productService';
 
 test('useSelectedPartyProduct returns the currect product', () => {
-  const { result } = renderHook(() => useSelectedPartyProduct('mockId2', mockedPartyProducts));
+  const { result } = renderHook(() => useSelectedPartyProduct('prod-pn-pg', mockedPartyProducts));
 
-  expect(result.current).toEqual({ id: 'mockId2', name: 'Product2' });
+  expect(result.current).toEqual(mockedPartyProducts[0]);
 });
 
 test('useSelectedPartyProduct returns undefined for non-existent product', () => {
@@ -18,12 +18,12 @@ test('useSelectedPartyProduct re-renders when productId changes', () => {
   const { result, rerender } = renderHook(
     ({ productId }: { productId: string }) =>
       useSelectedPartyProduct(productId, mockedPartyProducts),
-    { initialProps: { productId: 'mockId1' } }
+    { initialProps: { productId: 'prod-pn-pg' } }
   );
 
-  expect(result.current).toEqual({ id: 'mockId1', name: 'Product1' });
+  expect(result.current).toEqual(mockedPartyProducts[0]);
 
-  rerender({ productId: 'mockId2' });
+  rerender({ productId: 'prod-pn-pg-svil' });
 
-  expect(result.current).toEqual({ id: 'mockId2', name: 'Product2' });
+  expect(result.current).toEqual(mockedPartyProducts[1]);
 });

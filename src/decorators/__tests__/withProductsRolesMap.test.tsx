@@ -22,8 +22,10 @@ const renderApp = (injectedStore?: ReturnType<typeof createStore>) => {
 
 let fetchProductRolesSpy: any;
 
+const productServiceImport = await import ('../../services/productService')
+
 beforeEach(() => {
-  fetchProductRolesSpy = vi.spyOn(require('../../services/productService'), 'fetchProductRoles');
+  fetchProductRolesSpy = vi.spyOn(productServiceImport, 'fetchProductRoles');
 });
 
 test.skip('Test', async () => {

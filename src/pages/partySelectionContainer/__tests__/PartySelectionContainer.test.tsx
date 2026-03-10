@@ -9,6 +9,10 @@ import { mockedBaseInstitutions } from '../../../services/__mocks__/partyService
 import PartySelectionContainer from '../PartySelectionContainer';
 import './../../../locale';
 
+vi.mock('selfcareUsers/RoutingUsers', () => ({
+  default: () => null,
+}));
+
 const mockedParty: Array<BaseParty> = [
   {
     partyId: '5b321318-3df7-48c1-67c8-1111e6707c3d',

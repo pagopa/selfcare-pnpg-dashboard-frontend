@@ -1,14 +1,16 @@
 import { DashboardApi } from '../../api/DashboardApi';
 
-vi.mock('../../api/DashboardApi');
-
-// Spy — let TS infer the type
-let retrieveProductBackofficeSpy = vi.spyOn(DashboardApi, 'retrieveProductBackoffice');
+let retrieveProductBackofficeSpy: ReturnType<typeof vi.spyOn>;
 
 beforeEach(() => {
-  retrieveProductBackofficeSpy.mockClear();
+  retrieveProductBackofficeSpy = vi.spyOn(DashboardApi, 'retrieveProductBackoffice');
   retrieveProductBackofficeSpy.mockResolvedValue('https://hostname/path?id=DUMMYTOKEN');
 });
+
+afterEach(() => {
+  vi.restoreAllMocks();
+});
+
 
 test('Test retrieveTokenExchange', async () => {
   const url = await DashboardApi.retrieveProductBackoffice('product1', 'institution1');
