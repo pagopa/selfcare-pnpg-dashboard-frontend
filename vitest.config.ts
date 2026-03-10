@@ -8,14 +8,14 @@ function moduleFederationStubPlugin() {
   return {
     name: 'vite-plugin-mf-stub',
     enforce: 'pre' as const,
-    resolveId(id: string) {
+    resolveId(id: string): string | undefined {
       if (id.startsWith('\0virtual:mf-stub:')) return id;
-      // Match any scoped federation remote: selfcareUsers/X, selfcareGroups/X, selfcareAdmin/X
       if (/^selfcare[A-Za-z]+\//.test(id)) {
         return '\0virtual:mf-stub:' + id;
       }
+      return undefined;
     },
-    load(id: string) {
+    load(id: string): string | undefined {
       if (id.startsWith('\0virtual:mf-stub:')) {
         return `
           import React from 'react';
@@ -23,6 +23,7 @@ function moduleFederationStubPlugin() {
           export default Stub;
         `;
       }
+      return undefined;
     },
   };
 }

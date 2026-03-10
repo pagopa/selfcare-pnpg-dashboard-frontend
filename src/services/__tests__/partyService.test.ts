@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, test, vi } from 'vitest';
+import { beforeEach, describe, expect, MockInstance, test, vi } from 'vitest';
 import { mockedInstitutionResources } from '../../api/__mocks__/DashboardApi';
 import {
   institutionBaseResource2BaseParty,
@@ -9,13 +9,14 @@ import { fetchParties, fetchPartyDetails, updateBusinessData } from '../partySer
 
 vi.mock('../../api/DashboardApi');
 
-let dashboardApiGetInstitutionSpy: ReturnType<typeof vi.spyOn>;
-let dashboardApiGetInstitutionsSpy: ReturnType<typeof vi.spyOn>;
-let dashboardApiUpdateBusinessDataSpy: ReturnType<typeof vi.spyOn>;
+let dashboardApiGetInstitutionSpy: MockInstance;
+let dashboardApiGetInstitutionsSpy: MockInstance;
+let dashboardApiUpdateBusinessDataSpy: MockInstance;
 const apiModule = await import('../../api/DashboardApi');
 beforeEach(() => {
   // Spy on DashboardApi methods and mock their return values
-  dashboardApiGetInstitutionSpy = vi.spyOn(apiModule.DashboardApi, 'getInstitution')
+  dashboardApiGetInstitutionSpy = vi
+    .spyOn(apiModule.DashboardApi, 'getInstitution')
     .mockResolvedValue(mockedInstitutionResources[0]);
   dashboardApiGetInstitutionsSpy = vi
     .spyOn(apiModule.DashboardApi, 'getInstitutions')

@@ -1,6 +1,7 @@
+import { MockInstance } from 'vitest';
 import { DashboardApi } from '../../api/DashboardApi';
 
-let retrieveProductBackofficeSpy: ReturnType<typeof vi.spyOn>;
+let retrieveProductBackofficeSpy: MockInstance;
 
 beforeEach(() => {
   retrieveProductBackofficeSpy = vi.spyOn(DashboardApi, 'retrieveProductBackoffice');
@@ -10,7 +11,6 @@ beforeEach(() => {
 afterEach(() => {
   vi.restoreAllMocks();
 });
-
 
 test('Test retrieveTokenExchange', async () => {
   const url = await DashboardApi.retrieveProductBackoffice('product1', 'institution1');
