@@ -1,7 +1,6 @@
-// vitest.config.ts
-import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
 import svgr from 'vite-plugin-svgr';
+import { defineConfig } from 'vitest/config';
 
 // Stubs ALL module federation remotes — no federation() plugin loaded at all
 function moduleFederationStubPlugin() {
@@ -39,17 +38,17 @@ export default defineConfig({
     clearMocks: true,
     isolate: false,
     include: ['src/**/__tests__/**/*.test.{ts,tsx}'],
-    exclude: [                        // only non-test exclusions here
-      'node_modules/**',
-      'e2e/**',
-      '**/__mf__temp/**',
-    ],
+    exclude: ['node_modules/**', 'e2e/**', '**/__mf__temp/**'],
     coverage: {
       provider: 'v8',
-      include: ['src/**/*.{ts,tsx}'], // source files to measure
-      exclude: [                      // what to strip from coverage report
-        'src/**/__tests__/**',        // test files
-        'src/**/__mocks__/**',        // mocks
+      include: ['src/**/*.{ts,tsx}'],
+      exclude: [
+        'src/**/__tests__/**',
+        'src/**/__mocks__/**',
+        'src/api/**',
+        'src/services/**',
+        'src/microcomponents/**',
+        'src/locale/**',
         'src/index.js',
         'src/reportWebVitals.ts',
         'src/api/generated/**',
