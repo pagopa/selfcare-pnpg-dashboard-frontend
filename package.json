@@ -4,7 +4,7 @@
   "homepage": "dashboard",
   "private": true,
   "dependencies": {
-    "@module-federation/vite": "^1.11.0",
+    "@module-federation/vite": "1.11.0",
     "@mui/icons-material": "^5.8.2",
     "@mui/lab": "^5.0.0-alpha.80",
     "@mui/material": "^5.8.2",
