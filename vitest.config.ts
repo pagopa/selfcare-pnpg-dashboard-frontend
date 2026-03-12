@@ -50,7 +50,6 @@ export default defineConfig({
         'src/microcomponents/**',
         'src/locale/**',
         'src/index.js',
-        'src/reportWebVitals.ts',
         'src/api/generated/**',
         'e2e/**',
       ],
