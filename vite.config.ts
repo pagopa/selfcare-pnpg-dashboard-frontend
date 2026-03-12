@@ -5,8 +5,6 @@ import { defineConfig, loadEnv } from 'vite';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import svgr from 'vite-plugin-svgr';
 
-// https://pnpg.dev.selfcare.pagopa.it/dashboard/users
-
 const require = createRequire(import.meta.url);
 
 const commonDependencies = require('@pagopa/selfcare-common-frontend/package.json').dependencies;
@@ -137,7 +135,7 @@ export default defineConfig(({ mode }) => {
       }),
     ],
 
-    base: '/dashboard',
+    base: '/dashboard/',
     build: {
       outDir: 'dist',
       target: 'esnext',
