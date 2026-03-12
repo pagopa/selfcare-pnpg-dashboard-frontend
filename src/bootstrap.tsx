@@ -8,7 +8,6 @@ import { CssBaseline, ThemeProvider } from '@mui/material';
 import { theme } from '@pagopa/mui-italia';
 import { CONFIG } from '@pagopa/selfcare-common-frontend/lib/config/env';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
 import { store } from './redux/store';
 import { MOCK_USER } from './utils/constants';
 import { ENV } from './utils/env';
