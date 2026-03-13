@@ -1,7 +1,7 @@
 import { render, waitFor } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
-import { Route, Router, Switch } from 'react-router';
+import { Route, Router, Switch } from 'react-router-dom';
 import { createStore } from '../../redux/store';
 import withSelectedParty from '../withSelectedParty';
 
