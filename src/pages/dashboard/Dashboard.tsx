@@ -1,6 +1,6 @@
 import { Grid, Box, useTheme, Drawer, Button } from '@mui/material';
 import { useMemo, useState } from 'react';
-import { Route, Switch, useHistory } from 'react-router';
+import { Route, Switch, useHistory } from 'react-router-dom';
 import { useStore } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import DehazeIcon from '@mui/icons-material/Dehaze';

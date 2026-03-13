@@ -13,6 +13,9 @@ beforeAll(async () => {
       interpolation: { escapeValue: false },
       react: { useSuspense: false },
     });
+  } else {
+    i18n.addResourceBundle('it', 'translation', it, true, true);
+    await i18n.changeLanguage('it');
   }
 });
 

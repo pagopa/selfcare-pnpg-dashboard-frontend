@@ -49,6 +49,10 @@ export default defineConfig(({ mode }) => {
           },
         },
         shared: {
+          '@pagopa/selfcare-common-frontend': {
+            singleton: true,
+            requiredVersion: dependencies['@pagopa/selfcare-common-frontend'],
+          },
           '@pagopa/mui-italia': {
             singleton: true,
             requiredVersion: dependencies['@pagopa/mui-italia'],

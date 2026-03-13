@@ -32,6 +32,11 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
+    server: {
+      deps: {
+        inline: ['@pagopa/mui-italia'],
+      },
+    },
     setupFiles: ['./src/setupTests.ts'],
     pool: 'forks',
     restoreMocks: true,
@@ -50,7 +55,6 @@ export default defineConfig({
         'src/microcomponents/**',
         'src/locale/**',
         'src/index.js',
-        'src/reportWebVitals.ts',
         'src/api/generated/**',
         'e2e/**',
       ],

@@ -1,7 +1,7 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
-import { Router } from 'react-router';
+import { Router } from 'react-router-dom';
 import { BaseParty } from '../../../model/Party';
 import { partiesActions } from '../../../redux/slices/partiesSlice';
 import { createStore } from '../../../redux/store';

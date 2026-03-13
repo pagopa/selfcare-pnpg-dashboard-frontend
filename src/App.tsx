@@ -4,7 +4,7 @@ import {
   UnloadEventHandler,
   UserNotifyHandle,
 } from '@pagopa/selfcare-common-frontend/lib';
-import { Redirect, Route, Switch } from 'react-router';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import withLogin from '@pagopa/selfcare-common-frontend/lib/decorators/withLogin';
 import Layout from './components/Layout/Layout';
 import routes, { RoutesObject } from './routes';
