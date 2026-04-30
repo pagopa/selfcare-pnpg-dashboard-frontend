@@ -11,6 +11,7 @@ import { useTokenExchange, validateUrlBO } from '../useTokenExchange';
 const oldWindowLocation = global.window.location;
 const mockedLocation = {
   assign: vi.fn(),
+  hostname: 'localhost',
   pathname: '',
   origin: 'MOCKED_ORIGIN',
   search: '',
@@ -28,13 +29,10 @@ vi.mock('../../services/tokenExchangeService');
 
 let retrieveBackOfficeUrlSpy: any;
 
-const tokenServiceImport = await import ('../../services/tokenExchangeService')
+const tokenServiceImport = await import('../../services/tokenExchangeService');
 
 beforeEach(() => {
-  retrieveBackOfficeUrlSpy = vi.spyOn(
-    tokenServiceImport,
-    'retrieveBackOfficeUrl'
-  );
+  retrieveBackOfficeUrlSpy = vi.spyOn(tokenServiceImport, 'retrieveBackOfficeUrl');
 });
 
 test('validateUrlBO', () => {

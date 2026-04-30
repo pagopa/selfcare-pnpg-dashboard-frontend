@@ -5,6 +5,7 @@ import { Party } from '../model/Party';
 import { Product } from '../model/Product';
 import { retrieveBackOfficeUrl } from '../services/tokenExchangeService';
 import { LOADING_TASK_TOKEN_EXCHANGE } from '../utils/constants';
+import { getAppArea } from '../utils/utils';
 
 const hostnameRegexp = /^(?:https?:\/\/)([-.a-zA-Z0-9_]+)/;
 
@@ -12,7 +13,11 @@ export const useTokenExchange = () => {
   const addError = useErrorDispatcher();
   const setLoading = useLoading(LOADING_TASK_TOKEN_EXCHANGE);
 
-  const invokeProductBo = async (product: Product, selectedParty: Party, lang?: string): Promise<void> => {
+  const invokeProductBo = async (
+    product: Product,
+    selectedParty: Party,
+    lang?: string
+  ): Promise<void> => {
     const result = validateUrlBO(product?.urlBO);
     if (result instanceof Error) {
       addError({
@@ -34,6 +39,7 @@ export const useTokenExchange = () => {
             party_id: selectedParty.partyId,
             product_id: product.id,
             product_role: selectedParty.userRole,
+            from: getAppArea(),
           },
           () => window.location.assign(url)
         );
