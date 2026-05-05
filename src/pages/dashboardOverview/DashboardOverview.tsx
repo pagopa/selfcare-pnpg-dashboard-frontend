@@ -3,7 +3,9 @@ import { theme } from '@pagopa/mui-italia';
 import { usePermissions } from '@pagopa/selfcare-common-frontend/lib';
 import TitleBox from '@pagopa/selfcare-common-frontend/lib/components/TitleBox';
 import i18n from '@pagopa/selfcare-common-frontend/lib/locale/locale-utils';
+import { trackEvent } from '@pagopa/selfcare-common-frontend/lib/services/analyticsService';
 import { Actions } from '@pagopa/selfcare-common-frontend/lib/utils/constants';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useIsMobile } from '../../hooks/useIsMobile';
 import { useTokenExchange } from '../../hooks/useTokenExchange';
@@ -28,6 +30,10 @@ const DashboardOverview = ({ party }: Props) => {
   const lang = i18n.language;
 
   const canUploadLogo = getAllProductsWithPermission(Actions.UploadLogo).length > 0;
+
+  useEffect(() => {
+    trackEvent('DASHBOARD_BUSINESS');
+  }, []);
 
   return (
     <Grid p={3} xs={12}>

@@ -1,38 +1,39 @@
-import React, { useEffect } from 'react';
-import { Grid, Button, Paper, useTheme, Typography, Stack, Link } from '@mui/material';
-import { useHistory } from 'react-router-dom';
-import { resolvePathVariables } from '@pagopa/selfcare-common-frontend/lib/utils/routes-utils';
+import { Button, Grid, Link, Paper, Stack, Typography, useTheme } from '@mui/material';
 import { trackEvent } from '@pagopa/selfcare-common-frontend/lib/services/analyticsService';
-import { useTranslation, Trans } from 'react-i18next';
-import ROUTES from '../../../routes';
+import { resolvePathVariables } from '@pagopa/selfcare-common-frontend/lib/utils/routes-utils';
+import React, { useEffect } from 'react';
+import { Trans, useTranslation } from 'react-i18next';
+import { useHistory } from 'react-router-dom';
+import PartySelectionSearch from '../../../components/partySelectionSearch/PartySelectionSearch';
+import { BaseParty } from '../../../model/Party';
 import { useAppDispatch } from '../../../redux/hooks';
 import { partiesActions } from '../../../redux/slices/partiesSlice';
-import { BaseParty } from '../../../model/Party';
-import PartySelectionSearch from '../../../components/partySelectionSearch/PartySelectionSearch';
+import ROUTES from '../../../routes';
 import { ENV } from '../../../utils/env';
 
 type Props = {
   parties: Array<BaseParty>;
 };
 
-export default function PartySelection({ parties }: Props) {
+export default function PartySelection({ parties }: Readonly<Props>) {
   const { t } = useTranslation();
   const bodyTitle = t('businessSelection.title');
   const theme = useTheme();
   const [selectedParty, setSelectedParty] = React.useState<BaseParty | null>(
     parties.length === 1 ? parties[0] : null
   );
-  const [disableBtn, setBtnDisable] = React.useState(true);
+  const [disableBtn, setDisableBtn] = React.useState(true);
   const history = useHistory();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(partiesActions.setPartySelected(undefined));
     dispatch(partiesActions.setPartySelectedProducts(undefined));
+    trackEvent('YOUR_BUSINESS_SELCETION');
   }, []);
 
   useEffect(() => {
-    setBtnDisable(!selectedParty);
+    setDisableBtn(!selectedParty);
   }, [selectedParty]);
 
   return (
