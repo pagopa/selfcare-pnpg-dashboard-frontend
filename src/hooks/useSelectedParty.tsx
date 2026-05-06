@@ -36,20 +36,27 @@ export const useSelectedParty = (): {
           userRole: selectedParty?.userRole,
         };
         setParty(partyWithUserRoleAndStatus);
-        
-        const productPermissions = [...party.products]
-        .filter((product) => product.productOnBoardingStatus === 'ACTIVE')
-        .map((product) => ({
-          productId: product.productId ?? '',
-          actions: product.userProductActions ? [...product.userProductActions] : [],
-        }));
 
-      dispatch(setProductPermissions(productPermissions));
+        // Register USER_ROLE as a Mixpanel super property so it's
+        // automatically attached to every subsequent tracked event.
+        if (selectedParty?.userRole && (window as any).mixpanel) {
+          (window as any).mixpanel.register({ USER_ROLE: selectedParty.userRole });
+        }
+
+        const productPermissions = [...party.products]
+          .filter((product) => product.productOnBoardingStatus === 'ACTIVE')
+          .map((product) => ({
+            productId: product.productId ?? '',
+            actions: product.userProductActions ? [...product.userProductActions] : [],
+          }));
+
+        dispatch(setProductPermissions(productPermissions));
         return party;
       } else {
         throw new Error(`Cannot find partyId ${partyId}`);
       }
     });
+
   const fetchProductLists = () =>
     fetchProducts().then((products) => {
       if (products) {
