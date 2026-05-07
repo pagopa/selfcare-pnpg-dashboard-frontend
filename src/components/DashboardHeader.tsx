@@ -1,5 +1,5 @@
 import { ProductSwitchItem } from '@pagopa/mui-italia';
-import { PartySwitchItem } from '@pagopa/mui-italia/dist/components/PartySwitch';
+import { PartySwitchItem } from '@pagopa/mui-italia/components/PartySwitch';
 import { Header } from '@pagopa/selfcare-common-frontend/lib';
 import i18n from '@pagopa/selfcare-common-frontend/lib/locale/locale-utils';
 import { User } from '@pagopa/selfcare-common-frontend/lib/model/User';
