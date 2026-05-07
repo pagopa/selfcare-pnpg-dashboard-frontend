@@ -1,6 +1,6 @@
-import { loadShare } from '@module-federation/runtime';
 import useLoading from '@pagopa/selfcare-common-frontend/lib/hooks/useLoading';
 import { setProductPermissions } from '@pagopa/selfcare-common-frontend/lib/redux/slices/permissionsSlice';
+import { registerSuperProperty } from '@pagopa/selfcare-common-frontend/lib/services/analyticsService';
 import { Party } from '../model/Party';
 import { Product } from '../model/Product';
 import { ProductsRolesMap } from '../model/ProductRole';
@@ -9,17 +9,6 @@ import { partiesActions, partiesSelectors } from '../redux/slices/partiesSlice';
 import { fetchPartyDetails } from '../services/partyService';
 import { fetchProducts } from '../services/productService';
 import { LOADING_TASK_SEARCH_PARTY, LOADING_TASK_SEARCH_PRODUCTS } from '../utils/constants';
-
-const registerUserRole = async (userRole: string) => {
-  const mixpanelFactory = await loadShare('mixpanel-browser');
-  if (!mixpanelFactory) {
-    return;
-  }
-  const mixpanel = (mixpanelFactory as any)();
-  if ((window as any).initMixPanel) {
-    mixpanel.register({ USER_ROLE: userRole });
-  }
-};
 
 export const useSelectedParty = (): {
   fetchSelectedParty: (partyId: string) => Promise<[Party | null, Array<Product> | null]>;
@@ -50,10 +39,9 @@ export const useSelectedParty = (): {
         };
         setParty(partyWithUserRoleAndStatus);
 
-        // Register USER_ROLE as a Mixpanel super property so it's
-        // automatically attached to every subsequent tracked event.
+        // Register USER_ROLE as a Mixpanel super property so it's automatically attached to every subsequent tracked event.
         if (selectedParty?.userRole) {
-          registerUserRole(selectedParty.userRole).catch(console.error);
+          registerSuperProperty({ USER_ROLE: selectedParty.userRole });
         }
 
         const productPermissions = [...party.products]
