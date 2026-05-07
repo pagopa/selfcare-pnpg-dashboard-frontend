@@ -1,6 +1,6 @@
-import React from 'react';
 import { Grid } from '@mui/material';
-import { PartyAccountItemButton } from '@pagopa/mui-italia/dist/components/PartyAccountItemButton';
+import { PartyAccountItemButton } from '@pagopa/mui-italia';
+import React from 'react';
 
 type Props = {
   selectedItem?: boolean;

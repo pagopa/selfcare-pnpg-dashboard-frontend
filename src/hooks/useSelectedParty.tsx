@@ -1,5 +1,6 @@
 import useLoading from '@pagopa/selfcare-common-frontend/lib/hooks/useLoading';
 import { setProductPermissions } from '@pagopa/selfcare-common-frontend/lib/redux/slices/permissionsSlice';
+import { registerSuperProperty } from '@pagopa/selfcare-common-frontend/lib/services/analyticsService';
 import { Party } from '../model/Party';
 import { Product } from '../model/Product';
 import { ProductsRolesMap } from '../model/ProductRole';
@@ -11,6 +12,7 @@ import { LOADING_TASK_SEARCH_PARTY, LOADING_TASK_SEARCH_PRODUCTS } from '../util
 
 export const useSelectedParty = (): {
   fetchSelectedParty: (partyId: string) => Promise<[Party | null, Array<Product> | null]>;
+  // eslint-disable-next-line sonarjs/cognitive-complexity
 } => {
   const dispatch = useAppDispatch();
   const selectedParty = useAppSelector(partiesSelectors.selectPartySelected);
@@ -23,7 +25,6 @@ export const useSelectedParty = (): {
   const setLoadingProducts = useLoading(LOADING_TASK_SEARCH_PRODUCTS);
   const productsRolesMap = useAppSelector(partiesSelectors.selectPartySelectedProductsRolesMap);
 
-  // eslint-disable-next-line sonarjs/cognitive-complexity
   const fetchParty = (partyId: string): Promise<Party | null> =>
     fetchPartyDetails(partyId).then((party) => {
       if (party) {
@@ -38,10 +39,9 @@ export const useSelectedParty = (): {
         };
         setParty(partyWithUserRoleAndStatus);
 
-        // Register USER_ROLE as a Mixpanel super property so it's
-        // automatically attached to every subsequent tracked event.
-        if (selectedParty?.userRole && (window as any).mixpanel) {
-          (window as any).mixpanel.register({ USER_ROLE: selectedParty.userRole });
+        // Register USER_ROLE as a Mixpanel super property so it's automatically attached to every subsequent tracked event.
+        if (selectedParty?.userRole) {
+          registerSuperProperty({ USER_ROLE: selectedParty.userRole });
         }
 
         const productPermissions = [...party.products]
