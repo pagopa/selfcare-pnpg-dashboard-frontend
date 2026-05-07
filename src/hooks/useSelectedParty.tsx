@@ -1,3 +1,4 @@
+import { loadShare } from '@module-federation/runtime';
 import useLoading from '@pagopa/selfcare-common-frontend/lib/hooks/useLoading';
 import { setProductPermissions } from '@pagopa/selfcare-common-frontend/lib/redux/slices/permissionsSlice';
 import { Party } from '../model/Party';
@@ -9,8 +10,20 @@ import { fetchPartyDetails } from '../services/partyService';
 import { fetchProducts } from '../services/productService';
 import { LOADING_TASK_SEARCH_PARTY, LOADING_TASK_SEARCH_PRODUCTS } from '../utils/constants';
 
+const registerUserRole = async (userRole: string) => {
+  const mixpanelFactory = await loadShare('mixpanel-browser');
+  if (!mixpanelFactory) {
+    return;
+  }
+  const mixpanel = (mixpanelFactory as any)();
+  if ((window as any).initMixPanel) {
+    mixpanel.register({ USER_ROLE: userRole });
+  }
+};
+
 export const useSelectedParty = (): {
   fetchSelectedParty: (partyId: string) => Promise<[Party | null, Array<Product> | null]>;
+  // eslint-disable-next-line sonarjs/cognitive-complexity
 } => {
   const dispatch = useAppDispatch();
   const selectedParty = useAppSelector(partiesSelectors.selectPartySelected);
@@ -23,7 +36,6 @@ export const useSelectedParty = (): {
   const setLoadingProducts = useLoading(LOADING_TASK_SEARCH_PRODUCTS);
   const productsRolesMap = useAppSelector(partiesSelectors.selectPartySelectedProductsRolesMap);
 
-  // eslint-disable-next-line sonarjs/cognitive-complexity
   const fetchParty = (partyId: string): Promise<Party | null> =>
     fetchPartyDetails(partyId).then((party) => {
       if (party) {
@@ -40,8 +52,8 @@ export const useSelectedParty = (): {
 
         // Register USER_ROLE as a Mixpanel super property so it's
         // automatically attached to every subsequent tracked event.
-        if (selectedParty?.userRole && (window as any).mixpanel) {
-          (window as any).mixpanel.register({ USER_ROLE: selectedParty.userRole });
+        if (selectedParty?.userRole) {
+          registerUserRole(selectedParty.userRole).catch(console.error);
         }
 
         const productPermissions = [...party.products]
