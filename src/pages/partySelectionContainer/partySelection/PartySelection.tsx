@@ -29,7 +29,7 @@ export default function PartySelection({ parties }: Readonly<Props>) {
   useEffect(() => {
     dispatch(partiesActions.setPartySelected(undefined));
     dispatch(partiesActions.setPartySelectedProducts(undefined));
-    trackEvent('YOUR_BUSINESS_SELCETION');
+    trackEvent('YOUR_BUSINESS_SELECTION');
   }, []);
 
   useEffect(() => {

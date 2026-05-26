@@ -26,18 +26,19 @@ const getLabelLinkText = (t: TFunction<'translation', undefined>) =>
 export function PartyLogoUploader({ partyId }: Readonly<Props>) {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
-
   const [labelLink, setLabelLink] = useState<string>(getLabelLinkText(t));
   const [uploadedFiles, setUploadedFiles] = useState<Array<File>>([]);
 
   const urlLogo = useAppSelector(partiesSelectors.selectPartySelectedLogo);
+
   const dispatch = useAppDispatch();
   const setUrlLogo = (urlLogo?: string) =>
     dispatch(partiesActions.setPartySelectedPartyLogo(urlLogo));
 
   const addError = useErrorDispatcher();
-
   const { announce, LiveRegion } = useLiveAnnouncerWithRegion();
+
+  const requestId = uniqueId();
 
   useEffect(() => {
     if (urlLogo && partyId) {
@@ -49,6 +50,10 @@ export function PartyLogoUploader({ partyId }: Readonly<Props>) {
   const minAllowedPx = 120;
 
   const onFileRejected = (files: Array<FileRejection>) => {
+    trackEvent('DASHBOARD_BUSINESS_CHANGE_LOGO_FAILURE', {
+      party_id: partyId,
+      request_id: requestId,
+    });
     addError({
       id: 'WRONG_FILE_EXTENSION',
       blocking: false,
@@ -66,8 +71,6 @@ export function PartyLogoUploader({ partyId }: Readonly<Props>) {
       setLoading(true);
       setUploadedFiles(files);
       setLabelLink(files[0].name);
-      const requestId = uniqueId();
-      trackEvent('DASHBOARD_BUSINESS_CHANGE_LOGO', { party_id: partyId, request_id: requestId });
 
       DashboardApi.saveInstitutionLogo(partyId, files[0])
         .then(() => {
@@ -81,10 +84,6 @@ export function PartyLogoUploader({ partyId }: Readonly<Props>) {
           });
         })
         .catch((reason) => {
-          trackEvent('DASHBOARD_BUSINESS_CHANGE_LOGO_FAILURE', {
-            party_id: partyId,
-            request_id: requestId,
-          });
           setLoading(false);
           addError({
             id: 'FILE_UPLOAD_ERROR',
@@ -110,6 +109,9 @@ export function PartyLogoUploader({ partyId }: Readonly<Props>) {
       if (!file) {
         return Promise.resolve([]);
       }
+
+      trackEvent('DASHBOARD_BUSINESS_CHANGE_LOGO', { party_id: partyId, request_id: requestId });
+
       return new Promise((resolve, reject) => {
         if (file.type !== 'image/png') {
           reject();
