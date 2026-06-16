@@ -103,24 +103,24 @@ export const mockedMappedProductRoles: Array<ProductRoleMappingsResource> = [
   {
     partyRole: 'MANAGER',
     selcRole: SelcRoleEnum.ADMIN,
-    multiroleGroups: [],
     productRoles: [
       {
         code: 'pg-admin',
         description: 'Stipula il contratto e identifica gli amministratori',
         label: 'Amministratore',
+        multiroleGroups: [],
       },
     ],
   },
   {
     partyRole: 'OPERATOR',
     selcRole: SelcRoleEnum.LIMITED,
-    multiroleGroups: [],
     productRoles: [
       {
         code: 'pg-operator',
         description: "Gestisce l'integrazione tecnologica e/o l'operatività dei servizi",
         label: 'Tecnico',
+        multiroleGroups: [],
       },
     ],
   },
