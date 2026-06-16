@@ -81,7 +81,7 @@ export const mockedProductRoles: Array<ProductRole> = [
     productId: 'prod-pn-pg',
     partyRole: 'SUB_DELEGATE',
     selcRole: 'ADMIN',
-    multiroleAllowed: false,
+    multiroleGroups: [],
     productRole: 'pg-admin',
     title: 'Amministratore',
     description: 'Stipula il contratto e identifica gli amministratori',
@@ -91,7 +91,7 @@ export const mockedProductRoles: Array<ProductRole> = [
     productId: 'prod-pn-pg',
     partyRole: 'OPERATOR',
     selcRole: 'LIMITED',
-    multiroleAllowed: false,
+    multiroleGroups: [],
     productRole: 'pg-operator',
     title: 'Tecnico',
     description: "Gestisce l'integrazione tecnologica e/o l'operatività dei servizi",
@@ -103,7 +103,7 @@ export const mockedMappedProductRoles: Array<ProductRoleMappingsResource> = [
   {
     partyRole: 'MANAGER',
     selcRole: SelcRoleEnum.ADMIN,
-    multiroleAllowed: false,
+    multiroleGroups: [],
     productRoles: [
       {
         code: 'pg-admin',
@@ -115,7 +115,7 @@ export const mockedMappedProductRoles: Array<ProductRoleMappingsResource> = [
   {
     partyRole: 'OPERATOR',
     selcRole: SelcRoleEnum.LIMITED,
-    multiroleAllowed: false,
+    multiroleGroups: [],
     productRoles: [
       {
         code: 'pg-operator',
@@ -138,7 +138,7 @@ export const fetchProductRoles = (product: Product): Promise<Array<ProductRole>>
       {},
       r,
       { productId: product.id },
-      { multiroleAllowed: product.id === 'prod-interop' && r.partyRole === 'OPERATOR' }
+      { multiroleGroups: product.id === 'prod-interop' && r.partyRole === 'OPERATOR' ? ['group1'] : [] }
     )
   );
   return new Promise((resolve) => resolve(out));
