@@ -147,24 +147,24 @@ export const mockedProductRoles: Array<ProductRoleMappingsResource> = [
   {
     partyRole: 'SUB_DELEGATE',
     selcRole: SelcRoleEnum.ADMIN,
-    multiroleAllowed: false,
     productRoles: [
       {
         code: 'pg-admin',
         description: 'Stipula il contratto e identifica gli amministratori',
         label: 'Amministratore',
+        multiroleGroups: [],
       },
     ],
   },
   {
     partyRole: 'OPERATOR',
     selcRole: SelcRoleEnum.LIMITED,
-    multiroleAllowed: false,
     productRoles: [
       {
         code: 'pg-operator',
         description: "Gestisce l'integrazione tecnologica e/o l'operatività dei servizi",
         label: 'Tecnico',
+        multiroleGroups: [],
       },
     ],
   },
