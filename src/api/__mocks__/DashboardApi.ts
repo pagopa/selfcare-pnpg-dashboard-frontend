@@ -5,6 +5,7 @@ import {
   ProductRoleMappingsResource,
   SelcRoleEnum,
 } from '../generated/b4f-dashboard-pnpg/ProductRoleMappingsResource';
+import { ProductRolesResource } from '../generated/b4f-dashboard-pnpg/ProductRolesResource';
 import { ProductsResource, StatusEnum } from '../generated/b4f-dashboard-pnpg/ProductsResource';
 
 export const mockedInstitutionResources: Array<InstitutionResource> = [
@@ -186,8 +187,8 @@ export const DashboardApi = {
   getProducts: async (): Promise<Array<ProductsResource>> =>
     new Promise((resolve) => resolve(mockedProductResources)),
 
-  getProductRoles: async (_productId: string): Promise<Array<ProductRoleMappingsResource>> =>
-    new Promise((resolve) => resolve(mockedProductRoles)),
+  getProductRoles: async (_productId: string): Promise<ProductRolesResource> =>
+    new Promise((resolve) => resolve({ roleMappings: mockedProductRoles })),
 
   retrieveProductBackoffice: async (
     _productId: string,
