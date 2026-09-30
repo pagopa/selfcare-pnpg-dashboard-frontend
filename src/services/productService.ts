@@ -25,8 +25,8 @@ export const fetchProductRoles = (product: Product): Promise<Array<ProductRole>>
   } else {
     return DashboardApi.getProductRoles(product.id)
       .then((roles) =>
-        roles
-          ?.map((pr) =>
+        (roles?.roleMappings ?? [])
+          .map((pr) =>
             pr?.productRoles?.map((r) => ({
               productId: product.id,
               partyRole: pr.partyRole,

@@ -7,7 +7,7 @@ import { store } from '../redux/store';
 import { InstitutionResource } from './generated/b4f-dashboard-pnpg/InstitutionResource';
 import { createClient, WithDefaultsT } from './generated/b4f-dashboard-pnpg/client';
 import { ProductsResource } from './generated/b4f-dashboard-pnpg/ProductsResource';
-import { ProductRoleMappingsResource } from './generated/b4f-dashboard-pnpg/ProductRoleMappingsResource';
+import { ProductRolesResource } from './generated/b4f-dashboard-pnpg/ProductRolesResource';
 import { InstitutionBaseResource } from './generated/b4f-dashboard-pnpg/InstitutionBaseResource';
 
 const withBearerAndInstitutionId: WithDefaultsT<'bearerAuth'> =
@@ -55,7 +55,7 @@ export const DashboardApi = {
     return extractResponse(result, 200, onRedirectToLogin);
   },
 
-  getProductRoles: async (productId: string): Promise<Array<ProductRoleMappingsResource>> => {
+  getProductRoles: async (productId: string): Promise<ProductRolesResource> => {
     const result = await apiClient.getProductRolesUsingGET({
       productId,
     });
